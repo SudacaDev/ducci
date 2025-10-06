@@ -30,7 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased grid grid-rows-[auto_1fr_auto] h-dvh`}
       >
         <Header />
-        {children}
+        <main className="">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

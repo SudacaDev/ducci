@@ -1,6 +1,10 @@
+import HeroBanner from "./components/hero"
+
 const HomePageContent =()=>{
     return (
-        <div> home </div>
+        <main>
+            <HeroBanner />
+        </main>
     )
 }
 

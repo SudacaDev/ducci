@@ -1,6 +1,8 @@
+import ProductsPageContent from "@/feature/products";
+
 export default function products(){
     return (
-        <div> pproductos</div>
+        <ProductsPageContent />
     )
 }
 

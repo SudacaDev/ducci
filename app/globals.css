@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
   }
 }
 
@@ -25,11 +25,33 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.header {
+  padding: 22px 0;
+}
 
-
-.navBar .item:first-of-type{
+.navBar .item:first-of-type {
   margin-right: auto;
 }
-.h-dvh{
-height: 100dvh;
+.h-dvh {
+  height: 100dvh;
+}
+
+.products-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1em;
+}
+
+.footer_logo {
+  display: grid;
+  place-items: center;
+}
+.footer_links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+.footer_link {
+  width: 100%;
+  margin-bottom: 1rem;
 }

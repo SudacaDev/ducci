@@ -2,22 +2,27 @@ import { MENU } from "@/types/nav.type";
 
 export const NAV = [
     {
-        id: '',
-        label: 'about',
+        id: 'mskkjsouisbyusyy11992',
+        label: 'nosotros',
         url: MENU.ABOUT,
 
     },
  {
-        id: '',
+        id: 'idoidisjsmooij930920',
         label: 'products',
         url: MENU.PRODUCTS,
 
     },
     {
-        id: '',
-        label: 'contacto',
+        id: 'jsks99uuahs00d00djjdo',
+        label: 'pedidos',
         url: MENU.CONTACT,
 
+    },
+    {
+          id: 'jsks99uuahs00d00ddsjdo',
+        label: 'contacto',
+        url: MENU.CONTACT,
     }
 ]
 
