@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f8f0dd;
   --foreground: #171717;
+  --primary-color: #f9dd71;
+  --primary-color-light: #fefdfb;
+  --primary-color-outline: #ba651633;
+  --secondary-color: #ba6516;
+  --primary-foreground: #ba6516;
+  --secondary-foreground: #f9dd71;
+
 }
 
 @theme inline {
@@ -10,12 +17,21 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --primary-color: var(--primary-color);
+  --primary-color-light: var(--primary-color-light);
+  --primary-color-outline: var( --primary-color-outline);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff;
+    --background: #f8f0dd;
     --foreground: #171717;
+    --primary-color: #f9dd71;
+    --primary-color-light: #fefdfb;
+    --primary-color-outline: #ba651633;
+    --secondary-color: #ba6516;
+    --primary-foreground: #ba6516;
+    --secondary-foreground: #f9dd71;
   }
 }
 
@@ -27,11 +43,43 @@ body {
 
 .header {
   padding: 22px 0;
+  background-color: var(  --primary-color-light);
+      position: relative;
+    z-index: 5;
+    border-bottom: 1px solid var( --primary-color-outline);
+}
+.header nav{
+  gap: 40px;
+}
+
+.header nav .item{
+  text-transform: capitalize;
+  font-weight: 600;
+  transition: all;
+}
+.header nav .item:hover{
+   transition: all;
+    color: var(--primary-foreground);
+}
+.header nav .item.active{
+    color: var(--primary-foreground);
+  }
+.header .nav-wrapper {
+    min-height: 70px;
 }
 
 .navBar .item:first-of-type {
   margin-right: auto;
 }
+
+
+.sub-banner{
+  padding-block: 8em;
+  justify-content: center;
+  display: flex;
+}
+
+
 .h-dvh {
   height: 100dvh;
 }
@@ -42,6 +90,15 @@ body {
   gap: 1em;
 }
 
+
+
+
+footer{
+  color: var(--primary-color);
+  background-color: var(--primary-foreground);
+  padding-top: 2rem;
+}
+
 .footer_logo {
   display: grid;
   place-items: center;
@@ -49,9 +106,13 @@ body {
 .footer_links {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
+ 
 }
 .footer_link {
   width: 100%;
   margin-bottom: 1rem;
+}
+
+footer .footer-copy{
+  border-top: 1px solid var(--primary-color-outline)
 }

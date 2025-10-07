@@ -28,7 +28,7 @@ const Footer = () => {
                         <div> social networks</div>
                     </div>
                 </div>
-                <div className="py-4 w-full justify-center items-center flex border-t container">
+                <div className="py-4 w-full justify-center items-center flex footer-copy container">
                     <small> Copyright &copy;  2024 Ducci Gelateria. All rights reserved.</small>
                 </div>
             </div>

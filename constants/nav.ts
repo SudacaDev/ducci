@@ -16,7 +16,7 @@ export const NAV = [
     {
         id: 'jsks99uuahs00d00djjdo',
         label: 'pedidos',
-        url: MENU.CONTACT,
+        url: MENU.ORDERS,
 
     },
     {
