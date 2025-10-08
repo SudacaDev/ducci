@@ -1,8 +1,7 @@
+"use client";
 
-"use client"
-
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface ImageSource {
   src: string;
@@ -22,21 +21,21 @@ interface SmallBannerProps {
   priority?: boolean;
   className?: string;
   containerClassName?: string;
-  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
   onClick?: () => void;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   quality?: number;
 }
 
 const SmallBanner = ({
   images,
   priority = false,
-  className = '',
-  containerClassName = '',
-  objectFit = 'cover',
+  className = "",
+  containerClassName = "",
+  objectFit = "cover",
   onClick,
-  loading = 'lazy',
-  quality = 85
+  loading = "lazy",
+  quality = 85,
 }: SmallBannerProps) => {
   const [currentImage, setCurrentImage] = useState<ImageSource>(images.desktop);
 
@@ -54,9 +53,9 @@ const SmallBanner = ({
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [images]);
 
   const handleClick = () => {
@@ -68,7 +67,7 @@ const SmallBanner = ({
   return (
     <div
       className={`relative w-full overflow-hidden ${containerClassName} ${
-        onClick ? 'cursor-pointer' : ''
+        onClick ? "cursor-pointer" : ""
       }`}
       onClick={handleClick}
     >

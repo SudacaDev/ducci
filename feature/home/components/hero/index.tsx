@@ -1,7 +1,5 @@
-const HeroBanner =() => {
-    return (
-        <div> hero</div>
-    )
-}
+const HeroBanner = () => {
+  return <section className="banner-cta relative"> hero</section>;
+};
 
-export default HeroBanner
+export default HeroBanner;

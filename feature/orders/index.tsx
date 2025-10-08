@@ -1,17 +1,10 @@
-import SmallBanner from "@/components/small-banner"
+import InnerLayout from "@/components/inner-layout";
+ 
 
 const OrdersPageContent = () => {
-    return (
-        <div> 
-            <SmallBanner  images={{
-                desktop: {
-                    src: 'https://html.designingmedia.com/icedelight/assets/images/mission-rightbackgroundimage.png',
-                    alt: ''
-                }
-            }}   />
-            OrdersPageContent
-            </div>
-    )
-}
+  return (
+    <InnerLayout bannerTitle="Pedidos">pedidos</InnerLayout>
+  );
+};
 
-export default OrdersPageContent
+export default OrdersPageContent;
