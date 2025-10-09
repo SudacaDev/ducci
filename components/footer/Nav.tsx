@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { NAV } from "@/constants/nav";
 import { useFooter } from "./Footer";
@@ -13,7 +13,7 @@ const Nav = () => {
           const active = isActive(item.url);
           return (
             <li key={item.id}>
-                <i></i>
+              <i></i>
               <Link
                 href={item.url}
                 aria-current={active ? "page" : undefined}

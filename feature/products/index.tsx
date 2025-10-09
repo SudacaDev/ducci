@@ -6,26 +6,25 @@ import Aside from "@/feature/products/Aside";
 import ViewToggle from "@/feature/products/ViewToggle";
 import ProductsList from "@/feature/products/ProductsList";
 
-import './styles/products.css'
+import "./styles/products.css";
 
 const ProductsPageContent = () => {
   return (
     <div id="product-wrapper" className="h-full overflow-hidden ">
-
-    <InnerLayout bannerTitle="Productos">
-      <Product>
-        <Aside />
-        <div className="flex flex-col">
-          <ViewToggle />
-          <ProductsList />
-        </div>
-      </Product>
-    </InnerLayout>
+      <InnerLayout bannerTitle="Nuestros Productos">
+        <Product>
+          <Aside />
+          <div className="flex flex-col">
+            <ViewToggle />
+            <ProductsList />
+          </div>
+        </Product>
+      </InnerLayout>
     </div>
   );
 };
 
-export default ProductsPageContent; 
+export default ProductsPageContent;
 /** import InnerLayout from "@/components/inner-layout";
 import { PROD } from "@/constants/prod";
 
@@ -77,5 +76,3 @@ const ProductsPageContent = () => {
 export default ProductsPageContent;
 
 **/
-
-

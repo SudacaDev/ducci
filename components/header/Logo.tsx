@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { MENU } from "@/types/nav.type";
 import { useHeader } from "./Header";

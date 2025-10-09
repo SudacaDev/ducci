@@ -5,8 +5,7 @@ import Nav from "./Nav";
 import Address from "./Address";
 import Social from "./Social";
 
-
-import './style/footer.css'
+import "./style/footer.css";
 
 const FooterWithComponents = Object.assign(Footer, {
   Logo,

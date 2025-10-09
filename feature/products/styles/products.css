@@ -2,6 +2,21 @@
 products
 **/
 
+.aside_filter-title {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.aside_filter-content li button {
+  font-size: 0.9em;
+  line-height: 1.5em;
+  color: var(--color-global-text);
+}
+.aside_filter-content li button.active {
+  color: var(--secondary-color);
+}
 .product-home {
   background-color: #b2cfe6;
 }
@@ -16,7 +31,7 @@ products
 }
 
 .product-list-block {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 #product {
   display: grid;
@@ -66,7 +81,7 @@ products
 }
 .product-list_item {
   display: flex;
-  flex-direction: column;
+
   background-color: var(--white);
   padding: 10px 10px 25px;
   box-shadow: 0 2px 73px 2px rgba(0, 0, 0, 0.05);
@@ -120,11 +135,26 @@ products
 
 .product-list_desc {
   color: var(--color-global-text);
+  min-height: 50px;
+}
+
+.product-list_desc p {
+  font-size: 0.95em;
+  line-height: 1.5em;
+}
+
+.product-list_price {
+  font-weight: 700;
+  font-size: 1.3em;
+  color: var(--color-accent);
 }
 
 .filter-button {
   background-color: #f9f9f9;
   color: var(--color-global-text);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
 }
 .filter-button.active {
   background-color: var(--primary-color);

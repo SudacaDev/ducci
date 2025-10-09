@@ -60,7 +60,8 @@ export const PROD = [
     name: "Tiramisú",
     price: 1150,
     category: "premium",
-    description: "Inspirado en el clásico postre italiano con café y mascarpone.",
+    description:
+      "Inspirado en el clásico postre italiano con café y mascarpone.",
   },
   {
     id: 10,
@@ -154,7 +155,6 @@ export const PROD = [
     description: "Dulce de leche con chips crocantes de chocolate.",
   },
 ];
-
 
 export const CATEGORIES = [
   { id: "todos", label: "Todos" },

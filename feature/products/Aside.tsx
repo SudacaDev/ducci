@@ -7,16 +7,15 @@ import { useProducts } from "@/components/products/Product";
 import { Button } from "@/components/ui/button";
 
 const Aside = () => {
-  const { 
-    selectedCategory, 
-    setSelectedCategory, 
-    openFilter, 
-    openFilterToggle 
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    openFilter,
+    openFilterToggle,
   } = useProducts();
 
   return (
     <>
-      {/* Overlay en mobile */}
       {openFilter && (
         <button
           type="button"
@@ -26,14 +25,12 @@ const Aside = () => {
         />
       )}
 
-      {/* Aside */}
-      <aside 
+      <aside
         className={`
           product-aside
-          ${openFilter ? 'show' : ''}
+          ${openFilter ? "show" : ""}
         `}
       >
-        {/* Botón cerrar (solo mobile) */}
         <div className="flex justify-between items-center mb-4 md:hidden">
           <h2 className="text-xl font-semibold">Filtros</h2>
           <Button
@@ -46,36 +43,37 @@ const Aside = () => {
             <X size={24} />
           </Button>
         </div>
-
-        {/* Categorías */}
-        <div>
-          <h3 className="font-semibold mb-3 text-lg">Categorías</h3>
-          <ul className="flex flex-col gap-2">
-            {CATEGORIES.map((category) => (
-              <li key={category.id}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategory(category.id);
-                    // Cerrar en mobile después de seleccionar
-                    if (window.innerWidth < 768) {
-                      openFilterToggle();
-                    }
-                  }}
-                  className={`w-full text-left px-3 py-2 rounded transition-colors ${
-                    selectedCategory === category.id
-                      ? "bg-[var(--primary-color)] text-[var(--primary-foreground)] font-semibold"
-                      : "hover:bg-gray-100"
-                  }`}
-                >
-                  {category.label}
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className="">
+          <div className="aside_filter-title">
+            <h3 className="font-semibold  text-lg">Categorías</h3>
+          </div>
+          <div className="aside_filter-content">
+            <ul className="aside_filter-content-ul flex flex-col gap-2">
+              {CATEGORIES.map((category) => (
+                <li key={category.id}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory(category.id);
+                      if (window.innerWidth < 768) {
+                        openFilterToggle();
+                      }
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded transition-colors ${
+                      selectedCategory === category.id
+                        ? "bg-[var(--primary-color)] text-[var(--primary-foreground)] font-semibold active"
+                        : "hover:bg-gray-100"
+                    }`}
+                  >
+                    {category.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </aside>
     </>
   );
 };
-export default Aside
+export default Aside;

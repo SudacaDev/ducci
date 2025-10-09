@@ -14,9 +14,12 @@ const useGetPathname = () => {
     return pathname === url || pathname.startsWith(url + "/");
   };
 
+  const splitString = pathname.replace("/", "");
+
   return {
     isActive,
     pathname,
+    splitString,
   };
 };
 

@@ -11,7 +11,9 @@ export interface HeaderContextType {
   onCloseMenu: () => void;
 }
 
-export const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
+export const HeaderContext = createContext<HeaderContextType | undefined>(
+  undefined,
+);
 
 export const useHeader = () => {
   const context = useContext(HeaderContext);

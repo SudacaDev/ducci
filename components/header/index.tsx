@@ -4,7 +4,7 @@ import MenuButton from "./MenuButton";
 import Overlay from "./Overlay";
 import Nav from "./Nav";
 
-import './style/header.css'
+import "./style/header.css";
 
 const Header = Object.assign(HeaderRoot, {
   Logo,

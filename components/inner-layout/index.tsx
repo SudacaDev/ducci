@@ -1,5 +1,10 @@
+"use client";
 import type { ReactNode } from "react";
 import SmallBanner from "../small-banner";
+import Link from "next/link";
+import useGetPathname from "@/libs/url";
+
+import { MENU } from "@/types/nav.type";
 
 interface InnerLayoutProps {
   children: ReactNode;
@@ -13,6 +18,8 @@ const InnerLayout = ({
   imgMobile,
   bannerTitle,
 }: InnerLayoutProps) => {
+  const { splitString } = useGetPathname();
+
   return (
     <div className="flex flex-col">
       <div>
@@ -29,13 +36,17 @@ const InnerLayout = ({
           ""
         )}
         {bannerTitle && (
-          <div className="sub-banner">
-            {" "}
+          <div className="sub-banner ">
             <h1>{bannerTitle}</h1>
+            <div className="sub-banner_breadcrumb">
+              <div className="flex gap-4">
+                <Link href={MENU.HOME}>Home</Link> / <p> {splitString}</p>
+              </div>
+            </div>
           </div>
         )}
       </div>
-      <div className="container m-auto px-4">{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 };

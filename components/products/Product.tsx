@@ -25,13 +25,15 @@ export interface ProductsContextType {
 }
 
 export const ProductsContext = createContext<ProductsContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useProducts = () => {
   const context = useContext(ProductsContext);
   if (!context) {
-    throw new Error("Los componentes Product.* deben usarse dentro de <Product>");
+    throw new Error(
+      "Los componentes Product.* deben usarse dentro de <Product>",
+    );
   }
   return context;
 };
@@ -44,7 +46,7 @@ const Product = ({ children }: ProductProps) => {
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
-  const [openFilter, setOpenFilter] = useState(false)
+  const [openFilter, setOpenFilter] = useState(false);
 
   const filteredProducts = PROD.filter((product) => {
     if (selectedCategory === "todos") return true;
@@ -55,9 +57,9 @@ const Product = ({ children }: ProductProps) => {
     return 0;
   });
 
-  const openFilterToggle = () =>{
-    setOpenFilter(!openFilter)
-  }
+  const openFilterToggle = () => {
+    setOpenFilter(!openFilter);
+  };
 
   const value = {
     products: PROD,
@@ -69,16 +71,14 @@ const Product = ({ children }: ProductProps) => {
     setViewMode,
     setSortOrder,
     openFilterToggle,
-    openFilter
+    openFilter,
   };
 
   return (
     <ProductsContext.Provider value={value}>
- 
-        <div id="product" className="h-full container m-auto my-4">
-          {children}
-        </div>
- 
+      <div id="product" className="h-full container m-auto my-4">
+        {children}
+      </div>
     </ProductsContext.Provider>
   );
 };

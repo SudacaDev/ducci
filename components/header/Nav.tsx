@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { NAV } from "@/constants/nav";
@@ -20,7 +20,7 @@ const Nav = () => {
           type="button"
           onClick={onCloseMenu}
           aria-label="Cerrar menú"
-          variant={'outline'}
+          variant={"outline"}
         >
           <X />
         </Button>

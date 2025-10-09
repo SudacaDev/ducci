@@ -1,14 +1,13 @@
 "use client";
 
 import { useProducts } from "@/components/products/Product";
-
- 
+import Image from "next/image";
 
 const ProductsList = () => {
   const { filteredProducts, viewMode } = useProducts();
 
   return (
-     <div className="products-list-container product-list-block  py-4">
+    <div className="products-list-container product-list-block  py-4">
       <div
         className={`products-list-container py-4 ${
           viewMode === "grid"
@@ -22,21 +21,32 @@ const ProductsList = () => {
           </p>
         ) : (
           filteredProducts.map((item) => (
-           <div key={item.id + 1} className="product-list_item rounded-lg  ">
-                  <div className="product-list_image inset-shadow-sm rounded-md">
-                    <figure>
-                      <img src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png" alt="" loading="lazy" />
-                    </figure>
-                  </div>
+            <div
+              key={item.id + 1}
+              className={`product-list_item  ${viewMode === "grid" ? "flex-col" : "flex-row"} rounded-lg`}
+            >
+              <div className="product-list_image inset-shadow-sm rounded-md">
+                <figure>
+                  <Image
+                    src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
+                    alt=""
+                    width={240}
+                    height={240}
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
 
-                  <div className="flex flex-col gap-2">
-                    <div className="product-list_name">
-                      <h3> {item.name}</h3>
-                    </div>
-                    <div className="product-list_desc"> {item.description}</div>
-                    <div className="product-list_price"> {item.price}</div>
-                  </div>
+              <div className="flex flex-col gap-2">
+                <div className="product-list_name">
+                  <h3> {item.name}</h3>
                 </div>
+                <div className="product-list_desc">
+                  <p>{item.description}</p>
+                </div>
+                <div className="product-list_price"> {item.price}</div>
+              </div>
+            </div>
           ))
         )}
       </div>

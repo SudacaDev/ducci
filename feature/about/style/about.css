@@ -1,0 +1,90 @@
+.journey-con {
+  padding-inline: 8em;
+  display: grid;
+  padding-block: 8em;
+  gap: 4em;
+}
+@media screen and (min-width: 980px) {
+  .journey-con {
+    padding-inline: 4em;
+    display: grid;
+    padding-block: 2em;
+    gap: 2em;
+  }
+}
+@media screen and (max-width: 980px) {
+}
+.journey-image {
+  display: flex;
+  background-color: var(--background);
+  border-radius: 100%;
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.journey_content {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  padding-block: 2em;
+  justify-content: center;
+  align-items: center;
+}
+.about-section__title {
+  font-size: 54px;
+  font-weight: 600;
+}
+.about-section__text {
+  max-width: 580px;
+  width: 100%;
+  gap: 1em;
+  color: var(--e-global-text-color);
+}
+.about-section__content {
+  width: 100%;
+  max-width: 580px;
+}
+.about-section__content .about-section__cta {
+  display: inline-flex;
+  justify-content: start;
+  align-items: center;
+  transition: all 0.8s ease-in-out;
+}
+.about-section__cta:hover svg {
+  transform: translateX(4px);
+  transition: all 0.8s ease-in-out;
+}
+.about-section__cta svg {
+  transform: translateX(0px);
+  transition: all 0.8s ease-in-out;
+}
+.about-section__cta:hover {
+  transition: all 0.8s ease-in-out;
+}
+
+.about-section__cta:hover {
+  background-color: var(--primary-color);
+  color: var(--color-primary-foreground);
+}
+
+.about-section__cta {
+  display: inline-flex;
+  background-color: var(--secondary-color);
+  padding: 1.5em 2em;
+  width: auto;
+  color: var(--primary-color);
+  border-radius: 48px;
+  font-size: 1em;
+  font-weight: 600;
+  gap: 1em;
+  align-items: center;
+  box-shadow: 0px 3px 22px 3px var(--secondary-color-aplpha);
+  transition: all 0.8s ease-in-out;
+}
+
+#our-philosophy p {
+  color: black;
+}

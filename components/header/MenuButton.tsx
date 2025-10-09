@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import { Menu } from "lucide-react";
 import { useHeader } from "./Header";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 const MenuButton = () => {
   const { expanded, onShowMenu } = useHeader();
