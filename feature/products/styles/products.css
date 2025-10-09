@@ -12,18 +12,58 @@ products
 
 .products-list-container {
   display: grid;
- 
   gap: 1em;
 }
 
-.product-list-block{
- grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.product-list-block {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+#product {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2em;
 }
 
+.product-aside {
+  transition: transform 300ms ease-out;
+}
+@media screen and (max-width: 768px) {
+  #product {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+
+  /* Aside como modal en mobile */
+  .product-aside {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    width: min(320px, 85vw);
+    background-color: var(--primary-color-light);
+    z-index: 50;
+    padding: 2rem;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 300ms ease-out;
+  }
+
+  .product-aside.show {
+    left: 0;
+  }
+}
 #product-wrapper {
   background-color: var(--primary-color-light);
 }
-
+#product button#open-filter {
+  display: none;
+}
+@media screen and (max-width: 780px) {
+  #product button#open-filter {
+    display: block;
+  }
+}
 .product-list_item {
   display: flex;
   flex-direction: column;
@@ -65,7 +105,7 @@ products
   object-fit: contain;
   margin-bottom: 0;
   transition: margin-bottom 300ms ease-in-out;
-  transform: scale(.7);
+  transform: scale(0.7);
 }
 
 .product-list_item:hover .product-list_image figure img {
@@ -82,17 +122,17 @@ products
   color: var(--color-global-text);
 }
 
-.filter-button{
-    background-color: #f9f9f9;
-    color: var(--color-global-text);
+.filter-button {
+  background-color: #f9f9f9;
+  color: var(--color-global-text);
 }
-.filter-button.active{
-     background-color: var(--primary-color);
-    color: var(--secondary-color);
+.filter-button.active {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
-.filter-button:hover{
-      background-color: var(--primary-color);
-    color: var(--secondary-color);
+.filter-button:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
 /**
 end products

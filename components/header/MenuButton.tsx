@@ -1,12 +1,13 @@
 "use client"
 import { Menu } from "lucide-react";
 import { useHeader } from "./Header";
+import { Button } from "@/components/ui/button"
 
 const MenuButton = () => {
   const { expanded, onShowMenu } = useHeader();
 
   return (
-    <button
+    <Button
       id="open-menu"
       type="button"
       onClick={onShowMenu}
@@ -15,7 +16,7 @@ const MenuButton = () => {
       aria-controls="navbar"
     >
       <Menu />
-    </button>
+    </Button>
   );
 };
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { X } from "lucide-react";
 import { NAV } from "@/constants/nav";
 import { useHeader } from "./Header";
+import { Button } from "../ui/button";
 
 const Nav = () => {
   const { show, isActive, onCloseMenu } = useHeader();
@@ -14,14 +15,15 @@ const Nav = () => {
       className={show ? "show" : ""}
     >
       <div className="close-button_wrapper">
-        <button
+        <Button
           id="close-menu"
           type="button"
           onClick={onCloseMenu}
           aria-label="Cerrar menú"
+          variant={'outline'}
         >
           <X />
-        </button>
+        </Button>
       </div>
       <ul className="flex">
         {NAV.map((item) => {
