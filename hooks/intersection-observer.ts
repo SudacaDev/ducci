@@ -1,48 +1,23 @@
-import { useRef, useEffect, useState, RefObject } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-type IntersectionOptions = {
-  root?: Element | Document | null;
-  rootMargin?: string;
-  threshold?: number | number[];
-};
-
-type IntersectionHookReturn<T extends HTMLElement> = {
-  ref: RefObject<T>;
-  isIntersecting: boolean;
-};
-
-/**
- * Hook para detectar cuándo un elemento entra o sale del viewport usando la API Intersection Observer.
- *
- * @param {IntersectionOptions} options - Opciones del Intersection Observer (root, rootMargin, threshold).
- * @returns {IntersectionHookReturn<T>} Un objeto con:
- * - ref: La referencia que debes aplicar al elemento objetivo.
- * - isIntersecting: Estado booleano que es true cuando el elemento es visible.
- */
-function useIntersectionObserver<T extends HTMLElement>(
-  options: IntersectionOptions = {}, // Asignamos un objeto vacío por defecto y lo tipamos
-): IntersectionHookReturn<T> {
+function useIntersectionObserver<T extends Element = HTMLDivElement>() {
+  const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<T>(null);
 
-  const [isIntersecting, setIntersecting] = useState<boolean>(false);
-
   useEffect(() => {
-    const targetElement = ref.current;
-    if (!targetElement) return;
+    const element = ref.current;
+    if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]: IntersectionObserverEntry[]) => {
-        setIntersecting(entry.isIntersecting);
-      },
-      options,
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting);
+    });
 
-    observer.observe(targetElement);
+    observer.observe(element);
 
     return () => {
-      observer.unobserve(targetElement);
+      observer.unobserve(element);
     };
-  }, [options]);
+  }, []);
 
   return { ref, isIntersecting };
 }

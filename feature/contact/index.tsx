@@ -29,7 +29,8 @@ const ContactPageContent = () => {
         <div id="contactWrapper" className="py-8">
           <div className="contact__content">
             <h2>Información de contacto</h2>
-            <p>  Completa el formulario y te responderemos a la brevedad</p>
+            <p>Escribinos y contanos cuales son tus inquietudes.</p>
+            <p>Nuestro equipo se pondrá en contacto con vos.</p>
           </div>
 
           <div className="contact_form">
