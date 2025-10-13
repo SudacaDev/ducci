@@ -9,13 +9,13 @@ interface SvgIconProps {
   stroke?: string;
 }
 
-const SvgIcon = ({ 
-  children, 
-  size = 24, 
+const SvgIcon = ({
+  children,
+  size = 24,
   className = "",
   viewBox = "0 0 24 24",
   fill = "none",
-  stroke = "currentColor"
+  stroke = "currentColor",
 }: SvgIconProps) => {
   return (
     <svg

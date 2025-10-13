@@ -2,6 +2,7 @@ footer {
   color: var(--primary-color);
   background-color: var(--primary-foreground);
   padding-top: 2rem;
+  font-family: var(--font-dm-sans);
 }
 .footer_wrapper {
   display: grid;
@@ -14,9 +15,11 @@ footer {
   gap: 1.5em;
 }
 
-.footer_address-wrapper .label, .footer_social .label{
+.footer_address-wrapper .label,
+.footer_social .label {
   color: #f9e19b;
   font-size: 0.875em;
+  font-family: var(--font-dm-sans);
 }
 
 .footer_address-wrapper .pin {
@@ -68,7 +71,8 @@ footer {
   gap: calc(0.24em * 4);
 }
 
-.footer_social-content, .footer_address-content{
+.footer_social-content,
+.footer_address-content {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -78,5 +82,5 @@ footer .footer-copy {
   border-top: 1px solid var(--primary-color-outline);
 }
 .footer-copy small {
-    opacity: .8;
+  opacity: 0.8;
 }

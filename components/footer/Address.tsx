@@ -18,7 +18,9 @@ const Address = () => {
         </div>
         <div className="footer_address-content">
           <p className="font-semibold">Email</p>
-          <a href="mailto:contacto@ducci.com" className="label">contacto@ducci.com</a>
+          <a href="mailto:contacto@ducci.com" className="label">
+            contacto@ducci.com
+          </a>
         </div>
       </div>
     </div>

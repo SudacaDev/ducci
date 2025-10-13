@@ -1,6 +1,7 @@
 "use client";
 
 import { useProducts } from "@/components/products/Product";
+
 import Image from "next/image";
 
 const ProductsList = () => {

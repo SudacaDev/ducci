@@ -8,11 +8,14 @@ products
   align-items: center;
   margin-bottom: 24px;
 }
-
+.aside_filter-title h3 {
+  font-family: var(--font-poppins);
+}
 .aside_filter-content li button {
   font-size: 0.9em;
   line-height: 1.5em;
   color: var(--color-global-text);
+  font-family: var(--font-dm-sans);
 }
 .aside_filter-content li button.active {
   color: var(--secondary-color);
@@ -31,7 +34,7 @@ products
 }
 
 .product-list-block {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 #product {
   display: grid;

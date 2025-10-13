@@ -1,6 +1,6 @@
 "use client";
 
-import {  LayoutGrid, LayoutList, ListFilter } from "lucide-react";
+import { LayoutGrid, LayoutList, ListFilter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/components/products/Product";
 import {

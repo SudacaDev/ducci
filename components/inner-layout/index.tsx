@@ -37,10 +37,14 @@ const InnerLayout = ({
         )}
         {bannerTitle && (
           <div className="sub-banner ">
-            <h1>{bannerTitle}</h1>
-            <div className="sub-banner_breadcrumb">
-              <div className="flex gap-4">
-                <Link href={MENU.HOME}>Home</Link> / <p> {splitString}</p>
+            <div className="container">
+              <div className="flex flex-col justify-center items-center gap-4">
+                <h1>{bannerTitle}</h1>
+                <div className="sub-banner_breadcrumb">
+                  <div className="flex gap-4 max-w-[200px]">
+                    <Link href={MENU.HOME}>Home</Link> / <p> {splitString}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

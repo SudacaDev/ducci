@@ -1,0 +1,11 @@
+.about-home{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+#about_wrapper{
+    grid-column: 3 / 10;
+    border: 1px solid ;
+    overflow: hidden;
+    position: relative;
+}
