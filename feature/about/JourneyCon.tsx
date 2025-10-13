@@ -14,26 +14,29 @@ const observerOptions = {
 const JourneyCon = () => {
   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
-  const filosofiaClasses = `journey-con grid-image_right aos-animate ${isFilosofiaVisible ? "show" : ""}`;
+    
+  const filosofiaClasses = `journey-con grid-image_right aos-animate ${
+    isFilosofiaVisible ? "show" : ""
+  }`;
+
   return (
     <div className="container">
-      <div className="journey-con ">
-        <div className="journey-image grid-image_left">
+      {/* Primera sección */}
+      <div className="journey-con">
+        <div className="journey-image grid-image_left relative h-[400px]">
           <Image
             src="/images/guilt-image.jpg"
             fill
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt=""
-            className=""
+            alt="Nuestra Historia"
           />
         </div>
         <div className="journey_content grid-content_right">
           <div className="body_content">
-            <h2 className="about-section__title"> Nuestra Historia</h2>
+            <h2 className="about-section__title">Nuestra Historia</h2>
             <div className="flex flex-col about-section__text">
               <p>
-                {" "}
                 Ducci Gelatería nació en 2015 en el corazón de Rosario, con la
                 pasión de crear helados artesanales que rescatan el auténtico
                 sabor del gelato italiano. Nuestra familia, con raíces
@@ -41,7 +44,6 @@ const JourneyCon = () => {
                 perfeccionamos con ingredientes locales de primera calidad.
               </p>
               <p>
-                {" "}
                 Desde nuestros inicios, nos comprometimos a elaborar cada sabor
                 con dedicación y amor, sin aditivos artificiales ni
                 conservantes. Hoy, somos el punto de encuentro favorito de
@@ -57,10 +59,11 @@ const JourneyCon = () => {
         </div>
       </div>
 
+      {/* Segunda sección con animación */}
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <div className="body_content">
-            <h2 className="about-section__title"> Nuestra Filosofía</h2>
+            <h2 className="about-section__title">Nuestra Filosofía</h2>
             <div className="flex flex-col about-section__text">
               <p>
                 Creemos que un helado excepcional comienza con ingredientes
@@ -84,18 +87,18 @@ const JourneyCon = () => {
             </Link>
           </div>
         </div>
-        <div className="journey-image grid-image_right">
+        <div className="journey-image grid-image_right relative h-[400px]">
           <Image
             src="/images/guilt-image.jpg"
             fill
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt=""
-            className=""
+            alt="Nuestra Filosofía"
           />
         </div>
       </div>
     </div>
   );
 };
+
 export default JourneyCon;
