@@ -15,9 +15,9 @@
   }
 }
 @media screen and (max-width: 980px) {
-    .journey-con{
-         grid-template-columns: 1fr;
-    }
+  .journey-con {
+    grid-template-columns: 1fr;
+  }
 }
 .journey-image {
   width: 100%;
@@ -27,10 +27,10 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 980px){
-    .journey-image{
-        height: 400px;
-    }
+@media screen and (max-width: 980px) {
+  .journey-image {
+    height: 400px;
+  }
 }
 
 .journey-image img {
@@ -101,8 +101,6 @@
   background-color: var(--primary-color);
   color: var(--color-primary-foreground);
 }
-
-
 
 #our-philosophy p {
   color: black;

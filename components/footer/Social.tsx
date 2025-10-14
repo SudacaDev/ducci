@@ -1,5 +1,4 @@
-import FacebookIcon from "@/components/icons/facebook";
-import IntagramIcon from "@/components/icons/instagram";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 
 const Social = () => {
   return (
@@ -20,7 +19,9 @@ const Social = () => {
             rel="noopener"
             target="_blank"
           >
-            <IntagramIcon />
+            <span>
+              <FaInstagram size={16} />
+            </span>
           </a>
           <a
             href="https://www.instagram.com/ducci.gelateria/"
@@ -29,7 +30,9 @@ const Social = () => {
             rel="noopener"
             target="_blank"
           >
-            <FacebookIcon />
+            <span>
+              <FaFacebookF size={16} />
+            </span>
           </a>
         </div>
       </div>

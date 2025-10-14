@@ -25,7 +25,7 @@ footer {
 .footer_address-wrapper .pin {
   background-color: rgba(255, 255, 255, 10%);
   color: var(--primary-color);
-  padding: 0.6em;
+  padding: 0.8em;
   border-radius: 50%;
 }
 
@@ -76,6 +76,25 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+}
+
+.footer_social-content a svg {
+  border-radius: 100%;
+  color: var(--primary-color);
+  position: relative;
+}
+
+.footer_social-content a span {
+  position: relative;
+  display: flex;
+}
+.footer_social-content a span {
+  border-radius: 100%;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  padding: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer .footer-copy {

@@ -17,11 +17,24 @@
   flex-direction: column;
   gap: 2em;
 }
+@media screen and (max-width: 980px) {
+  #contactWrapper .contact_form .contact_form-info {
+    grid-column: 1 / 13;
+    gap: 1em;
+  }
+}
 #contactWrapper form {
   display: flex;
   flex-direction: column;
   grid-column: 5 / 13;
   gap: 2em;
+}
+@media screen and (max-width: 980px) {
+  #contactWrapper form {
+    grid-column: 1 / 13;
+    gap: 1em;
+    margin-top: 2em;
+  }
 }
 
 #contactWrapper .contact_form-group {
@@ -39,32 +52,43 @@
   gap: 1.5em;
 }
 
-#contactWrapper  .contact__content{
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-     padding-block: 3em;
-}
-#contactWrapper  .contact__content h2 {
-    font-weight: 600;
-    font-size: clamp(1em, 6vw, 40px);
-    font-family: var(--font-poppins), sans-serif;
-   
+@media screen and (max-width: 768px) {
+  #contactWrapper .contact_form-wrapper {
+    grid-template-columns: 1fr;
+  }
 }
 
-#contactWrapper  .contact__content p, #contactWrapper .contact__box p{
-    color: var(--color-global-text)
+#contactWrapper .contact__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: 3em;
+}
+#contactWrapper .contact__content h2 {
+  font-weight: 600;
+  font-size: clamp(1em, 6vw, 40px);
+  font-family: var(--font-poppins), sans-serif;
+}
+
+#contactWrapper .contact__content h2 span {
+  color: var(--accent-color);
+}
+
+#contactWrapper .contact__content p,
+#contactWrapper .contact__box p {
+  color: var(--color-global-text);
+  font-family: var(--font-dm-sans);
 }
 .contact__icon {
-    background-color: rgb(var(--primary-color-rgb), 0.5);
-    padding: .5em;
-    border-radius: 50%;
-   color:  var(--secondary-color) 
+  background-color: rgb(var(--primary-color-rgb), 0.5);
+  padding: 0.5em;
+  border-radius: 50%;
+  color: var(--secondary-color);
 }
 
-.contact__icon svg{ stroke-width: 2px;
+.contact__icon svg {
+  stroke-width: 2px;
 }
 .contact__box {
   padding: 2em;
@@ -74,12 +98,10 @@
   box-shadow: 0 2px 73px 2px rgb(0 0 0 / 5%);
 }
 
-
-
-.contact__box h3{
-    font-weight: 600;
-    text-transform: capitalize;
+.contact__box h3 {
+  font-weight: 600;
+  text-transform: capitalize;
 }
-.contact__box p{
-    font-size: 0.875em;
+.contact__box p {
+  font-size: 0.875em;
 }

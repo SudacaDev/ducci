@@ -27,14 +27,25 @@ const Nav = () => {
       </div>
       <ul className="flex">
         {NAV.map((item) => {
-          const active = isActive(item.url);
+          const isCurrentPage = isActive(item.url);
+          const isContacto = item.alwaysActive;
+
+          const getClasses = () => {
+            if (isContacto) {
+              return "active item";
+            }
+            if (isCurrentPage) {
+              return "active-url  item";
+            }
+            return "item";
+          };
 
           return (
             <li key={item.id}>
               <Link
                 href={item.url}
-                aria-current={active ? "page" : undefined}
-                className={active ? "active item" : "item"}
+                aria-current={isCurrentPage ? "page" : undefined}
+                className={getClasses()}
                 onClick={onCloseMenu}
               >
                 {item.label}

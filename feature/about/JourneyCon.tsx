@@ -14,7 +14,7 @@ const observerOptions = {
 const JourneyCon = () => {
   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
-    
+
   const filosofiaClasses = `journey-con grid-image_right aos-animate ${
     isFilosofiaVisible ? "show" : ""
   }`;
@@ -52,7 +52,7 @@ const JourneyCon = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="about-section__cta">
+            <Link href={MENU.PRODUCTS} className="button__cta">
               Conoce nuestros sabores <ArrowRight size={16} />
             </Link>
           </div>
@@ -82,7 +82,7 @@ const JourneyCon = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="about-section__cta">
+            <Link href={MENU.PRODUCTS} className="button__cta">
               Conoce nuestros sabores <ArrowRight size={16} />
             </Link>
           </div>

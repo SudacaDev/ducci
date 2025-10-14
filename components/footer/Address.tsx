@@ -1,11 +1,10 @@
-import { MailIcon, MapPin } from "lucide-react";
-
+import { FaLocationDot, FaEnvelopeOpenText } from "react-icons/fa6";
 const Address = () => {
   return (
     <div className="footer_address">
       <div className="footer_address-wrapper flex">
         <div className="pin">
-          <MapPin size={20} />
+          <FaLocationDot size={16} />
         </div>
         <div className="footer_address-content">
           <p className="font-semibold">Dirección</p>
@@ -14,7 +13,7 @@ const Address = () => {
       </div>
       <div className="footer_address-wrapper flex">
         <div className="pin">
-          <MailIcon size={20} />
+          <FaEnvelopeOpenText size={16} />
         </div>
         <div className="footer_address-content">
           <p className="font-semibold">Email</p>

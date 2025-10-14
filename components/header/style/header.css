@@ -107,6 +107,10 @@ header
   border-radius: 48px;
 }
 
+.navBar ul li a.active-url {
+  color: var(--primary-foreground);
+}
+
 .navBar ul li a.active {
   background: var(--primary-color);
   color: var(--primary-foreground);

@@ -6,29 +6,36 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, XCircle, Loader2, MapPinIcon, PhoneIcon, MailIcon } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle,
+  XCircle,
+  Loader2,
+  MapPinIcon,
+  PhoneIcon,
+  MailIcon,
+} from "lucide-react";
 
-import './style/contact.css';
+import "./style/contact.css";
 import { useSendContactMail } from "./hooks/useSendContactMail";
 
 const ContactPageContent = () => {
-  const {
-    form,
-    onSubmit,
-    isLoading,
-    isSuccess,
-    isError,
-    errorMessage
-  } = useSendContactMail();
+  const { form, onSubmit, isLoading, isSuccess, isError, errorMessage } =
+    useSendContactMail();
 
-  const { register, formState: { errors } } = form;
+  const {
+    register,
+    formState: { errors },
+  } = form;
 
   return (
     <InnerLayout bannerTitle="Contacto">
       <CenterContainer center>
         <div id="contactWrapper" className="py-8">
           <div className="contact__content">
-            <h2>Información de contacto</h2>
+            <h2>
+              Ponte en <span>contacto</span> con nosotros
+            </h2>
             <p>Escribinos y contanos cuales son tus inquietudes.</p>
             <p>Nuestro equipo se pondrá en contacto con vos.</p>
           </div>
@@ -62,7 +69,6 @@ const ContactPageContent = () => {
                   <p>contacto@ducci.com</p>
                 </div>
               </div>
-               
             </div>
 
             <form onSubmit={onSubmit} noValidate>
@@ -72,13 +78,18 @@ const ContactPageContent = () => {
                   <Input
                     id="firstName"
                     type="text"
-                    {...register('firstName')}
+                    {...register("firstName")}
                     disabled={isLoading}
-                    aria-invalid={errors.firstName ? 'true' : 'false'}
-                    aria-describedby={errors.firstName ? 'firstName-error' : undefined}
+                    aria-invalid={errors.firstName ? "true" : "false"}
+                    aria-describedby={
+                      errors.firstName ? "firstName-error" : undefined
+                    }
                   />
                   {errors.firstName && (
-                    <p id="firstName-error" className="text-sm text-red-500 mt-1">
+                    <p
+                      id="firstName-error"
+                      className="text-sm text-red-500 mt-1"
+                    >
                       {errors.firstName.message}
                     </p>
                   )}
@@ -89,13 +100,18 @@ const ContactPageContent = () => {
                   <Input
                     id="lastName"
                     type="text"
-                    {...register('lastName')}
+                    {...register("lastName")}
                     disabled={isLoading}
-                    aria-invalid={errors.lastName ? 'true' : 'false'}
-                    aria-describedby={errors.lastName ? 'lastName-error' : undefined}
+                    aria-invalid={errors.lastName ? "true" : "false"}
+                    aria-describedby={
+                      errors.lastName ? "lastName-error" : undefined
+                    }
                   />
                   {errors.lastName && (
-                    <p id="lastName-error" className="text-sm text-red-500 mt-1">
+                    <p
+                      id="lastName-error"
+                      className="text-sm text-red-500 mt-1"
+                    >
                       {errors.lastName.message}
                     </p>
                   )}
@@ -106,10 +122,10 @@ const ContactPageContent = () => {
                   <Input
                     id="email"
                     type="email"
-                    {...register('email')}
+                    {...register("email")}
                     disabled={isLoading}
-                    aria-invalid={errors.email ? 'true' : 'false'}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    aria-invalid={errors.email ? "true" : "false"}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
                   {errors.email && (
                     <p id="email-error" className="text-sm text-red-500 mt-1">
@@ -123,10 +139,10 @@ const ContactPageContent = () => {
                   <Input
                     id="phone"
                     type="tel"
-                    {...register('phone')}
+                    {...register("phone")}
                     disabled={isLoading}
-                    aria-invalid={errors.phone ? 'true' : 'false'}
-                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                   />
                   {errors.phone && (
                     <p id="phone-error" className="text-sm text-red-500 mt-1">
@@ -140,11 +156,13 @@ const ContactPageContent = () => {
                 <Label htmlFor="message">Mensaje *</Label>
                 <Textarea
                   id="message"
-                  {...register('message')}
+                  {...register("message")}
                   disabled={isLoading}
                   rows={5}
-                  aria-invalid={errors.message ? 'true' : 'false'}
-                  aria-describedby={errors.message ? 'message-error' : undefined}
+                  aria-invalid={errors.message ? "true" : "false"}
+                  aria-describedby={
+                    errors.message ? "message-error" : undefined
+                  }
                 />
                 {errors.message && (
                   <p id="message-error" className="text-sm text-red-500 mt-1">
@@ -169,7 +187,7 @@ const ContactPageContent = () => {
                   role="alert"
                 >
                   <XCircle size={20} />
-                  <p>{errorMessage || 'Error al enviar el mensaje'}</p>
+                  <p>{errorMessage || "Error al enviar el mensaje"}</p>
                 </div>
               )}
 

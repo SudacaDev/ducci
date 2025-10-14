@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 
 :root {
- 
+  /* RGB */
   --white-rgb: 255, 255, 255;
   --background-rgb: 248, 240, 221;
   --foreground-rgb: 23, 23, 23;
@@ -10,11 +10,12 @@
   --primary-color-light-rgb: 254, 253, 251;
   --primary-color-outline-rgb: 186, 101, 22;
   --secondary-color-rgb: 186, 101, 22;
+  --secondary-color-dark-rgb: 113, 61, 11; /* ✅ Corregido el typo */
   --accent-color-rgb: 32, 93, 101;
   --e-global-text-color-rgb: 115, 109, 104;
   --e-global-text-dark-rgb: 14, 7, 2;
 
- 
+  /* Colores normales */
   --white: rgb(var(--white-rgb));
   --background: rgb(var(--background-rgb));
   --foreground: rgb(var(--foreground-rgb));
@@ -23,8 +24,10 @@
   --primary-color-fade: rgba(var(--primary-color-light-rgb), 0.53);
   --primary-color-outline: rgba(var(--primary-color-outline-rgb), 0.2);
   --secondary-color: rgb(var(--secondary-color-rgb));
+  --secondary-color-dark: rgb(var(--secondary-color-dark-rgb)); /* ✅ Agregado */
   --primary-foreground: rgb(var(--secondary-color-rgb));
   --secondary-foreground: rgb(var(--primary-color-rgb));
+
   --accent-color: rgb(var(--accent-color-rgb));
   --e-global-text-color: rgb(var(--e-global-text-color-rgb));
   --e-global-text-dark: rgb(var(--e-global-text-dark-rgb));
@@ -45,12 +48,13 @@
   --color-primary-foreground: var(--primary-foreground);
 
   --color-secondary: var(--secondary-color);
+  --color-secondary-dark: var(--secondary-color-dark); /* ✅ Agregado */
   --color-secondary-foreground: var(--secondary-foreground);
 
-  --secondary-color-aplpha: #ba651644;
+  --secondary-color-alpha: rgba(var(--secondary-color-rgb), 0.27); /* ✅ Cambié a rgba */
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-poppins);
 
   --color-global-text: var(--e-global-text-color);
   --color-global-text-dark: var(--e-global-text-dark);
@@ -60,32 +64,23 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --white: #ffffff;
-    --background: #f8f0dd;
-    --foreground: #171717;
-    --primary-color: #f9dd71;
-    --primary-color-light: #fefdfb;
-    --primary-color-fade: #fefdfb99;
-
-    --primary-color-outline: #ba651633;
-    --secondary-color: #ba6516;
-    --primary-foreground: #ba6516;
-    --secondary-foreground: #f9dd71;
-
-    --e-global-text-color: #736d68;
-    --e-global-text-dark: #0e0702;
-
-    --accent-color: #205d65;
-
-    --font-poppins: "Poppins", sans-serif;
-    --font-dm-sans: "DM Sans", sans-serif;
+    --white-rgb: 255, 255, 255;
+    --background-rgb: 248, 240, 221;
+    --foreground-rgb: 23, 23, 23;
+    --primary-color-rgb: 249, 221, 113;
+    --primary-color-light-rgb: 254, 253, 251;
+    --primary-color-outline-rgb: 186, 101, 22;
+    --secondary-color-rgb: 186, 101, 22;
+    --secondary-color-dark-rgb: 113, 61, 11;
+    --accent-color-rgb: 32, 93, 101;
+    --e-global-text-color-rgb: 115, 109, 104;
+    --e-global-text-dark-rgb: 14, 7, 2;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-
   min-height: 100dvh;
   min-height: 100vh;
 }
@@ -101,6 +96,7 @@ body {
   gap: 32px;
   background-image: url(/images/bg-banner.jpg);
 }
+
 .sub-banner_breadcrumb {
   background-color: var(--primary-color-light);
   padding: 1em 2em;
@@ -117,7 +113,7 @@ body {
 }
 
 .sub-banner_breadcrumb p {
-  color: var(--color-global-text-dark);
+  color: var(--e-global-text-dark);
 }
 
 .banner-cta,
@@ -135,6 +131,7 @@ body {
   flex-direction: column;
   gap: 1em;
 }
+
 .grid-image_left {
   grid-column: 1 / 7;
 }
@@ -147,13 +144,14 @@ body {
 .grid-image_right {
   grid-column: 7 / 13;
 }
-@media screen and (max-width: 980px){
-  .grid-image_left, .grid-image_right, .grid-content_left, .grid-content_right {
-  grid-column: 1 / 13;
-}
- 
- 
 
+@media screen and (max-width: 980px) {
+  .grid-image_left,
+  .grid-image_right,
+  .grid-content_left,
+  .grid-content_right {
+    grid-column: 1 / 13;
+  }
 }
 
 .button__cta {
@@ -167,39 +165,27 @@ body {
   font-weight: 600;
   gap: 1em;
   align-items: center;
-  box-shadow: 0px 3px 22px 3px var(--secondary-color-aplpha);
-  transition: all 0.8s ease-in-out;
+  box-shadow: 0px 3px 22px 3px rgba(var(--secondary-color-rgb), 0.27); /* ✅ Cambié a rgba */
+  transition: all 0.3s ease-in-out;
   height: 72px;
 }
+
 .button__cta:hover svg {
   transform: translateX(4px);
-  transition: all 0.8s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
+
 .button__cta svg {
   transform: translateX(0px);
-  transition: all 0.8s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
+
 .button__cta:hover {
-  transition: all 0.8s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.button__cta:hover {
-  background-color: var(--primary-color);
-  color: var(--color-primary-foreground);
-}
 
-
-/**
-.fr2_fr3{
-   grid-template-columns: 2fr 3fr;
+.button__cta:hover,
+.button__cta:focus-visible {
+  background-color: var(--secondary-color-dark); /* ✅ Ahora funciona */
 }
-.fr3_fr2{
-   grid-template-columns: 3fr 2fr;
-}
-
-@media screen and (max-width: 980px){
-  .fr3_fr2, .fr2_fr3 {
-    grid-template-columns: 1fr;
-}
-}
-**/

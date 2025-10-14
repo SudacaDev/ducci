@@ -53,7 +53,7 @@ const OurPhilosophy = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="about-section__cta">
+            <Link href={MENU.PRODUCTS} className="button__cta">
               Conoce nuestros sabores <ArrowRight size={16} />
             </Link>
           </div>
@@ -82,7 +82,7 @@ const OurPhilosophy = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="about-section__cta">
+            <Link href={MENU.PRODUCTS} className="button__cta">
               Conoce nuestros sabores <ArrowRight size={16} />
             </Link>
           </div>
@@ -90,7 +90,7 @@ const OurPhilosophy = () => {
         <div className="journey-image grid-content_right">
           <Image
             src="/images/guilt-image.jpg"
-           fill
+            fill
             objectFit="cover"
             sizes="(max-width: 768px) 100vw, 50vw"
             alt=""

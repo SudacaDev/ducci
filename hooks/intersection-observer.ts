@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface UseIntersectionObserverOptions {
   threshold?: number | number[];
@@ -8,9 +8,14 @@ interface UseIntersectionObserverOptions {
 }
 
 function useIntersectionObserver<T extends Element = HTMLDivElement>(
-  options: UseIntersectionObserverOptions = {}
+  options: UseIntersectionObserverOptions = {},
 ) {
-  const { threshold = 0, root = null, rootMargin = '0px', freezeOnceVisible = false } = options;
+  const {
+    threshold = 0,
+    root = null,
+    rootMargin = "0px",
+    freezeOnceVisible = false,
+  } = options;
 
   const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<T>(null);
@@ -26,7 +31,7 @@ function useIntersectionObserver<T extends Element = HTMLDivElement>(
       ([entry]) => {
         setIsIntersecting(entry.isIntersecting);
       },
-      { threshold, root, rootMargin }
+      { threshold, root, rootMargin },
     );
 
     observer.observe(element);

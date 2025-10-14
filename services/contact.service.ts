@@ -1,21 +1,21 @@
-import { ContactFormData, ContactFormResponse } from '@/types/contact.type';
+import { ContactFormData, ContactFormResponse } from "@/types/contact.type";
 
-const API_ENDPOINT = '/api/contact';
+const API_ENDPOINT = "/api/contact";
 
 /**
  * Envía un mensaje de contacto
  */
 export const sendContactMessage = async (
-  data: ContactFormData
+  data: ContactFormData,
 ): Promise<ContactFormResponse> => {
   try {
     // Log estructurado para desarrollo
-    console.log('📧 Enviando mensaje de contacto:', {
+    console.log("📧 Enviando mensaje de contacto:", {
       timestamp: new Date().toISOString(),
       from: `${data.firstName} ${data.lastName}`,
       email: data.email,
       phone: data.phone,
-      messagePreview: data.message.substring(0, 50) + '...',
+      messagePreview: data.message.substring(0, 50) + "...",
     });
 
     // Simular delay de red
@@ -40,15 +40,15 @@ export const sendContactMessage = async (
     // Respuesta simulada
     return {
       success: true,
-      message: 'Mensaje enviado correctamente',
+      message: "Mensaje enviado correctamente",
     };
   } catch (error) {
-    console.error('❌ Error al enviar mensaje:', error);
+    console.error("❌ Error al enviar mensaje:", error);
 
     throw new Error(
       error instanceof Error
         ? error.message
-        : 'Error desconocido al enviar el mensaje'
+        : "Error desconocido al enviar el mensaje",
     );
   }
 };
@@ -65,7 +65,7 @@ export const isValidEmail = (email: string): boolean => {
  * Formatea el teléfono eliminando caracteres no numéricos
  */
 export const formatPhone = (phone: string): string => {
-  return phone.replace(/\D/g, '');
+  return phone.replace(/\D/g, "");
 };
 
 /**
@@ -73,6 +73,6 @@ export const formatPhone = (phone: string): string => {
  */
 export const sanitizeMessage = (message: string): string => {
   return message
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
     .trim();
 };

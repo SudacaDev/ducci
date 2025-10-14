@@ -1,4 +1,4 @@
-export type SendStatus = 'idle' | 'loading' | 'success' | 'error';
+export type SendStatus = "idle" | "loading" | "success" | "error";
 
 export interface ContactFormData {
   firstName: string;
