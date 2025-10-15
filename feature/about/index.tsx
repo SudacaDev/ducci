@@ -7,7 +7,7 @@ import "./style/about.css";
 
 const AboutUsContentPage = () => {
   return (
-    <InnerLayout id='about' bannerTitle="Quienes Somos">
+    <InnerLayout id="about" bannerTitle="Quienes Somos">
       <CenterContainer center>
         <JourneyCon />
       </CenterContainer>

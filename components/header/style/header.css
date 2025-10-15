@@ -5,7 +5,7 @@ header
   padding: 22px 0;
   background-color: var(--primary-color-light);
   position: relative;
-  z-index: 5;
+  z-index: 999;
   border-bottom: 1px solid var(--primary-color-outline);
 }
 .header nav {

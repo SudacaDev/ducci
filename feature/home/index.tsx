@@ -1,5 +1,6 @@
 import AboutHomeSection from "./components/about";
 import HeroBanner from "./components/hero";
+import NewsletterHomeSection from "./components/newsletter";
 import ProductsHomeSection from "./components/products";
 
 import "./style/home.css";
@@ -10,6 +11,7 @@ const HomePageContent = () => {
       <HeroBanner />
       <ProductsHomeSection />
       <AboutHomeSection />
+      <NewsletterHomeSection />
     </div>
   );
 };

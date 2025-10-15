@@ -22,7 +22,7 @@ const JourneyCon = () => {
   return (
     <div className="container">
       <div className="journey-con">
-        <div className="journey-image grid-image_left relative h-[400px]">
+        <div className="journey-image grid-image_left relative ">
           <Image
             src="/images/guilt-image.jpg"
             fill
@@ -58,7 +58,6 @@ const JourneyCon = () => {
         </div>
       </div>
 
-
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <div className="body_content">
@@ -86,7 +85,7 @@ const JourneyCon = () => {
             </Link>
           </div>
         </div>
-        <div className="journey-image grid-image_right relative h-[400px]">
+        <div className="journey-image grid-image_right relative ">
           <Image
             src="/images/guilt-image.jpg"
             fill

@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
+
 import { MENU } from "@/types/nav.type";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+
+import { FaIceCream } from "react-icons/fa6";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -20,7 +23,10 @@ const HeroBanner = () => {
           <div className=" banner_content">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-4">
-                <p className="hero__eyebrow">Bienvenidos a</p>
+                <p className="hero__eyebrow flex items-center gap-2">
+                  <FaIceCream size={14} />
+                  Bienvenidos a
+                </p>
                 <h1 className="hero__title">
                   Ducci <span className="hero__title--accent">Gelatería</span>
                 </h1>

@@ -34,11 +34,11 @@ const PRODUCTS = [
   },
 ];
 
-const ProductCard = ({ 
-  product, 
-  index 
-}: { 
-  product: typeof PRODUCTS[0]; 
+const ProductCard = ({
+  product,
+  index,
+}: {
+  product: (typeof PRODUCTS)[0];
   index: number;
 }) => {
   const { ref, isIntersecting } = useIntersectionObserver<HTMLDivElement>({
@@ -58,24 +58,25 @@ const ProductCard = ({
     >
       <div className="product-home-list__grid__item_image">
         <figure>
-
-        <Image
-          src={product.image}
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 100vw, 33vw"
-          alt={product.name}
-        />
+          <Image
+            src={product.image}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, 33vw"
+            alt={product.name}
+          />
         </figure>
       </div>
       <div className="product-home-list__grid__cta">
         <div className="product-home-list__grid__cta__content">
           <div>
             <span className="text-sm opacity-70">{product.category}</span>
-          <h3 className="text-xl font-bold">{product.name}</h3>
+            <h3 className="text-xl font-bold">{product.name}</h3>
           </div>
           <div className="rounded-full">
-            <Button className="product-home-list__grid__button"><ArrowRight size={24} /></Button>
+            <Button className="product-home-list__grid__button">
+              <ArrowRight size={24} />
+            </Button>
           </div>
         </div>
       </div>
@@ -87,18 +88,20 @@ const ProductsHomeSection = () => {
   return (
     <section className="product-home-wrapper">
       <CenterContainer center className="">
-        <SectionHeader align="center" >
-          <h2 className="section-header__title">Explorá <span>nuestros sabores</span> </h2>
-          <p className="section-header__subtitle">Helados artesanales elaborados con ingredientes naturales</p>
-        </SectionHeader>
-        
+        <div className="items-center justify-center flex">
+          <SectionHeader align="center" className="text-center">
+            <h2 className="section-header__title">
+              Explorá <span>nuestros sabores</span>{" "}
+            </h2>
+            <p className="section-header__subtitle">
+              Helados artesanales elaborados con ingredientes naturales
+            </p>
+          </SectionHeader>
+        </div>
+
         <div className="product-home-list">
           {PRODUCTS.map((product, index) => (
-            <ProductCard 
-              key={product.id} 
-              product={product} 
-              index={index}
-            />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </CenterContainer>

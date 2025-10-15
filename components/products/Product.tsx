@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, ReactNode } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PROD } from "@/constants/prod";
 
 export interface Product {
@@ -17,7 +18,8 @@ export interface ProductsContextType {
   selectedCategory: string;
   viewMode: "grid" | "list";
   sortOrder: "asc" | "desc" | "none";
-  openFilter: boolean; // ← Agregar esto
+  openFilter: boolean;
+
   setSelectedCategory: (category: string) => void;
   setViewMode: (mode: "grid" | "list") => void;
   setSortOrder: (order: "asc" | "desc" | "none") => void;
@@ -43,10 +45,53 @@ interface ProductProps {
 }
 
 const Product = ({ children }: ProductProps) => {
-  const [selectedCategory, setSelectedCategory] = useState("todos");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
-  const [openFilter, setOpenFilter] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Leer valores iniciales desde la URL
+  const selectedCategory = searchParams.get("category") || "todos";
+  const viewMode = (searchParams.get("view") as "grid" | "list") || "grid";
+  const sortOrder =
+    (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
+  const openFilter = searchParams.get("filter") === "open";
+
+  // Función helper para actualizar la URL
+  const updateURL = (params: Record<string, string>) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+
+    Object.entries(params).forEach(([key, value]) => {
+      if (
+        value === "todos" ||
+        value === "grid" ||
+        value === "none" ||
+        value === "closed"
+      ) {
+        current.delete(key);
+      } else {
+        current.set(key, value);
+      }
+    });
+
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+    router.push(`${window.location.pathname}${query}`, { scroll: false });
+  };
+
+  const setSelectedCategory = (category: string) => {
+    updateURL({ category });
+  };
+
+  const setViewMode = (mode: "grid" | "list") => {
+    updateURL({ view: mode });
+  };
+
+  const setSortOrder = (order: "asc" | "desc" | "none") => {
+    updateURL({ sort: order });
+  };
+
+  const openFilterToggle = () => {
+    updateURL({ filter: openFilter ? "closed" : "open" });
+  };
 
   const filteredProducts = PROD.filter((product) => {
     if (selectedCategory === "todos") return true;
@@ -56,10 +101,6 @@ const Product = ({ children }: ProductProps) => {
     if (sortOrder === "desc") return b.price - a.price;
     return 0;
   });
-
-  const openFilterToggle = () => {
-    setOpenFilter(!openFilter);
-  };
 
   const value = {
     products: PROD,
