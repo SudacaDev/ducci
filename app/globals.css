@@ -10,7 +10,7 @@
   --primary-color-light-rgb: 254, 253, 251;
   --primary-color-outline-rgb: 186, 101, 22;
   --secondary-color-rgb: 186, 101, 22;
-  --secondary-color-dark-rgb: 113, 61, 11; /* ✅ Corregido el typo */
+  --secondary-color-dark-rgb: 113, 61, 11;  
   --accent-color-rgb: 32, 93, 101;
   --e-global-text-color-rgb: 115, 109, 104;
   --e-global-text-dark-rgb: 14, 7, 2;
@@ -24,7 +24,7 @@
   --primary-color-fade: rgba(var(--primary-color-light-rgb), 0.53);
   --primary-color-outline: rgba(var(--primary-color-outline-rgb), 0.2);
   --secondary-color: rgb(var(--secondary-color-rgb));
-  --secondary-color-dark: rgb(var(--secondary-color-dark-rgb)); /* ✅ Agregado */
+  --secondary-color-dark: rgb(var(--secondary-color-dark-rgb));  
   --primary-foreground: rgb(var(--secondary-color-rgb));
   --secondary-foreground: rgb(var(--primary-color-rgb));
 
@@ -48,10 +48,10 @@
   --color-primary-foreground: var(--primary-foreground);
 
   --color-secondary: var(--secondary-color);
-  --color-secondary-dark: var(--secondary-color-dark); /* ✅ Agregado */
+  --color-secondary-dark: var(--secondary-color-dark);  
   --color-secondary-foreground: var(--secondary-foreground);
 
-  --secondary-color-alpha: rgba(var(--secondary-color-rgb), 0.27); /* ✅ Cambié a rgba */
+  --secondary-color-alpha: rgba(var(--secondary-color-rgb), 0.27);  
 
   --font-sans: var(--font-poppins);
   --font-mono: var(--font-poppins);
@@ -118,7 +118,7 @@ body {
 
 .banner-cta,
 .about-home,
-.product-home {
+.product-home{
   padding-block: 142px;
 }
 
@@ -152,6 +152,32 @@ body {
   .grid-content_right {
     grid-column: 1 / 13;
   }
+}
+
+.section-header{
+  padding-top: 6em;
+  padding-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-header--center{
+  justify-content: center;
+  align-items: center;
+}
+
+.section-header__title{
+  font-size: clamp(2.3em, 3.2vw, 3.2vw);
+  font-weight: 600;
+  line-height: clamp(40px, 4vw, 4vw);
+}
+
+.section-header__title span {
+    color: var(--secondary-color);
+}
+
+.section-header__subtitle{
+  color: rgb(var(--e-global-text-color-rgb), .9)
 }
 
 .button__cta {

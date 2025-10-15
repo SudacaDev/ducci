@@ -8,8 +8,8 @@ const HomePageContent = () => {
   return (
     <div className="flex flex-col">
       <HeroBanner />
-      <AboutHomeSection />
       <ProductsHomeSection />
+      <AboutHomeSection />
     </div>
   );
 };
