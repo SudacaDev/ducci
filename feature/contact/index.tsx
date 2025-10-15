@@ -29,7 +29,7 @@ const ContactPageContent = () => {
   } = form;
 
   return (
-    <InnerLayout bannerTitle="Contacto">
+    <InnerLayout id="contact"  bannerTitle="Contacto" >
       <CenterContainer center>
         <div id="contactWrapper" className="py-8">
           <div className="contact__content">

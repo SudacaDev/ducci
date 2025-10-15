@@ -122,6 +122,12 @@ body {
   padding-block: 142px;
 }
 
+@media  screen and (max-width: 980) {
+  .banner-cta, .about-home, .product-home{
+    padding-block: 60px;
+  }
+}
+
 .bg-light {
   background-color: var(--primary-color-light);
 }
@@ -161,6 +167,12 @@ body {
   flex-direction: column;
 }
 
+@media screen and (max-width: 980px) {
+  .section-header{
+ padding-top: 2em;
+  }
+}
+
 .section-header--center{
   justify-content: center;
   align-items: center;
@@ -174,10 +186,12 @@ body {
 
 .section-header__title span {
     color: var(--secondary-color);
+     font-family: var(--font-poppins), sans-serif;
 }
 
 .section-header__subtitle{
-  color: rgb(var(--e-global-text-color-rgb), .9)
+  color: rgb(var(--e-global-text-color-rgb), .9);
+      font-family: var(--font-dm-sans), sans-serif;
 }
 
 .button__cta {
@@ -191,7 +205,7 @@ body {
   font-weight: 600;
   gap: 1em;
   align-items: center;
-  box-shadow: 0px 3px 22px 3px rgba(var(--secondary-color-rgb), 0.27); /* ✅ Cambié a rgba */
+  box-shadow: 0px 3px 22px 3px rgba(var(--secondary-color-rgb), 0.27); 
   transition: all 0.3s ease-in-out;
   height: 72px;
 }
@@ -213,5 +227,20 @@ body {
 
 .button__cta:hover,
 .button__cta:focus-visible {
-  background-color: var(--secondary-color-dark); /* ✅ Ahora funciona */
+  background-color: var(--secondary-color-dark); 
+}
+
+
+
+.aos-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.aos-animate.show {
+  opacity: 1;
+  transform: translateY(0);
 }

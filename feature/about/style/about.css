@@ -1,3 +1,6 @@
+#about{
+  background-color: var(--primary-color-light);
+}
 .journey-con {
   padding-inline: 4em;
   display: grid;
@@ -114,7 +117,7 @@
     transform 0.6s ease-out;
 }
 
-/* Estado activo (visible) */
+
 .journey-con.aos-animate.show {
   opacity: 1;
   transform: translateY(0);

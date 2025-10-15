@@ -1,3 +1,6 @@
+#contact{
+  background-color: var(--primary-color-light);
+}
 #contactWrapper {
   display: flex;
   flex-direction: column;

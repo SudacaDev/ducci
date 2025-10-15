@@ -86,12 +86,8 @@ const ProductCard = ({
 const ProductsHomeSection = () => {
   return (
     <section className="product-home-wrapper">
-      <CenterContainer center className="bg-light">
-        <SectionHeader
-          
-          align="center"
-           
-        >
+      <CenterContainer center className="">
+        <SectionHeader align="center" >
           <h2 className="section-header__title">Explorá <span>nuestros sabores</span> </h2>
           <p className="section-header__subtitle">Helados artesanales elaborados con ingredientes naturales</p>
         </SectionHeader>

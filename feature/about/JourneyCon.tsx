@@ -21,7 +21,6 @@ const JourneyCon = () => {
 
   return (
     <div className="container">
-      {/* Primera sección */}
       <div className="journey-con">
         <div className="journey-image grid-image_left relative h-[400px]">
           <Image
@@ -59,7 +58,7 @@ const JourneyCon = () => {
         </div>
       </div>
 
-      {/* Segunda sección con animación */}
+
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <div className="body_content">

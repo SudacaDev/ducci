@@ -12,7 +12,7 @@ const CenterContainer = ({
   className,
 }: CenterContainerProps) => {
   return (
-    <div className={cn("w-full px-4 bg-light py-8", className)}>
+    <div className={cn("w-full px-4  py-8", className)}>
       <div className={`${center ? "container mx-auto" : " "} w-full`}>
         {children}
       </div>

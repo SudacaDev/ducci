@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import SmallBanner from "../small-banner";
 import Link from "next/link";
 import useGetPathname from "@/libs/url";
+import { cn } from "@/lib/utils"
 
 import { MENU } from "@/types/nav.type";
 
@@ -11,17 +12,21 @@ interface InnerLayoutProps {
   imgDesktop?: string;
   imgMobile?: string;
   bannerTitle?: string;
+  className?:string;
+  id?: string
 }
 const InnerLayout = ({
   children,
+  id,
   imgDesktop,
   imgMobile,
   bannerTitle,
+  className,
 }: InnerLayoutProps) => {
   const { splitString } = useGetPathname();
 
   return (
-    <div className="flex flex-col">
+    <div id={id} className={cn("flex flex-col", className)}>
       <div>
         {imgDesktop || imgMobile ? (
           <SmallBanner
