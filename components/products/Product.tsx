@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, ReactNode } from "react";
+import { createContext, useContext, ReactNode, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PROD } from "@/constants/prod";
 
@@ -44,7 +44,8 @@ interface ProductProps {
   children: ReactNode;
 }
 
-const Product = ({ children }: ProductProps) => {
+// Componente interno que usa useSearchParams
+const ProductProvider = ({ children }: ProductProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -121,6 +122,24 @@ const Product = ({ children }: ProductProps) => {
         {children}
       </div>
     </ProductsContext.Provider>
+  );
+};
+
+// Componente wrapper con Suspense
+const Product = ({ children }: ProductProps) => {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-full container m-auto my-4 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+            <p className="text-gray-600">Cargando productos...</p>
+          </div>
+        </div>
+      }
+    >
+      <ProductProvider>{children}</ProductProvider>
+    </Suspense>
   );
 };
 

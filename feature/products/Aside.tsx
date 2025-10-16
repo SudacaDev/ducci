@@ -61,7 +61,7 @@ const Aside = () => {
                     }}
                     className={`w-full text-left px-3 py-2 rounded transition-colors ${
                       selectedCategory === category.id
-                        ? "bg-[var(--primary-color)] text-[var(--primary-foreground)] font-semibold active"
+                        ? "bg-[var(--secondary-color)] text-[var(--secondary-foreground)] font-semibold active"
                         : "hover:bg-gray-100"
                     }`}
                   >

@@ -32,12 +32,12 @@
   border-radius: 50%;
 }
 .journey_content {
+  gap: 3em;
   display: flex;
   flex-direction: column;
-  gap: 3em;
-
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: 400px;
 }
 .about-section__title {
   font-size: 54px;

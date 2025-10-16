@@ -17,6 +17,13 @@ export const NAV = [
   },
   {
     id: "jsks99uuahs00d00djjdo",
+    label: "sucursales",
+    slug: "sucursales",
+    url: MENU.BRANCHES,
+    alwaysActive: false,
+  },
+  {
+    id: "jsks99uuahs00d00dsKmu",
     label: "pedidos",
     slug: "pedidos",
     url: MENU.ORDERS,

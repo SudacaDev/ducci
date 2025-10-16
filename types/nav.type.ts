@@ -4,4 +4,5 @@ export enum MENU {
   PRODUCTS = "/productos",
   CONTACT = "/contacto",
   ORDERS = "/pedidos",
+  BRANCHES = "/sucursales",
 }

@@ -94,7 +94,7 @@ const ProductsHomeSection = () => {
               Explorá <span>nuestros sabores</span>{" "}
             </h2>
             <p className="section-header__subtitle">
-              Helados artesanales elaborados con ingredientes naturales
+              Probá nuestros helados, disfrutá de una experiencia distinta!
             </p>
           </SectionHeader>
         </div>

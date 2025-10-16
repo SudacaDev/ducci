@@ -37,7 +37,7 @@ const Footer = ({ children }: FooterProps) => {
           <div className="footer_wrapper container  m-auto px-4   gap-4">
             {children}
           </div>
-          <div className="py-4 w-full justify-center items-center flex footer-copy container border-t">
+          <div className="py-4 w-full justify-center items-center flex footer-copy container ">
             <small>
               Copyright &copy; 2024 Ducci Gelateria. All rights reserved.
             </small>

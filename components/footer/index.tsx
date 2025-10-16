@@ -1,14 +1,15 @@
 import Footer from "./Footer";
 
-import Logo from "./Logo";
+ 
 import Nav from "./Nav";
 import Address from "./Address";
 import Social from "./Social";
 
 import "./style/footer.css";
+import FooterLogo from "./Logo";
 
 const FooterWithComponents = Object.assign(Footer, {
-  Logo,
+  Logo: FooterLogo,
   Nav,
   Address,
   Social,

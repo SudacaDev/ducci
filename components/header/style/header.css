@@ -11,7 +11,9 @@ header
 .header nav {
   gap: 40px;
 }
-
+.header .logo {
+    width: 100px;
+}
 .header nav .item {
   text-transform: capitalize;
   font-weight: 600;

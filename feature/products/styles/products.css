@@ -18,7 +18,7 @@ products
   font-family: var(--font-dm-sans);
 }
 .aside_filter-content li button.active {
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 .product-home {
   background-color: #b2cfe6;

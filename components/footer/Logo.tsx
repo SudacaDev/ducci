@@ -1,9 +1,15 @@
-const Logo = () => {
+"use client"
+ 
+import Logo from "@/components/logo";
+
+const FooterLogo = () => {
+   
   return (
-    <div className="footer_logo">
-      <p>Logo</p>
+    <div className="relative">
+
+      <Logo isFooter />
     </div>
   );
 };
 
-export default Logo;
+export default FooterLogo;

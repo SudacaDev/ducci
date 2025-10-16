@@ -1,4 +1,5 @@
 import AboutHomeSection from "./components/about";
+import BranchesHomeSection from "./components/branches";
 import HeroBanner from "./components/hero";
 import NewsletterHomeSection from "./components/newsletter";
 import ProductsHomeSection from "./components/products";
@@ -11,6 +12,7 @@ const HomePageContent = () => {
       <HeroBanner />
       <ProductsHomeSection />
       <AboutHomeSection />
+      <BranchesHomeSection />
       <NewsletterHomeSection />
     </div>
   );

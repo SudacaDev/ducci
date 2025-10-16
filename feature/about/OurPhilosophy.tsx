@@ -1,9 +1,11 @@
 "use client";
-import useIntersectionObserver from "@/hooks/intersection-observer";
-import { MENU } from "@/types/nav.type";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+
+import { MENU } from "@/types/nav.type";
+import useGoToPage from "@/libs/goToPage";
+import useIntersectionObserver from "@/hooks/intersection-observer";
+import CTAButton from "@/components/cta-button";
 
 const observerOptions = {
   root: null,
@@ -12,6 +14,7 @@ const observerOptions = {
 };
 
 const OurPhilosophy = () => {
+  const goToPage = useGoToPage();
   const { ref: refHistoria, isIntersecting: isHistoriaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
   const { ref: refFilosofia, isIntersecting: isFilosofiaVisible } =
@@ -19,6 +22,8 @@ const OurPhilosophy = () => {
 
   const historiaClasses = `journey-con grid-content_left aos-animate ${isHistoriaVisible ? "show" : ""}`;
   const filosofiaClasses = `journey-con fr3_fr2 aos-animate ${isFilosofiaVisible ? "show" : ""}`;
+
+
 
   return (
     <div id="our-philosophy" className="container">
@@ -35,27 +40,25 @@ const OurPhilosophy = () => {
         </div>
         <div className="journey_content grid-content_right ">
           <div className="body_content">
-            <h2 className="about-section__title"> Nuestra Historia</h2>
+            <h2 className="about-section__title"> Misión</h2>
             <div className="flex flex-col about-section__text">
               <p>
-                Ducci Gelatería nació en 2015 en el corazón de Rosario, con la
-                pasión de crear helados artesanales que rescatan el auténtico
-                sabor del gelato italiano. Nuestra familia, con raíces
-                italo-argentinas, trajo consigo recetas tradicionales que
-                perfeccionamos con ingredientes locales de primera calidad.
+               Crear espacios accesibles, cálidos y bien pensados donde todas las edades
+puedan disfrutar. Servir helado con calidad, atención con cariño y experiencias
+que valgan la pena. Acompañar de cerca a nuestros franquiciados y a sus
+equipos, dándoles herramientas claras para que crezcan con su comercio y
+también en su vida.
               </p>
               <p>
-                Desde nuestros inicios, nos comprometimos a elaborar cada sabor
-                con dedicación y amor, sin aditivos artificiales ni
-                conservantes. Hoy, somos el punto de encuentro favorito de
-                familias y amigos que buscan un momento dulce y auténtico.
+               No buscamos estar en todos lados: buscamos estar bien, ser sólidos y dejar
+huella en cada lugar donde abrimos las puertas.
               </p>
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="button__cta">
-              Conoce nuestros sabores <ArrowRight size={16} />
-            </Link>
+            <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
+              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            </CTAButton>
           </div>
         </div>
       </div>
@@ -82,9 +85,9 @@ const OurPhilosophy = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="button__cta">
-              Conoce nuestros sabores <ArrowRight size={16} />
-            </Link>
+            <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
+              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            </CTAButton>
           </div>
         </div>
         <div className="journey-image grid-content_right">

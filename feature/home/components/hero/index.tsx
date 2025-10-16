@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 import { MENU } from "@/types/nav.type";
-import { Button } from "@/components/ui/button";
-
+ 
 import { FaIceCream } from "react-icons/fa6";
+import CTAButton from "@/components/cta-button";
+import Link from "next/link";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const HeroBanner = () => {
               <div className="flex flex-col gap-4">
                 <p className="hero__eyebrow flex items-center gap-2">
                   <FaIceCream size={14} />
-                  Bienvenidos a
+                 Es mucho más que una heladería.
                 </p>
                 <h1 className="hero__title">
                   Ducci <span className="hero__title--accent">Gelatería</span>
@@ -33,21 +34,21 @@ const HeroBanner = () => {
               </div>
 
               <p className="hero__description copy">
-                Disfrutá el auténtico sabor del helado artesanal, elaborado con
-                ingredientes naturales y recetas que rescatan la tradición
-                italiana en cada cucharada.
+                Es el punto de encuentro. <br />
+                En Ducci cada sabor tiene su historia y cada visita se
+                transforma en un recreo.
               </p>
             </div>
 
             <div className="hero__cta">
-              <Button
+              <Link
                 className="button__cta"
-                onClick={goToProducts}
-                type="button"
+                href={MENU.PRODUCTS}
+                
               >
-                Conocé nuestros sabores
-                <ArrowRight size={20} />
-              </Button>
+               Conocé nuestros sabores
+               <span> <ArrowRight size={20} /></span> 
+              </Link>
             </div>
           </div>
 

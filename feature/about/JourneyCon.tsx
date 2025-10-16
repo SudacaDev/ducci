@@ -1,5 +1,7 @@
 "use client";
+import CTAButton from "@/components/cta-button";
 import useIntersectionObserver from "@/hooks/intersection-observer";
+import useGoToPage from "@/libs/goToPage";
 import { MENU } from "@/types/nav.type";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -18,6 +20,9 @@ const JourneyCon = () => {
   const filosofiaClasses = `journey-con grid-image_right aos-animate ${
     isFilosofiaVisible ? "show" : ""
   }`;
+
+  const goToPage = useGoToPage();
+
 
   return (
     <div className="container">
@@ -51,9 +56,9 @@ const JourneyCon = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="button__cta">
-              Conoce nuestros sabores <ArrowRight size={16} />
-            </Link>
+            <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
+              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            </CTAButton>
           </div>
         </div>
       </div>
@@ -61,28 +66,23 @@ const JourneyCon = () => {
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <div className="body_content">
-            <h2 className="about-section__title">Nuestra Filosofía</h2>
+            <h2 className="about-section__title">Visión y Propósito</h2>
             <div className="flex flex-col about-section__text">
               <p>
-                Creemos que un helado excepcional comienza con ingredientes
-                excepcionales. Por eso trabajamos con productores locales,
-                seleccionando frutas de estación, chocolate belga premium y
-                dulce de leche artesanal argentino. Cada cucharada cuenta una
-                historia de calidad y compromiso.
+                Queremos ser la excusa perfecta para pasear. Para salir con tus hijos, con
+amigas, con tus padres.
               </p>
               <p>
-                Nuestra heladería es más que un negocio: es un espacio donde las
-                tradiciones se encuentran con la innovación. Respetamos las
-                recetas clásicas mientras experimentamos con nuevos sabores que
-                sorprenden a nuestros clientes. Porque para nosotros, hacer
-                helado es un arte que se disfruta mejor cuando se comparte.
+                 Queremos que cada visita a Ducci sea un recreo en
+medio del pueblo: un momento que corte la rutina, habilite una charla, o
+simplemente genere un recuerdo.
               </p>
             </div>
           </div>
           <div className="about-section__content">
-            <Link href={MENU.PRODUCTS} className="button__cta">
-              Conoce nuestros sabores <ArrowRight size={16} />
-            </Link>
+           <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
+              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            </CTAButton>
           </div>
         </div>
         <div className="journey-image grid-image_right relative ">

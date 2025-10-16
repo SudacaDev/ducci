@@ -1,6 +1,6 @@
 footer {
   color: var(--primary-color);
-  background-color: var(--primary-foreground);
+  background-color: var(--secondary-color-darker);
   padding-top: 2rem;
   font-family: var(--font-dm-sans);
 }
@@ -98,8 +98,13 @@ footer {
 }
 
 footer .footer-copy {
-  border-top: 1px solid var(--primary-color-outline);
+  border-top: 1px solid rgba(var(--primary-color-rgb), .2);
+  max-width: 980px;
 }
 .footer-copy small {
   opacity: 0.8;
+}
+
+.footer_logo img {
+  max-width: 200px;
 }
