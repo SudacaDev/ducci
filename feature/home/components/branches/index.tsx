@@ -31,11 +31,11 @@ const BranchesHomeSection = () => {
                                 </p>
                                 <ul>
                                     <li>
-                                        Ambientes luminosos y acogedores con estética mediterránea
+                                        <p> Ambientes luminosos y acogedores con estética mediterránea </p>
                                     </li>
-                                    <li>Atención cercana y amigable en cada visita</li>
-                                    <li>Locales cómodos para familias, amigos y parejas</li>
-                                    <li>El mismo cuidado y calidad en cada sucursal</li>
+                                    <li><p>Atención cercana y amigable en cada visita </p> </li>
+                                    <li><p>Locales cómodos para familias, amigos y parejas </p> </li>
+                                    <li><p>El mismo cuidado y calidad en cada sucursal </p> </li>
                                 </ul>
                                 <p>
                                     No buscamos estar en todos lados: buscamos estar bien, ser

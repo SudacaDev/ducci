@@ -27,7 +27,7 @@
   background-color: antiquewhite;
   border-radius: 190px;
   overflow: hidden;
-    position: relative;
+  position: relative;
 }
 .branches-home--image__content.item-content-first {
   grid-column: 1 / 7;
@@ -52,7 +52,7 @@
   position: absolute;
   grid-column: 5 / 12;
   grid-row: 8 / 12;
-  box-shadow: 0px 3px 12px 3px hsla(var(--secondary-color-darker-hsl), .27);
+  box-shadow: 0px 3px 12px 3px hsla(var(--secondary-color-darker-hsl), 0.27);
 }
 
 .branches-home--image__float .icon {
@@ -67,9 +67,8 @@
 }
 
 @media screen and (max-width: 1280px) {
-  
-  .branches-home--content-info{
-padding: 24px;
+  .branches-home--content-info {
+    padding: 24px;
   }
 }
 
@@ -80,8 +79,32 @@ padding: 24px;
   .branches-home--image-container {
     padding-top: 48px;
   }
-  .branches-home--content-info{
-padding: 16px;
+  .branches-home--content-info {
+    padding: 16px;
   }
 }
 
+.content-block__body ul{
+    padding-left: 1em;
+    line-height: 32px;
+}
+
+.content-block__body ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.content-block__body ul li p {
+  padding-left: 1.5em;
+}
+.content-block__body ul li::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  width: .8em;
+  height: .8em;
+  background-color: var(--secondary-color-dark);
+  margin-right: 20px;
+  border-radius: 100%;
+  display: block;
+}

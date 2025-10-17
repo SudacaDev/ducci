@@ -1,11 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import CenterContainer from "@/components/container/center";
-import SectionHeader from "@/components/section-header";
-import useIntersectionObserver from "@/hooks/intersection-observer";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import SectionHeader from "@/components/section-header";
+import CenterContainer from "@/components/container/center";
+import useIntersectionObserver from "@/hooks/intersection-observer";
+
+
+import "../../style/products.css"
 
 const PRODUCTS = [
   {

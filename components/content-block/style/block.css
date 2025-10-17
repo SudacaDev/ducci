@@ -40,7 +40,6 @@
 .content-block__wrapper {
   display: var(--display, block);
   flex-direction: var(--direction);
-  justify-content: var(--justify-content);
   height: 100%;
   align-items: flex-start;
   gap: var(--gap);
