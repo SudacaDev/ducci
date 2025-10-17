@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Button,  } from "../ui/button";
+import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
 interface CTAButtonProps {
@@ -8,7 +8,15 @@ interface CTAButtonProps {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
-  size?:  "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg" | null | undefined
+  size?:
+    | "default"
+    | "sm"
+    | "lg"
+    | "icon"
+    | "icon-sm"
+    | "icon-lg"
+    | null
+    | undefined;
 }
 
 const CTAButton = ({

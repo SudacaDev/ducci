@@ -1,6 +1,5 @@
 import Footer from "./Footer";
 
- 
 import Nav from "./Nav";
 import Address from "./Address";
 import Social from "./Social";

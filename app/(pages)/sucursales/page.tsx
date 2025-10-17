@@ -19,8 +19,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BranchesPage(){
-    return (
-        <BranchesContentPage />
-    )
+export default function BranchesPage() {
+  return <BranchesContentPage />;
 }

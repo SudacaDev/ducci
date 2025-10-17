@@ -98,7 +98,7 @@ footer {
 }
 
 footer .footer-copy {
-  border-top: 1px solid rgba(var(--primary-color-rgb), .2);
+  border-top: 1px solid rgba(var(--primary-color-rgb), 0.2);
   max-width: 980px;
 }
 .footer-copy small {

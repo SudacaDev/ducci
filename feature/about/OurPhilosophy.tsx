@@ -23,8 +23,6 @@ const OurPhilosophy = () => {
   const historiaClasses = `journey-con grid-content_left aos-animate ${isHistoriaVisible ? "show" : ""}`;
   const filosofiaClasses = `journey-con fr3_fr2 aos-animate ${isFilosofiaVisible ? "show" : ""}`;
 
-
-
   return (
     <div id="our-philosophy" className="container">
       <div ref={refHistoria} className={historiaClasses}>
@@ -43,21 +41,28 @@ const OurPhilosophy = () => {
             <h2 className="about-section__title"> Misión</h2>
             <div className="flex flex-col about-section__text">
               <p>
-               Crear espacios accesibles, cálidos y bien pensados donde todas las edades
-puedan disfrutar. Servir helado con calidad, atención con cariño y experiencias
-que valgan la pena. Acompañar de cerca a nuestros franquiciados y a sus
-equipos, dándoles herramientas claras para que crezcan con su comercio y
-también en su vida.
+                Crear espacios accesibles, cálidos y bien pensados donde todas
+                las edades puedan disfrutar. Servir helado con calidad, atención
+                con cariño y experiencias que valgan la pena. Acompañar de cerca
+                a nuestros franquiciados y a sus equipos, dándoles herramientas
+                claras para que crezcan con su comercio y también en su vida.
               </p>
               <p>
-               No buscamos estar en todos lados: buscamos estar bien, ser sólidos y dejar
-huella en cada lugar donde abrimos las puertas.
+                No buscamos estar en todos lados: buscamos estar bien, ser
+                sólidos y dejar huella en cada lugar donde abrimos las puertas.
               </p>
             </div>
           </div>
           <div className="about-section__content">
-            <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
-              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            <CTAButton
+              className="button__cta--secondary"
+              onClick={() => goToPage(String(MENU.PRODUCTS))}
+            >
+              Conoce nuestros sabores{" "}
+              <span>
+                {" "}
+                <ArrowRight size={16} />
+              </span>
             </CTAButton>
           </div>
         </div>
@@ -85,8 +90,15 @@ huella en cada lugar donde abrimos las puertas.
             </div>
           </div>
           <div className="about-section__content">
-            <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
-              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            <CTAButton
+              className="button__cta--secondary"
+              onClick={() => goToPage(String(MENU.PRODUCTS))}
+            >
+              Conoce nuestros sabores{" "}
+              <span>
+                {" "}
+                <ArrowRight size={16} />
+              </span>
             </CTAButton>
           </div>
         </div>

@@ -2,24 +2,18 @@
 @import "tw-animate-css";
 
 :root {
-  
-  
- 
   --secondary-h: 29;
   --secondary-s: 79%;
   --secondary-l: 41%;
-  
- 
+
   --primary-h: 44;
   --primary-s: 92%;
   --primary-l: 71%;
-  
- 
+
   --accent-h: 188;
   --accent-s: 52%;
   --accent-l: 26%;
-  
- 
+
   --background-h: 40;
   --background-s: 71%;
   --background-l: 92%;
@@ -28,16 +22,22 @@
   /* ⚠️ NO TOCAR ABAJO - Se calcula automáticamente */
   /* ===================================== */
 
-  
   --white-hsl: 0, 0%, 100%;
-  --background-hsl: var(--background-h), var(--background-s), var(--background-l);
+  --background-hsl:
+    var(--background-h), var(--background-s), var(--background-l);
   --foreground-hsl: 0, 0%, 9%;
   --primary-color-hsl: var(--primary-h), var(--primary-s), var(--primary-l);
   --primary-color-light-hsl: 43, 95%, 99%;
-  --primary-color-outline-hsl: var(--secondary-h), var(--secondary-s), var(--secondary-l);
-  --secondary-color-hsl: var(--secondary-h), var(--secondary-s), var(--secondary-l);
-  --secondary-color-dark-hsl: var(--secondary-h), calc(var(--secondary-s) + 3%), calc(var(--secondary-l) - 17%);
-  --secondary-color-darker-hsl: var(--secondary-h), calc(var(--secondary-s) + 3%), calc(var(--secondary-l) - 24%);
+  --primary-color-outline-hsl:
+    var(--secondary-h), var(--secondary-s), var(--secondary-l);
+  --secondary-color-hsl:
+    var(--secondary-h), var(--secondary-s), var(--secondary-l);
+  --secondary-color-dark-hsl:
+    var(--secondary-h), calc(var(--secondary-s) + 3%),
+    calc(var(--secondary-l) - 17%);
+  --secondary-color-darker-hsl:
+    var(--secondary-h), calc(var(--secondary-s) + 3%),
+    calc(var(--secondary-l) - 24%);
   --accent-color-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
   --e-global-text-color-hsl: 29, 5%, 43%;
   --e-global-text-dark-hsl: 28, 75%, 3%;
@@ -60,14 +60,32 @@
   --e-global-text-color: hsl(var(--e-global-text-color-hsl));
   --e-global-text-dark: hsl(var(--e-global-text-dark-hsl));
 
- 
-  --secondary-lighter: hsl(var(--secondary-h), var(--secondary-s), calc(var(--secondary-l) + 19%));
-  --secondary-lightest: hsl(var(--secondary-h), var(--secondary-s), calc(var(--secondary-l) + 44%));
-  --secondary-darker-alt: hsl(var(--secondary-h), calc(var(--secondary-s) + 3%), calc(var(--secondary-l) - 31%));
-  
- 
-  --secondary-hover: hsl(var(--secondary-h), var(--secondary-s), calc(var(--secondary-l) - 25%));
-  --secondary-hover-darkest: hsl(var(--secondary-h), var(--secondary-s), calc(var(--secondary-l) - 28%));
+  --secondary-lighter: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) + 19%)
+  );
+  --secondary-lightest: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) + 44%)
+  );
+  --secondary-darker-alt: hsl(
+    var(--secondary-h),
+    calc(var(--secondary-s) + 3%),
+    calc(var(--secondary-l) - 31%)
+  );
+
+  --secondary-hover: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) - 25%)
+  );
+  --secondary-hover-darkest: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) - 28%)
+  );
 
   /* Fuentes */
   --font-poppins: "Poppins", sans-serif;
@@ -76,36 +94,37 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    
     --secondary-h: 29;
     --secondary-s: 79%;
     --secondary-l: 41%;
-    
-    
+
     --primary-h: 44;
     --primary-s: 92%;
     --primary-l: 71%;
-    
-    
+
     --accent-h: 188;
     --accent-s: 52%;
     --accent-l: 26%;
-    
- 
+
     --background-h: 40;
     --background-s: 71%;
     --background-l: 92%;
 
-     
     --white-hsl: 0, 0%, 100%;
-    --background-hsl: var(--background-h), var(--background-s), var(--background-l);
+    --background-hsl:
+      var(--background-h), var(--background-s), var(--background-l);
     --foreground-hsl: 0, 0%, 9%;
     --primary-color-hsl: var(--primary-h), var(--primary-s), var(--primary-l);
     --primary-color-light-hsl: 43, 95%, 99%;
     --primary-color-outline-hsl: 8, 51%, 23%;
-    --secondary-color-hsl: var(--secondary-h), var(--secondary-s), var(--secondary-l);
-    --secondary-color-dark-hsl: var(--secondary-h), calc(var(--secondary-s) + 3%), calc(var(--secondary-l) - 17%);
-    --secondary-color-darker-hsl:var(--secondary-h), calc(var(--secondary-s) + 3%), calc(var(--secondary-l) - 24%);
+    --secondary-color-hsl:
+      var(--secondary-h), var(--secondary-s), var(--secondary-l);
+    --secondary-color-dark-hsl:
+      var(--secondary-h), calc(var(--secondary-s) + 3%),
+      calc(var(--secondary-l) - 17%);
+    --secondary-color-darker-hsl:
+      var(--secondary-h), calc(var(--secondary-s) + 3%),
+      calc(var(--secondary-l) - 24%);
     --accent-color-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
     --e-global-text-color-hsl: 29, 5%, 43%;
     --e-global-text-dark-hsl: 28, 75%, 3%;
@@ -244,7 +263,6 @@ body {
   align-items: center;
   box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark-hsl), 0.27);
   transition: all 0.3s ease-in-out;
- 
 }
 
 .button__cta:hover span,
@@ -263,10 +281,9 @@ body {
 .button__cta--secondary:hover {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-   
 }
-.button__cta:hover{
-box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
+.button__cta:hover {
+  box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
 }
 .button__cta:hover,
 .button__cta:focus-visible,
@@ -299,14 +316,17 @@ box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
   color: var(--primary-color);
 }
 
-.button__cta--secondary:hover span:before, 
+.button__cta--secondary:hover span:before,
 .button__cta:hover span:before {
-  background-color: hsl(var(--secondary-h), var(--secondary-s), calc(var(--secondary-l) + 20%));
+  background-color: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) + 20%)
+  );
 }
 
-
-
 .button__cta--secondary {
+  display: inline-flex;
   color: var(--primary-color);
   background-color: var(--secondary-color-dark);
   padding: 1.5em 1.5em 1.5em 2em;
@@ -318,7 +338,6 @@ box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
   align-items: center;
   box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-darker-hsl), 0.27);
   transition: all 0.3s ease-in-out;
- 
 }
 
 .button__cta--secondary span {
@@ -342,10 +361,11 @@ box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
   z-index: -1;
 }
 
-.button__cta, .button__cta--secondary{
-   color: var(--primary-color-light);
-    padding: .5em 1em .5em 1.5em;
-     height: auto;
+.button__cta,
+.button__cta--secondary {
+  color: var(--primary-color-light);
+  padding: 0.5em 1em 0.5em 1.5em;
+  height: auto;
 }
 
 .aos-animate {

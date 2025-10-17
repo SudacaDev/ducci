@@ -1,11 +1,12 @@
 "use client";
-import CenterContainer from "@/components/container/center";
-import CTAButton from "@/components/cta-button";
-import { Button } from "@/components/ui/button";
-import useIntersectionObserver from "@/hooks/intersection-observer";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+
+import Block from "@/components/content-block";
+import CTAButton from "@/components/cta-button";
+import CenterContainer from "@/components/container/center";
+import useIntersectionObserver from "@/hooks/intersection-observer";
 
 const observerOptions = {
   root: null,
@@ -41,29 +42,36 @@ const AboutHomeSection = () => {
               <div className="about-home__wrappe--info">
                 <div className="about-home__wrappe--info__wrapper">
                   <div className="about-home__wrappe--info__content">
-                    <div className="about-home__wrappe--info__content__title">
-                      <h3>Nuestros valores, nuestra cultura</h3>
-                    </div>
-
-                    <div className="about-home__wrappe--info__content__body">
-                      <p>
-                        En Ducci creemos en lo simple, en lo cuidado y en lo
-                        compartido.
-                      </p>
-                      <p>
-                        Desde quien atiende, hasta quien limpia. Todos hacemos
-                        cultura.
-                      </p>
-                    </div>
-
-                    <div className="about-home__wrappe--info__content__button">
-                      <Link href="/nosotros">
-                        <CTAButton className="button__cta--secondary">
-                          Conocé nuestra historia
-                          <span><ArrowRight size={20} /></span>
-                        </CTAButton>
-                      </Link>
-                    </div>
+                    <Block>
+                      <Block.Content>
+                        <Block.Subtitle> ¿Quiénes Somos? </Block.Subtitle>
+                        <Block.Title>
+                          Nuestros valores, <span>nuestra cultura</span>
+                        </Block.Title>
+                      </Block.Content>
+                      <Block.Body>
+                        <div className="about-home__wrappe--info__content__body">
+                          <p>
+                            En Ducci creemos en lo simple, en lo cuidado y en lo
+                            compartido.
+                          </p>
+                          <p>
+                            Desde quien atiende, hasta quien limpia. Todos
+                            hacemos cultura.
+                          </p>
+                        </div>
+                      </Block.Body>
+                      <Block.Footer>
+                        <Link href="/nosotros">
+                          <CTAButton className="button__cta--secondary">
+                            Conocé nuestra historia
+                            <span>
+                              <ArrowRight size={20} />
+                            </span>
+                          </CTAButton>
+                        </Link>
+                      </Block.Footer>
+                    </Block>
                   </div>
                 </div>
               </div>

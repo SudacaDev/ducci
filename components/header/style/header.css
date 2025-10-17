@@ -12,7 +12,7 @@ header
   gap: 40px;
 }
 .header .logo {
-    width: 100px;
+  width: 100px;
 }
 .header nav .item {
   text-transform: capitalize;

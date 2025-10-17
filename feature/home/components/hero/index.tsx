@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 import { MENU } from "@/types/nav.type";
- 
+
 import { FaIceCream } from "react-icons/fa6";
 import CTAButton from "@/components/cta-button";
 import Link from "next/link";
@@ -26,7 +26,7 @@ const HeroBanner = () => {
               <div className="flex flex-col gap-4">
                 <p className="hero__eyebrow flex items-center gap-2">
                   <FaIceCream size={14} />
-                 Es mucho más que una heladería.
+                  Es mucho más que una heladería.
                 </p>
                 <h1 className="hero__title">
                   Ducci <span className="hero__title--accent">Gelatería</span>
@@ -41,13 +41,12 @@ const HeroBanner = () => {
             </div>
 
             <div className="hero__cta">
-              <Link
-                className="button__cta"
-                href={MENU.PRODUCTS}
-                
-              >
-               Conocé nuestros sabores
-               <span> <ArrowRight size={20} /></span> 
+              <Link className="button__cta" href={MENU.PRODUCTS}>
+                Conocé nuestros sabores
+                <span>
+                  {" "}
+                  <ArrowRight size={20} />
+                </span>
               </Link>
             </div>
           </div>

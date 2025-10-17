@@ -23,7 +23,6 @@ const JourneyCon = () => {
 
   const goToPage = useGoToPage();
 
-
   return (
     <div className="container">
       <div className="journey-con">
@@ -56,8 +55,15 @@ const JourneyCon = () => {
             </div>
           </div>
           <div className="about-section__content">
-            <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
-              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            <CTAButton
+              className="button__cta--secondary"
+              onClick={() => goToPage(String(MENU.PRODUCTS))}
+            >
+              Conoce nuestros sabores{" "}
+              <span>
+                {" "}
+                <ArrowRight size={16} />
+              </span>
             </CTAButton>
           </div>
         </div>
@@ -69,19 +75,26 @@ const JourneyCon = () => {
             <h2 className="about-section__title">Visión y Propósito</h2>
             <div className="flex flex-col about-section__text">
               <p>
-                Queremos ser la excusa perfecta para pasear. Para salir con tus hijos, con
-amigas, con tus padres.
+                Queremos ser la excusa perfecta para pasear. Para salir con tus
+                hijos, con amigas, con tus padres.
               </p>
               <p>
-                 Queremos que cada visita a Ducci sea un recreo en
-medio del pueblo: un momento que corte la rutina, habilite una charla, o
-simplemente genere un recuerdo.
+                Queremos que cada visita a Ducci sea un recreo en medio del
+                pueblo: un momento que corte la rutina, habilite una charla, o
+                simplemente genere un recuerdo.
               </p>
             </div>
           </div>
           <div className="about-section__content">
-           <CTAButton  className="button__cta--secondary" onClick={() => goToPage(String(MENU.PRODUCTS))}>
-              Conoce nuestros sabores <span> <ArrowRight size={16} /></span>
+            <CTAButton
+              className="button__cta--secondary"
+              onClick={() => goToPage(String(MENU.PRODUCTS))}
+            >
+              Conoce nuestros sabores{" "}
+              <span>
+                {" "}
+                <ArrowRight size={16} />
+              </span>
             </CTAButton>
           </div>
         </div>
