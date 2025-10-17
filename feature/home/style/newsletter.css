@@ -64,6 +64,10 @@ object-fit: contain !important;
 }
 
 @media screen and (max-width: 980px) {
+
+    .newsletter-home-content{
+        max-height: 768px;
+    }
     
     .newsletter-home-content__image{
         grid-row: 1 / 6;
