@@ -254,7 +254,7 @@ body {
 
 .button__cta {
   display: inline-flex;
-  background-color: var(--secondary-hover-darkest);
+  background-color: var(--primary-color);
   width: auto;
   border-radius: 48px;
   font-size: 1em;
@@ -263,6 +263,10 @@ body {
   align-items: center;
   box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark-hsl), 0.27);
   transition: all 0.3s ease-in-out;
+}
+
+.button__cta{
+  color: hsl(var(--secondary-color-dark-hsl))
 }
 
 .button__cta:hover span,
@@ -285,10 +289,14 @@ body {
 .button__cta:hover {
   box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
 }
-.button__cta:hover,
+
 .button__cta:focus-visible,
 .button__cta--secondary:hover {
   background-color: var(--secondary-color);
+}
+
+.button__cta:hover {
+  background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 15%));
 }
 
 .button__cta span:before {
@@ -313,22 +321,22 @@ body {
 }
 
 .button__cta--secondary:hover {
-  color: var(--primary-color);
+  color:  hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 45%));
 }
 
 .button__cta--secondary:hover span:before,
 .button__cta:hover span:before {
   background-color: hsl(
-    var(--secondary-h),
-    var(--secondary-s),
-    calc(var(--secondary-l) + 20%)
+    var(--primary-h),
+    var(--primary-s),
+    calc(var(--primary-l) - 20%)
   );
 }
 
 .button__cta--secondary {
   display: inline-flex;
   color: var(--primary-color);
-  background-color: var(--secondary-color-dark);
+  background-color: var(--secondary-color);
   padding: 1.5em 1.5em 1.5em 2em;
   width: auto;
   border-radius: 48px;
@@ -354,7 +362,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: var(--secondary-color-dark);
+  background-color: var(--secondary-color);
   top: 0;
   left: 0;
   border-radius: 100%;
@@ -363,11 +371,13 @@ body {
 
 .button__cta,
 .button__cta--secondary {
-  color: var(--primary-color-light);
+
   padding: 0.5em 1em 0.5em 1.5em;
   height: auto;
 }
-
+.button__cta--secondary{
+  color: var(--primary-color-light);
+}
 .aos-animate {
   opacity: 0;
   transform: translateY(40px);

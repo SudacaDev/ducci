@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+
+import { useRouter } from "next/navigation";
+
 
 import { MENU } from "@/types/nav.type";
 
-import { FaIceCream } from "react-icons/fa6";
-import CTAButton from "@/components/cta-button";
-import Link from "next/link";
+
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -25,7 +26,6 @@ const HeroBanner = () => {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-4">
                 <p className="hero__eyebrow flex items-center gap-2">
-                  <FaIceCream size={14} />
                   Es mucho más que una heladería.
                 </p>
                 <h1 className="hero__title">

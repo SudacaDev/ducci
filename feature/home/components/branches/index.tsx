@@ -1,15 +1,28 @@
-import CenterContainer from "@/components/container/center";
-import Block from "@/components/content-block";
-
+"use client"
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { FaShop } from "react-icons/fa6";
 
-import "../../style/branches.css";
+import useGoToPage from "@/libs/goToPage";
+
+import Block from "@/components/content-block";
+import CTAButton from "@/components/cta-button";
+import CenterContainer from "@/components/container/center";
+
 import { MENU } from "@/types/nav.type";
-import Image from "next/image";
+
+
+
+import "../../style/branches.css";
+import ParallaxFloat from "@/components/parallax-float";
 
 const BranchesHomeSection = () => {
+
+
+
+    const goToPage = useGoToPage()
+
+
     return (
         <section className="branches-home">
             <CenterContainer center className="">
@@ -44,12 +57,12 @@ const BranchesHomeSection = () => {
                                 </p>
                             </Block.Body>
                             <Block.Footer>
-                                <Link href={MENU.BRANCHES} aria-label="ir a sucursales" title="Sucursales" className="button__cta--secondary">
+                                <CTAButton onClick={() => goToPage(MENU.BRANCHES)} aria-label="ir a sucursales" aria-title="Sucursales" className="button__cta--secondary">
                                     Conocé las sucursales
                                     <span>
                                         <ArrowRight />
                                     </span>
-                                </Link>
+                                </CTAButton>
                             </Block.Footer>
                         </Block>
                     </div>
@@ -72,7 +85,7 @@ const BranchesHomeSection = () => {
                                 alt="Helados artesanales Ducci"
                             />
                         </div>
-                        <div className="branches-home--image__float">
+                        <ParallaxFloat >
                             <div className="flex items-center gap-4">
                                 <div className="icon">
                                     <FaShop size={32} />
@@ -82,7 +95,8 @@ const BranchesHomeSection = () => {
                                     <p>Nustros Locales</p>
                                 </div>
                             </div>
-                        </div>
+                        </ParallaxFloat>
+
                     </div>
                 </div>
             </CenterContainer>

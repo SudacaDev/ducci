@@ -8,7 +8,7 @@
   );
   */
   /*background-image: url(/images/bg-banner.jpg);*/
-  background-color: var(--secondary-color-dark);
+  background-color: var(--secondary-color);
   position: relative;
   overflow: hidden;
   height: 90dvh;
@@ -67,7 +67,7 @@
   line-height: 94px;
   font-weight: 700;
   font-family: var(--font-poppins);
-  color: var(--secondary-color);
+  color: var(--primary-color-light);
 }
 .banner_content .hero__title span {
   color: var(--global-text-dark);

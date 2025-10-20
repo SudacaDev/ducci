@@ -3,7 +3,7 @@
   --gap: 24px;
   --direction: column;
   --justify-content: space-between;
-  --content-max: 500px;
+  --content-max: 520px;
   height: 100%;
 }
 .content-block__subtitle {
@@ -29,6 +29,7 @@
 
 .content-block__body p {
   color: hsla(var(--e-global-text-color-hsl), 0.9);
+   font-family: var(--font-dm-sans), sans-serif;
 }
 
 .content-block__content {

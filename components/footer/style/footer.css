@@ -1,6 +1,6 @@
 footer {
   color: var(--primary-color);
-  background-color: var(--secondary-color-darker);
+  background-color: var(--secondary-color);
   padding-top: 2rem;
   font-family: var(--font-dm-sans);
 }
@@ -82,10 +82,10 @@ footer {
 .footer_social-content a span {
   position: relative;
   display: flex;
+  background-color: rgba(255, 255, 255, .1);
 }
 .footer_social-content a span {
   border-radius: 100%;
-  background-color: rgba(var(--primary-color-rgb), 0.1);
   padding: 0.8em;
   display: flex;
   justify-content: center;
