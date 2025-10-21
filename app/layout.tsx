@@ -1,4 +1,5 @@
 import { Poppins, DM_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -24,6 +25,38 @@ export default function RootLayout({
         className={`${poppins.variable} ${dmSans.variable} antialiased grid grid-rows-[auto_1fr_auto] min-h-screen`}
       >
         {children}
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            
+            duration: 4000,
+            style: {
+              background: '#333',
+              color: '#fff',
+              padding: '16px',
+              borderRadius: '8px',
+              fontSize: '14px',
+            },
+             
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: '#BA6516',
+                secondary: '#fff',
+              },
+            },
+           
+            error: {
+              duration: 4000,
+              iconTheme: {
+                primary: '#ef4444',
+                secondary: '#fff',
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );

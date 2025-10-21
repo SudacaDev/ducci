@@ -1,6 +1,5 @@
 "use client";
 
- 
 import useBranchesMap from "./hooks/useBranchesMap";
 import SidebarBranch from "./SidebarBranch";
 
@@ -18,7 +17,10 @@ const DucciBranchesMap = () => {
     setSelectedBranch,
     hoveredBranch,
     setHoveredBranch,
+    nearbyBranches,      
+    userLocation,        
   } = useBranchesMap();
+
   return (
     <div className="branches-map-container">
       <SidebarBranch
@@ -31,6 +33,8 @@ const DucciBranchesMap = () => {
         setSelectedBranch={setSelectedBranch}
         hoveredBranch={hoveredBranch}
         setHoveredBranch={setHoveredBranch}
+        nearbyBranches={nearbyBranches}      
+        userLocation={userLocation}         
       />
 
       <div ref={mapRef} style={{ height: "100%", width: "100%" }} />

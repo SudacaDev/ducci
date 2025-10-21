@@ -61,7 +61,19 @@ export const BRANCHES: Branch[] = [
     phone: "+54 341 345 6789",
     hours: "Abierto • Cierra a las 23:00",
   },
+  {
+     id: 7,
+  name: "Ducci San Fernando",
+  address: "Constitución 2050",
+  city: "San Fernando, Buenos Aires",
+  lat: -34.4428,  
+  lng: -58.5584,
+  phone: "+54 11 4744 5678",
+  hours: "Abierto • Cierra a las 23:00",
+  },
 ];
+
+ 
 
 export const THEME = {
   primary: "#BA6516",
