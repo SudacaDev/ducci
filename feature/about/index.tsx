@@ -11,7 +11,7 @@ const AboutUsContentPage = () => {
       <CenterContainer center>
         <JourneyCon />
       </CenterContainer>
-      <CenterContainer className="bg-[#b2cee4]">
+      <CenterContainer className="bg-[var(--primary-color)]">
         <div className="container mx-auto">
           <OurPhilosophy />
         </div>

@@ -15,16 +15,20 @@
   max-height: 980px;
 }
 
-.hero-banner:after {
-  content: "";
-  left: 0;
-  bottom: 0;
-  position: absolute;
-  background-position: bottom;
-  background-image: url("/images/banner-backgroundbottomimage.png");
-  width: 100%;
-  height: 125px;
-  z-index: 10;
+.hero-banner::after {
+content: "";
+    z-index: 10;
+    background-image: url(/images/wave.svg);
+    background-position: bottom;
+    width: 100%;
+ 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-repeat: repeat-x;
+ 
+    height: 40px;
+    background-size: 10.00% 100%;;
 }
 
 .hero--banner__wrapper {
@@ -43,10 +47,24 @@
   display: grid;
 }
 
+@media screen and (max-width: 980px) {
+  .hero-banner::after {
+
+    background-size: 20.00% 100%;;
+}
+ 
+
+}
+
 @media screen and (max-width: 768px) {
+  .hero-banner::after {
+
+    background-size: 20.00% 100%;;
+}
   #about_wrapper {
     grid-column: 1 / 13;
   }
+
 }
 
 .banner_content {

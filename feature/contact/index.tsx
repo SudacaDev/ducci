@@ -18,6 +18,7 @@ import {
 
 import "./style/contact.css";
 import { useSendContactMail } from "./hooks/useSendContactMail";
+import Block from "@/components/content-block";
 
 const ContactPageContent = () => {
   const { form, onSubmit, isLoading, isSuccess, isError, errorMessage } =
@@ -32,13 +33,19 @@ const ContactPageContent = () => {
     <InnerLayout id="contact" bannerTitle="Contacto">
       <CenterContainer center>
         <div id="contactWrapper" className="py-8">
-          <div className="contact__content">
-            <h2>
-              Ponte en <span>contacto</span> con nosotros
-            </h2>
-            <p>Escribinos y contanos cuales son tus inquietudes.</p>
+          
+          <Block className="text-center">
+            <Block.Title>
+ Ponte en <span>contacto</span> con nosotros
+            </Block.Title>
+            <Block.Body>
+ <p>Escribinos y contanos cuales son tus inquietudes.</p>
             <p>Nuestro equipo se pondrá en contacto con vos.</p>
-          </div>
+            </Block.Body>
+          </Block>
+            
+           
+    
 
           <div className="contact_form">
             <div className="contact_form-info">

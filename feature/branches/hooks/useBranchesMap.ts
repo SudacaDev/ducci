@@ -127,25 +127,34 @@ const useBranchesMap = () => {
   });
 }, []);
 
-    useEffect(() => {
-        if (!mapInstance || markers.length === 0) return;
+  useEffect(() => {
+  if (!mapInstance || markers.length === 0) return;
 
-        const branchId = hoveredBranch || selectedBranch;
+  const branchId = hoveredBranch || selectedBranch;
 
-        markers.forEach(({ marker, normalIcon, highlightIcon, branch }) => {
-            if (branch.id === branchId) {
-                marker.setIcon(highlightIcon);
-                marker.setZIndexOffset(1000);
-                if (hoveredBranch) {
-                    marker.openPopup();
-                    mapInstance.flyTo([branch.lat, branch.lng], 15, { duration: 0.5 });
-                }
-            } else {
-                marker.setIcon(normalIcon);
-                marker.setZIndexOffset(0);
-            }
-        });
-    }, [hoveredBranch, selectedBranch, mapInstance, markers]);
+  markers.forEach(({ marker, normalIcon, highlightIcon, branch }) => {
+    if (branch.id === branchId) {
+      marker.setIcon(highlightIcon);
+      marker.setZIndexOffset(1000);
+    
+      if (selectedBranch === branch.id) {
+        marker.openPopup();
+        mapInstance.flyTo([branch.lat, branch.lng], 15, { duration: 0.5 });
+      }
+     
+      else if (hoveredBranch === branch.id) {
+        marker.openPopup();
+      }
+    } else {
+      marker.setIcon(normalIcon);
+      marker.setZIndexOffset(0);
+       
+      if (hoveredBranch !== branch.id && selectedBranch !== branch.id) {
+        marker.closePopup();
+      }
+    }
+  });
+}, [hoveredBranch, selectedBranch, mapInstance, markers]);
 
     useEffect(() => {
         const removeAccents = (str: string) => {
