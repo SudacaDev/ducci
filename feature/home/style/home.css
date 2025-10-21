@@ -188,7 +188,11 @@ ease-in-out infinite alternate move; */
     height: 500px;
   }
 }
-
+@media screen and (max-width: 980px){
+  .banner_content .hero__title{
+    line-height: 48px;
+  }
+}
 @media screen and (max-width: 768px) {
   .banner-image img {
     width: 350px;

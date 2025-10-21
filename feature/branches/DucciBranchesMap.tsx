@@ -1,28 +1,26 @@
 "use client";
 
  
-
-import { THEME } from "@/constants/branches";
 import useBranchesMap from "./hooks/useBranchesMap";
 import SidebarBranch from "./SidebarBranch";
 
 import "leaflet/dist/leaflet.css";
 
-
 const DucciBranchesMap = () => {
-  const { mapRef, searchQuery,
-setSearchQuery,
-handleUseMyLocation,
-handleGetDirections,
-filteredBranches,
-selectedBranch,
-setSelectedBranch,
-hoveredBranch,
-setHoveredBranch,  } = useBranchesMap()
+  const {
+    mapRef,
+    searchQuery,
+    setSearchQuery,
+    handleUseMyLocation,
+    handleGetDirections,
+    filteredBranches,
+    selectedBranch,
+    setSelectedBranch,
+    hoveredBranch,
+    setHoveredBranch,
+  } = useBranchesMap();
   return (
     <div className="branches-map-container">
-      
- 
       <SidebarBranch
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}

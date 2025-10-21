@@ -73,6 +73,9 @@
   .branches-home--content-info {
     padding: 24px;
   }
+  .branches-home--image__float--paragraph{
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -87,6 +90,8 @@
     padding: 16px;
     grid-column: 1 / 13;
   }
+
+  
 }
 
 .content-block__body ul {
@@ -112,4 +117,18 @@
   margin-right: 20px;
   border-radius: 100%;
   display: block;
+}
+
+
+@media screen and (max-width: 680px){
+  .branches-home--image__content.item-content-first{
+    grid-column: 1 / 6;
+  }
+  .branches-home--image__content.item-content-second{
+    grid-column: 6 / 11;
+  grid-row: 2 / 10;
+  }
+  .branches-home--image__float{
+    grid-column: 4 / 8;
+  }
 }

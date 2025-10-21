@@ -1,17 +1,33 @@
 "use client";
+
 import { ArrowRight } from "lucide-react";
 
 import CTAButton from "@/components/cta-button";
-import SectionHeader from "@/components/section-header";
-import CenterContainer from "@/components/container/center";
 
 import { Input } from "@/components/ui/input";
+
 
 import "../../style/newsletter.css";
 import Block from "@/components/content-block";
 import Image from "next/image";
+import useIntersectionObserver from "@/hooks/intersection-observer";
+
+const observerOptions = {
+  root: null,
+  rootMargin: "20px",
+  threshold: 0.3,
+};
+
 
 const NewsletterHomeSection = () => {
+
+   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
+    useIntersectionObserver<HTMLDivElement>(observerOptions);
+
+  const newsletterClasses = `newsletter-home-content__image aos-animate ${
+    isFilosofiaVisible ? "show " : ""
+  }`;
+
   return (
     <section className="newsletter-home-wrapper">
       <div className="newsletter-home-content">
@@ -47,7 +63,7 @@ const NewsletterHomeSection = () => {
           </Block>
         </div>
 
-        <div className="newsletter-home-content__image">
+        <div ref={refHistoria} className={newsletterClasses}>
           <div className="newsletter-home-content__image--content">
             <Image
               src="/images/special-image.png"

@@ -225,6 +225,12 @@ body {
   gap: 1em;
 }
 
+@media screen and (max-width: 980px){
+ .banner-cta, .about-home, .product-home, .branches-home{
+      padding-block: 80px;
+  }
+}
+
 @media screen and (max-width: 980px) {
   .section-header {
     padding-top: 2em;

@@ -29,7 +29,6 @@ const SidebarBranch = ({
 }: SidebarBranchProps) => {
   return (
     <div className="branches-sidebar">
-        
       <div className="sidebar-header">
         <h2>Encontrá un Ducci cerca</h2>
 
@@ -45,8 +44,8 @@ const SidebarBranch = ({
           />
         </div>
 
-        <Button className="location-btn" onClick={handleUseMyLocation}>
-           <FaLocationDot size={16} /> Usar mi ubicación actual
+        <Button className="location-btn button__cta" onClick={handleUseMyLocation}>
+          <FaLocationDot size={16} /> Usar mi ubicación actual
         </Button>
 
         <p className="branches-count">
@@ -77,7 +76,7 @@ const SidebarBranch = ({
                 <p className="branch-card__hours">• {branch.hours}</p>
               )}
               <Button
-                className="branch-card__cta"
+                className="branch-card__cta "
                 onClick={(e) => {
                   e.stopPropagation();
                   handleGetDirections(branch.lat, branch.lng);

@@ -20,8 +20,8 @@
 .newsletter-home-content__form {
   grid-column: 7 / 11;
   grid-row: 3 / 11;
+  max-width: 540px;
 }
-
 
 .newsletter-home-content__image {
   background-color: transparent;
@@ -44,18 +44,18 @@
   grid-column: 3 / 11;
 }
 
-@media screen and (min-width: 2000px){
-  .newsletter-home-content__image--content{
+@media screen and (min-width: 2560px) {
+  .newsletter-home-content__image--content {
     height: 700px;
   }
-   .newsletter-home-content__image img {
-object-fit: none;
-   }
+  .newsletter-home-content__image img {
+    object-fit: none;
+  }
   .newsletter-home-content__image {
     height: 750px;
     max-width: 750px;
   }
-  .newsletter-home-content__image--content{
+  .newsletter-home-content__image--content {
     grid-column: 1 / 13;
     height: 670px;
   }

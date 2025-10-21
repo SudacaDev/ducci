@@ -100,7 +100,7 @@ const BranchesHomeSection = () => {
                 </div>
                 <div className="flex flex-col item-content-info">
                   <p className="font-bold">Descubri</p>
-                  <p>Nustros Locales</p>
+                  <p className="branches-home--image__float--paragraph">Nustros Locales</p>
                 </div>
               </div>
             </ParallaxFloat>
