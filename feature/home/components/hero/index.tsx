@@ -6,10 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 import { useRouter } from "next/navigation";
 
-
 import { MENU } from "@/types/nav.type";
-
-
 
 const HeroBanner = () => {
   const router = useRouter();

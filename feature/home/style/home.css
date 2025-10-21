@@ -1,4 +1,3 @@
-
 .hero-banner {
   /*
   background: linear-gradient(
@@ -13,6 +12,7 @@
   overflow: hidden;
   height: 90dvh;
   display: flex;
+  max-height: 980px;
 }
 
 .hero-banner:after {
@@ -205,4 +205,3 @@ ease-in-out infinite alternate move; */
     transform: translateX(10px) translateY(0px);
   }
 }
-

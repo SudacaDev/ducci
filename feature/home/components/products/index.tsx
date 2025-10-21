@@ -8,8 +8,7 @@ import SectionHeader from "@/components/section-header";
 import CenterContainer from "@/components/container/center";
 import useIntersectionObserver from "@/hooks/intersection-observer";
 
-
-import "../../style/products.css"
+import "../../style/products.css";
 
 const PRODUCTS = [
   {

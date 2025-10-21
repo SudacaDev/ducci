@@ -8,7 +8,7 @@ import CTAButton from "@/components/cta-button";
 import CenterContainer from "@/components/container/center";
 import useIntersectionObserver from "@/hooks/intersection-observer";
 
-import "../../style/about.css"
+import "../../style/about.css";
 
 const observerOptions = {
   root: null,

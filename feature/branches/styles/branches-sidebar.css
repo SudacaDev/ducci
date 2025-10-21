@@ -1,0 +1,153 @@
+.branches-map-container {
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  height: 100vh;
+  max-height: 800px;
+}
+.branches-sidebar {
+  background-color: var(--white);
+  position: relative;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-header {
+  position: sticky;
+  padding-inline: 2em;
+  padding-block: 2em;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--primary-color-outline);
+}
+
+.sidebar-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+
+
+.search-box input:focus {
+  outline: none;
+}
+.search-box input {
+  padding-left: 3em;
+}
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+.branch-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border-radius: 12px;
+  border: 2px solid #e5e5e5;
+  background: white;
+
+  font-size: 0.95rem;
+}
+
+.location-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: transparent;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.location-btn:hover {
+  color: white;
+}
+
+.branches-count {
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.branches-list {
+  padding: 0 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+    overflow-y: scroll;
+  max-height: 600px;
+}
+ 
+
+.branch-card:hover {
+  transform: translateX(6px);
+}
+
+.branch-card.active {
+}
+
+.branch-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.branch-card__address {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.branch-card__hours {
+  color: #22c55e;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.branch-card__cta {
+  width: 100%;
+  padding: 0.875rem;
+
+  border: none;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.branch-card__cta:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 968px) {
+  .branches-map-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 50vh 50vh;
+  }
+}

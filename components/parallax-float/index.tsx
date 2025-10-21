@@ -2,14 +2,12 @@
 
 import { ReactNode, useEffect, useRef } from "react";
 
-
 interface ParallaxFloatProps {
-    children: ReactNode,
-    speed?: number
+  children: ReactNode;
+  speed?: number;
 }
 
-
-const ParallaxFloat = ({ children, speed = 0.5 }: ParallaxFloatProps) => {
+const ParallaxFloat = ({ children, speed = 0.8 }: ParallaxFloatProps) => {
   const floatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,7 +24,7 @@ const ParallaxFloat = ({ children, speed = 0.5 }: ParallaxFloatProps) => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const handleScroll = () => {
@@ -45,13 +43,10 @@ const ParallaxFloat = ({ children, speed = 0.5 }: ParallaxFloatProps) => {
   }, [speed]);
 
   return (
-    <div 
-      ref={floatRef}
-      className="branches-home--image__float"
-    >
+    <div ref={floatRef} className="branches-home--image__float">
       {children}
     </div>
   );
 };
 
-export default ParallaxFloat
+export default ParallaxFloat;

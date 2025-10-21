@@ -265,8 +265,8 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-.button__cta{
-  color: hsl(var(--secondary-color-dark-hsl))
+.button__cta {
+  color: hsl(var(--secondary-color-dark-hsl));
 }
 
 .button__cta:hover span,
@@ -296,7 +296,11 @@ body {
 }
 
 .button__cta:hover {
-  background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 15%));
+  background-color: hsl(
+    var(--primary-h),
+    var(--primary-s),
+    calc(var(--primary-l) - 15%)
+  );
 }
 
 .button__cta span:before {
@@ -321,7 +325,7 @@ body {
 }
 
 .button__cta--secondary:hover {
-  color:  hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 45%));
+  color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 45%));
 }
 
 .button__cta--secondary:hover span:before,
@@ -371,11 +375,10 @@ body {
 
 .button__cta,
 .button__cta--secondary {
-
   padding: 0.5em 1em 0.5em 1.5em;
   height: auto;
 }
-.button__cta--secondary{
+.button__cta--secondary {
   color: var(--primary-color-light);
 }
 .aos-animate {
