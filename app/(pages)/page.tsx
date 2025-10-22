@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description: "Ducci es mucho más que una heladería. Es el punto de encuentro.",
   keywords: ["Ducci", "soporte", "ayuda"],
   openGraph: {
-    title: `${APP_CONFIG.APP_NAME} | Sucursales`,
+    title: `${APP_CONFIG.APP_NAME} | Home`,
     description: "Ducci es mucho más que una heladería. Es el punto de encuentro.",
     images: ["/images/logo-ducci.svg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${APP_CONFIG.APP_NAME} | Sucursales`,
+    title: `${APP_CONFIG.APP_NAME} | Home`,
     description: "Ducci es mucho más que una heladería. Es el punto de encuentro.",
   },
 };
