@@ -3,17 +3,15 @@ import InnerLayout from "@/components/inner-layout";
 import DucciBranchesMap from "./DucciBranchesMap";
 
 import "./styles/branches-sidebar.css";
+import ProductsHomeSection from "../home/components/products";
+
 
 const BranchesContentPage = () => {
   return (
     <InnerLayout id="branches" bannerTitle="Sucursales">
       <DucciBranchesMap />
-
-      <CenterContainer>
-        <div className="py-8">
-          <p> banner </p>
-        </div>
-      </CenterContainer>
+     <ProductsHomeSection />
+     
     </InnerLayout>
   );
 };
