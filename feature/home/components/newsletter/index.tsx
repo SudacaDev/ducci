@@ -21,27 +21,40 @@ const observerOptions = {
 
 const NewsletterHomeSection = () => {
 
-   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
+  const { ref, isIntersecting: isFilosofiaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
 
-  const newsletterClasses = `newsletter-home-content__image aos-animate ${
-    isFilosofiaVisible ? "show " : ""
-  }`;
+  const newsletterClasses = `newsletter-home-content  aos-animate ${isFilosofiaVisible ? "show " : ""
+    }`;
 
   return (
     <section className="newsletter-home-wrapper">
-      <div className="newsletter-home-content">
-        <div className="newsletter-home-content__form">
+      <div ref={ref}  className={newsletterClasses} >
+        <div  className='newsletter-home-content__form'>
+          <div className=" newsletter-home-content__image--content">
+            <Image
+              src="/images/special-image.png"
+              style={{ objectFit: "cover" }}
+              width={600}
+              height={600}
+              alt="Helados artesanales Ducci"
+            />
+          </div>
           <Block>
-            <Block.Title>
-              <span>Beneficios especiales </span> te esperan
-            </Block.Title>
+            <Block.Content>
+              <Block.Subtitle>
+                Newsletter
+              </Block.Subtitle>
+              <Block.Title>
+                <span>Beneficios especiales </span> te esperan
+              </Block.Title>
+            </Block.Content>
             <Block.Body>
               <p className="section-header__subtitle">
                 Promociones especiales, lanzamientos de sabores únicos y
                 descuentos exclusivos para suscriptores
               </p>
-              <form className="flex flex-col gap-4">
+              <form className="newsletter-home-content__form--content">
                 <Input
                   type="text"
                   placeholder="ingresa tu email para subscribirte al newsletter"
@@ -63,17 +76,7 @@ const NewsletterHomeSection = () => {
           </Block>
         </div>
 
-        <div ref={refHistoria} className={newsletterClasses}>
-          <div className="newsletter-home-content__image--content">
-            <Image
-              src="/images/special-image.png"
-              fill
-              style={{ objectFit: "cover" }}
-              sizes="(max-width: 768px) 80vw, 50vw"
-              alt="Helados artesanales Ducci"
-            />
-          </div>
-        </div>
+
       </div>
     </section>
   );

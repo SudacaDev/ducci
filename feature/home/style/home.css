@@ -10,7 +10,7 @@
   background-color: var(--secondary-color);
   position: relative;
   overflow: hidden;
-  height: 90dvh;
+  
   display: flex;
   max-height: 980px;
 }

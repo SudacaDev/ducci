@@ -26,10 +26,18 @@
 
 .branches-home--image__content {
   background-color: antiquewhite;
-
   overflow: hidden;
   position: relative;
+ 
 }
+.branches-home--image__content img{
+ transition:  ease-in-out 0.6s;
+}
+.branches-home--image__content img:hover  {
+   transform: scale(1.05);
+    
+}
+
 .branches-home--image__content.item-content-first {
   grid-column: 1 / 7;
   grid-row: 1 / 13;
