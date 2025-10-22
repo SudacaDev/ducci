@@ -138,6 +138,10 @@ body {
   min-height: 100vh;
 }
 
+main{
+  overflow: hidden;
+}
+
 .sub-banner {
   padding-block: 8em;
   display: flex;

@@ -82,3 +82,12 @@
   }
 
 }
+
+@media screen and (max-width: 768px) {
+      .newsletter-home-content{
+                max-width: 340px;
+        margin-inline: auto;
+        padding: 2em;
+      }
+      
+}

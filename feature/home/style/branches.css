@@ -115,10 +115,11 @@
 .content-block__body ul li p {
   padding-left: 1.5em;
 }
-.content-block__body ul li::before {
+.content-block__body ul li p::before {
   position: absolute;
   content: "";
   left: 0;
+  top: 10px;
   width: 0.8em;
   height: 0.8em;
   background-color: var(--secondary-color-dark);
