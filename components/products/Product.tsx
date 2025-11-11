@@ -1,29 +1,35 @@
 "use client";
 
-import { createContext, useContext, ReactNode, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { createContext, useContext, ReactNode, Suspense, useState, useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { PROD } from "@/constants/prod";
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  description: string;
-}
+import type { Product as ProductType } from "@/types/product.type";
+import type { IceCreamOrder, IceCreamSize } from "@/types/order.type";
+import { SIZE_CONFIG } from "@/types/order.type";
 
 export interface ProductsContextType {
-  products: Product[];
-  filteredProducts: Product[];
+  products: ProductType[];
+  filteredProducts: ProductType[];
   selectedCategory: string;
   viewMode: "grid" | "list";
   sortOrder: "asc" | "desc" | "none";
   openFilter: boolean;
+  selectedBranchId: number | null;
+  confirmedOrders: IceCreamOrder[]; // Pedidos confirmados en el carrito
+  currentDraft: IceCreamOrder | null; // Borrador del pedido actual
 
   setSelectedCategory: (category: string) => void;
   setViewMode: (mode: "grid" | "list") => void;
   setSortOrder: (order: "asc" | "desc" | "none") => void;
   openFilterToggle: () => void;
+  startNewOrder: (size: IceCreamSize, pricePerKg: number) => void;
+  addFlavorToDraft: (flavorSlug: string) => void;
+  removeFlavorFromDraft: (flavorSlug: string) => void;
+  confirmCurrentOrder: () => void;
+  cancelCurrentOrder: () => void;
+  removeConfirmedOrder: (orderId: string) => void;
+  setBranchId: (branchId: number | null) => void;
+  clearCart: () => void;
 }
 
 export const ProductsContext = createContext<ProductsContextType | undefined>(
@@ -44,28 +50,81 @@ interface ProductProps {
   children: ReactNode;
 }
 
-// Componente interno que usa useSearchParams
 const ProductProvider = ({ children }: ProductProps) => {
-  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Leer valores iniciales desde la URL
   const selectedCategory = searchParams.get("category") || "todos";
   const viewMode = (searchParams.get("view") as "grid" | "list") || "grid";
   const sortOrder =
     (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
   const openFilter = searchParams.get("filter") === "open";
+  const branchIdParam = searchParams.get("branch-id");
+  const ordersParam = searchParams.get("orders");
 
-  // Función helper para actualizar la URL
-  const updateURL = (params: Record<string, string>) => {
+  // Parsear órdenes de la URL
+  const parseOrdersFromURL = (ordersString: string | null): IceCreamOrder[] => {
+    if (!ordersString) return [];
+    
+    try {
+      return ordersString.split("|").map((orderStr, index) => {
+        const [sizeStr, priceStr, flavorsStr] = orderStr.split(":");
+        const size = sizeStr as IceCreamSize;
+        const flavors = flavorsStr ? flavorsStr.split(",").filter(f => f) : [];
+        
+        return {
+          id: `order-${Date.now()}-${index}`,
+          size,
+          maxFlavors: SIZE_CONFIG[size].maxFlavors,
+          pricePerKg: parseFloat(priceStr),
+          selectedFlavors: flavors,
+        };
+      });
+    } catch (error) {
+      console.error("Error parsing orders from URL:", error);
+      return [];
+    }
+  };
+
+  // Convertir órdenes a string para URL
+  const ordersToURLString = (orders: IceCreamOrder[]): string => {
+    return orders
+      .map(order => 
+        `${order.size}:${order.pricePerKg}:${order.selectedFlavors.join(",")}`
+      )
+      .join("|");
+  };
+
+  const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(
+    branchIdParam ? Number.parseInt(branchIdParam) : null
+  );
+
+  const [confirmedOrders, setConfirmedOrdersState] = useState<IceCreamOrder[]>(
+    parseOrdersFromURL(ordersParam)
+  );
+
+  // Borrador del pedido actual (no se guarda en URL hasta confirmar)
+  const [currentDraft, setCurrentDraft] = useState<IceCreamOrder | null>(null);
+
+  useEffect(() => {
+    const newBranchId = branchIdParam ? Number.parseInt(branchIdParam) : null;
+    const newOrders = parseOrdersFromURL(ordersParam);
+
+    setSelectedBranchIdState(newBranchId);
+    setConfirmedOrdersState(newOrders);
+  }, [branchIdParam, ordersParam]);
+
+  const updateURL = (params: Record<string, string | null>) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
 
     Object.entries(params).forEach(([key, value]) => {
       if (
+        value === null ||
         value === "todos" ||
         value === "grid" ||
         value === "none" ||
-        value === "closed"
+        value === "closed" ||
+        value === ""
       ) {
         current.delete(key);
       } else {
@@ -75,7 +134,8 @@ const ProductProvider = ({ children }: ProductProps) => {
 
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    router.push(`${window.location.pathname}${query}`, { scroll: false });
+
+    window.history.replaceState({}, '', `${pathname}${query}`);
   };
 
   const setSelectedCategory = (category: string) => {
@@ -94,10 +154,110 @@ const ProductProvider = ({ children }: ProductProps) => {
     updateURL({ filter: openFilter ? "closed" : "open" });
   };
 
-  const filteredProducts = PROD.filter((product) => {
-    if (selectedCategory === "todos") return true;
-    return product.category === selectedCategory;
-  }).sort((a, b) => {
+  const setBranchId = (branchId: number | null) => {
+    setSelectedBranchIdState(branchId);
+    updateURL({ "branch-id": branchId ? branchId.toString() : null });
+  };
+
+  const clearCart = () => {
+    setSelectedBranchIdState(null);
+    setConfirmedOrdersState([]);
+    setCurrentDraft(null);
+    updateURL({
+      "branch-id": null,
+      orders: null,
+    });
+  };
+
+  const startNewOrder = (size: IceCreamSize, pricePerKg: number) => {
+    const newDraft: IceCreamOrder = {
+      id: `draft-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      size,
+      maxFlavors: SIZE_CONFIG[size].maxFlavors,
+      pricePerKg,
+      selectedFlavors: [],
+    };
+
+    setCurrentDraft(newDraft);
+  };
+
+  const addFlavorToDraft = (flavorSlug: string) => {
+    if (!currentDraft) return;
+
+    // No agregar si ya existe
+    if (currentDraft.selectedFlavors.includes(flavorSlug)) {
+      return;
+    }
+
+    // No agregar si alcanzó el máximo
+    if (currentDraft.selectedFlavors.length >= currentDraft.maxFlavors) {
+      return;
+    }
+
+    setCurrentDraft({
+      ...currentDraft,
+      selectedFlavors: [...currentDraft.selectedFlavors, flavorSlug],
+    });
+  };
+
+  const removeFlavorFromDraft = (flavorSlug: string) => {
+    if (!currentDraft) return;
+
+    setCurrentDraft({
+      ...currentDraft,
+      selectedFlavors: currentDraft.selectedFlavors.filter(f => f !== flavorSlug),
+    });
+  };
+
+  const confirmCurrentOrder = () => {
+    if (!currentDraft) return;
+
+    // Validar que tenga al menos un sabor
+    if (currentDraft.selectedFlavors.length === 0) {
+      return;
+    }
+
+    // Agregar a pedidos confirmados
+    const newConfirmedOrders = [...confirmedOrders, currentDraft];
+    setConfirmedOrdersState(newConfirmedOrders);
+
+    // Limpiar borrador
+    setCurrentDraft(null);
+
+    // Actualizar URL
+    updateURL({
+      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
+      orders: ordersToURLString(newConfirmedOrders),
+    });
+  };
+
+  const cancelCurrentOrder = () => {
+    setCurrentDraft(null);
+  };
+
+  const removeConfirmedOrder = (orderId: string) => {
+    const newOrders = confirmedOrders.filter(order => order.id !== orderId);
+    setConfirmedOrdersState(newOrders);
+
+    updateURL({
+      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
+      orders: newOrders.length > 0 ? ordersToURLString(newOrders) : null,
+    });
+  };
+
+  let filteredProducts = PROD.filter((product) => {
+    if (selectedCategory !== "todos" && product.category !== selectedCategory) {
+      return false;
+    }
+
+    if (selectedBranchId !== null && product.branch.id !== selectedBranchId) {
+      return false;
+    }
+
+    return true;
+  });
+
+  filteredProducts = filteredProducts.sort((a, b) => {
     if (sortOrder === "asc") return a.price - b.price;
     if (sortOrder === "desc") return b.price - a.price;
     return 0;
@@ -109,11 +269,22 @@ const ProductProvider = ({ children }: ProductProps) => {
     selectedCategory,
     viewMode,
     sortOrder,
+    selectedBranchId,
+    confirmedOrders,
+    currentDraft,
     setSelectedCategory,
     setViewMode,
     setSortOrder,
     openFilterToggle,
     openFilter,
+    startNewOrder,
+    addFlavorToDraft,
+    removeFlavorFromDraft,
+    confirmCurrentOrder,
+    cancelCurrentOrder,
+    removeConfirmedOrder,
+    setBranchId,
+    clearCart,
   };
 
   return (
@@ -125,7 +296,6 @@ const ProductProvider = ({ children }: ProductProps) => {
   );
 };
 
-// Componente wrapper con Suspense
 const Product = ({ children }: ProductProps) => {
   return (
     <Suspense

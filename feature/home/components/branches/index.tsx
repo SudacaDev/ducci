@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useRef } from "react"
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { FaShop } from "react-icons/fa6";
@@ -13,23 +14,66 @@ import { MENU } from "@/types/nav.type";
 
 import "../../style/branches.css";
 import ParallaxFloat from "@/components/parallax-float";
+import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
+
+
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BranchesHomeSection = () => {
   const goToPage = useGoToPage();
 
+  const refTitle = useRef<HTMLDivElement>(null);
+  const refBodyCopy = useRef<HTMLDivElement>(null);
+  const refEyebrow = useRef<HTMLDivElement>(null);
+  const refButtonCTA = useRef<HTMLDivElement>(null);
+  const refContentBranchesPin = useRef<HTMLDivElement>(null);
+
+
+  useHeroAnimation(refTitle, refEyebrow, refBodyCopy, refButtonCTA);
+
+useEffect(() => {
+  if (!refContentBranchesPin.current) return;
+  
+  const ctx = gsap.context(() => {
+    gsap.set(refContentBranchesPin.current, {  background: 'white', });
+    ScrollTrigger.create({
+      trigger: refContentBranchesPin.current,
+      start: "top top",
+      end: "+=200%",
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      
+      onUpdate: (self) => {
+        if (self.progress > 0.8) {
+          gsap.set(refContentBranchesPin.current, { zIndex: 1 });
+        }
+      }
+    });
+  }, refContentBranchesPin);
+  
+  return () => ctx.revert();
+}, []);
+
+ 
+
+
   return (
-    <section className="branches-home">
+    <section className="branches-home" ref={refContentBranchesPin}>
       <CenterContainer center className="">
         <div className="branches-home--wrapper">
           <div className="branches-home--content-info">
             <Block>
               <Block.Content>
-                <Block.Subtitle> Sucursales </Block.Subtitle>
-                <Block.Title>
+                <Block.Subtitle ref={refEyebrow}> Sucursales </Block.Subtitle>
+                <Block.Title ref={refTitle}>
                   Espacios pensados para <span>compartir momentos</span>
                 </Block.Title>
               </Block.Content>
-              <Block.Body>
+              <Block.Body ref={refBodyCopy}>
                 <p>
                   Cada local Ducci es un lugar de encuentro diseñado para que
                   todas las edades puedan disfrutar. Espacios cálidos,
@@ -39,7 +83,6 @@ const BranchesHomeSection = () => {
                 <ul>
                   <li>
                     <p>
-                      {" "}
                       Ambientes luminosos y acogedores con estética mediterránea{" "}
                     </p>
                   </li>
@@ -59,7 +102,7 @@ const BranchesHomeSection = () => {
                   puertas.
                 </p>
               </Block.Body>
-              <Block.Footer>
+              <Block.Footer ref={refButtonCTA}>
                 <CTAButton
                   onClick={() => goToPage(MENU.BRANCHES)}
                   aria-label="ir a sucursales"

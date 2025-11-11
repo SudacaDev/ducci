@@ -22,13 +22,7 @@ export const NAV = [
     url: MENU.BRANCHES,
     alwaysActive: false,
   },
-  {
-    id: "jsks99uuahs00d00dsKmu",
-    label: "pedidos",
-    slug: "pedidos",
-    url: MENU.ORDERS,
-    alwaysActive: false,
-  },
+ 
   {
     id: "jsks99uuahs00d00ddsjdo",
     label: "contacto",
@@ -37,3 +31,16 @@ export const NAV = [
     alwaysActive: true,
   },
 ];
+
+
+/**
+ * 
+ *  {
+    id: "jsks99uuahs00d00dsKmu",
+    label: "pedidos",
+    slug: "pedidos",
+    url: MENU.ORDERS,
+    alwaysActive: false,
+  },
+  *
+ */

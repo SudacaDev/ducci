@@ -9,6 +9,7 @@ import ProductsHomeSection from "../home/components/products";
 const BranchesContentPage = () => {
   return (
     <InnerLayout id="branches" bannerTitle="Sucursales">
+      <div> carousel sucursales </div>
       <DucciBranchesMap />
      <ProductsHomeSection />
      

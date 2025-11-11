@@ -1,10 +1,24 @@
 .newsletter-home-wrapper {
   min-height: 980px;
+  height: 100dvh;
+  height: 100vh;
+  /**position: sticky; */
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
+  margin-top: -100vh;
+
 }
+
+@media screen and (max-width: 768px) {
+  .newsletter-home-wrapper {
+    height: auto;
+    position: relative;
+  }
+}
+
 .newsletter-home-wrapper::after {
   content: "";
   background-color: var(--primary-color);
@@ -16,6 +30,7 @@
 
   background-size: cover;
 }
+
 .newsletter-home-wrapper:before {
   content: "";
   background-color: var(--primary-color);
@@ -26,6 +41,7 @@
   top: 0;
   background-image: url(/images/bg-banner.jpg);
 }
+
 .newsletter-home-content {
   position: relative;
   z-index: 8;
@@ -34,13 +50,14 @@
   padding: 4em;
   background-color: white;
 }
+
 .newsletter-home-content__form {
-      gap: 24px;
+  gap: 24px;
   display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.newsletter-home-content__form--content{
+.newsletter-home-content__form--content {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -53,17 +70,13 @@
   position: relative;
 }
 
-.newsletter-home-content__image img {
-}
+.newsletter-home-content__image img {}
 
-.newsletter-home-content__image--content {
-}
+.newsletter-home-content__image--content {}
 
-@media screen and (min-width: 2560px) {
-}
+@media screen and (min-width: 2560px) {}
 
-@media screen and (max-width: 1280px) {
-}
+@media screen and (max-width: 1280px) {}
 
 @media screen and (max-width: 980px) {
   .newsletter-home-content__form {
@@ -71,11 +84,13 @@
     flex-direction: column;
     gap: 16px;
   }
+
   .newsletter-home-content {
     margin-left: 0;
     max-width: 680px;
     margin-block: 24px;
   }
+
   .newsletter-home-content__image--content img {
     width: 300px;
     height: auto;
@@ -84,10 +99,10 @@
 }
 
 @media screen and (max-width: 768px) {
-      .newsletter-home-content{
-                max-width: 340px;
-        margin-inline: auto;
-        padding: 2em;
-      }
-      
+  .newsletter-home-content {
+    max-width: 340px;
+    margin-inline: auto;
+    padding: 2em;
+  }
+
 }

@@ -1,10 +1,11 @@
 // components/products/Aside.tsx
 "use client";
 
-import { X } from "lucide-react";
+import { X, Trash2 } from "lucide-react";
 import { CATEGORIES } from "@/constants/prod";
 import { useProducts } from "@/components/products/Product";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const Aside = () => {
   const {
@@ -12,7 +13,14 @@ const Aside = () => {
     setSelectedCategory,
     openFilter,
     openFilterToggle,
+    selectedBranchId,
   } = useProducts();
+
+  const router = useRouter();
+
+  const clearAllFilters = () => {
+    router.push("/productos", { scroll: false });
+  };
 
   return (
     <>
@@ -43,6 +51,20 @@ const Aside = () => {
             <X size={24} />
           </Button>
         </div>
+
+        {/* Botón para limpiar filtros */}
+        {selectedCategory !== "todos" && (
+          <Button
+            type="button"
+            onClick={clearAllFilters}
+            variant="outline"
+            className="w-full mb-4 gap-2"
+          >
+            <Trash2 className="w-4 h-4" />
+            Limpiar filtros
+          </Button>
+        )}
+
         <div className="">
           <div className="aside_filter-title">
             <h3 className="font-semibold  text-lg">Categorías</h3>

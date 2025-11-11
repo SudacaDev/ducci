@@ -90,6 +90,7 @@
   /* Fuentes */
   --font-poppins: "Poppins", sans-serif;
   --font-dm-sans: "DM Sans", sans-serif;
+     --text-lg: 1.125rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -128,6 +129,7 @@
     --accent-color-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
     --e-global-text-color-hsl: 29, 5%, 43%;
     --e-global-text-dark-hsl: 28, 75%, 3%;
+    --text-lg: 1.125rem;
   }
 }
 
@@ -139,7 +141,7 @@ body {
 }
 
 main{
-  overflow: hidden;
+  position: relative;
 }
 
 .sub-banner {
@@ -229,6 +231,7 @@ main{
   gap: 1em;
 }
 
+
 @media screen and (max-width: 980px){
  .banner-cta, .about-home, .product-home, .branches-home{
       padding-block: 80px;
@@ -240,6 +243,8 @@ main{
     padding-top: 2em;
   }
 }
+
+
 
 .section-header--center {
   justify-content: center;
@@ -402,4 +407,16 @@ main{
 .aos-animate.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+.confirm-btn{
+  background-color: var(--secondary-color);
+  color: var(--primary-color)
+}
+.cancel-btn{}
+
+
+.confirm-btn, .cancel-btn{
+  padding: 1rem 2rem
 }

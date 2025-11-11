@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import CTAButton from "@/components/cta-button";
@@ -9,27 +11,31 @@ import { Input } from "@/components/ui/input";
 
 import "../../style/newsletter.css";
 import Block from "@/components/content-block";
-import Image from "next/image";
-import useIntersectionObserver from "@/hooks/intersection-observer";
+ 
 
-const observerOptions = {
-  root: null,
-  rootMargin: "20px",
-  threshold: 0.3,
-};
+ 
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 
 const NewsletterHomeSection = () => {
-
-  const { ref, isIntersecting: isFilosofiaVisible } =
-    useIntersectionObserver<HTMLDivElement>(observerOptions);
-
-  const newsletterClasses = `newsletter-home-content  aos-animate ${isFilosofiaVisible ? "show " : ""
-    }`;
+  const refContentNewsletter = useRef(null);
+ // Solo agregá esto al newsletter
+useEffect(() => {
+  if (!refContentNewsletter.current) return;
+  
+  // Solo dale mayor z-index y ya
+  gsap.set(refContentNewsletter.current, { 
+    zIndex: 100,
+    position: 'relative',
+    background: 'white'
+  });
+}, []);
 
   return (
-    <section className="newsletter-home-wrapper">
-      <div ref={ref}  className={newsletterClasses} >
+    <section ref={refContentNewsletter} className="newsletter-home-wrapper">
+      <div  className="newsletter-home-content" >
         <div  className='newsletter-home-content__form'>
           <div className=" newsletter-home-content__image--content">
             <Image

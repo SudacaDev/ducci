@@ -8,7 +8,7 @@ export const BRANCHES: Branch[] = [
     city: "Rosario, Santa Fe",
     lat: -32.9468,
     lng: -60.6393,
-    phone: "+54 341 123 4567",
+    phone: "+541159594708",
     hours: "Abierto • Cierra a las 23:00",
   },
   {

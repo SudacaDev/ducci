@@ -1,3 +1,17 @@
+
+.branches-home{
+ 
+height: 100dvh;
+ 
+}
+@media screen and (max-width: 860px) {
+  .branches-home{
+    height: auto;
+    position: relative;
+  }
+}
+
+
 .branches-home--wrapper {
   position: relative;
   display: grid;

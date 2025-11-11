@@ -5,6 +5,11 @@ export interface Product {
   category: "clasicos" | "frutales" | "premium" | "veganos" | "especiales";
   description: string;
   image?: string;
+  branch: {
+    id: number;
+    name: string;
+    address: string;
+  };
 }
 
 export interface Category {

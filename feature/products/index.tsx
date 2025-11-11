@@ -5,6 +5,8 @@ import Product from "@/components/products/Product";
 import Aside from "@/feature/products/Aside";
 import ViewToggle from "@/feature/products/ViewToggle";
 import ProductsList from "@/feature/products/ProductsList";
+import CartWidget from "@/feature/products/CartWidget";
+import SizeSelector from "@/feature/products/SizeSelector";
 
 import "./styles/products.css";
 
@@ -14,10 +16,12 @@ const ProductsPageContent = () => {
       <InnerLayout bannerTitle="Nuestros Productos">
         <Product>
           <Aside />
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-4">
             <ViewToggle />
+            <SizeSelector />
             <ProductsList />
           </div>
+          <CartWidget />
         </Product>
       </InnerLayout>
     </div>
@@ -25,6 +29,8 @@ const ProductsPageContent = () => {
 };
 
 export default ProductsPageContent;
+
+ 
 /** import InnerLayout from "@/components/inner-layout";
 import { PROD } from "@/constants/prod";
 

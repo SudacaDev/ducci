@@ -1,4 +1,5 @@
 "use client";
+import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -6,27 +7,59 @@ import { ArrowRight } from "lucide-react";
 import Block from "@/components/content-block";
 import CTAButton from "@/components/cta-button";
 import CenterContainer from "@/components/container/center";
-import useIntersectionObserver from "@/hooks/intersection-observer";
 
 import "../../style/about.css";
+import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
 
-const observerOptions = {
-  root: null,
-  rootMargin: "20px",
-  threshold: 0.3,
-};
+
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 const AboutHomeSection = () => {
-  const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
-    useIntersectionObserver<HTMLDivElement>(observerOptions);
+  const refTitle = useRef<HTMLHeadingElement>(null);
+  const refEyebrow = useRef<HTMLHeadingElement>(null);
+  const refBodyCopy = useRef<HTMLParagraphElement>(null);
+  const refButtonCTA = useRef<HTMLParagraphElement>(null);
 
-  const aboutClasses = `about-home aos-animate ${
-    isFilosofiaVisible ? "show " : ""
-  }`;
+  const refAbout = useRef<HTMLElement>(null);
+
+useEffect(() => {
+    if (!refAbout.current) {
+      return;
+    }
+
+    const cxt = gsap.context(() => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: refAbout.current,
+          start: "top bottom", // Inicia cuando el elemento entra por debajo del viewport
+          end: "center center", // Termina cuando el elemento llega al centro del viewport
+          scrub: 1, // Suavizado de 1 segundo
+          markers: false, // Desactivar marcadores para producción
+        }
+      })
+      // Solo necesitamos UN .from para definir el estado inicial (oculto)
+      // y GSAP lo animará hasta el estado final (visible, y: 0) a lo largo del scroll.
+      .from(refAbout.current, {
+        y: 100, // Empieza 100px abajo (para que suba)
+        opacity: 0,
+        ease: "power2.out", // Hace que la entrada sea más suave
+      });
+      
+    }, refAbout);
+
+    return () => cxt.revert();
+   }, [])
+
+
+  useHeroAnimation(refTitle, refEyebrow, refBodyCopy, refButtonCTA)
   return (
     <section className="about-home__wrapper">
       <CenterContainer center>
-        <section ref={refHistoria} className={aboutClasses}>
+        <section ref={refAbout} className="about-home">
           <div id="about_wrapper" className="flex">
             <div className="about_wrapper__content">
               <div className="about-home__wrappe--image-wrapper overflow-hidden">
@@ -46,12 +79,12 @@ const AboutHomeSection = () => {
                   <div className="about-home__wrappe--info__content">
                     <Block>
                       <Block.Content>
-                        <Block.Subtitle> ¿Quiénes Somos? </Block.Subtitle>
-                        <Block.Title>
+                        <Block.Subtitle ref={refEyebrow}> ¿Quiénes Somos? </Block.Subtitle>
+                        <Block.Title ref={refTitle}>
                           Nuestros valores, <span>nuestra cultura</span>
                         </Block.Title>
                       </Block.Content>
-                      <Block.Body>
+                      <Block.Body ref={refBodyCopy}>
                         <div className="about-home__wrappe--info__content__body">
                           <p>
                             En Ducci creemos en lo simple, en lo cuidado y en lo
@@ -63,7 +96,7 @@ const AboutHomeSection = () => {
                           </p>
                         </div>
                       </Block.Body>
-                      <Block.Footer>
+                      <Block.Footer ref={refButtonCTA}>
                         <Link href="/nosotros">
                           <CTAButton className="button__cta--secondary">
                             Conocé nuestra historia

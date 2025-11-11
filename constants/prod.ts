@@ -1,10 +1,17 @@
-export const PROD = [
+import type { Product } from "@/types/product.type";
+
+export const PROD: Product[] = [
   {
     id: 1,
     name: "Dulce de Leche",
     price: 850,
     category: "clasicos",
     description: "Cremoso helado de dulce de leche artesanal argentino.",
+    branch: {
+      id: 1,
+      name: "Ducci Centro",
+      address: "Córdoba 1050",
+    },
   },
   {
     id: 2,
@@ -12,6 +19,11 @@ export const PROD = [
     price: 900,
     category: "clasicos",
     description: "Intenso chocolate belga con 70% de cacao.",
+    branch: {
+      id: 2,
+      name: "Ducci Pichincha",
+      address: "Av. Pellegrini 2450",
+    },
   },
   {
     id: 3,
@@ -19,6 +31,11 @@ export const PROD = [
     price: 800,
     category: "clasicos",
     description: "Helado de vainilla natural con chaucha de Madagascar.",
+    branch: {
+      id: 3,
+      name: "Ducci Fisherton",
+      address: "Av. Eva Perón 5890",
+    },
   },
   {
     id: 4,
@@ -26,6 +43,11 @@ export const PROD = [
     price: 950,
     category: "frutales",
     description: "Helado de frutillas frescas de temporada.",
+    branch: {
+      id: 4,
+      name: "Ducci Oroño",
+      address: "Bv. Oroño 1234",
+    },
   },
   {
     id: 5,
@@ -33,6 +55,11 @@ export const PROD = [
     price: 820,
     category: "frutales",
     description: "Refrescante helado de limón con trozos de ralladura.",
+    branch: {
+      id: 5,
+      name: "Ducci Alberdi",
+      address: "Rioja 1567",
+    },
   },
   {
     id: 6,
@@ -40,6 +67,11 @@ export const PROD = [
     price: 1100,
     category: "frutales",
     description: "Exótico helado de maracuyá con pulpa natural.",
+    branch: {
+      id: 6,
+      name: "Ducci Parque España",
+      address: "Sarmiento 789",
+    },
   },
   {
     id: 7,
@@ -47,6 +79,11 @@ export const PROD = [
     price: 1050,
     category: "frutales",
     description: "Helado tropical de mango fresco y cremoso.",
+    branch: {
+      id: 7,
+      name: "Ducci San Fernando",
+      address: "Constitución 2050",
+    },
   },
   {
     id: 8,
@@ -54,6 +91,11 @@ export const PROD = [
     price: 1200,
     category: "premium",
     description: "Helado premium de pistacho siciliano auténtico.",
+    branch: {
+      id: 1,
+      name: "Ducci Centro",
+      address: "Córdoba 1050",
+    },
   },
   {
     id: 9,
@@ -62,6 +104,11 @@ export const PROD = [
     category: "premium",
     description:
       "Inspirado en el clásico postre italiano con café y mascarpone.",
+    branch: {
+      id: 2,
+      name: "Ducci Pichincha",
+      address: "Av. Pellegrini 2450",
+    },
   },
   {
     id: 10,
@@ -69,6 +116,11 @@ export const PROD = [
     price: 1000,
     category: "premium",
     description: "Chocolate con trozos de brownie y nueces pecanas.",
+    branch: {
+      id: 3,
+      name: "Ducci Fisherton",
+      address: "Av. Eva Perón 5890",
+    },
   },
   {
     id: 11,
@@ -76,6 +128,11 @@ export const PROD = [
     price: 950,
     category: "clasicos",
     description: "Vainilla con trozos generosos de galletas Oreo.",
+    branch: {
+      id: 4,
+      name: "Ducci Oroño",
+      address: "Bv. Oroño 1234",
+    },
   },
   {
     id: 12,
@@ -83,6 +140,11 @@ export const PROD = [
     price: 880,
     category: "clasicos",
     description: "Refrescante menta con chips de chocolate.",
+    branch: {
+      id: 5,
+      name: "Ducci Alberdi",
+      address: "Rioja 1567",
+    },
   },
   {
     id: 13,
@@ -90,6 +152,23 @@ export const PROD = [
     price: 1080,
     category: "frutales",
     description: "Helado de frambuesas con semillas naturales.",
+    branch: {
+      id: 6,
+      name: "Ducci Parque España",
+      address: "Sarmiento 789",
+    },
+  },
+  {
+    id: 13,
+    name: "Frambuesa",
+    price: 1080,
+    category: "frutales",
+    description: "Helado de frambuesas con semillas naturales.",
+    branch: {
+      id: 1,
+      name: "Ducci Centro",
+      address: "Córdoba 1050",
+    },
   },
   {
     id: 14,
@@ -97,6 +176,11 @@ export const PROD = [
     price: 920,
     category: "veganos",
     description: "Base de leche de coco, 100% vegano y sin lactosa.",
+    branch: {
+      id: 7,
+      name: "Ducci San Fernando",
+      address: "Constitución 2050",
+    },
   },
   {
     id: 15,
@@ -104,6 +188,11 @@ export const PROD = [
     price: 950,
     category: "veganos",
     description: "Chocolate intenso con base de leche de almendras.",
+    branch: {
+      id: 1,
+      name: "Ducci Centro",
+      address: "Córdoba 1050",
+    },
   },
   {
     id: 16,
@@ -111,6 +200,11 @@ export const PROD = [
     price: 980,
     category: "veganos",
     description: "Helado vegano de frutillas con base de anacardos.",
+    branch: {
+      id: 2,
+      name: "Ducci Pichincha",
+      address: "Av. Pellegrini 2450",
+    },
   },
   {
     id: 17,
@@ -118,6 +212,11 @@ export const PROD = [
     price: 1100,
     category: "premium",
     description: "Tradicional sambayón con vino Marsala italiano.",
+    branch: {
+      id: 3,
+      name: "Ducci Fisherton",
+      address: "Av. Eva Perón 5890",
+    },
   },
   {
     id: 18,
@@ -125,6 +224,11 @@ export const PROD = [
     price: 1250,
     category: "premium",
     description: "Chocolate suizo con almendras tostadas y miel.",
+    branch: {
+      id: 4,
+      name: "Ducci Oroño",
+      address: "Bv. Oroño 1234",
+    },
   },
   {
     id: 19,
@@ -132,6 +236,11 @@ export const PROD = [
     price: 1180,
     category: "premium",
     description: "Café expreso con whisky y crema batida.",
+    branch: {
+      id: 5,
+      name: "Ducci Alberdi",
+      address: "Rioja 1567",
+    },
   },
   {
     id: 20,
@@ -139,6 +248,11 @@ export const PROD = [
     price: 1300,
     category: "especiales",
     description: "Helado de cheesecake con salsa de frutos rojos.",
+    branch: {
+      id: 6,
+      name: "Ducci Parque España",
+      address: "Sarmiento 789",
+    },
   },
   {
     id: 21,
@@ -146,6 +260,11 @@ export const PROD = [
     price: 1350,
     category: "especiales",
     description: "Avellanas, chocolate y wafer inspirado en el bombón.",
+    branch: {
+      id: 7,
+      name: "Ducci San Fernando",
+      address: "Constitución 2050",
+    },
   },
   {
     id: 22,
@@ -153,6 +272,11 @@ export const PROD = [
     price: 1000,
     category: "especiales",
     description: "Dulce de leche con chips crocantes de chocolate.",
+    branch: {
+      id: 1,
+      name: "Ducci Centro",
+      address: "Córdoba 1050",
+    },
   },
 ];
 

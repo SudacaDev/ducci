@@ -1,6 +1,9 @@
+"use client";
 import { Poppins, DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import Lenis from 'lenis';
 import "./globals.css";
+import { useEffect } from "react";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -19,6 +22,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  
+      
+    })
+
+    function raf(time: any) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  }, [])
   return (
     <html lang="es">
       <body

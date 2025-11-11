@@ -1,14 +1,15 @@
-import { ReactNode } from "react";
+import { ReactNode, RefObject } from "react";
 import { cn } from "@/lib/utils";
 
 interface BlockContentProps {
   children?: ReactNode;
   className?: string;
+  ref?: RefObject<HTMLHeadingElement | null>;
 }
 
-const Content = ({ children, className }: BlockContentProps) => {
+const Content = ({ children, className, ref }: BlockContentProps) => {
   return (
-    <div className={cn("content-block__content", className)}>{children}</div>
+    <div className={cn("content-block__content", className)} ref={ref}>{children}</div>
   );
 };
 

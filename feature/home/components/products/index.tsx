@@ -1,16 +1,18 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/section-header";
 import CenterContainer from "@/components/container/center";
-import useIntersectionObserver from "@/hooks/intersection-observer";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 import "../../style/products.css";
+import ProductCard from "./ProductCatd";
+import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
 
-const PRODUCTS = [
+export const PRODUCTS = [
   {
     id: 1,
     name: "Dulce de Leche",
@@ -37,66 +39,56 @@ const PRODUCTS = [
   },
 ];
 
-const ProductCard = ({
-  product,
-  index,
-}: {
-  product: (typeof PRODUCTS)[0];
-  index: number;
-}) => {
-  const { ref, isIntersecting } = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.2,
-    freezeOnceVisible: true,
-  });
-
-  return (
-    <div
-      ref={ref}
-      className={`product-home-list__grid__item ${
-        isIntersecting ? "fade-in-up" : "opacity-0"
-      }`}
-      style={{
-        animationDelay: `${index * 150}ms`,
-      }}
-    >
-      <div className="product-home-list__grid__item_image">
-        <figure>
-          <Image
-            src={product.image}
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 768px) 100vw, 33vw"
-            alt={product.name}
-          />
-        </figure>
-      </div>
-      <div className="product-home-list__grid__cta">
-        <div className="product-home-list__grid__cta__content">
-          <div>
-            <span className="text-sm opacity-70">{product.category}</span>
-            <h3 className="text-xl font-bold">{product.name}</h3>
-          </div>
-          <div className="rounded-full">
-            <Button className="product-home-list__grid__button">
-              <ArrowRight size={24} />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ProductsHomeSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const refTitle = useRef<HTMLDivElement>(null);
+  const refBodyCopy = useRef<HTMLDivElement>(null);
+  useHeroAnimation(refTitle, refBodyCopy);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.product-home-list__grid__item');
+
+      cards.forEach((card: any, index: number) => {
+        const speedFactor = 1.2 + (index * 0.2);
+
+        gsap.fromTo(card,
+          {
+            opacity: 0,
+            y: 120,
+            scale: 0.85,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.5 / speedFactor,
+            delay: index * 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 70%",
+              toggleActions: "play none none reverse",
+            }
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="product-home-wrapper">
+    <section ref={sectionRef} className="product-home-wrapper">
       <CenterContainer center className="">
         <div className="items-center justify-center flex">
           <SectionHeader align="center" className="text-center">
-            <h2 className="section-header__title">
-              Explorá <span>nuestros sabores</span>{" "}
+            <h2 className="section-header__title" ref={refTitle}>
+              Explorá <span>nuestros sabores</span>
             </h2>
-            <p className="section-header__subtitle">
+            <p className="section-header__subtitle" ref={refBodyCopy}>
               Probá nuestros helados, disfrutá de una experiencia distinta!
             </p>
           </SectionHeader>
@@ -104,7 +96,11 @@ const ProductsHomeSection = () => {
 
         <div className="product-home-list">
           {PRODUCTS.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={index}
+            />
           ))}
         </div>
       </CenterContainer>
