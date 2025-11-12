@@ -39,21 +39,21 @@ const OurPhilosophy = () => {
         </div>
         <div className="journey_content grid-content_right ">
           <Block>
-            <Block.Title>
-              Misión
-            </Block.Title>
+            <Block.Title>Misión</Block.Title>
             <Block.Body>
               <div className="flex flex-col about-section__text">
                 <p>
                   Crear espacios accesibles, cálidos y bien pensados donde todas
-                  las edades puedan disfrutar. Servir helado con calidad, atención
-                  con cariño y experiencias que valgan la pena. Acompañar de cerca
-                  a nuestros franquiciados y a sus equipos, dándoles herramientas
-                  claras para que crezcan con su comercio y también en su vida.
+                  las edades puedan disfrutar. Servir helado con calidad,
+                  atención con cariño y experiencias que valgan la pena.
+                  Acompañar de cerca a nuestros franquiciados y a sus equipos,
+                  dándoles herramientas claras para que crezcan con su comercio
+                  y también en su vida.
                 </p>
                 <p>
                   No buscamos estar en todos lados: buscamos estar bien, ser
-                  sólidos y dejar huella en cada lugar donde abrimos las puertas.
+                  sólidos y dejar huella en cada lugar donde abrimos las
+                  puertas.
                 </p>
               </div>
             </Block.Body>
@@ -69,34 +69,31 @@ const OurPhilosophy = () => {
               </CTAButton>
             </Block.Footer>
           </Block>
-          
-         
         </div>
       </div>
 
       <div ref={refFilosofia} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <Block>
-            <Block.Title>
-             Nuestra Filosofía
-            </Block.Title>
-            
+            <Block.Title>Nuestra Filosofía</Block.Title>
+
             <Block.Body>
               <div className="flex flex-col about-section__text">
                 <p>
-                Creemos que un helado excepcional comienza con ingredientes
-                excepcionales. Por eso trabajamos con productores locales,
-                seleccionando frutas de estación, chocolate belga premium y
-                dulce de leche artesanal argentino. Cada cucharada cuenta una
-                historia de calidad y compromiso.
-              </p>
-              <p>
-                Nuestra heladería es más que un negocio: es un espacio donde las
-                tradiciones se encuentran con la innovación. Respetamos las
-                recetas clásicas mientras experimentamos con nuevos sabores que
-                sorprenden a nuestros clientes. Porque para nosotros, hacer
-                helado es un arte que se disfruta mejor cuando se comparte.
-              </p>
+                  Creemos que un helado excepcional comienza con ingredientes
+                  excepcionales. Por eso trabajamos con productores locales,
+                  seleccionando frutas de estación, chocolate belga premium y
+                  dulce de leche artesanal argentino. Cada cucharada cuenta una
+                  historia de calidad y compromiso.
+                </p>
+                <p>
+                  Nuestra heladería es más que un negocio: es un espacio donde
+                  las tradiciones se encuentran con la innovación. Respetamos
+                  las recetas clásicas mientras experimentamos con nuevos
+                  sabores que sorprenden a nuestros clientes. Porque para
+                  nosotros, hacer helado es un arte que se disfruta mejor cuando
+                  se comparte.
+                </p>
               </div>
             </Block.Body>
             <Block.Footer>
@@ -111,9 +108,6 @@ const OurPhilosophy = () => {
               </CTAButton>
             </Block.Footer>
           </Block>
-
-           
-         
         </div>
         <div className="journey-image grid-content_right">
           <Image

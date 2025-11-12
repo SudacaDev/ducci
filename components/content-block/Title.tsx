@@ -6,7 +6,11 @@ interface TitleProps {
 }
 
 const Title = ({ children, ref }: TitleProps) => {
-  return <h2 className="content-block__title" ref={ref}>{children}</h2>;
+  return (
+    <h2 className="content-block__title" ref={ref}>
+      {children}
+    </h2>
+  );
 };
 
 export default Title;

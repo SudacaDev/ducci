@@ -8,35 +8,32 @@ import CTAButton from "@/components/cta-button";
 
 import { Input } from "@/components/ui/input";
 
-
 import "../../style/newsletter.css";
 import Block from "@/components/content-block";
- 
 
- 
-import gsap from "gsap"
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NewsletterHomeSection = () => {
   const refContentNewsletter = useRef(null);
- // Solo agregá esto al newsletter
-useEffect(() => {
-  if (!refContentNewsletter.current) return;
-  
-  // Solo dale mayor z-index y ya
-  gsap.set(refContentNewsletter.current, { 
-    zIndex: 100,
-    position: 'relative',
-    background: 'white'
-  });
-}, []);
+  // Solo agregá esto al newsletter
+  useEffect(() => {
+    if (!refContentNewsletter.current) return;
+
+    // Solo dale mayor z-index y ya
+    gsap.set(refContentNewsletter.current, {
+      zIndex: 100,
+      position: "relative",
+      background: "white",
+    });
+  }, []);
 
   return (
     <section ref={refContentNewsletter} className="newsletter-home-wrapper">
-      <div  className="newsletter-home-content" >
-        <div  className='newsletter-home-content__form'>
+      <div className="newsletter-home-content">
+        <div className="newsletter-home-content__form">
           <div className=" newsletter-home-content__image--content">
             <Image
               src="/images/special-image.png"
@@ -48,9 +45,7 @@ useEffect(() => {
           </div>
           <Block>
             <Block.Content>
-              <Block.Subtitle>
-                Newsletter
-              </Block.Subtitle>
+              <Block.Subtitle>Newsletter</Block.Subtitle>
               <Block.Title>
                 <span>Beneficios especiales </span> te esperan
               </Block.Title>
@@ -81,8 +76,6 @@ useEffect(() => {
             </Block.Body>
           </Block>
         </div>
-
-
       </div>
     </section>
   );

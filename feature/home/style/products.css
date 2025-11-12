@@ -39,7 +39,6 @@
 }
 
 .product-home-list__grid__item {
-
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
@@ -94,7 +93,8 @@
   pointer-events: none;
 }
 
-.product-home-list__grid__item:hover .product-home-list__grid__item_image::before {
+.product-home-list__grid__item:hover
+  .product-home-list__grid__item_image::before {
   opacity: 0.4;
 }
 
@@ -149,7 +149,6 @@
 .product-home-list__grid__button svg {
   color: white;
 }
-
 
 @keyframes fadeInUp {
   from {

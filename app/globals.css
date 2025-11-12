@@ -90,7 +90,7 @@
   /* Fuentes */
   --font-poppins: "Poppins", sans-serif;
   --font-dm-sans: "DM Sans", sans-serif;
-     --text-lg: 1.125rem;
+  --text-lg: 1.125rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -140,7 +140,7 @@ body {
   min-height: 100vh;
 }
 
-main{
+main {
   position: relative;
 }
 
@@ -231,10 +231,12 @@ main{
   gap: 1em;
 }
 
-
-@media screen and (max-width: 980px){
- .banner-cta, .about-home, .product-home, .branches-home{
-      padding-block: 80px;
+@media screen and (max-width: 980px) {
+  .banner-cta,
+  .about-home,
+  .product-home,
+  .branches-home {
+    padding-block: 80px;
   }
 }
 
@@ -243,8 +245,6 @@ main{
     padding-top: 2em;
   }
 }
-
-
 
 .section-header--center {
   justify-content: center;
@@ -409,14 +409,14 @@ main{
   transform: translateY(0);
 }
 
-
-.confirm-btn{
+.confirm-btn {
   background-color: var(--secondary-color);
-  color: var(--primary-color)
+  color: var(--primary-color);
 }
-.cancel-btn{}
+.cancel-btn {
+}
 
-
-.confirm-btn, .cancel-btn{
-  padding: 1rem 2rem
+.confirm-btn,
+.cancel-btn {
+  padding: 1rem 2rem;
 }

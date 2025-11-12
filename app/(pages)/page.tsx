@@ -4,12 +4,20 @@ import APP_CONFIG from "@/config/general";
 
 export const metadata: Metadata = {
   title: `${APP_CONFIG.APP_NAME} | Home`,
-  description: "Ducci es mucho más que una heladería. Es el punto de encuentro.",
-  keywords: ["Ducci", "heladería", "helado artesanal", "punto de encuentro", "cafetería"],
-  
+  description:
+    "Ducci es mucho más que una heladería. Es el punto de encuentro.",
+  keywords: [
+    "Ducci",
+    "heladería",
+    "helado artesanal",
+    "punto de encuentro",
+    "cafetería",
+  ],
+
   openGraph: {
     title: `${APP_CONFIG.APP_NAME} | Home`,
-    description: "Ducci es mucho más que una heladería. Es el punto de encuentro.",
+    description:
+      "Ducci es mucho más que una heladería. Es el punto de encuentro.",
     type: "website",
     locale: "es_AR",
     siteName: APP_CONFIG.APP_NAME,
@@ -22,11 +30,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   twitter: {
     card: "summary_large_image",
     title: `${APP_CONFIG.APP_NAME} | Home`,
-    description: "Ducci es mucho más que una heladería. Es el punto de encuentro.",
+    description:
+      "Ducci es mucho más que una heladería. Es el punto de encuentro.",
     images: ["/images/Logo-Ducci-OP.jpg"],
   },
 };

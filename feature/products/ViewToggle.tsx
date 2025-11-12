@@ -12,13 +12,8 @@ import {
 } from "@/components/ui/select";
 
 const ViewToggle = () => {
-  const {
-    viewMode,
-    setViewMode,
-    setSortOrder,
-    sortOrder,
-    openFilterToggle,
-  } = useProducts();
+  const { viewMode, setViewMode, setSortOrder, sortOrder, openFilterToggle } =
+    useProducts();
 
   return (
     <div className="flex items-center justify-between mb-4">

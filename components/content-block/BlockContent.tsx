@@ -9,7 +9,9 @@ interface BlockContentProps {
 
 const Content = ({ children, className, ref }: BlockContentProps) => {
   return (
-    <div className={cn("content-block__content", className)} ref={ref}>{children}</div>
+    <div className={cn("content-block__content", className)} ref={ref}>
+      {children}
+    </div>
   );
 };
 

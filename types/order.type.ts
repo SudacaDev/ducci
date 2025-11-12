@@ -1,18 +1,22 @@
-export type IceCreamSize = "1/4" | "1/2" | "1" | "1-bocha" | "2-bochas" | "3-bochas";
+export type IceCreamSize =
+  | "1/4"
+  | "1/2"
+  | "1"
+  | "1-bocha"
+  | "2-bochas"
+  | "3-bochas";
 
- 
 export interface FlavorOrder {
   id: string;
   type: "flavor-selection";
-  productId: number; 
+  productId: number;
   productName: string;
   size: IceCreamSize;
   maxFlavors: number;
   price: number;
-  selectedFlavors: string[]; 
+  selectedFlavors: string[];
 }
 
- 
 export interface QuantityOrder {
   id: string;
   type: "quantity-selection";
@@ -22,7 +26,6 @@ export interface QuantityOrder {
   quantity: number;
 }
 
- 
 export interface SingleItemOrder {
   id: string;
   type: "single-item";
@@ -31,7 +34,6 @@ export interface SingleItemOrder {
   price: number;
 }
 
- 
 export interface BoxOrder {
   id: string;
   type: "box";
@@ -41,10 +43,8 @@ export interface BoxOrder {
   boxQuantity: number;
 }
 
- 
 export type Order = FlavorOrder | QuantityOrder | SingleItemOrder | BoxOrder;
 
- 
 export const SIZE_CONFIG = {
   "1/4": { maxFlavors: 3, label: "1/4 Kilo", weight: 0.25 },
   "1/2": { maxFlavors: 3, label: "1/2 Kilo", weight: 0.5 },

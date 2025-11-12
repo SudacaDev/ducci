@@ -1,17 +1,16 @@
 "use client";
 
 import { type ReactNode, useContext, createContext, useState } from "react";
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 export interface ContentBlockContextType {
   isActive: boolean;
   setIsActive: (active: boolean) => void;
- 
 }
 
 export interface ContentBlockProps {
   children: ReactNode;
-   className?: string
+  className?: string;
 }
 
 const ContentBlockContext = createContext<ContentBlockContextType | undefined>(
@@ -34,13 +33,14 @@ const ContentBlock = ({ children, className }: ContentBlockProps) => {
   const value: ContentBlockContextType = {
     isActive,
     setIsActive,
-
   };
 
   return (
     <ContentBlockContext.Provider value={value}>
       <div className="content-block">
-        <div className={cn('content-block__wrapper', className )}>{children}</div>
+        <div className={cn("content-block__wrapper", className)}>
+          {children}
+        </div>
       </div>
     </ContentBlockContext.Provider>
   );

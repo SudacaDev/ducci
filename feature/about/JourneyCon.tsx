@@ -18,8 +18,9 @@ const JourneyCon = () => {
   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
 
-  const filosofiaClasses = `journey-con grid-image_right aos-animate ${isFilosofiaVisible ? "show" : ""
-    }`;
+  const filosofiaClasses = `journey-con grid-image_right aos-animate ${
+    isFilosofiaVisible ? "show" : ""
+  }`;
 
   const goToPage = useGoToPage();
 
@@ -37,9 +38,7 @@ const JourneyCon = () => {
         </div>
         <div className="journey_content grid-content_right">
           <Block>
-            <Block.Title>
-              Nuestra Historia
-            </Block.Title>
+            <Block.Title>Nuestra Historia</Block.Title>
             <Block.Body>
               <div className="flex flex-col about-section__text">
                 <p>
@@ -50,8 +49,8 @@ const JourneyCon = () => {
                   perfeccionamos con ingredientes locales de primera calidad.
                 </p>
                 <p>
-                  Desde nuestros inicios, nos comprometimos a elaborar cada sabor
-                  con dedicación y amor, sin aditivos artificiales ni
+                  Desde nuestros inicios, nos comprometimos a elaborar cada
+                  sabor con dedicación y amor, sin aditivos artificiales ni
                   conservantes. Hoy, somos el punto de encuentro favorito de
                   familias y amigos que buscan un momento dulce y auténtico.
                 </p>
@@ -69,21 +68,18 @@ const JourneyCon = () => {
               </CTAButton>
             </Block.Footer>
           </Block>
-           
         </div>
       </div>
 
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <Block>
-            <Block.Title>
-              Visión y Propósito
-            </Block.Title>
+            <Block.Title>Visión y Propósito</Block.Title>
             <Block.Body>
               <div className="flex flex-col about-section__text">
                 <p>
-                  Queremos ser la excusa perfecta para pasear. Para salir con tus
-                  hijos, con amigas, con tus padres.
+                  Queremos ser la excusa perfecta para pasear. Para salir con
+                  tus hijos, con amigas, con tus padres.
                 </p>
                 <p>
                   Queremos que cada visita a Ducci sea un recreo en medio del
@@ -99,13 +95,11 @@ const JourneyCon = () => {
               >
                 Conoce nuestros sabores{" "}
                 <span>
-
                   <ArrowRight size={16} />
                 </span>
               </CTAButton>
             </Block.Footer>
           </Block>
-
         </div>
         <div className="journey-image grid-image_right relative ">
           <Image

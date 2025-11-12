@@ -1,10 +1,24 @@
 "use client";
 
-import { createContext, useContext, ReactNode, Suspense, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  Suspense,
+  useState,
+  useEffect,
+} from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { PROD } from "@/constants/prod";
 import type { Product as ProductType } from "@/types/product.type";
-import type { Order, FlavorOrder, QuantityOrder, SingleItemOrder, BoxOrder, IceCreamSize } from "@/types/order.type";
+import type {
+  Order,
+  FlavorOrder,
+  QuantityOrder,
+  SingleItemOrder,
+  BoxOrder,
+  IceCreamSize,
+} from "@/types/order.type";
 import { SIZE_CONFIG } from "@/types/order.type";
 
 export interface ProductsContextType {
@@ -22,20 +36,20 @@ export interface ProductsContextType {
   setViewMode: (mode: "grid" | "list") => void;
   setSortOrder: (order: "asc" | "desc" | "none") => void;
   openFilterToggle: () => void;
-  
+
   // Para productos con sabores
   startFlavorOrder: (product: ProductType) => void;
   addFlavorToDraft: (flavorSlug: string) => void;
   removeFlavorFromDraft: (flavorSlug: string) => void;
-  
+
   // Para productos con cantidad
   startQuantityOrder: (product: ProductType, quantity: number) => void;
   updateQuantityOrder: (quantity: number) => void;
-  
+
   // Para productos únicos o cajas
   addSingleItemOrder: (product: ProductType) => void;
   addBoxOrder: (product: ProductType) => void;
-  
+
   // Generales
   confirmCurrentOrder: () => void;
   cancelCurrentOrder: () => void;
@@ -44,12 +58,16 @@ export interface ProductsContextType {
   clearCart: () => void;
 }
 
-export const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
+export const ProductsContext = createContext<ProductsContextType | undefined>(
+  undefined,
+);
 
 export const useProducts = () => {
   const context = useContext(ProductsContext);
   if (!context) {
-    throw new Error("Los componentes Product.* deben usarse dentro de <Product>");
+    throw new Error(
+      "Los componentes Product.* deben usarse dentro de <Product>",
+    );
   }
   return context;
 };
@@ -64,7 +82,8 @@ const ProductProvider = ({ children }: ProductProps) => {
 
   const selectedCategory = searchParams.get("category") || "todos";
   const viewMode = (searchParams.get("view") as "grid" | "list") || "grid";
-  const sortOrder = (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
+  const sortOrder =
+    (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
   const openFilter = searchParams.get("filter") === "open";
   const branchIdParam = searchParams.get("branch-id");
   const ordersParam = searchParams.get("orders");
@@ -72,13 +91,13 @@ const ProductProvider = ({ children }: ProductProps) => {
   // Parsear órdenes de la URL
   const parseOrdersFromURL = (ordersString: string | null): Order[] => {
     if (!ordersString) return [];
-    
+
     try {
       return ordersString.split("|").map((orderStr, index) => {
         const parts = orderStr.split(":");
         const type = parts[0] as Order["type"];
         const id = `order-${Date.now()}-${index}`;
-        
+
         switch (type) {
           case "flavor-selection": {
             const [_, productId, productName, size, price, flavorsStr] = parts;
@@ -90,10 +109,12 @@ const ProductProvider = ({ children }: ProductProps) => {
               size: size as IceCreamSize,
               maxFlavors: SIZE_CONFIG[size as IceCreamSize].maxFlavors,
               price: parseFloat(price),
-              selectedFlavors: flavorsStr ? flavorsStr.split(",").filter(f => f) : [],
+              selectedFlavors: flavorsStr
+                ? flavorsStr.split(",").filter((f) => f)
+                : [],
             } as FlavorOrder;
           }
-          
+
           case "quantity-selection": {
             const [_, productId, productName, price, quantity] = parts;
             return {
@@ -105,7 +126,7 @@ const ProductProvider = ({ children }: ProductProps) => {
               quantity: parseInt(quantity),
             } as QuantityOrder;
           }
-          
+
           case "single-item": {
             const [_, productId, productName, price] = parts;
             return {
@@ -116,7 +137,7 @@ const ProductProvider = ({ children }: ProductProps) => {
               price: parseFloat(price),
             } as SingleItemOrder;
           }
-          
+
           case "box": {
             const [_, productId, productName, price, boxQuantity] = parts;
             return {
@@ -128,7 +149,7 @@ const ProductProvider = ({ children }: ProductProps) => {
               boxQuantity: parseInt(boxQuantity),
             } as BoxOrder;
           }
-          
+
           default:
             throw new Error(`Unknown order type: ${type}`);
         }
@@ -141,32 +162,35 @@ const ProductProvider = ({ children }: ProductProps) => {
 
   // Convertir órdenes a string para URL
   const ordersToURLString = (orders: Order[]): string => {
-    return orders.map(order => {
-      switch (order.type) {
-        case "flavor-selection":
-          return `${order.type}:${order.productId}:${order.productName}:${order.size}:${order.price}:${order.selectedFlavors.join(",")}`;
-        
-        case "quantity-selection":
-          return `${order.type}:${order.productId}:${order.productName}:${order.price}:${order.quantity}`;
-        
-        case "single-item":
-          return `${order.type}:${order.productId}:${order.productName}:${order.price}`;
-        
-        case "box":
-          return `${order.type}:${order.productId}:${order.productName}:${order.price}:${order.boxQuantity}`;
-        
-        default:
-          return "";
-      }
-    }).filter(Boolean).join("|");
+    return orders
+      .map((order) => {
+        switch (order.type) {
+          case "flavor-selection":
+            return `${order.type}:${order.productId}:${order.productName}:${order.size}:${order.price}:${order.selectedFlavors.join(",")}`;
+
+          case "quantity-selection":
+            return `${order.type}:${order.productId}:${order.productName}:${order.price}:${order.quantity}`;
+
+          case "single-item":
+            return `${order.type}:${order.productId}:${order.productName}:${order.price}`;
+
+          case "box":
+            return `${order.type}:${order.productId}:${order.productName}:${order.price}:${order.boxQuantity}`;
+
+          default:
+            return "";
+        }
+      })
+      .filter(Boolean)
+      .join("|");
   };
 
   const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(
-    branchIdParam ? Number.parseInt(branchIdParam) : null
+    branchIdParam ? Number.parseInt(branchIdParam) : null,
   );
 
   const [confirmedOrders, setConfirmedOrdersState] = useState<Order[]>(
-    parseOrdersFromURL(ordersParam)
+    parseOrdersFromURL(ordersParam),
   );
 
   const [currentDraft, setCurrentDraft] = useState<Order | null>(null);
@@ -200,7 +224,7 @@ const ProductProvider = ({ children }: ProductProps) => {
     const search = current.toString();
     const query = search ? `?${search}` : "";
 
-    window.history.replaceState({}, '', `${pathname}${query}`);
+    window.history.replaceState({}, "", `${pathname}${query}`);
   };
 
   const setSelectedCategory = (category: string) => {
@@ -223,9 +247,9 @@ const ProductProvider = ({ children }: ProductProps) => {
     setSelectedBranchIdState(branchId);
     setConfirmedOrdersState([]); // Limpiar carrito al cambiar sucursal
     setCurrentDraft(null);
-    updateURL({ 
+    updateURL({
       "branch-id": branchId ? branchId.toString() : null,
-      orders: null 
+      orders: null,
     });
   };
 
@@ -299,37 +323,39 @@ const ProductProvider = ({ children }: ProductProps) => {
 
     setCurrentDraft({
       ...currentDraft,
-      selectedFlavors: currentDraft.selectedFlavors.filter(f => f !== flavorSlug),
+      selectedFlavors: currentDraft.selectedFlavors.filter(
+        (f) => f !== flavorSlug,
+      ),
     });
   };
 
   // ==========================================
   // PRODUCTOS CON CANTIDAD (quantity-selection)
   // ==========================================
- const startQuantityOrder = (product: ProductType, quantity: number) => {
-  if (product.type !== "quantity-selection") return;
-  if (quantity <= 0) return;
+  const startQuantityOrder = (product: ProductType, quantity: number) => {
+    if (product.type !== "quantity-selection") return;
+    if (quantity <= 0) return;
 
-  // Crear orden directamente SIN draft
-  const newOrder: QuantityOrder = {
-    id: `order-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-    type: "quantity-selection",
-    productId: product.id,
-    productName: product.name,
-    price: product.price,
-    quantity,
+    // Crear orden directamente SIN draft
+    const newOrder: QuantityOrder = {
+      id: `order-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      type: "quantity-selection",
+      productId: product.id,
+      productName: product.name,
+      price: product.price,
+      quantity,
+    };
+
+    // Agregar directamente al carrito
+    const newConfirmedOrders = [...confirmedOrders, newOrder];
+    setConfirmedOrdersState(newConfirmedOrders);
+
+    // Actualizar URL
+    updateURL({
+      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
+      orders: ordersToURLString(newConfirmedOrders),
+    });
   };
-
-  // Agregar directamente al carrito
-  const newConfirmedOrders = [...confirmedOrders, newOrder];
-  setConfirmedOrdersState(newConfirmedOrders);
-
-  // Actualizar URL
-  updateURL({
-    "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-    orders: ordersToURLString(newConfirmedOrders),
-  });
-};
 
   const updateQuantityOrder = (quantity: number) => {
     if (!currentDraft || currentDraft.type !== "quantity-selection") return;
@@ -397,11 +423,17 @@ const ProductProvider = ({ children }: ProductProps) => {
     if (!currentDraft) return;
 
     // Validaciones por tipo
-    if (currentDraft.type === "flavor-selection" && currentDraft.selectedFlavors.length === 0) {
+    if (
+      currentDraft.type === "flavor-selection" &&
+      currentDraft.selectedFlavors.length === 0
+    ) {
       return;
     }
 
-    if (currentDraft.type === "quantity-selection" && currentDraft.quantity <= 0) {
+    if (
+      currentDraft.type === "quantity-selection" &&
+      currentDraft.quantity <= 0
+    ) {
       return;
     }
 
@@ -424,7 +456,7 @@ const ProductProvider = ({ children }: ProductProps) => {
   };
 
   const removeConfirmedOrder = (orderId: string) => {
-    const newOrders = confirmedOrders.filter(order => order.id !== orderId);
+    const newOrders = confirmedOrders.filter((order) => order.id !== orderId);
     setConfirmedOrdersState(newOrders);
 
     updateURL({
@@ -434,26 +466,28 @@ const ProductProvider = ({ children }: ProductProps) => {
   };
 
   let filteredProducts = PROD.filter((product) => {
-  // Filtrar por categoría
-  if (selectedCategory !== "todos" && product.category !== selectedCategory) {
-    return false;
-  }
-
-  // CAMBIO: Filtrar por sucursal - verificar si la sucursal está en el array
-  if (selectedBranchId !== null) {
-    const hasThisBranch = product.branches.some(branch => branch.id === selectedBranchId);
-    if (!hasThisBranch) {
+    // Filtrar por categoría
+    if (selectedCategory !== "todos" && product.category !== selectedCategory) {
       return false;
     }
-  }
 
-  // Solo mostrar productos "comprables" (no sabores sueltos)
-  if (product.type === "flavor-selection" && product.price === 0) {
-    return false;
-  }
+    // CAMBIO: Filtrar por sucursal - verificar si la sucursal está en el array
+    if (selectedBranchId !== null) {
+      const hasThisBranch = product.branches.some(
+        (branch) => branch.id === selectedBranchId,
+      );
+      if (!hasThisBranch) {
+        return false;
+      }
+    }
 
-  return true;
-});
+    // Solo mostrar productos "comprables" (no sabores sueltos)
+    if (product.type === "flavor-selection" && product.price === 0) {
+      return false;
+    }
+
+    return true;
+  });
 
   // Ordenar productos
   filteredProducts = filteredProducts.sort((a, b) => {

@@ -11,12 +11,10 @@ import CenterContainer from "@/components/container/center";
 import "../../style/about.css";
 import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
 
-
-import gsap from "gsap"
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 const AboutHomeSection = () => {
   const refTitle = useRef<HTMLHeadingElement>(null);
@@ -26,36 +24,35 @@ const AboutHomeSection = () => {
 
   const refAbout = useRef<HTMLElement>(null);
 
-useEffect(() => {
+  useEffect(() => {
     if (!refAbout.current) {
       return;
     }
 
     const cxt = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: refAbout.current,
-          start: "top bottom", // Inicia cuando el elemento entra por debajo del viewport
-          end: "center center", // Termina cuando el elemento llega al centro del viewport
-          scrub: 1, // Suavizado de 1 segundo
-          markers: false, // Desactivar marcadores para producción
-        }
-      })
-      // Solo necesitamos UN .from para definir el estado inicial (oculto)
-      // y GSAP lo animará hasta el estado final (visible, y: 0) a lo largo del scroll.
-      .from(refAbout.current, {
-        y: 100, // Empieza 100px abajo (para que suba)
-        opacity: 0,
-        ease: "power2.out", // Hace que la entrada sea más suave
-      });
-      
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: refAbout.current,
+            start: "top bottom", // Inicia cuando el elemento entra por debajo del viewport
+            end: "center center", // Termina cuando el elemento llega al centro del viewport
+            scrub: 1, // Suavizado de 1 segundo
+            markers: false, // Desactivar marcadores para producción
+          },
+        })
+        // Solo necesitamos UN .from para definir el estado inicial (oculto)
+        // y GSAP lo animará hasta el estado final (visible, y: 0) a lo largo del scroll.
+        .from(refAbout.current, {
+          y: 100, // Empieza 100px abajo (para que suba)
+          opacity: 0,
+          ease: "power2.out", // Hace que la entrada sea más suave
+        });
     }, refAbout);
 
     return () => cxt.revert();
-   }, [])
+  }, []);
 
-
-  useHeroAnimation(refTitle, refEyebrow, refBodyCopy, refButtonCTA)
+  useHeroAnimation(refTitle, refEyebrow, refBodyCopy, refButtonCTA);
   return (
     <section className="about-home__wrapper">
       <CenterContainer center>
@@ -79,7 +76,10 @@ useEffect(() => {
                   <div className="about-home__wrappe--info__content">
                     <Block>
                       <Block.Content>
-                        <Block.Subtitle ref={refEyebrow}> ¿Quiénes Somos? </Block.Subtitle>
+                        <Block.Subtitle ref={refEyebrow}>
+                          {" "}
+                          ¿Quiénes Somos?{" "}
+                        </Block.Subtitle>
                         <Block.Title ref={refTitle}>
                           Nuestros valores, <span>nuestra cultura</span>
                         </Block.Title>

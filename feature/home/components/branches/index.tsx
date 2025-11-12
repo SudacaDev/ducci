@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { FaShop } from "react-icons/fa6";
@@ -16,8 +16,7 @@ import "../../style/branches.css";
 import ParallaxFloat from "@/components/parallax-float";
 import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
 
-
-import gsap from "gsap"
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,35 +30,31 @@ const BranchesHomeSection = () => {
   const refButtonCTA = useRef<HTMLDivElement>(null);
   const refContentBranchesPin = useRef<HTMLDivElement>(null);
 
-
   useHeroAnimation(refTitle, refEyebrow, refBodyCopy, refButtonCTA);
 
-useEffect(() => {
-  if (!refContentBranchesPin.current) return;
-  
-  const ctx = gsap.context(() => {
-    gsap.set(refContentBranchesPin.current, {  background: 'white', });
-    ScrollTrigger.create({
-      trigger: refContentBranchesPin.current,
-      start: "top top",
-      end: "+=200%",
-      pin: true,
-      pinSpacing: true,
-      scrub: 1,
-      
-      onUpdate: (self) => {
-        if (self.progress > 0.8) {
-          gsap.set(refContentBranchesPin.current, { zIndex: 1 });
-        }
-      }
-    });
-  }, refContentBranchesPin);
-  
-  return () => ctx.revert();
-}, []);
+  useEffect(() => {
+    if (!refContentBranchesPin.current) return;
 
- 
+    const ctx = gsap.context(() => {
+      gsap.set(refContentBranchesPin.current, { background: "white" });
+      ScrollTrigger.create({
+        trigger: refContentBranchesPin.current,
+        start: "top top",
+        end: "+=200%",
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
 
+        onUpdate: (self) => {
+          if (self.progress > 0.8) {
+            gsap.set(refContentBranchesPin.current, { zIndex: 1 });
+          }
+        },
+      });
+    }, refContentBranchesPin);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section className="branches-home" ref={refContentBranchesPin}>
@@ -143,7 +138,9 @@ useEffect(() => {
                 </div>
                 <div className="flex flex-col item-content-info">
                   <p className="font-bold">Descubri</p>
-                  <p className="branches-home--image__float--paragraph">Nustros Locales</p>
+                  <p className="branches-home--image__float--paragraph">
+                    Nustros Locales
+                  </p>
                 </div>
               </div>
             </ParallaxFloat>

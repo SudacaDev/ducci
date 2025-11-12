@@ -49,7 +49,6 @@ header
   visibility: visible;
 }
 
-
 .header .nav-wrapper {
   min-height: 70px;
 }
@@ -118,7 +117,6 @@ header
     cursor: pointer;
   }
 }
-
 
 @media screen and (max-width: 780px) {
   .header nav ul {

@@ -373,11 +373,10 @@ export const PROD: Product[] = [
     name: "Balde 3L Ch-Ctor-Spl-Vai",
     price: 15000,
     category: "postres",
-    description: "Balde de 3L con sabores: Chocolate, Crema Tostada, Sambayon, Vainilla.",
+    description:
+      "Balde de 3L con sabores: Chocolate, Crema Tostada, Sambayon, Vainilla.",
     type: "single-item",
-    branches: [
-      { id: 1, name: "Ducci Centro", address: "Córdoba 1050" },
-    ],
+    branches: [{ id: 1, name: "Ducci Centro", address: "Córdoba 1050" }],
   },
   {
     id: 404,
@@ -386,9 +385,7 @@ export const PROD: Product[] = [
     category: "postres",
     description: "Balde de 3L con sabores: Flan, DDL, Granizado, Frutilla.",
     type: "single-item",
-    branches: [
-      { id: 1, name: "Ducci Centro", address: "Córdoba 1050" },
-    ],
+    branches: [{ id: 1, name: "Ducci Centro", address: "Córdoba 1050" }],
   },
 
   // ========================================
@@ -511,7 +508,8 @@ export const PROD: Product[] = [
     name: "Tiramisú",
     price: 0,
     category: "premium",
-    description: "Inspirado en el clásico postre italiano con café y mascarpone.",
+    description:
+      "Inspirado en el clásico postre italiano con café y mascarpone.",
     type: "flavor-selection",
     branches: [
       { id: 1, name: "Ducci Centro", address: "Córdoba 1050" },
@@ -585,9 +583,7 @@ export const PROD: Product[] = [
     category: "veganos",
     description: "Chocolate intenso con base de leche de almendras.",
     type: "flavor-selection",
-    branches: [
-      { id: 1, name: "Ducci Centro", address: "Córdoba 1050" },
-    ],
+    branches: [{ id: 1, name: "Ducci Centro", address: "Córdoba 1050" }],
   },
   {
     id: 16,
@@ -667,9 +663,7 @@ export const PROD: Product[] = [
     category: "especiales",
     description: "Dulce de leche con chips crocantes de chocolate.",
     type: "flavor-selection",
-    branches: [
-      { id: 1, name: "Ducci Centro", address: "Córdoba 1050" },
-    ],
+    branches: [{ id: 1, name: "Ducci Centro", address: "Córdoba 1050" }],
   },
 ];
 

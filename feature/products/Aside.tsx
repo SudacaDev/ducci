@@ -6,8 +6,12 @@ import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/constants/prod";
 
 const Aside = () => {
-  const { selectedCategory, setSelectedCategory, openFilter, openFilterToggle } =
-    useProducts();
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    openFilter,
+    openFilterToggle,
+  } = useProducts();
 
   return (
     <aside

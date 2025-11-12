@@ -16,7 +16,6 @@
 
   display: flex;
   max-height: 980px;
-
 }
 
 .hero__wrapper {
@@ -58,7 +57,6 @@
 
   height: 40px;
   background-size: 10.00% 100%;
-  ;
 }
 
 .hero--banner__wrapper {
@@ -81,25 +79,18 @@
 
 @media screen and (max-width: 980px) {
   .hero-banner::after {
-
     background-size: 20.00% 100%;
-    ;
   }
-
-
 }
 
 @media screen and (max-width: 768px) {
   .hero-banner::after {
-
     background-size: 20.00% 100%;
-    ;
   }
 
   #about_wrapper {
     grid-column: 1 / 13;
   }
-
 }
 
 .banner_content {
@@ -136,9 +127,11 @@
 .banner_content .hero__description,
 .banner_content .hero__eyebrow {
   font-family: var(--font-dm-sans);
-  color: hsl(var(--secondary-h),
-      var(--secondary-s),
-      calc(var(--secondary-l) + 40%));
+  color: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) + 40%)
+  );
 }
 
 .banner-image {
@@ -198,7 +191,8 @@ ease-in-out infinite alternate move; */
   }
 }
 
-@media screen and (max-width: 1280px) {}
+@media screen and (max-width: 1280px) {
+}
 
 @media screen and (max-width: 1100px) {
   .hero-banner {

@@ -17,8 +17,8 @@ const DucciBranchesMap = () => {
     setSelectedBranch,
     hoveredBranch,
     setHoveredBranch,
-    nearbyBranches,      
-    userLocation,        
+    nearbyBranches,
+    userLocation,
   } = useBranchesMap();
 
   return (
@@ -33,8 +33,8 @@ const DucciBranchesMap = () => {
         setSelectedBranch={setSelectedBranch}
         hoveredBranch={hoveredBranch}
         setHoveredBranch={setHoveredBranch}
-        nearbyBranches={nearbyBranches}      
-        userLocation={userLocation}         
+        nearbyBranches={nearbyBranches}
+        userLocation={userLocation}
       />
 
       <div ref={mapRef} style={{ height: "100%", width: "100%" }} />

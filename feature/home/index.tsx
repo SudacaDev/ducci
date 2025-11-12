@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
@@ -13,16 +13,13 @@ import { CarouselProducts } from "./components/carousel-products";
 
 import "./style/home.css";
 
-
 const HomePageContent = () => {
- 
-
   return (
-    <div  id="smooth-wrapper">
+    <div id="smooth-wrapper">
       <div className="smooth-content">
         <HeroBanner />
         <CarouselProducts />
-        <ProductsHomeSection /> 
+        <ProductsHomeSection />
         <AboutHomeSection />
         <BranchesHomeSection />
         <NewsletterHomeSection />

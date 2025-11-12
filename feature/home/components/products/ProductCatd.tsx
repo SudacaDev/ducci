@@ -20,41 +20,38 @@ const ProductCard = ({
   product: (typeof PRODUCTS)[0];
   index: number;
 }) => {
-  
   const refItems = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
- useEffect(() => {
-
+  useEffect(() => {
     const gsap = (window as any).gsap;
     const ScrollTrigger = (window as any).ScrollTrigger;
 
     // Salir si GSAP no está disponible
     if (!gsap || !ScrollTrigger || !refItems.current) {
-        return; 
+      return;
     }
 
     // El cálculo de velocidad y la inicialización de ScrollSmoother FUERON REMOVIDOS
     // ScrollSmoother debe vivir en el componente padre.
 
-    const speedFactor = 1.2 + (index * 0.2); 
-    
+    const speedFactor = 1.2 + index * 0.2;
+
     let ctx = gsap.context(() => {
-     
       // 2. Animación de Parallax (basada en el scroll suave del padre)
       if (imageRef.current) {
         gsap.to(imageRef.current, {
-          y: -50 * speedFactor, 
+          y: -50 * speedFactor,
           ease: "none",
           scrollTrigger: {
             trigger: refItems.current,
-            start: "top bottom", 
-            end: "bottom top",    
-            scrub: speedFactor,  
-          }
+            start: "top bottom",
+            end: "bottom top",
+            scrub: speedFactor,
+          },
         });
       }
-     
+
       gsap.set(refItems.current, { opacity: 0, y: 60 });
       gsap.to(refItems.current, {
         opacity: 1,
@@ -66,14 +63,12 @@ const ProductCard = ({
           trigger: refItems.current,
           start: "top 110%",
           toggleActions: "play none none reverse",
-        }
+        },
       });
-
     }, refItems);
-    
+
     return () => {
       ctx.revert();
-    
     };
   }, [index]);
 
@@ -81,16 +76,12 @@ const ProductCard = ({
     <div
       ref={refItems}
       className="product-home-list__grid__item"
-      data-speed={1.2 + (index * 0.2)} 
-      style={{ 
-        opacity: 0, 
-       
+      data-speed={1.2 + index * 0.2}
+      style={{
+        opacity: 0,
       }}
     >
-      <div 
-
-        className="product-home-list__grid__item_image"
-      >
+      <div className="product-home-list__grid__item_image">
         <figure>
           <Image
             src={product.image}

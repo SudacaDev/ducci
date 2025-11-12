@@ -49,12 +49,13 @@ const ProductsHomeSection = () => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.product-home-list__grid__item');
+      const cards = gsap.utils.toArray(".product-home-list__grid__item");
 
       cards.forEach((card: any, index: number) => {
-        const speedFactor = 1.2 + (index * 0.2);
+        const speedFactor = 1.2 + index * 0.2;
 
-        gsap.fromTo(card,
+        gsap.fromTo(
+          card,
           {
             opacity: 0,
             y: 120,
@@ -71,8 +72,8 @@ const ProductsHomeSection = () => {
               trigger: sectionRef.current,
               start: "top 70%",
               toggleActions: "play none none reverse",
-            }
-          }
+            },
+          },
         );
       });
     }, sectionRef);
@@ -96,11 +97,7 @@ const ProductsHomeSection = () => {
 
         <div className="product-home-list">
           {PRODUCTS.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              index={index}
-            />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </CenterContainer>

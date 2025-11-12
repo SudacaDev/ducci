@@ -33,19 +33,15 @@ const ContactPageContent = () => {
     <InnerLayout id="contact" bannerTitle="Contacto">
       <CenterContainer center>
         <div id="contactWrapper" className="py-8">
-          
           <Block className="text-center">
             <Block.Title>
- Ponte en <span>contacto</span> con nosotros
+              Ponte en <span>contacto</span> con nosotros
             </Block.Title>
             <Block.Body>
- <p>Escribinos y contanos cuales son tus inquietudes.</p>
-            <p>Nuestro equipo se pondrá en contacto con vos.</p>
+              <p>Escribinos y contanos cuales son tus inquietudes.</p>
+              <p>Nuestro equipo se pondrá en contacto con vos.</p>
             </Block.Body>
           </Block>
-            
-           
-    
 
           <div className="contact_form">
             <div className="contact_form-info">

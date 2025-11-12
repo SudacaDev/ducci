@@ -21,14 +21,13 @@
   gap: 2em;
 }
 
-#contactWrapper .content-block__wrapper{
+#contactWrapper .content-block__wrapper {
   justify-content: center !important;
   align-items: center;
   text-align: center;
 }
-#contactWrapper  .content-block__body{
+#contactWrapper .content-block__body {
   gap: 8px;
-
 }
 
 @media screen and (max-width: 980px) {

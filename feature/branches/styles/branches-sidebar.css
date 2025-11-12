@@ -41,11 +41,11 @@
 }
 
 .branch-card {
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 1.5rem;
   cursor: pointer;
   transition: all 0.3s;
- border-bottom: 1px solid var(--primary-color-outline);
+  border-bottom: 1px solid var(--primary-color-outline);
 }
 
 .search-box {
@@ -84,7 +84,7 @@
 }
 
 .branches-list {
-  padding: 2rem .5rem;
+  padding: 2rem 0.5rem;
   display: flex;
   flex-direction: column;
 
@@ -94,7 +94,6 @@
 .branch-card:hover {
   transform: translateY(-6px);
   background-color: #f1f1f1;
-  
 }
 
 .branch-card.active {
@@ -118,7 +117,7 @@
 .branch-card__hours {
   color: var(--accent-color);
   font-size: 0.875rem;
- 
+
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -143,10 +142,9 @@
 }
 
 @media (max-width: 968px) {
-  .sidebar-header h2
-{
-  font-size: 1.3rem;
-}
+  .sidebar-header h2 {
+    font-size: 1.3rem;
+  }
   .branches-map-container {
     grid-template-columns: 1fr;
     grid-template-rows: 60vh 40vh;

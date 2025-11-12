@@ -3,7 +3,6 @@
 import InnerLayout from "@/components/inner-layout";
 import Product from "@/components/products/Product";
 import Aside from "@/feature/products/Aside";
-import ViewToggle from "@/feature/products/ViewToggle";
 import ProductsList from "@/feature/products/ProductsList";
 import CartWidget from "@/feature/products/CartWidget";
 import OrderSelector from "@/feature/products/OrderSelector"; // NUEVO

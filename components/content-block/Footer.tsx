@@ -6,6 +6,11 @@ interface FooterProps {
 }
 
 const Footer = ({ children, ref }: FooterProps) => {
-  return <div className="content-block__footer" ref={ref}> {children} </div>;
+  return (
+    <div className="content-block__footer" ref={ref}>
+      {" "}
+      {children}{" "}
+    </div>
+  );
 };
 export default Footer;

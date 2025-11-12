@@ -1,4 +1,4 @@
-import { ReactNode, RefObject,  } from "react";
+import { ReactNode, RefObject } from "react";
 
 interface BodyProps {
   children?: ReactNode;
@@ -6,7 +6,11 @@ interface BodyProps {
 }
 
 const Body = ({ children, ref }: BodyProps) => {
-  return <div className="content-block__body" ref={ref}>{children}</div>;
+  return (
+    <div className="content-block__body" ref={ref}>
+      {children}
+    </div>
+  );
 };
 
 export default Body;

@@ -1,0 +1,123 @@
+import { Product } from "@/types/product.type";
+import { Lock, Minus, Plus, ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
+interface ProductsQuantityProps {
+  viewMode: string;
+  quantityProducts: Product[];
+  tempQuantities: Record<number, number>;
+  selectedBranchId: number | null;
+  handleQuantityChange: (productId: number, change: number) => void;
+  handleAddQuantityProduct: (item: Product) => void;
+}
+export const ProductsQuantity = ({
+  viewMode,
+  quantityProducts,
+  tempQuantities,
+  selectedBranchId,
+  handleQuantityChange,
+  handleAddQuantityProduct,
+}: ProductsQuantityProps) => {
+  return (
+    <div className="mb-8">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        Productos individuales
+      </h2>
+      <p className="text-sm text-gray-600 mb-4">
+        Selecciona la cantidad que desees
+      </p>
+
+      <div
+        className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 2xl:grid-cols-4 " : "grid-cols-1"}`}
+      >
+        {quantityProducts.map((item) => {
+          const quantity = tempQuantities[item.id] || 1;
+
+          return (
+            <div
+              key={item.id}
+              className={`product-list_item flex-col rounded-lg transition-all relative ${
+                !selectedBranchId ? "opacity-50" : ""
+              }`}
+            >
+              {!selectedBranchId && (
+                <div className="absolute top-2 right-2 z-20 bg-gray-400 rounded-full p-1">
+                  <Lock className="w-6 h-6 text-white" />
+                </div>
+              )}
+
+              <div className="product-list_image inset-shadow-sm rounded-md">
+                <figure>
+                  <Image
+                    src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
+                    alt={item.name}
+                    width={240}
+                    height={240}
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+
+              <div className="flex flex-col gap-2 text-left w-full">
+                <div className="product-list_name">
+                  <h3>{item.name}</h3>
+                </div>
+                <div className="product-list_desc">
+                  <p>{item.description}</p>
+                </div>
+                <div className="mt-2 flex items-center justify-between">
+                  <p className="text-xl font-bold text-orange-600">
+                    ${item.price}
+                  </p>
+                  <p className="text-sm text-gray-600">c/u</p>
+                </div>
+
+                {/* Selector de cantidad */}
+                <div className="flex items-center gap-3 mt-3">
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleQuantityChange(item.id, -1)}
+                    disabled={!selectedBranchId || quantity <= 1}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Minus className="w-4 h-4" />
+                  </Button>
+
+                  <span className="text-lg font-semibold w-12 text-center">
+                    {quantity}
+                  </span>
+
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleQuantityChange(item.id, 1)}
+                    disabled={!selectedBranchId}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Plus className="w-4 h-4" />
+                  </Button>
+
+                  <Button
+                    type="button"
+                    onClick={() => handleAddQuantityProduct(item)}
+                    disabled={!selectedBranchId}
+                    className="flex-1 bg-[var(--secondary-color)] hover:bg-[var(--secondary-color)]/90 text-white gap-2"
+                  >
+                    <ShoppingCart className="w-4 h-4" />
+                    Agregar ${item.price * quantity}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default ProductsQuantity;

@@ -1,7 +1,7 @@
 "use client";
 import { Poppins, DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import Lenis from 'lenis';
+import Lenis from "lenis";
 import "./globals.css";
 import { useEffect } from "react";
 
@@ -22,21 +22,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  
-      
-    })
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
 
     function raf(time: any) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf)
-  }, [])
+    requestAnimationFrame(raf);
+  }, []);
   return (
     <html lang="es">
       <body
@@ -48,29 +46,28 @@ export default function RootLayout({
           reverseOrder={false}
           gutter={8}
           toastOptions={{
-            
             duration: 4000,
             style: {
-              background: '#333',
-              color: '#fff',
-              padding: '16px',
-              borderRadius: '8px',
-              fontSize: '14px',
+              background: "#333",
+              color: "#fff",
+              padding: "16px",
+              borderRadius: "8px",
+              fontSize: "14px",
             },
-             
+
             success: {
               duration: 3000,
               iconTheme: {
-                primary: '#BA6516',
-                secondary: '#fff',
+                primary: "#BA6516",
+                secondary: "#fff",
               },
             },
-           
+
             error: {
               duration: 4000,
               iconTheme: {
-                primary: '#ef4444',
-                secondary: '#fff',
+                primary: "#ef4444",
+                secondary: "#fff",
               },
             },
           }}
