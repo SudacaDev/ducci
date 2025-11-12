@@ -14,10 +14,9 @@ const ProductsPageContent = () => {
     <div id="product-wrapper" className="h-full  ">
       <InnerLayout bannerTitle="Nuestros Productos">
         <Product>
-          <Aside />
-          <div className="flex flex-col relatve">
-            
-            <OrderSelector /> 
+          <div className="flex w-full flex-col relatve">
+            <OrderSelector />
+            <Aside />
             <ProductsList />
           </div>
           <CartWidget />

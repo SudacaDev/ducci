@@ -16,6 +16,7 @@ import FlavorProducts from "./components/FlavorProducts";
 import CurrentDraft from "./components/CurrentDraft";
 import ModalFlavorProduct from "./components/ModalFlavorProduct";
 import { FlavorOrder, IceCreamSize } from "@/types/order.type";
+import SingleItems from "./components/SingleItems";
 
 const ProductsList = () => {
   const {
@@ -35,7 +36,9 @@ const ProductsList = () => {
   } = useProducts();
 
   // Estado local para cantidades temporales
-  const [tempQuantities, setTempQuantities] = useState<Record<number, number>>({});
+  const [tempQuantities, setTempQuantities] = useState<Record<number, number>>(
+    {},
+  );
 
   // ============================================
   // ESTADOS PARA EL MODAL
@@ -67,27 +70,33 @@ const ProductsList = () => {
   // ============================================
   // CONFIRMAR DESDE EL MODAL
   // ============================================
-const handleConfirmFromModal = (selectedFlavors: string[], quantity: number) => {
-  if (!selectedProduct) return;
+  const handleConfirmFromModal = (
+    selectedFlavors: string[],
+    quantity: number,
+  ) => {
+    if (!selectedProduct) return;
 
-  // Usar la nueva función del contexto
-  addMultipleFlavorOrders(selectedProduct, selectedFlavors, quantity);
+    // Usar la nueva función del contexto
+    addMultipleFlavorOrders(selectedProduct, selectedFlavors, quantity);
 
-  toast.success(
-    `${quantity} ${selectedProduct.name} agregado${quantity > 1 ? 's' : ''} al carrito`,
-    { duration: 2000 }
-  );
-};
+    toast.success(
+      `${quantity} ${selectedProduct.name} agregado${quantity > 1 ? "s" : ""} al carrito`,
+      { duration: 2000 },
+    );
+  };
 
-const getSizeFromProduct = (product: Product): IceCreamSize => {
-  if (product.name.includes("1 Kilo") || product.name.includes("1kg")) return "1";
-  if (product.name.includes("1/2 Kilo") || product.name.includes("1/2kg")) return "1/2";
-  if (product.name.includes("1/4 Kilo") || product.name.includes("1/4kg")) return "1/4";
-  if (product.name.includes("1 Bocha")) return "1-bocha";
-  if (product.name.includes("2 Bochas")) return "2-bochas";
-  if (product.name.includes("3 Bochas")) return "3-bochas";
-  return "1";
-};
+  const getSizeFromProduct = (product: Product): IceCreamSize => {
+    if (product.name.includes("1 Kilo") || product.name.includes("1kg"))
+      return "1";
+    if (product.name.includes("1/2 Kilo") || product.name.includes("1/2kg"))
+      return "1/2";
+    if (product.name.includes("1/4 Kilo") || product.name.includes("1/4kg"))
+      return "1/4";
+    if (product.name.includes("1 Bocha")) return "1-bocha";
+    if (product.name.includes("2 Bochas")) return "2-bochas";
+    if (product.name.includes("3 Bochas")) return "3-bochas";
+    return "1";
+  };
 
   const productNameToSlug = (name: string) => {
     return name
@@ -351,71 +360,14 @@ const getSizeFromProduct = (product: Product): IceCreamSize => {
       {/* ============================================
           SECCIÓN 5: PRODUCTOS ÚNICOS
           ============================================ */}
+
       {singleItems.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-gray-800">
-            🎂 Tortas y especiales
-          </h2>
-
-          <div
-            className={`grid gap-4 ${
-              viewMode === "grid"
-                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
-                : "grid-cols-1"
-            }`}
-          >
-            {singleItems.map((item) => (
-              <div
-                key={item.id}
-                className={`product-list_item flex-col rounded-lg transition-all relative ${
-                  !selectedBranchId ? "opacity-50" : ""
-                }`}
-              >
-                {!selectedBranchId && (
-                  <div className="absolute top-2 right-2 z-20 bg-gray-400 rounded-full p-1">
-                    <Lock className="w-6 h-6 text-white" />
-                  </div>
-                )}
-
-                <div className="product-list_image inset-shadow-sm rounded-md">
-                  <figure>
-                    <Image
-                      src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
-                      alt={item.name}
-                      width={240}
-                      height={240}
-                      loading="lazy"
-                    />
-                  </figure>
-                </div>
-
-                <div className="flex flex-col gap-2 text-left w-full">
-                  <div className="product-list_name">
-                    <h3>{item.name}</h3>
-                  </div>
-                  <div className="product-list_desc">
-                    <p>{item.description}</p>
-                  </div>
-                  <div className="mt-2">
-                    <p className="text-xl font-bold text-orange-600">
-                      ${item.price}
-                    </p>
-                  </div>
-
-                  <Button
-                    type="button"
-                    onClick={() => handleAddSingleItem(item)}
-                    disabled={!selectedBranchId}
-                    className="w-full mt-3 bg-[var(--secondary-color)] hover:bg-[var(--secondary-color)]/90 text-white gap-2"
-                  >
-                    <ShoppingCart className="w-4 h-4" />
-                    Agregar al carrito
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <SingleItems
+          singleItems={singleItems}
+          viewMode="grid"
+          handleAddSingleItem={handleAddSingleItem}
+          selectedBranchId={selectedBranchId}
+        />
       )}
 
       {/* Mensaje si no hay productos */}

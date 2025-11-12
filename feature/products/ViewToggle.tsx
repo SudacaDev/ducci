@@ -11,7 +11,11 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-const ViewToggle = () => {
+interface ViewToogleProps {
+  hasButtons?: boolean;
+}
+
+const ViewToggle = ({ hasButtons }: ViewToogleProps) => {
   const { viewMode, setViewMode, setSortOrder, sortOrder, openFilterToggle } =
     useProducts();
 
@@ -21,24 +25,28 @@ const ViewToggle = () => {
         <Button type="button" id="open-filter" onClick={openFilterToggle}>
           Filtros
         </Button>
-        <Button
-          type="button"
-          onClick={() => setViewMode("grid")}
-          className={`filter-button hover:cursor-pointer ${
-            viewMode === "grid" ? "active" : ""
-          }`}
-        >
-          <LayoutGrid size={32} />
-        </Button>
-        <Button
-          type="button"
-          onClick={() => setViewMode("list")}
-          className={`filter-button hover:cursor-pointer ${
-            viewMode === "list" ? "active" : ""
-          }`}
-        >
-          <LayoutList size={32} />
-        </Button>
+        {hasButtons && (
+          <>
+            <Button
+              type="button"
+              onClick={() => setViewMode("grid")}
+              className={`filter-button hover:cursor-pointer ${
+                viewMode === "grid" ? "active" : ""
+              }`}
+            >
+              <LayoutGrid size={32} />
+            </Button>
+            <Button
+              type="button"
+              onClick={() => setViewMode("list")}
+              className={`filter-button hover:cursor-pointer ${
+                viewMode === "list" ? "active" : ""
+              }`}
+            >
+              <LayoutList size={32} />
+            </Button>
+          </>
+        )}
       </div>
       <Select
         value={sortOrder}

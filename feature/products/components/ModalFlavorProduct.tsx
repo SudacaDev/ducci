@@ -31,68 +31,69 @@ export const ModalFlavorProduct = ({
   // BLOQUEAR SCROLL DEL BODY
   // ============================================
   useEffect(() => {
-    console.log('🔵 Modal isOpen changed:', isOpen);
-    
+    console.log("🔵 Modal isOpen changed:", isOpen);
+
     if (isOpen) {
       const scrollY = window.scrollY;
-      console.log('📍 Current scroll position:', scrollY);
-      
+      console.log("📍 Current scroll position:", scrollY);
+
       // INTENTAR DETENER LENIS
       const lenis = (window as any).lenis;
-      console.log('🎯 Lenis instance:', lenis);
+      console.log("🎯 Lenis instance:", lenis);
       if (lenis) {
         lenis.stop();
-        console.log('⏸️ Lenis STOPPED');
+        console.log("⏸️ Lenis STOPPED");
       } else {
-        console.log('⚠️ Lenis NOT FOUND - usando fallback');
+        console.log("⚠️ Lenis NOT FOUND - usando fallback");
       }
-      
+
       // Bloquear scroll del body
-      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      const scrollBarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.paddingRight = `${scrollBarWidth}px`;
-      console.log('🔒 Body scroll LOCKED');
+      console.log("🔒 Body scroll LOCKED");
     } else {
       // REACTIVAR LENIS
       const lenis = (window as any).lenis;
-      console.log('🎯 Lenis instance on close:', lenis);
+      console.log("🎯 Lenis instance on close:", lenis);
       if (lenis) {
         lenis.start();
-        console.log('▶️ Lenis RESTARTED');
+        console.log("▶️ Lenis RESTARTED");
       }
-      
+
       // Restaurar scroll del body
-      const scrollY = parseInt(document.body.style.top || '0') * -1;
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.paddingRight = '';
-      
+      const scrollY = parseInt(document.body.style.top || "0") * -1;
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.paddingRight = "";
+
       // Volver a la posición original
       window.scrollTo(0, scrollY);
-      console.log('🔓 Body scroll UNLOCKED');
+      console.log("🔓 Body scroll UNLOCKED");
     }
 
     // Cleanup al desmontar
     return () => {
-      console.log('🧹 Cleanup running');
+      console.log("🧹 Cleanup running");
       const lenis = (window as any).lenis;
       if (lenis) {
         lenis.start();
-        console.log('▶️ Lenis RESTARTED (cleanup)');
+        console.log("▶️ Lenis RESTARTED (cleanup)");
       }
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.paddingRight = '';
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.paddingRight = "";
     };
   }, [isOpen]);
 
@@ -115,9 +116,9 @@ export const ModalFlavorProduct = ({
   // Toggle sabor
   const handleFlavorToggle = (flavorName: string) => {
     const slug = productNameToSlug(flavorName);
-    
+
     if (selectedFlavors.includes(slug)) {
-      setSelectedFlavors(selectedFlavors.filter(f => f !== slug));
+      setSelectedFlavors(selectedFlavors.filter((f) => f !== slug));
     } else {
       if (selectedFlavors.length < maxFlavors) {
         setSelectedFlavors([...selectedFlavors, slug]);
@@ -139,7 +140,7 @@ export const ModalFlavorProduct = ({
     }
 
     onConfirm(selectedFlavors, quantity);
-    
+
     // Reset y cerrar
     setSelectedFlavors([]);
     setQuantity(1);
@@ -156,32 +157,33 @@ export const ModalFlavorProduct = ({
   };
 
   // Filtrar sabores disponibles según la sucursal
-  const filteredFlavors = availableFlavors.filter(flavor => 
-    selectedBranchId === null || 
-    flavor.branches.some(branch => branch.id === selectedBranchId)
+  const filteredFlavors = availableFlavors.filter(
+    (flavor) =>
+      selectedBranchId === null ||
+      flavor.branches.some((branch) => branch.id === selectedBranchId),
   );
 
   return (
     <>
       {/* Overlay */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
         onClick={handleClose}
-        style={{ overflow: 'hidden' }}
+        style={{ overflow: "hidden" }}
       >
         {/* Modal */}
-        <div 
+        <div
           className="bg-white rounded-2xl max-w-lg w-full shadow-2xl"
           onClick={(e) => e.stopPropagation()}
-          style={{ 
-            maxHeight: '90vh',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden'
+          style={{
+            maxHeight: "90vh",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
           }}
         >
           {/* Header */}
-          <div 
+          <div
             className="bg-white border-b border-gray-200 p-4 flex items-center justify-between rounded-t-2xl"
             style={{ flexShrink: 0 }}
           >
@@ -195,14 +197,14 @@ export const ModalFlavorProduct = ({
           </div>
 
           {/* Contenido - CON SCROLL INTERNO */}
-          <div 
+          <div
             className="p-6 space-y-6"
-            style={{ 
-              flex: '1 1 auto',
-              overflowY: 'auto',
-              overflowX: 'hidden',
-              WebkitOverflowScrolling: 'touch',
-              minHeight: 0
+            style={{
+              flex: "1 1 auto",
+              overflowY: "auto",
+              overflowX: "hidden",
+              WebkitOverflowScrolling: "touch",
+              minHeight: 0,
             }}
           >
             {/* Imagen */}
@@ -220,7 +222,9 @@ export const ModalFlavorProduct = ({
             {/* Precio */}
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-3xl font-bold text-gray-900">${unitPrice.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-gray-900">
+                  ${unitPrice.toLocaleString()}
+                </p>
                 <p className="text-sm text-gray-500">Sin impuestos</p>
               </div>
             </div>
@@ -235,7 +239,9 @@ export const ModalFlavorProduct = ({
             {/* Selector de Sabores */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-gray-900">Sabores de Helado</h3>
+                <h3 className="font-semibold text-gray-900">
+                  Sabores de Helado
+                </h3>
                 <button
                   onClick={() => setShowFlavorSelector(!showFlavorSelector)}
                   className="text-sm px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors font-medium"
@@ -247,10 +253,12 @@ export const ModalFlavorProduct = ({
               {/* Sabores seleccionados */}
               {selectedFlavors.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {selectedFlavors.map(slug => {
-                    const flavor = filteredFlavors.find(f => productNameToSlug(f.name) === slug);
+                  {selectedFlavors.map((slug) => {
+                    const flavor = filteredFlavors.find(
+                      (f) => productNameToSlug(f.name) === slug,
+                    );
                     return (
-                      <span 
+                      <span
                         key={slug}
                         className="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
                       >
@@ -264,22 +272,24 @@ export const ModalFlavorProduct = ({
 
               {/* Info de sabores */}
               <p className="text-xs text-gray-500">
-                {selectedFlavors.length} de hasta {maxFlavors} sabores seleccionados
+                {selectedFlavors.length} de hasta {maxFlavors} sabores
+                seleccionados
               </p>
 
               {/* Lista de sabores desplegable */}
               {showFlavorSelector && (
-                <div 
+                <div
                   className="border border-gray-200 rounded-lg"
-                  style={{ 
-                    maxHeight: '300px',
-                    overflowY: 'auto'
+                  style={{
+                    maxHeight: "300px",
+                    overflowY: "auto",
                   }}
                 >
                   {filteredFlavors.map((flavor) => {
                     const slug = productNameToSlug(flavor.name);
                     const isSelected = selectedFlavors.includes(slug);
-                    const isDisabled = selectedFlavors.length >= maxFlavors && !isSelected;
+                    const isDisabled =
+                      selectedFlavors.length >= maxFlavors && !isSelected;
 
                     return (
                       <label
@@ -291,7 +301,9 @@ export const ModalFlavorProduct = ({
                         <input
                           type="checkbox"
                           checked={isSelected}
-                          onChange={() => !isDisabled && handleFlavorToggle(flavor.name)}
+                          onChange={() =>
+                            !isDisabled && handleFlavorToggle(flavor.name)
+                          }
                           disabled={isDisabled}
                           className="w-5 h-5 rounded border-gray-300 text-pink-500 focus:ring-pink-500"
                         />
@@ -334,7 +346,7 @@ export const ModalFlavorProduct = ({
           </div>
 
           {/* Footer */}
-          <div 
+          <div
             className="bg-white border-t border-gray-200 p-4 rounded-b-2xl"
             style={{ flexShrink: 0 }}
           >

@@ -47,7 +47,7 @@ export const ChooseYourFlavor = ({
           return (
             <div
               key={flavor.id}
-              className={`product-list_item flex-col rounded-lg transition-all relative ${
+              className={`product-list_item flex rounded-lg transition-all relative ${
                 isSelected
                   ? "ring-4 ring-green-500 shadow-lg bg-green-50"
                   : isMaxReached
@@ -55,7 +55,6 @@ export const ChooseYourFlavor = ({
                     : "hover:shadow-md"
               }`}
             >
-              {/* Badge de seleccionado */}
               {isSelected && (
                 <div className="absolute top-2 right-2 z-20 bg-green-500 rounded-full p-1">
                   <CheckCircle2 className="w-6 h-6 text-white" />
@@ -76,7 +75,7 @@ export const ChooseYourFlavor = ({
               </div>
 
               {/* Info del sabor */}
-              <div className="flex flex-col gap-2 text-left w-full">
+              <div className="flex flex-col gap-2 text-left w-full  justify-center">
                 <div className="product-list_name">
                   <h3 className="text-base">{flavor.name}</h3>
                 </div>
@@ -84,7 +83,6 @@ export const ChooseYourFlavor = ({
                   <p className="text-xs">{flavor.description}</p>
                 </div>
 
-                {/* BOTÓN PARA AGREGAR/QUITAR */}
                 <Button
                   type="button"
                   onClick={() => handleFlavorClick(flavor)}

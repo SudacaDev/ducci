@@ -1,12 +1,16 @@
 /**
 products
 **/
-
+.aside_filter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding-bottom: 24px;
+}
 .aside_filter-title {
-  min-height: 80px;
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+  gap: 24px;
 }
 .aside_filter-title h3 {
   font-family: var(--font-poppins);
@@ -38,7 +42,7 @@ products
 }
 #product {
   display: grid;
-  grid-template-columns: 240px 1fr;
+
   gap: 2em;
 }
 
@@ -69,6 +73,9 @@ products
 
   .product-aside.active {
     left: 0;
+    .aside_filter-content-ul {
+      flex-direction: column;
+    }
   }
 
   .product-aside.show {
@@ -120,8 +127,8 @@ products
 }
 
 .product-list_image {
-  height: 200px;
-    width: 100%;
+  height: 150px;
+  width: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,6 +174,7 @@ products
   min-height: 50px;
   position: relative;
   z-index: 1;
+  font-size: 14px;
 }
 
 .product-list_desc p {
@@ -498,8 +506,7 @@ products
 end products
 **/
 
-
-.modal-img{
+.modal-img {
   position: relative;
   width: 180px;
   height: 180px;

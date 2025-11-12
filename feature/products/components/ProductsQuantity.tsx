@@ -2,6 +2,7 @@ import { Product } from "@/types/product.type";
 import { Lock, Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useCurrency } from "@/hooks/useCurrency";
 
 interface ProductsQuantityProps {
   viewMode: string;
@@ -19,6 +20,8 @@ export const ProductsQuantity = ({
   handleQuantityChange,
   handleAddQuantityProduct,
 }: ProductsQuantityProps) => {
+  const { formatPrice } = useCurrency();
+
   return (
     <div className="mb-8">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">
@@ -29,7 +32,7 @@ export const ProductsQuantity = ({
       </p>
 
       <div
-        className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 2xl:grid-cols-4 " : "grid-cols-1"}`}
+        className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 " : "grid-cols-1"}`}
       >
         {quantityProducts.map((item) => {
           const quantity = tempQuantities[item.id] || 1;
@@ -37,7 +40,7 @@ export const ProductsQuantity = ({
           return (
             <div
               key={item.id}
-              className={`product-list_item flex-col rounded-lg transition-all relative ${
+              className={`product-list_item flex rounded-lg transition-all relative ${
                 !selectedBranchId ? "opacity-50" : ""
               }`}
             >
@@ -59,7 +62,7 @@ export const ProductsQuantity = ({
                 </figure>
               </div>
 
-              <div className="flex flex-col gap-2 text-left w-full">
+              <div className="flex flex-col gap-2 text-left w-full  justify-center">
                 <div className="product-list_name">
                   <h3>{item.name}</h3>
                 </div>
@@ -68,7 +71,7 @@ export const ProductsQuantity = ({
                 </div>
                 <div className="mt-2 flex items-center justify-between">
                   <p className="text-xl font-bold text-orange-600">
-                    ${item.price}
+                    {formatPrice(item.price)}
                   </p>
                   <p className="text-sm text-gray-600">c/u</p>
                 </div>

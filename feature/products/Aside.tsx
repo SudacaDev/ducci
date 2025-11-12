@@ -14,12 +14,7 @@ const Aside = () => {
   } = useProducts();
 
   return (
-    <aside
-      className={`
-          product-aside
-          ${openFilter ? "active" : ""}
-        `}
-    >
+    <aside className={` product-aside  ${openFilter ? "active" : ""}`}>
       <div className="flex justify-between items-center mb-4 md:hidden">
         <h2 className="text-xl font-semibold">Filtros</h2>
         <Button
@@ -33,12 +28,12 @@ const Aside = () => {
         </Button>
       </div>
 
-      <div className="">
+      <div className="aside_filter">
         <div className="aside_filter-title">
           <h3 className="font-semibold text-lg">Categorías</h3>
         </div>
         <div className="aside_filter-content">
-          <ul className="aside_filter-content-ul flex flex-col gap-2">
+          <ul className="aside_filter-content-ul flex gap-2">
             {CATEGORIES.map((category) => (
               <li key={category.id}>
                 <button

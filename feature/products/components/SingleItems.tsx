@@ -4,31 +4,34 @@ import { Product } from "@/types/product.type";
 import { Lock, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 
-interface ProductBoxesProps {
-  boxes: Product[];
-  selectedBranchId: number | null;
-  handleAddBox: (item: Product) => void;
+interface SingleItemsProps {
   viewMode: "grid" | "list";
+  singleItems: Product[];
+  selectedBranchId: number | null;
+  handleAddSingleItem: (item: Product) => void;
 }
 
-export const ProductBoxes = ({
-  boxes,
-  selectedBranchId,
-  handleAddBox,
+const SingleItems = ({
   viewMode,
-}: ProductBoxesProps) => {
+  singleItems,
+  selectedBranchId,
+  handleAddSingleItem,
+}: SingleItemsProps) => {
   const { formatPrice } = useCurrency();
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Cajas</h2>
-      <p className="text-sm text-gray-600 mb-4">
-        Packs especiales con descuento
-      </p>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        Tortas y especiales
+      </h2>
 
       <div
-        className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 " : "grid-cols-1"}`}
+        className={`grid gap-4 ${
+          viewMode === "grid"
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
+            : "grid-cols-1"
+        }`}
       >
-        {boxes.map((item) => (
+        {singleItems.map((item) => (
           <div
             key={item.id}
             className={`product-list_item flex rounded-lg transition-all relative ${
@@ -40,10 +43,6 @@ export const ProductBoxes = ({
                 <Lock className="w-6 h-6 text-white" />
               </div>
             )}
-
-            <div className="absolute top-2 left-2 z-20 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-              x{item.config?.boxQuantity}
-            </div>
 
             <div className="product-list_image inset-shadow-sm rounded-md">
               <figure>
@@ -57,7 +56,7 @@ export const ProductBoxes = ({
               </figure>
             </div>
 
-            <div className="flex flex-col gap-2 text-left w-full  justify-center">
+            <div className="flex flex-col gap-2 text-left w-full justify-center">
               <div className="product-list_name">
                 <h3>{item.name}</h3>
               </div>
@@ -72,7 +71,7 @@ export const ProductBoxes = ({
 
               <Button
                 type="button"
-                onClick={() => handleAddBox(item)}
+                onClick={() => handleAddSingleItem(item)}
                 disabled={!selectedBranchId}
                 className="w-full mt-3 bg-[var(--secondary-color)] hover:bg-[var(--secondary-color)]/90 text-white gap-2"
               >
@@ -86,4 +85,4 @@ export const ProductBoxes = ({
     </div>
   );
 };
-export default ProductBoxes;
+export default SingleItems;
