@@ -144,10 +144,7 @@ const ProductsList = () => {
   // Reset cantidad a 1
   setTempQuantities({ ...tempQuantities, [item.id]: 1 });
 };
-
-  // ==========================================
-  // MANEJO DE PRODUCTOS ÚNICOS Y CAJAS
-  // ==========================================
+ 
   const handleAddSingleItem = (item: Product) => {
     if (!selectedBranchId) {
       toast.error("Primero selecciona una sucursal", { duration: 2000 });
@@ -168,9 +165,7 @@ const ProductsList = () => {
     toast.success(`${item.name} agregado al carrito`, { duration: 2000 });
   };
 
-  // ==========================================
-  // SEPARAR PRODUCTOS POR TIPO
-  // ==========================================
+ 
   const flavorProducts = filteredProducts.filter(p => p.type === "flavor-selection" && p.price > 0);
   const quantityProducts = filteredProducts.filter(p => p.type === "quantity-selection");
   const singleItems = filteredProducts.filter(p => p.type === "single-item");
@@ -187,9 +182,7 @@ const ProductsList = () => {
     <>
       <ViewToggle />
 
-      {/* ========================================
-          PANEL DE ARMADO (si hay draft activo)
-          ======================================== */}
+      
       {currentDraft && currentDraft.type === "flavor-selection" && (
         <div className="order-wrapper-timeline rounded-lg p-6 mb-6" id="flavor-draft-panel">
           <div className="flex items-center justify-between mb-4">
@@ -229,7 +222,7 @@ const ProductsList = () => {
           )}
 
           {/* Botones de acción */}
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button
               type="button"
               onClick={handleConfirmFlavors}
@@ -250,15 +243,13 @@ const ProductsList = () => {
         </div>
       )}
 
-      {/* ========================================
-          SECCIÓN 1: PRODUCTOS CON SABORES
-          ======================================== */}
+     
       {flavorProducts.length > 0 && (
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">🍦 Helados por peso</h2>
           <p className="text-sm text-gray-600 mb-4">Selecciona el tamaño y luego elige tus sabores favoritos</p>
           
-          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1"}`}>
+          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 2xl:grid-cols-4" : "grid-cols-1"}`}>
             {flavorProducts.map((item) => {
               const isActive = currentDraft?.type === "flavor-selection" && currentDraft.productId === item.id;
               
@@ -332,7 +323,7 @@ const ProductsList = () => {
             </p>
           </div>
 
-          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1"}`}>
+          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 2xl:grid-cols-4 mx-4 " : "grid-cols-1"}`}>
             {availableFlavors.map((flavor) => {
               const isSelected = isFlavorSelected(flavor.name);
               const isMaxReached = currentDraft.selectedFlavors.length >= currentDraft.maxFlavors && !isSelected;
@@ -392,7 +383,7 @@ const ProductsList = () => {
           <h2 className="text-2xl font-bold mb-4 text-gray-800">🍫 Productos individuales</h2>
           <p className="text-sm text-gray-600 mb-4">Selecciona la cantidad que desees</p>
           
-          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
+          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 2xl:grid-cols-4 " : "grid-cols-1"}`}>
             {quantityProducts.map((item) => {
               const quantity = tempQuantities[item.id] || 1;
               
@@ -485,7 +476,7 @@ const ProductsList = () => {
           <h2 className="text-2xl font-bold mb-4 text-gray-800">📦 Cajas</h2>
           <p className="text-sm text-gray-600 mb-4">Packs especiales con descuento</p>
           
-          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
+          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 2xl:grid-cols-4" : "grid-cols-1"}`}>
             {boxes.map((item) => (
               <div
                 key={item.id}
@@ -549,7 +540,7 @@ const ProductsList = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">🎂 Tortas y especiales</h2>
           
-          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
+          <div className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 " : "grid-cols-1"}`}>
             {singleItems.map((item) => (
               <div
                 key={item.id}

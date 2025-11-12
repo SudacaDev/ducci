@@ -67,6 +67,10 @@ products
     transition: left 300ms ease-out;
   }
 
+  .product-aside.active{
+    left: 0;
+  }
+
   .product-aside.show {
     left: 0;
   }
@@ -406,6 +410,9 @@ products
 
 .order-wrapper-timeline{
   background-color: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 .order-wrapper-label{
   color: var(--secondary-color-dark);

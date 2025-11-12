@@ -12,11 +12,11 @@ import "./styles/products.css";
 
 const ProductsPageContent = () => {
   return (
-    <div id="product-wrapper" className="h-full overflow-hidden ">
+    <div id="product-wrapper" className="h-full  ">
       <InnerLayout bannerTitle="Nuestros Productos">
         <Product>
           <Aside />
-          <div className="flex flex-col">
+          <div className="flex flex-col relatve">
             
             <OrderSelector /> 
             <ProductsList />
