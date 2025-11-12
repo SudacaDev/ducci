@@ -3,6 +3,7 @@
 import { useProducts } from "@/components/products/Product";
 import { Button } from "@/components/ui/button";
 import { SIZE_CONFIG, type IceCreamSize } from "@/types/order.type";
+import { Lock } from "lucide-react";
 import toast from "react-hot-toast";
 
 const SizeSelector = () => {
@@ -29,11 +30,40 @@ const SizeSelector = () => {
     });
   };
 
+  // Si no hay sucursal seleccionada, mostrar mensaje bloqueado
+  if (!selectedBranchId) {
+    return (
+      <div className="bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 p-8 mb-6 text-center">
+        <Lock className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+        <p className="text-gray-600 font-medium text-lg">
+          Primero debes seleccionar una sucursal arriba ☝️
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white rounded-lg shadow-sm   p-6 mb-6">
-      <h3 className="text-xl font-semibold mb-4">
-        {currentDraft ? "Termina tu pedido actual o agregar otro tamaño" : "Selecciona el tamaño"}
-      </h3>
+    <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="bg-[var(--secondary-color)] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">
+          2
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">
+            {currentDraft ? "Termina tu pedido actual para agregar otro tamaño" : "Selecciona el tamaño"}
+          </h3>
+          <p className="text-gray-600 text-sm">Elige cuánto helado quieres llevar</p>
+        </div>
+      </div>
+
+      {currentDraft && (
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded">
+          <p className="text-blue-800 font-medium text-sm">
+            ⚠️ Ya tienes un pedido en proceso. Confírmalo o cancélalo primero.
+          </p>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {(Object.keys(SIZE_CONFIG) as IceCreamSize[]).map((size) => {
           const config = SIZE_CONFIG[size];

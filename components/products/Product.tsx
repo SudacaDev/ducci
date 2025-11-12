@@ -210,27 +210,26 @@ const ProductProvider = ({ children }: ProductProps) => {
   };
 
   const confirmCurrentOrder = () => {
-    if (!currentDraft) return;
+  if (!currentDraft) return;
 
-    // Validar que tenga al menos un sabor
-    if (currentDraft.selectedFlavors.length === 0) {
-      return;
-    }
+  // Validar que tenga al menos un sabor
+  if (currentDraft.selectedFlavors.length === 0) {
+    return;
+  }
 
-    // Agregar a pedidos confirmados
-    const newConfirmedOrders = [...confirmedOrders, currentDraft];
-    setConfirmedOrdersState(newConfirmedOrders);
+  // Agregar a pedidos confirmados
+  const newConfirmedOrders = [...confirmedOrders, currentDraft];
+  setConfirmedOrdersState(newConfirmedOrders);
 
-    // Limpiar borrador
-    setCurrentDraft(null);
+  // Limpiar borrador - ESTO RESETEA EL SELECT
+  setCurrentDraft(null);
 
-    // Actualizar URL
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: ordersToURLString(newConfirmedOrders),
-    });
-  };
-
+  // Actualizar URL
+  updateURL({
+    "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
+    orders: ordersToURLString(newConfirmedOrders),
+  });
+};
   const cancelCurrentOrder = () => {
     setCurrentDraft(null);
   };

@@ -159,7 +159,7 @@ export const PROD: Product[] = [
     },
   },
   {
-    id: 13,
+    id: 130,
     name: "Frambuesa",
     price: 1080,
     category: "frutales",
