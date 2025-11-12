@@ -496,3 +496,14 @@ products
 /**
 end products
 **/
+
+
+.modal-img{
+  position: relative;
+  width: 180px;
+  height: 180px;
+  @media screen and (max-width: 768px) {
+    width: 92px;
+    height: 92px;
+  }
+}

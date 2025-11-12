@@ -11,14 +11,8 @@ import {
 import { usePathname, useSearchParams } from "next/navigation";
 import { PROD } from "@/constants/prod";
 import type { Product as ProductType } from "@/types/product.type";
-import type {
-  Order,
-  FlavorOrder,
-  QuantityOrder,
-  SingleItemOrder,
-  BoxOrder,
-  IceCreamSize,
-} from "@/types/order.type";
+import type { Order, FlavorOrder, QuantityOrder, SingleItemOrder, BoxOrder, IceCreamSize } from "@/types/order.type";
+
 import { SIZE_CONFIG } from "@/types/order.type";
 
 export interface ProductsContextType {
@@ -29,8 +23,8 @@ export interface ProductsContextType {
   sortOrder: "asc" | "desc" | "none";
   openFilter: boolean;
   selectedBranchId: number | null;
-  confirmedOrders: Order[]; // Pedidos confirmados en el carrito
-  currentDraft: Order | null; // Borrador del pedido actual
+  confirmedOrders: Order[];
+  currentDraft: Order | null;
 
   setSelectedCategory: (category: string) => void;
   setViewMode: (mode: "grid" | "list") => void;
@@ -41,6 +35,7 @@ export interface ProductsContextType {
   startFlavorOrder: (product: ProductType) => void;
   addFlavorToDraft: (flavorSlug: string) => void;
   removeFlavorFromDraft: (flavorSlug: string) => void;
+  addMultipleFlavorOrders: (product: ProductType, selectedFlavors: string[], quantity: number) => void; // ← AGREGAR ESTA LÍNEA
 
   // Para productos con cantidad
   startQuantityOrder: (product: ProductType, quantity: number) => void;
@@ -416,6 +411,51 @@ const ProductProvider = ({ children }: ProductProps) => {
     });
   };
 
+
+ // ==========================================
+// AGREGAR MÚLTIPLES ÓRDENES DE SABORES
+// ==========================================
+const addMultipleFlavorOrders = (product: ProductType, selectedFlavors: string[], quantity: number) => {
+  if (product.type !== "flavor-selection") return;
+  if (quantity <= 0) return;
+  
+  const getSizeFromProduct = (prod: ProductType): IceCreamSize => {
+    if (prod.name.includes("1 Kilo") || prod.name.includes("1kg")) return "1";
+    if (prod.name.includes("1/2 Kilo") || prod.name.includes("1/2kg")) return "1/2";
+    if (prod.name.includes("1/4 Kilo") || prod.name.includes("1/4kg")) return "1/4";
+    if (prod.name.includes("1 Bocha")) return "1-bocha";
+    if (prod.name.includes("2 Bochas")) return "2-bochas";
+    if (prod.name.includes("3 Bochas")) return "3-bochas";
+    return "1";
+  };
+
+  const newOrders: FlavorOrder[] = [];
+  
+  // Crear múltiples órdenes
+  for (let i = 0; i < quantity; i++) {
+    const newOrder: FlavorOrder = {
+      id: `order-${Date.now()}-${i}-${Math.random().toString(36).substr(2, 9)}`,
+      type: "flavor-selection",
+      productId: product.id,
+      productName: product.name,
+      size: getSizeFromProduct(product),
+      maxFlavors: product.config?.maxFlavors || 1,
+      price: product.price,
+      selectedFlavors: selectedFlavors,
+    };
+    newOrders.push(newOrder);
+  }
+
+  // Agregar todas las órdenes
+  const updatedOrders = [...confirmedOrders, ...newOrders];
+  setConfirmedOrdersState(updatedOrders);
+
+  // Actualizar URL
+  updateURL({
+    "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
+    orders: ordersToURLString(updatedOrders),
+  });
+};
   // ==========================================
   // GENERALES
   // ==========================================
@@ -497,32 +537,33 @@ const ProductProvider = ({ children }: ProductProps) => {
   });
 
   const value = {
-    products: PROD,
-    filteredProducts,
-    selectedCategory,
-    viewMode,
-    sortOrder,
-    selectedBranchId,
-    confirmedOrders,
-    currentDraft,
-    setSelectedCategory,
-    setViewMode,
-    setSortOrder,
-    openFilterToggle,
-    openFilter,
-    startFlavorOrder,
-    addFlavorToDraft,
-    removeFlavorFromDraft,
-    startQuantityOrder,
-    updateQuantityOrder,
-    addSingleItemOrder,
-    addBoxOrder,
-    confirmCurrentOrder,
-    cancelCurrentOrder,
-    removeConfirmedOrder,
-    setBranchId,
-    clearCart,
-  };
+  products: PROD,
+  filteredProducts,
+  selectedCategory,
+  viewMode,
+  sortOrder,
+  selectedBranchId,
+  confirmedOrders,
+  currentDraft,
+  setSelectedCategory,
+  setViewMode,
+  setSortOrder,
+  openFilterToggle,
+  openFilter,
+  startFlavorOrder,
+  addFlavorToDraft,
+  removeFlavorFromDraft,
+  addMultipleFlavorOrders, // ← AGREGAR ESTA LÍNEA
+  startQuantityOrder,
+  updateQuantityOrder,
+  addSingleItemOrder,
+  addBoxOrder,
+  confirmCurrentOrder,
+  cancelCurrentOrder,
+  removeConfirmedOrder,
+  setBranchId,
+  clearCart,
+};
 
   return (
     <ProductsContext.Provider value={value}>

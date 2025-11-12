@@ -1,7 +1,7 @@
 "use client";
 
 import { useProducts } from "@/components/products/Product";
-import { CheckCircle2, Lock, Package, ShoppingCart } from "lucide-react";
+import { Lock, Package, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import type { Product } from "@/types/product.type";
@@ -14,6 +14,8 @@ import ProductsQuantity from "./components/ProductsQuantity";
 import ProductBoxes from "./components/ProductBoxes";
 import FlavorProducts from "./components/FlavorProducts";
 import CurrentDraft from "./components/CurrentDraft";
+import ModalFlavorProduct from "./components/ModalFlavorProduct";
+import { FlavorOrder, IceCreamSize } from "@/types/order.type";
 
 const ProductsList = () => {
   const {
@@ -25,17 +27,67 @@ const ProductsList = () => {
     addFlavorToDraft,
     removeFlavorFromDraft,
     startQuantityOrder,
-    updateQuantityOrder,
     addSingleItemOrder,
     addBoxOrder,
     confirmCurrentOrder,
     cancelCurrentOrder,
+    addMultipleFlavorOrders,
   } = useProducts();
 
   // Estado local para cantidades temporales
-  const [tempQuantities, setTempQuantities] = useState<Record<number, number>>(
-    {},
+  const [tempQuantities, setTempQuantities] = useState<Record<number, number>>({});
+
+  // ============================================
+  // ESTADOS PARA EL MODAL
+  // ============================================
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  // ============================================
+  // ABRIR MODAL
+  // ============================================
+  const handleOpenModal = (product: Product) => {
+    if (!selectedBranchId) {
+      toast.error("Primero selecciona una sucursal", { duration: 2000 });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  // ============================================
+  // CERRAR MODAL
+  // ============================================
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  // ============================================
+  // CONFIRMAR DESDE EL MODAL
+  // ============================================
+const handleConfirmFromModal = (selectedFlavors: string[], quantity: number) => {
+  if (!selectedProduct) return;
+
+  // Usar la nueva función del contexto
+  addMultipleFlavorOrders(selectedProduct, selectedFlavors, quantity);
+
+  toast.success(
+    `${quantity} ${selectedProduct.name} agregado${quantity > 1 ? 's' : ''} al carrito`,
+    { duration: 2000 }
   );
+};
+
+const getSizeFromProduct = (product: Product): IceCreamSize => {
+  if (product.name.includes("1 Kilo") || product.name.includes("1kg")) return "1";
+  if (product.name.includes("1/2 Kilo") || product.name.includes("1/2kg")) return "1/2";
+  if (product.name.includes("1/4 Kilo") || product.name.includes("1/4kg")) return "1/4";
+  if (product.name.includes("1 Bocha")) return "1-bocha";
+  if (product.name.includes("2 Bochas")) return "2-bochas";
+  if (product.name.includes("3 Bochas")) return "3-bochas";
+  return "1";
+};
 
   const productNameToSlug = (name: string) => {
     return name
@@ -47,7 +99,7 @@ const ProductsList = () => {
   };
 
   // ==========================================
-  // MANEJO DE PRODUCTOS CON SABORES
+  // MANEJO DE PRODUCTOS CON SABORES (VIEJO FLUJO - MANTENER POR AHORA)
   // ==========================================
   const handleFlavorProductClick = (item: Product) => {
     if (!selectedBranchId) {
@@ -170,6 +222,9 @@ const ProductsList = () => {
     setTempQuantities({ ...tempQuantities, [item.id]: 1 });
   };
 
+  // ==========================================
+  // MANEJO DE PRODUCTOS ÚNICOS Y CAJAS
+  // ==========================================
   const handleAddSingleItem = (item: Product) => {
     if (!selectedBranchId) {
       toast.error("Primero selecciona una sucursal", { duration: 2000 });
@@ -190,6 +245,9 @@ const ProductsList = () => {
     toast.success(`${item.name} agregado al carrito`, { duration: 2000 });
   };
 
+  // ==========================================
+  // SEPARAR PRODUCTOS POR TIPO
+  // ==========================================
   const flavorProducts = filteredProducts.filter(
     (p) => p.type === "flavor-selection" && p.price > 0,
   );
@@ -211,30 +269,47 @@ const ProductsList = () => {
     <>
       <ViewToggle />
 
-      
-
-      {currentDraft && currentDraft.type === "flavor-selection" && (
-        <CurrentDraft 
-          currentDraft={currentDraft} 
-          availableFlavors={availableFlavors} 
-          productNameToSlug={productNameToSlug} 
-          handleCancelFlavors={handleCancelFlavors} 
-          handleConfirmFlavors={handleConfirmFlavors} 
+      {/* ============================================
+          MODAL DE SABORES
+          ============================================ */}
+      <ModalFlavorProduct
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        product={selectedProduct}
+        availableFlavors={availableFlavors}
+        selectedBranchId={selectedBranchId}
+        onConfirm={handleConfirmFromModal}
       />
-       
+
+      {/* ============================================
+          PANEL DE ARMADO (VIEJO FLUJO)
+          ============================================ */}
+      {currentDraft && currentDraft.type === "flavor-selection" && (
+        <CurrentDraft
+          currentDraft={currentDraft}
+          availableFlavors={availableFlavors}
+          productNameToSlug={productNameToSlug}
+          handleCancelFlavors={handleCancelFlavors}
+          handleConfirmFlavors={handleConfirmFlavors}
+        />
       )}
 
+      {/* ============================================
+          SECCIÓN 1: PRODUCTOS CON SABORES
+          ============================================ */}
       {flavorProducts.length > 0 && (
         <FlavorProducts
           currentDraft={currentDraft}
           flavorProducts={flavorProducts}
-          handleFlavorProductClick={handleFlavorProductClick}
+          handleOpenModal={handleOpenModal} // ← CAMBIÉ ESTA LÍNEA
           selectedBranchId={selectedBranchId}
           viewMode="grid"
         />
       )}
 
-     
+      {/* ============================================
+          SECCIÓN 2: SABORES (VIEJO FLUJO)
+          ============================================ */}
       {currentDraft &&
         currentDraft.type === "flavor-selection" &&
         availableFlavors.length > 0 && (
@@ -247,7 +322,9 @@ const ProductsList = () => {
           />
         )}
 
-     
+      {/* ============================================
+          SECCIÓN 3: PRODUCTOS CON CANTIDAD
+          ============================================ */}
       {quantityProducts.length > 0 && (
         <ProductsQuantity
           handleAddQuantityProduct={handleAddQuantityProduct}
@@ -259,6 +336,9 @@ const ProductsList = () => {
         />
       )}
 
+      {/* ============================================
+          SECCIÓN 4: CAJAS
+          ============================================ */}
       {boxes.length > 0 && (
         <ProductBoxes
           boxes={boxes}
@@ -268,9 +348,9 @@ const ProductsList = () => {
         />
       )}
 
-      {/* ========================================
+      {/* ============================================
           SECCIÓN 5: PRODUCTOS ÚNICOS
-          ======================================== */}
+          ============================================ */}
       {singleItems.length > 0 && (
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">
@@ -278,7 +358,11 @@ const ProductsList = () => {
           </h2>
 
           <div
-            className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 " : "grid-cols-1"}`}
+            className={`grid gap-4 ${
+              viewMode === "grid"
+                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
+                : "grid-cols-1"
+            }`}
           >
             {singleItems.map((item) => (
               <div
