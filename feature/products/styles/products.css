@@ -121,6 +121,7 @@ products
 
 .product-list_image {
   height: 200px;
+    width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,7 +134,7 @@ products
 
 .product-list_image figure {
   margin: 0;
-  width: 100%;
+  width: 100dvw;
   height: 100%;
   display: flex;
   align-items: center;
