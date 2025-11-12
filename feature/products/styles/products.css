@@ -477,10 +477,19 @@ products
   width: 100%;
 }
 
+
 .order-selector button{
   width: 100%;
+  border: 1px solid var(--secondary-color) !important;
 }
-
+ 
+.order-selector button span[data-slot] {
+  width: 100%;
+}
+.order-selector button.selected{
+  
+  color: var(--secondary-color);
+}
 /**
 end products
 **/

@@ -72,7 +72,7 @@ const OrderSelector = () => {
             onValueChange={handleBranchChange}
           
           >
-            <SelectTrigger className="h-12 border-2 border-orange-300 bg-white  ">
+            <SelectTrigger className="h-12   bg-white  ">
               <SelectValue placeholder="Elegir sucursal..." />
             </SelectTrigger>
             <SelectContent className="bg-white ">
@@ -106,8 +106,8 @@ const OrderSelector = () => {
                 !selectedBranchId 
                   ? "border-gray-300 bg-gray-100 cursor-not-allowed" 
                   : currentDraft
-                    ? "border-blue-300 bg-blue-50"
-                    : "border-orange-300 bg-white"
+                    ? "selected"
+                    : "bg-white"
               }`}
             >
               <SelectValue placeholder={
@@ -123,7 +123,7 @@ const OrderSelector = () => {
                 
                 return (
                   <SelectItem key={size} value={size}>
-                    <div className="flex justify-between items-center gap-4">
+                    <div className="flex justify-between items-center w-full gap-4">
                       <div className="flex flex-col items-start">
                         <span className="font-semibold">{config.label}</span>
                         <span className="text-xs text-gray-600">
