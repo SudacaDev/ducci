@@ -83,7 +83,7 @@ products
   }
 }
 .place-order{
-  border: 1px solid var(--secondary-color)
+  border: 1px solid var(--primary-color-outline);
 }
 .current-draft{
   color:var(--secondary-color-dark);

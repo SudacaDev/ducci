@@ -6,7 +6,7 @@ import { ShoppingCart, Trash2, ChevronUp, ChevronDown, Send, X } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { BRANCHES } from "@/constants/branches";
 import { PROD } from "@/constants/prod";
-import { SIZE_CONFIG } from "@/types/order.type";
+import type { Order } from "@/types/order.type";
 
 const CartWidget = () => {
   const { confirmedOrders, selectedBranchId, clearCart, removeConfirmedOrder } = useProducts();
@@ -29,28 +29,47 @@ const CartWidget = () => {
     ? BRANCHES.find(b => b.id === selectedBranchId)
     : null;
 
+  // Calcular precio total
   const totalPrice = confirmedOrders.reduce((sum, order) => {
-    const sizeConfig = SIZE_CONFIG[order.size];
-    return sum + (order.pricePerKg * sizeConfig.weight);
+    return sum + order.price * (order.type === "quantity-selection" ? order.quantity : 1);
   }, 0);
+
+  // Función para formatear cada orden según su tipo
+  const formatOrderForWhatsApp = (order: Order, index: number): string => {
+    switch (order.type) {
+      case "flavor-selection": {
+        const flavors = order.selectedFlavors
+          .map(slug => {
+            const product = PROD.find(p => productNameToSlug(p.name) === slug);
+            return product ? product.name : slug;
+          })
+          .join(", ");
+
+        return `Pedido #${index + 1}: ${order.productName}\nSabores: ${flavors || "Sin sabores"}\nPrecio: $${order.price}`;
+      }
+
+      case "quantity-selection":
+        return `Pedido #${index + 1}: ${order.productName} x${order.quantity}\nPrecio unitario: $${order.price}\nSubtotal: $${order.price * order.quantity}`;
+
+      case "single-item":
+        return `Pedido #${index + 1}: ${order.productName}\nPrecio: $${order.price}`;
+
+      case "box":
+        return `Pedido #${index + 1}: ${order.productName} (${order.boxQuantity} unidades)\nPrecio: $${order.price}`;
+
+      default:
+        return "";
+    }
+  };
 
   const handleOrderClick = () => {
     const branchInfo = selectedBranch 
       ? `Sucursal: ${selectedBranch.name} - ${selectedBranch.address}` 
       : "";
     
-    const ordersText = confirmedOrders.map((order, index) => {
-      const sizeConfig = SIZE_CONFIG[order.size];
-      const price = order.pricePerKg * sizeConfig.weight;
-      const flavors = order.selectedFlavors
-        .map(slug => {
-          const product = PROD.find(p => productNameToSlug(p.name) === slug);
-          return product ? product.name : slug;
-        })
-        .join(", ");
-
-      return `Pedido #${index + 1}: ${sizeConfig.label}\nSabores: ${flavors || "Sin sabores"}\nPrecio: $${price}`;
-    }).join("\n\n");
+    const ordersText = confirmedOrders
+      .map((order, index) => formatOrderForWhatsApp(order, index))
+      .join("\n\n");
 
     const message = `¡Hola! Me gustaría hacer un pedido:\n\n${branchInfo}\n\n${ordersText}\n\nTotal: $${totalPrice}\n\n¿Está disponible?`;
 
@@ -58,6 +77,118 @@ const CartWidget = () => {
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, "_blank");
+  };
+
+  // Función para renderizar cada orden según su tipo
+  const renderOrderCard = (order: Order, index: number) => {
+    const commonHeader = (
+      <div className="flex items-start justify-between mb-2">
+        <div className="flex-1">
+          <p className="font-bold text-orange-900">
+            Pedido #{index + 1}
+          </p>
+          <p className="text-sm font-semibold text-orange-800">
+            {order.productName}
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            onClick={() => removeConfirmedOrder(order.id)}
+            className="h-6 w-6 p-0 text-red-600 hover:bg-red-100"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    );
+
+    switch (order.type) {
+      case "flavor-selection":
+        return (
+          <div key={order.id} className="border-2 border-orange-200 rounded-lg p-3 bg-orange-50">
+            {commonHeader}
+            
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs text-orange-700">
+                {order.selectedFlavors.length} sabor(es)
+              </p>
+              <p className="font-bold text-orange-600">${order.price}</p>
+            </div>
+
+            {order.selectedFlavors.length > 0 && (
+              <div className="mt-2 pt-2 border-t border-orange-200">
+                <p className="text-xs font-semibold text-orange-800 mb-1">Sabores:</p>
+                <ul className="text-xs text-orange-700 space-y-1">
+                  {order.selectedFlavors.map(flavorSlug => {
+                    const product = PROD.find(p => productNameToSlug(p.name) === flavorSlug);
+                    return (
+                      <li key={flavorSlug} className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                        {product?.name || flavorSlug}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        );
+
+      case "quantity-selection":
+        return (
+          <div key={order.id} className="border-2 border-orange-200 rounded-lg p-3 bg-orange-50">
+            {commonHeader}
+            
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-orange-700">
+                  Cantidad: <span className="font-semibold">{order.quantity} unidad(es)</span>
+                </p>
+                <p className="text-xs text-orange-600">
+                  ${order.price} c/u
+                </p>
+              </div>
+              <p className="font-bold text-orange-600 text-lg">
+                ${order.price * order.quantity}
+              </p>
+            </div>
+          </div>
+        );
+
+      case "single-item":
+        return (
+          <div key={order.id} className="border-2 border-orange-200 rounded-lg p-3 bg-orange-50">
+            {commonHeader}
+            
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-orange-700">
+                Producto único
+              </p>
+              <p className="font-bold text-orange-600">${order.price}</p>
+            </div>
+          </div>
+        );
+
+      case "box":
+        return (
+          <div key={order.id} className="border-2 border-orange-200 rounded-lg p-3 bg-orange-50">
+            {commonHeader}
+            
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-orange-700">
+                Caja de <span className="font-semibold">{order.boxQuantity} unidades</span>
+              </p>
+              <p className="font-bold text-orange-600">${order.price}</p>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
   };
 
   return (
@@ -91,54 +222,7 @@ const CartWidget = () => {
           )}
 
           <div className="cart-widget__products">
-            {confirmedOrders.map((order, index) => {
-              const sizeConfig = SIZE_CONFIG[order.size];
-              const price = order.pricePerKg * sizeConfig.weight;
-              
-              return (
-                <div key={order.id} className="border-2 border-orange-200 rounded-lg p-3 bg-orange-50">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <p className="font-bold text-orange-900">
-                        Pedido #{index + 1} - {sizeConfig.label}
-                      </p>
-                      <p className="text-xs text-orange-700">
-                        {order.selectedFlavors.length} sabores
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <p className="font-bold text-orange-600">${price}</p>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => removeConfirmedOrder(order.id)}
-                        className="h-6 w-6 p-0 text-red-600 hover:bg-red-100"
-                      >
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {order.selectedFlavors.length > 0 && (
-                    <div className="mt-2 pt-2 border-t border-orange-200">
-                      <p className="text-xs font-semibold text-orange-800 mb-1">Sabores:</p>
-                      <ul className="text-xs text-orange-700 space-y-1">
-                        {order.selectedFlavors.map(flavorSlug => {
-                          const product = PROD.find(p => productNameToSlug(p.name) === flavorSlug);
-                          return (
-                            <li key={flavorSlug} className="flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                              {product?.name || flavorSlug}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+            {confirmedOrders.map((order, index) => renderOrderCard(order, index))}
           </div>
 
           <div className="cart-widget__total">
