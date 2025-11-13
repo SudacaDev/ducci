@@ -137,6 +137,7 @@ products
   border-radius: 0.375rem;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .product-list_image figure {
@@ -162,7 +163,7 @@ products
 }
 
 .product-list_name {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 24px;
   font-weight: 700;
   position: relative;

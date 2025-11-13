@@ -1,3 +1,6 @@
+// ============================================
+// BASE TYPES
+// ============================================
 export type IceCreamSize =
   | "1/4"
   | "1/2"
@@ -6,46 +9,61 @@ export type IceCreamSize =
   | "2-bochas"
   | "3-bochas";
 
-export interface FlavorOrder {
+type BaseOrder = {
   id: string;
-  type: "flavor-selection";
   productId: number;
   productName: string;
+  price: number;
+};
+
+// ============================================
+// ORDER TYPES
+// ============================================
+export type FlavorOrder = BaseOrder & {
+  type: "flavor-selection";
   size: IceCreamSize;
   maxFlavors: number;
-  price: number;
   selectedFlavors: string[];
-}
+};
 
-export interface QuantityOrder {
-  id: string;
+export type QuantityOrder = BaseOrder & {
   type: "quantity-selection";
-  productId: number;
-  productName: string;
-  price: number;
   quantity: number;
-}
+};
 
-export interface SingleItemOrder {
-  id: string;
+export type SingleItemOrder = BaseOrder & {
   type: "single-item";
-  productId: number;
-  productName: string;
-  price: number;
-}
+};
 
-export interface BoxOrder {
-  id: string;
+export type BoxOrder = BaseOrder & {
   type: "box";
-  productId: number;
-  productName: string;
-  price: number;
   boxQuantity: number;
-}
+};
 
 export type Order = FlavorOrder | QuantityOrder | SingleItemOrder | BoxOrder;
 
-export const SIZE_CONFIG = {
+// ============================================
+// UTILITY TYPES
+// ============================================
+// Solo órdenes con sabores
+export type OrderWithFlavors = Extract<Order, { selectedFlavors: string[] }>;
+
+// Órdenes sin cantidad
+export type OrderWithoutQuantity = Exclude<Order, QuantityOrder>;
+
+// Info mínima de orden para el carrito
+export type OrderSummary = Pick<Order, "id" | "productName" | "price">;
+
+// ============================================
+// SIZE CONFIGURATION
+// ============================================
+type SizeConfig = {
+  maxFlavors: number;
+  label: string;
+  weight: number;
+};
+
+export const SIZE_CONFIG: Record<IceCreamSize, SizeConfig> = {
   "1/4": { maxFlavors: 3, label: "1/4 Kilo", weight: 0.25 },
   "1/2": { maxFlavors: 3, label: "1/2 Kilo", weight: 0.5 },
   "1": { maxFlavors: 4, label: "1 Kilo", weight: 1 },

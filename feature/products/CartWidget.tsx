@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useProducts } from "@/components/products/Product";
+ 
 import {
   ShoppingCart,
   Trash2,
@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { BRANCHES } from "@/constants/branches";
 import { PROD } from "@/constants/prod";
 import type { Order } from "@/types/order.type";
+import { useProducts } from "@/components/products/ProductContext";
 
 const CartWidget = () => {
   const { confirmedOrders, selectedBranchId, clearCart, removeConfirmedOrder } =

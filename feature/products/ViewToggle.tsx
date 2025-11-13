@@ -2,7 +2,7 @@
 
 import { LayoutGrid, LayoutList, ListFilter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useProducts } from "@/components/products/Product";
+ 
 import {
   Select,
   SelectTrigger,
@@ -10,6 +10,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { useProducts } from "@/components/products/ProductContext";
 
 interface ViewToogleProps {
   hasButtons?: boolean;
