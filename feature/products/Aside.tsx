@@ -5,11 +5,11 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/constants/prod";
 import { useProducts } from "@/components/products/ProductContext";
+import CategoryFilter from "@/components/products/CategoryFilter";
 
 const Aside = () => {
   const {
-    selectedCategory,
-    setSelectedCategory,
+    
     openFilter,
     openFilterToggle,
   } = useProducts();
@@ -33,25 +33,8 @@ const Aside = () => {
         <div className="aside_filter-title">
           <h3 className="font-semibold text-lg">Categorías</h3>
         </div>
-        <div className="aside_filter-content">
-          <ul className="aside_filter-content-ul flex gap-2">
-            {CATEGORIES.map((category) => (
-              <li key={category.id}>
-                <button
-                  type="button"
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`w-full text-left px-3 py-2 rounded transition-colors ${
-                    selectedCategory === category.id
-                      ? "bg-[var(--secondary-color)] text-[var(--secondary-foreground)] font-semibold active"
-                      : "hover:bg-gray-100"
-                  }`}
-                >
-                  {category.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <CategoryFilter />
+         
       </div>
     </aside>
   );

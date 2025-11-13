@@ -1,32 +1,22 @@
 "use client";
 
-import { ReactNode, Suspense, useState, useEffect, useMemo } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useProductsDB } from "@/hooks/useProducts";
 import { useFlavorsDB } from "@/hooks/useFlavors";
 import { ProductsContext } from "./ProductContext";
 import { parseOrdersFromURL, ordersToURLString } from "./utils/orderParsers";
-import { getSizeFromProduct, filterProducts } from "./utils/orderHelpers";
+import { getSizeFromProduct } from "./utils/orderHelpers";
 import type { Product as ProductType } from "@/types/product.type";
-import type { Order, FlavorOrder, QuantityOrder, SingleItemOrder, BoxOrder, IceCreamSize } from "@/types/order.type";
+import type { Order, FlavorOrder, QuantityOrder, SingleItemOrder, BoxOrder } from "@/types/order.type";
 
 interface ProductProps {
   children: ReactNode;
 }
 
-const ProductProvider = ({ children }: ProductProps) => {
+const Product = ({ children }: ProductProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  // ============================================
-  // FETCH DATA
-  // ============================================
-  const { products: productsFromDB, loading: productsLoading, error: productsError } = useProductsDB();
-  const { flavors: flavorsFromDB, loading: flavorsLoading, error: flavorsError } = useFlavorsDB();
-
-  const loading = productsLoading || flavorsLoading;
-  const error = productsError || flavorsError;
-  const allProducts = useMemo(() => [...productsFromDB, ...flavorsFromDB], [productsFromDB, flavorsFromDB]);
 
   // ============================================
   // URL PARAMS
@@ -38,13 +28,44 @@ const ProductProvider = ({ children }: ProductProps) => {
   const branchIdParam = searchParams.get("branch-id");
   const ordersParam = searchParams.get("orders");
 
-  // ============================================
-  // LOCAL STATE
-  // ============================================
   const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(
     branchIdParam ? parseInt(branchIdParam) : null
   );
 
+  // ============================================
+  // FETCH DATA CON FILTROS EN LA BD
+  // ============================================
+  const {
+    products: productsFromDB,
+    loading: productsLoading,
+    error: productsError,
+    refetch: refetchProducts,
+  } = useProductsDB({
+    categorySlug: selectedCategory,
+    branchId: selectedBranchId,
+    sortOrder: sortOrder,
+  });
+
+  const {
+    flavors: flavorsFromDB,
+    loading: flavorsLoading,
+    error: flavorsError,
+    refetch: refetchFlavors,
+  } = useFlavorsDB({
+    categorySlug: selectedCategory,
+    branchId: selectedBranchId,
+  });
+
+  const loading = productsLoading || flavorsLoading;
+  const error = productsError || flavorsError;
+
+  // Ya vienen filtrados de la BD
+  const filteredProducts = productsFromDB;
+  const allFlavors = flavorsFromDB;
+
+  // ============================================
+  // LOCAL STATE
+  // ============================================
   const [confirmedOrders, setConfirmedOrdersState] = useState<Order[]>(
     parseOrdersFromURL(ordersParam)
   );
@@ -67,7 +88,14 @@ const ProductProvider = ({ children }: ProductProps) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
 
     Object.entries(params).forEach(([key, value]) => {
-      if (value === null || value === "todos" || value === "grid" || value === "none" || value === "closed" || value === "") {
+      if (
+        value === null ||
+        value === "todos" ||
+        value === "grid" ||
+        value === "none" ||
+        value === "closed" ||
+        value === ""
+      ) {
         current.delete(key);
       } else {
         current.set(key, value);
@@ -76,7 +104,7 @@ const ProductProvider = ({ children }: ProductProps) => {
 
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    window.history.replaceState({}, '', `${pathname}${query}`);
+    window.history.replaceState({}, "", `${pathname}${query}`);
   };
 
   // ============================================
@@ -140,11 +168,15 @@ const ProductProvider = ({ children }: ProductProps) => {
 
     setCurrentDraft({
       ...currentDraft,
-      selectedFlavors: currentDraft.selectedFlavors.filter(f => f !== flavorSlug),
+      selectedFlavors: currentDraft.selectedFlavors.filter((f) => f !== flavorSlug),
     });
   };
 
-  const addMultipleFlavorOrders = (product: ProductType, selectedFlavors: string[], quantity: number) => {
+  const addMultipleFlavorOrders = (
+    product: ProductType,
+    selectedFlavors: string[],
+    quantity: number
+  ) => {
     if (product.type !== "flavor-selection") return;
 
     const newOrders: FlavorOrder[] = [];
@@ -256,7 +288,8 @@ const ProductProvider = ({ children }: ProductProps) => {
   const confirmCurrentOrder = () => {
     if (!currentDraft) return;
 
-    if (currentDraft.type === "flavor-selection" && currentDraft.selectedFlavors.length === 0) return;
+    if (currentDraft.type === "flavor-selection" && currentDraft.selectedFlavors.length === 0)
+      return;
     if (currentDraft.type === "quantity-selection" && currentDraft.quantity <= 0) return;
 
     const updatedOrders = [...confirmedOrders, currentDraft];
@@ -272,7 +305,7 @@ const ProductProvider = ({ children }: ProductProps) => {
   const cancelCurrentOrder = () => setCurrentDraft(null);
 
   const removeConfirmedOrder = (orderId: string) => {
-    const updatedOrders = confirmedOrders.filter(order => order.id !== orderId);
+    const updatedOrders = confirmedOrders.filter((order) => order.id !== orderId);
     setConfirmedOrdersState(updatedOrders);
 
     updateURL({
@@ -282,20 +315,12 @@ const ProductProvider = ({ children }: ProductProps) => {
   };
 
   // ============================================
-  // FILTERED PRODUCTS
-  // ============================================
-  const filteredProducts = useMemo(
-    () => filterProducts(allProducts, selectedCategory, selectedBranchId, sortOrder),
-    [allProducts, selectedCategory, selectedBranchId, sortOrder]
-  );
-
-  // ============================================
   // CONTEXT VALUE
   // ============================================
   const value = {
-    products: allProducts,
+    products: filteredProducts,
     filteredProducts,
-    allFlavors: flavorsFromDB,
+    allFlavors,
     selectedCategory,
     viewMode,
     sortOrder,
@@ -325,7 +350,7 @@ const ProductProvider = ({ children }: ProductProps) => {
   };
 
   // ============================================
-  // RENDER - Sin bloquear la UI con loading
+  // RENDER
   // ============================================
   return (
     <ProductsContext.Provider value={value}>
@@ -333,23 +358,6 @@ const ProductProvider = ({ children }: ProductProps) => {
         {children}
       </div>
     </ProductsContext.Provider>
-  );
-};
-
-const Product = ({ children }: ProductProps) => {
-  return (
-    <Suspense
-      fallback={
-        <div className="h-full container m-auto my-4 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-            <p className="text-gray-600">Cargando productos...</p>
-          </div>
-        </div>
-      }
-    >
-      <ProductProvider>{children}</ProductProvider>
-    </Suspense>
   );
 };
 

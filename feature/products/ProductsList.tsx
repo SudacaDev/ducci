@@ -245,11 +245,7 @@ const ProductsList = () => {
 
   const boxes = filteredProducts.filter((p) => p.type === "box");
 
-  const availableFlavors = allFlavors.filter(
-    (flavor) =>
-      selectedBranchId === null ||
-      flavor.branches.some((branch) => branch.id === selectedBranchId)
-  );
+  const availableFlavors = allFlavors;
 
   // ============================================
   // RENDER
@@ -287,7 +283,7 @@ const ProductsList = () => {
           SECCIÓN 1: PRODUCTOS CON SABORES
           ============================================ */}
       {loading ? (
-        <div className="mb-8">
+        <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
           <ProductListSkeleton count={3} />
         </div>
@@ -306,7 +302,7 @@ const ProductsList = () => {
           ============================================ */}
       {currentDraft && currentDraft.type === "flavor-selection" && (
         loading ? (
-          <div className="mb-8">
+          <div className="mb-8 mx-4">
             <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
             <FlavorListSkeleton count={12} />
           </div>
@@ -329,7 +325,7 @@ const ProductsList = () => {
           SECCIÓN 3: PRODUCTOS CON CANTIDAD
           ============================================ */}
       {loading ? (
-        <div className="mb-8">
+        <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
           <ProductListSkeleton count={6} />
         </div>
@@ -348,7 +344,7 @@ const ProductsList = () => {
           SECCIÓN 4: CAJAS
           ============================================ */}
       {loading ? (
-        <div className="mb-8">
+        <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
           <ProductListSkeleton count={5} />
         </div>
@@ -365,7 +361,7 @@ const ProductsList = () => {
           SECCIÓN 5: PRODUCTOS ÚNICOS
           ============================================ */}
       {loading ? (
-        <div className="mb-8">
+        <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
           <ProductListSkeleton count={5} />
         </div>

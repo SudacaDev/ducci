@@ -9,10 +9,20 @@ interface Activable {
   is_active: boolean;
 }
 
+ 
+export interface Category extends Base, Activable {
+  slug: string;
+  description: string;
+  color: string | null;
+  image: string | null;
+  display_order: number;
+}
+
+ 
 interface Categorizable {
-  category: string;
   description: string;
   image: string | null;
+  category_id: number;
 }
 
 export interface Branch extends Base, Activable {
@@ -22,7 +32,8 @@ export interface Branch extends Base, Activable {
 
 export interface ProductDB extends Base, Activable, Categorizable {
   price: number;
-  type: "flavor-selection" | "quantity-selection" | "single-item" | "box";
+  type: 'flavor-selection' | 'quantity-selection' | 'single-item' | 'box';
+  
   max_flavors: number | null;
   weight: number | null;
   max_quantity: number | null;

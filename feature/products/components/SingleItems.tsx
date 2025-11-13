@@ -19,10 +19,10 @@ const SingleItems = ({
 }: SingleItemsProps) => {
   const { formatPrice } = useCurrency();
   return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+     <div className="mb-8 md:mx-2 sm:mx-2">
+      <h3 className="text-2xl font-bold mb-4 text-gray-800">
         Tortas y especiales
-      </h2>
+      </h3>
 
       <div
         className={`grid gap-4 ${

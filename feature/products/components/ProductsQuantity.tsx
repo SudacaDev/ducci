@@ -23,10 +23,10 @@ export const ProductsQuantity = ({
   const { formatPrice } = useCurrency();
 
   return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <div className="mb-8 md:mx-2 sm:mx-2">
+      <h3 className="text-2xl font-bold mb-4 text-gray-800">
         Productos individuales
-      </h2>
+      </h3>
       <p className="text-sm text-gray-600 mb-4">
         Selecciona la cantidad que desees
       </p>

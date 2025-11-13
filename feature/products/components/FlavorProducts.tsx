@@ -21,10 +21,10 @@ const FlavorProducts = ({
 }: FlavorProductsProps) => {
   const { formatPrice } = useCurrency();
   return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <div className="mb-8 md:mx-2 sm:mx-2">
+      <h3 className="text-2xl font-bold mb-4 text-gray-800">
         Helados por peso
-      </h2>
+      </h3>
       <p className="text-sm text-gray-600 mb-4">
         Selecciona el tamaño y luego elige tus sabores favoritos
       </p>
