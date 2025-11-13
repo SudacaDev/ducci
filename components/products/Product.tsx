@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useProductsDB } from "@/hooks/useProducts";
 import { useFlavorsDB } from "@/hooks/useFlavors";
@@ -14,13 +14,11 @@ interface ProductProps {
   children: ReactNode;
 }
 
-const Product = ({ children }: ProductProps) => {
+ 
+const ProductProvider = ({ children }: ProductProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  // ============================================
-  // URL PARAMS
-  // ============================================
+  
   const selectedCategory = searchParams.get("category") || "todos";
   const viewMode = (searchParams.get("view") as "grid" | "list") || "grid";
   const sortOrder = (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
@@ -32,9 +30,6 @@ const Product = ({ children }: ProductProps) => {
     branchIdParam ? parseInt(branchIdParam) : null
   );
 
-  // ============================================
-  // FETCH DATA CON FILTROS EN LA BD
-  // ============================================
   const {
     products: productsFromDB,
     loading: productsLoading,
@@ -59,20 +54,15 @@ const Product = ({ children }: ProductProps) => {
   const loading = productsLoading || flavorsLoading;
   const error = productsError || flavorsError;
 
-  // Ya vienen filtrados de la BD
   const filteredProducts = productsFromDB;
   const allFlavors = flavorsFromDB;
 
-  // ============================================
-  // LOCAL STATE
-  // ============================================
   const [confirmedOrders, setConfirmedOrdersState] = useState<Order[]>(
     parseOrdersFromURL(ordersParam)
   );
 
   const [currentDraft, setCurrentDraft] = useState<Order | null>(null);
 
-  // Sync with URL
   useEffect(() => {
     const newBranchId = branchIdParam ? parseInt(branchIdParam) : null;
     const newOrders = parseOrdersFromURL(ordersParam);
@@ -81,9 +71,6 @@ const Product = ({ children }: ProductProps) => {
     setConfirmedOrdersState(newOrders);
   }, [branchIdParam, ordersParam]);
 
-  // ============================================
-  // URL HELPERS
-  // ============================================
   const updateURL = (params: Record<string, string | null>) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
 
@@ -107,9 +94,6 @@ const Product = ({ children }: ProductProps) => {
     window.history.replaceState({}, "", `${pathname}${query}`);
   };
 
-  // ============================================
-  // FILTER ACTIONS
-  // ============================================
   const setSelectedCategory = (category: string) => updateURL({ category });
   const setViewMode = (mode: "grid" | "list") => updateURL({ view: mode });
   const setSortOrder = (order: "asc" | "desc" | "none") => updateURL({ sort: order });
@@ -129,9 +113,6 @@ const Product = ({ children }: ProductProps) => {
     updateURL({ "branch-id": null, orders: null });
   };
 
-  // ============================================
-  // FLAVOR ORDERS
-  // ============================================
   const startFlavorOrder = (product: ProductType) => {
     if (product.type !== "flavor-selection") return;
     if (!product.config?.maxFlavors) return;
@@ -204,9 +185,6 @@ const Product = ({ children }: ProductProps) => {
     });
   };
 
-  // ============================================
-  // QUANTITY ORDERS
-  // ============================================
   const startQuantityOrder = (product: ProductType, quantity: number) => {
     if (product.type !== "quantity-selection") return;
     if (quantity <= 0) return;
@@ -234,9 +212,6 @@ const Product = ({ children }: ProductProps) => {
     setCurrentDraft({ ...currentDraft, quantity });
   };
 
-  // ============================================
-  // SINGLE ITEM ORDERS
-  // ============================================
   const addSingleItemOrder = (product: ProductType) => {
     if (product.type !== "single-item") return;
 
@@ -257,9 +232,6 @@ const Product = ({ children }: ProductProps) => {
     });
   };
 
-  // ============================================
-  // BOX ORDERS
-  // ============================================
   const addBoxOrder = (product: ProductType) => {
     if (product.type !== "box") return;
     if (!product.config?.boxQuantity) return;
@@ -282,9 +254,6 @@ const Product = ({ children }: ProductProps) => {
     });
   };
 
-  // ============================================
-  // ORDER MANAGEMENT
-  // ============================================
   const confirmCurrentOrder = () => {
     if (!currentDraft) return;
 
@@ -314,9 +283,7 @@ const Product = ({ children }: ProductProps) => {
     });
   };
 
-  // ============================================
-  // CONTEXT VALUE
-  // ============================================
+
   const value = {
     products: filteredProducts,
     filteredProducts,
@@ -349,15 +316,21 @@ const Product = ({ children }: ProductProps) => {
     clearCart,
   };
 
-  // ============================================
-  // RENDER
-  // ============================================
   return (
     <ProductsContext.Provider value={value}>
       <div id="product" className="h-full container m-auto my-4">
         {children}
       </div>
     </ProductsContext.Provider>
+  );
+};
+
+
+const Product = ({ children }: ProductProps) => {
+  return (
+    <Suspense fallback={null}>
+      <ProductProvider>{children}</ProductProvider>
+    </Suspense>
   );
 };
 
