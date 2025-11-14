@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/select";
 import { MapPin } from "lucide-react";
 import { BranchSelectorSkeleton } from "@/components/products/skeletons/ProductSkeleton";
- 
 
 const OrderSelector = () => {
   const { selectedBranchId, setBranchId, confirmedOrders } = useProducts();
@@ -19,7 +18,9 @@ const OrderSelector = () => {
 
   const handleBranchChange = (value: string) => {
     if (confirmedOrders.length > 0) {
-      if (!confirm("Si cambias de sucursal, se limpiará tu carrito. ¿Continuar?")) {
+      if (
+        !confirm("Si cambias de sucursal, se limpiará tu carrito. ¿Continuar?")
+      ) {
         return;
       }
     }
@@ -58,7 +59,9 @@ const OrderSelector = () => {
                   <SelectItem key={branch.id} value={branch.id.toString()}>
                     <div className="flex flex-col items-start">
                       <span className="font-semibold">{branch.name}</span>
-                      <span className="text-xs text-gray-600">{branch.address}</span>
+                      <span className="text-xs text-gray-600">
+                        {branch.address}
+                      </span>
                     </div>
                   </SelectItem>
                 ))}

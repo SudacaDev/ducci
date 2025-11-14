@@ -28,9 +28,14 @@ const CategoryFilter = () => {
   };
 
   return (
-    <nav aria-label="Filtro de categorías de productos" className="aside_filter">
-      <div className="aside_filter-content flex gap-2 overflow-x-auto pb-2" role="group">
- 
+    <nav
+      aria-label="Filtro de categorías de productos"
+      className="aside_filter"
+    >
+      <div
+        className="aside_filter-content flex gap-2 overflow-x-auto pb-2"
+        role="group"
+      >
         <div
           role="button"
           tabIndex={0}
@@ -43,18 +48,14 @@ const CategoryFilter = () => {
               handleCategoryClick("todos", "Todos");
             }
           }}
-          className={`  ${
-            selectedCategory === "todos"
-              ? "active li"
-              : " li "
-          }`}
+          className={`  ${selectedCategory === "todos" ? "active li" : " li "}`}
         >
           Todos
         </div>
- 
+
         {categories.map((category) => {
           const isSelected = selectedCategory === category.slug;
-          
+
           return (
             <div
               key={category.id}
@@ -69,19 +70,20 @@ const CategoryFilter = () => {
                   handleCategoryClick(category.slug, category.name);
                 }
               }}
-              className={`  ${
-                isSelected
-                  ? "active li"
-                  : " li"
-              }`}
+              className={`  ${isSelected ? "active li" : " li"}`}
             >
               {category.name}
             </div>
           );
         })}
       </div>
- 
-      <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+
+      <div
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {selectedCategory === "todos"
           ? "Mostrando todos los productos"
           : `Mostrando productos de la categoría ${

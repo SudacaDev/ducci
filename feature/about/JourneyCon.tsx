@@ -7,6 +7,8 @@ import { MENU } from "@/types/nav.type";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import { useHeroAnimation } from "../home/components/hero/hooks/useHeroAnimation";
 
 const observerOptions = {
   root: null,
@@ -15,6 +17,13 @@ const observerOptions = {
 };
 
 const JourneyCon = () => {
+  const refTitle = useRef<HTMLDivElement>(null);
+  const refBodyCopy = useRef<HTMLDivElement>(null);
+  const refEyebrow = useRef<HTMLDivElement>(null);
+  const refButtonCTA = useRef<HTMLDivElement>(null);
+
+  useHeroAnimation(refTitle, refEyebrow, refBodyCopy, refButtonCTA);
+
   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
 
@@ -38,8 +47,8 @@ const JourneyCon = () => {
         </div>
         <div className="journey_content grid-content_right">
           <Block>
-            <Block.Title>Nuestra Historia</Block.Title>
-            <Block.Body>
+            <Block.Title ref={refTitle}>Nuestra Historia</Block.Title>
+            <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
                 <p>
                   Ducci Gelatería nació en 2015 en el corazón de Rosario, con la
@@ -56,12 +65,12 @@ const JourneyCon = () => {
                 </p>
               </div>
             </Block.Body>
-            <Block.Footer>
+            <Block.Footer ref={refButtonCTA}>
               <CTAButton
                 className="button__cta--secondary"
                 onClick={() => goToPage(String(MENU.PRODUCTS))}
               >
-                Conoce nuestros sabores{" "}
+                Conoce nuestros sabores
                 <span>
                   <ArrowRight size={16} />
                 </span>
@@ -74,8 +83,8 @@ const JourneyCon = () => {
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <Block>
-            <Block.Title>Visión y Propósito</Block.Title>
-            <Block.Body>
+            <Block.Title ref={refTitle}>Visión y Propósito</Block.Title>
+            <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
                 <p>
                   Queremos ser la excusa perfecta para pasear. Para salir con
@@ -88,12 +97,12 @@ const JourneyCon = () => {
                 </p>
               </div>
             </Block.Body>
-            <Block.Footer>
+            <Block.Footer ref={refButtonCTA}>
               <CTAButton
                 className="button__cta--secondary"
                 onClick={() => goToPage(String(MENU.PRODUCTS))}
               >
-                Conoce nuestros sabores{" "}
+                Conoce nuestros sabores
                 <span>
                   <ArrowRight size={16} />
                 </span>

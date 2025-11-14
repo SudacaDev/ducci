@@ -1,6 +1,6 @@
 import type { SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
-import type { Branch } from "@/types/branch.type";
+import type { Branch } from "@/lib/supabase/types"; // ← CAMBIAR IMPORT
 
 interface BranchWithDistance extends Branch {
   distance?: number;
@@ -13,6 +13,7 @@ interface SidebarBranchProps {
   hoveredBranch: number | null;
   nearbyBranches: BranchWithDistance[];
   userLocation: { lat: number; lng: number } | null;
+  loadingBranches?: boolean; // ← NUEVO
   setSearchQuery: (value: SetStateAction<string>) => void;
   setHoveredBranch: (id: number | null) => void;
   setSelectedBranch: (id: number | null) => void;
@@ -32,6 +33,7 @@ const SidebarBranch = ({
   setHoveredBranch,
   nearbyBranches = [],
   userLocation = null,
+  loadingBranches = false, // ← NUEVO
 }: SidebarBranchProps) => {
   const sortedBranches = userLocation
     ? [
@@ -54,107 +56,143 @@ const SidebarBranch = ({
             placeholder="Ingresá ciudad, código postal o ubicación"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            disabled={loadingBranches}
           />
         </div>
 
-        <Button className="b" onClick={handleUseMyLocation}>
+        <Button
+          className="b"
+          onClick={handleUseMyLocation}
+          disabled={loadingBranches}
+        >
           📍 Usar mi ubicación actual
         </Button>
 
-        <p className="branches-count">
-          {sortedBranches.length} sucursal
-          {sortedBranches.length !== 1 ? "es" : ""} encontrada
-          {sortedBranches.length !== 1 ? "s" : ""}
-        </p>
+        {!loadingBranches && (
+          <p className="branches-count">
+            {sortedBranches.length} sucursal
+            {sortedBranches.length !== 1 ? "es" : ""} encontrada
+            {sortedBranches.length !== 1 ? "s" : ""}
+          </p>
+        )}
       </div>
 
       <div className="branches-list">
-        {userLocation && nearbyBranches.length > 0 && (
-          <div className="nearby-section">
-            <h3 className="nearby-title">🍦 Ducci cerca tuyo</h3>
-            {nearbyBranches.map((branch) => (
-              <div
-                key={branch.id}
-                className={`branch-card branch-card--nearby ${selectedBranch === branch.id ? "active" : ""}`}
-                onMouseEnter={() => setHoveredBranch(branch.id)}
-                onMouseLeave={() => setHoveredBranch(null)}
-                onClick={() => setSelectedBranch(branch.id)}
-              >
-                <div className="branch-card__distance">
-                  📍 {branch.distance!.toFixed(1)} km
-                </div>
-                <h3>{branch.name}</h3>
-                <p className="branch-card__address">
-                  {branch.address}
-                  <br />
-                  {branch.city}
-                </p>
-                <div className="flex items-center justify-center gap-2">
-                  <div className="flex-1 items-center justify-center">
-                    {branch.hours && (
-                      <p className="branch-card__hours">• {branch.hours}</p>
-                    )}
-                  </div>
-                  <div className="flex-1 items-center justify-center">
-                    <Button
-                      className="branch-card__cta"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleGetDirections(branch.lat, branch.lng);
-                      }}
-                    >
-                      Cómo llegar →
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+        {/* Loading State */}
+        {loadingBranches ? (
+          <div style={{ padding: "3rem 2rem", textAlign: "center" }}>
+            <div
+              style={{
+                width: "48px",
+                height: "48px",
+                border: "4px solid #f3f4f6",
+                borderTop: "4px solid #BA6516",
+                borderRadius: "50%",
+                animation: "spin 1s linear infinite",
+                margin: "0 auto 1rem",
+              }}
+            />
+            <p style={{ color: "#666" }}>Cargando sucursales...</p>
+            <style>{`
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+            `}</style>
           </div>
-        )}
-
-        {sortedBranches.length > 0 ? (
-          sortedBranches
-            .filter(
-              (branch) => !nearbyBranches.find((nb) => nb.id === branch.id),
-            )
-            .map((branch) => (
-              <div
-                key={branch.id}
-                className={`branch-card ${selectedBranch === branch.id ? "active" : ""}`}
-                onMouseEnter={() => setHoveredBranch(branch.id)}
-                onMouseLeave={() => setHoveredBranch(null)}
-                onClick={() => setSelectedBranch(branch.id)}
-              >
-                <h3>{branch.name}</h3>
-                <p className="branch-card__address">
-                  {branch.address}
-                  <br />
-                  {branch.city}
-                </p>
-                <div className="flex items-center justify-center gap-2">
-                  <div className="flex-1 items-center justify-center">
-                    {branch.hours && (
-                      <p className="branch-card__hours">• {branch.hours}</p>
-                    )}
-                  </div>
-                  <div className="flex-1 items-center justify-center">
-                    <Button
-                      className="branch-card__cta "
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleGetDirections(branch.lat, branch.lng);
-                      }}
-                    >
-                      Cómo llegar →
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))
         ) : (
-          <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
-            No se encontraron sucursales con "{searchQuery}"
-          </div>
+          <>
+            {/* Nearby Branches */}
+            {userLocation && nearbyBranches.length > 0 && (
+              <div className="nearby-section">
+                <h3 className="nearby-title">🍦 Ducci cerca tuyo</h3>
+                {nearbyBranches.map((branch) => (
+                  <div
+                    key={branch.id}
+                    className={`branch-card branch-card--nearby ${selectedBranch === branch.id ? "active" : ""}`}
+                    onMouseEnter={() => setHoveredBranch(branch.id)} // ← CAMBIO
+                    onMouseLeave={() => setHoveredBranch(null)} // ← CAMBIO
+                    onClick={() => setSelectedBranch(branch.id)}
+                  >
+                    <div className="branch-card__distance">
+                      📍 {branch.distance!.toFixed(1)} km
+                    </div>
+                    <h3>{branch.name}</h3>
+                    <p className="branch-card__address">
+                      {branch.address}
+                      <br />
+                      {branch.city}
+                    </p>
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="flex-1 items-center justify-center">
+                        {branch.hours && (
+                          <p className="branch-card__hours">• {branch.hours}</p>
+                        )}
+                      </div>
+                      <div className="flex-1 items-center justify-center">
+                        <Button
+                          className="branch-card__cta"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleGetDirections(branch.lat, branch.lng);
+                          }}
+                        >
+                          Cómo llegar →
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {sortedBranches.length > 0 ? (
+              sortedBranches
+                .filter(
+                  (branch) => !nearbyBranches.find((nb) => nb.id === branch.id),
+                )
+                .map((branch) => (
+                  <div
+                    key={branch.id}
+                    className={`branch-card ${selectedBranch === branch.id ? "active" : ""}`}
+                    onMouseEnter={() => setHoveredBranch(branch.id)} // ← CAMBIO
+                    onMouseLeave={() => setHoveredBranch(null)} // ← CAMBIO
+                    onClick={() => setSelectedBranch(branch.id)}
+                  >
+                    <h3>{branch.name}</h3>
+                    <p className="branch-card__address">
+                      {branch.address}
+                      <br />
+                      {branch.city}
+                    </p>
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="flex-1 items-center justify-center">
+                        {branch.hours && (
+                          <p className="branch-card__hours">• {branch.hours}</p>
+                        )}
+                      </div>
+                      <div className="flex-1 items-center justify-center">
+                        <Button
+                          className="branch-card__cta "
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleGetDirections(branch.lat, branch.lng);
+                          }}
+                        >
+                          Cómo llegar →
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+            ) : (
+              <div
+                style={{ padding: "2rem", textAlign: "center", color: "#666" }}
+              >
+                No se encontraron sucursales con "{searchQuery}"
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

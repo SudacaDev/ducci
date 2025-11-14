@@ -74,20 +74,20 @@ export const BRANCHES: Branch[] = [
 ];
 
 export const THEME = {
-  primary: "#BA6516",
-  primaryLight: "#F9DD71",
+  primary: "#bb6616",
+  primaryLight: "#f9efdc",
   background: "#F8F0DD",
-  text: "#2c2c2c",
+  text: "#bb6616",
 
   mapTheme: "light",
 
-  markerNormal: "#BA6516",
+  markerNormal: "#bb6616",
   markerNormalBorder: "#8B4A10",
-  markerHover: "#F9DD71",
-  markerHoverBorder: "#BA6516",
+  markerHover: "#f9efdc",
+  markerHoverBorder: "#bb6616",
 
   sidebarBg: "#ffffff",
   cardBg: "#F8F0DD",
   cardHover: "#f0e5c8",
-  cardBorder: "#BA6516",
+  cardBorder: "#bb6616",
 };

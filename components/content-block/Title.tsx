@@ -1,16 +1,20 @@
-import { ReactNode, RefObject } from "react";
+import React, { ReactNode } from "react";
+import type { Ref } from "react"; // Importar Ref de React
 
 interface TitleProps {
   children?: ReactNode;
-  ref?: RefObject<HTMLHeadingElement | null>;
 }
 
-const Title = ({ children, ref }: TitleProps) => {
-  return (
-    <h2 className="content-block__title" ref={ref}>
-      {children}
-    </h2>
-  );
-};
+const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
+  ({ children }, ref: Ref<HTMLHeadingElement>) => {
+    return (
+      <h2 className="content-block__title" ref={ref}>
+        {children}
+      </h2>
+    );
+  },
+);
+
+Title.displayName = "BlockTitle";
 
 export default Title;

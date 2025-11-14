@@ -2,7 +2,7 @@ export const ProductCardSkeleton = () => (
   <div className="product-list_item flex-col rounded-lg animate-pulse">
     {/* Imagen skeleton */}
     <div className="product-list_image inset-shadow-sm rounded-md bg-gray-200 h-48 w-full"></div>
-    
+
     {/* Contenido skeleton */}
     <div className="flex flex-col gap-2 text-left w-full mt-3">
       <div className="h-6 bg-gray-200 rounded w-3/4"></div>
@@ -40,7 +40,7 @@ export const FlavorListSkeleton = ({ count = 12 }: { count?: number }) => (
 );
 
 export const BranchSelectorSkeleton = () => (
-  <div className="animate-pulse">
+  <div className="relative">
     <div className="h-12 bg-gray-200 rounded-lg w-full"></div>
   </div>
 );

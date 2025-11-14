@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
-import { supabase } from '@/lib/supabase';
-import type { Product } from '@/types/product.type';
+import { useEffect, useState, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
+import type { Product } from "@/types/product.type";
 
 interface UseFlavorsParams {
   categorySlug?: string | null;
@@ -29,7 +29,7 @@ export const useFlavorsDB = ({
       setLoading(true);
       setError(null);
 
-      console.log('🔍 Fetching flavors with filters:', {
+      console.log("🔍 Fetching flavors with filters:", {
         categorySlug,
         branchId,
       });
@@ -38,8 +38,8 @@ export const useFlavorsDB = ({
       // BASE QUERY
       // ============================================
       let query = supabase
-  .from('flavors')
-  .select(`
+        .from("flavors")
+        .select(`
     id,
     name,
     description,
@@ -62,14 +62,14 @@ export const useFlavorsDB = ({
       )
     )
   `)
-  .eq('is_active', true)
-  .eq('flavor_branches.is_available', true);
+        .eq("is_active", true)
+        .eq("flavor_branches.is_available", true);
 
       // ============================================
       // FILTRO POR CATEGORÍA
       // ============================================
-      if (categorySlug && categorySlug !== 'todos') {
-        query = query.eq('categories.slug', categorySlug);
+      if (categorySlug && categorySlug !== "todos") {
+        query = query.eq("categories.slug", categorySlug);
       }
 
       // ============================================
@@ -77,14 +77,14 @@ export const useFlavorsDB = ({
       // ============================================
       if (branchId !== null) {
         query = query
-          .eq('flavor_branches.branch_id', branchId)
-          .eq('flavor_branches.is_available', true);
+          .eq("flavor_branches.branch_id", branchId)
+          .eq("flavor_branches.is_available", true);
       }
 
       // ============================================
       // ORDENAMIENTO
       // ============================================
-      query = query.order('name', { ascending: true });
+      query = query.order("name", { ascending: true });
 
       // ============================================
       // LÍMITE
@@ -103,46 +103,52 @@ export const useFlavorsDB = ({
       console.log(`✅ Fetched ${flavorsData?.length || 0} flavors`);
 
       // ============================================
-// TRANSFORMAR DATOS
-// ============================================
- 
-const transformedFlavors: Product[] = (flavorsData || []).map((flavor: any) => {
-  // Agrupar sucursales únicas
-  const branchMap = new Map<number, { id: number; name: string; address: string }>();
-  
-  flavor.flavor_branches.forEach((fb: any) => {
-    if (!branchMap.has(fb.branches.id)) {
-      branchMap.set(fb.branches.id, {
-        id: fb.branches.id,
-        name: fb.branches.name,
-        address: fb.branches.address,
-      });
-    }
-  });
+      // TRANSFORMAR DATOS
+      // ============================================
 
-  const uniqueBranches = Array.from(branchMap.values());
+      const transformedFlavors: Product[] = (flavorsData || []).map(
+        (flavor: any) => {
+          // Agrupar sucursales únicas
+          const branchMap = new Map<
+            number,
+            { id: number; name: string; address: string }
+          >();
 
-  return {
-    id: flavor.id,
-    name: flavor.name,
-    price: 0,
-    category: flavor.categories?.slug || 'otros',
-    description: flavor.description,
-    image: flavor.image,
-    type: 'flavor-selection' as const,
-    branches: uniqueBranches,
-    config: undefined,
-  };
-});
+          flavor.flavor_branches.forEach((fb: any) => {
+            if (!branchMap.has(fb.branches.id)) {
+              branchMap.set(fb.branches.id, {
+                id: fb.branches.id,
+                name: fb.branches.name,
+                address: fb.branches.address,
+              });
+            }
+          });
 
-setFlavors(transformedFlavors);
-setFlavors(transformedFlavors);
+          const uniqueBranches = Array.from(branchMap.values());
+
+          return {
+            id: flavor.id,
+            name: flavor.name,
+            price: 0,
+            category: flavor.categories?.slug || "otros",
+            description: flavor.description,
+            image: flavor.image,
+            type: "flavor-selection" as const,
+            branches: uniqueBranches,
+            config: undefined,
+          };
+        },
+      );
+
+      setFlavors(transformedFlavors);
+      setFlavors(transformedFlavors);
 
       setFlavors(transformedFlavors);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Error al cargar sabores';
+      const errorMessage =
+        err instanceof Error ? err.message : "Error al cargar sabores";
       setError(errorMessage);
-      console.error('❌ Error fetching flavors:', err);
+      console.error("❌ Error fetching flavors:", err);
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 "use client";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import useBranchesMap from "./hooks/useBranchesMap";
 import SidebarBranch from "./SidebarBranch";
 
@@ -19,6 +20,7 @@ const DucciBranchesMap = () => {
     setHoveredBranch,
     nearbyBranches,
     userLocation,
+    loadingBranches,
   } = useBranchesMap();
 
   return (
@@ -35,9 +37,13 @@ const DucciBranchesMap = () => {
         setHoveredBranch={setHoveredBranch}
         nearbyBranches={nearbyBranches}
         userLocation={userLocation}
+        loadingBranches={loadingBranches}
       />
-
-      <div ref={mapRef} style={{ height: "100%", width: "100%" }} />
+      {loadingBranches ? (
+        <Skeleton className=" w-[100dwv] bg-[var(--background)] h-[100dvh]" />
+      ) : (
+        <div ref={mapRef} style={{ height: "100%", width: "100%" }} />
+      )}
     </div>
   );
 };

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useBranches } from '@/hooks/useBranches';
-import { useProductsDB } from '@/hooks/useProducts';
-import { useFlavorsDB } from '@/hooks/useFlavors';
+import { useBranches } from "@/hooks/useBranches";
+import { useProductsDB } from "@/hooks/useProducts";
+import { useFlavorsDB } from "@/hooks/useFlavors";
 
 export default function TestSupabasePage() {
   const { branches, loading: branchesLoading } = useBranches();
@@ -16,9 +16,11 @@ export default function TestSupabasePage() {
   return (
     <div className="p-8 space-y-8">
       <div>
-        <h2 className="text-2xl font-bold mb-4">Sucursales ({branches.length})</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Sucursales ({branches.length})
+        </h2>
         <ul className="space-y-2">
-          {branches.map(branch => (
+          {branches.map((branch) => (
             <li key={branch.id} className="border p-2 rounded">
               {branch.name} - {branch.address}
             </li>
@@ -27,11 +29,14 @@ export default function TestSupabasePage() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold mb-4">Productos ({products.length})</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Productos ({products.length})
+        </h2>
         <ul className="space-y-2">
-          {products.map(product => (
+          {products.map((product) => (
             <li key={product.id} className="border p-2 rounded">
-              {product.name} - ${product.price} - {product.branches.length} sucursales
+              {product.name} - ${product.price} - {product.branches.length}{" "}
+              sucursales
             </li>
           ))}
         </ul>
@@ -40,7 +45,7 @@ export default function TestSupabasePage() {
       <div>
         <h2 className="text-2xl font-bold mb-4">Sabores ({flavors.length})</h2>
         <ul className="space-y-2">
-          {flavors.map(flavor => (
+          {flavors.map((flavor) => (
             <li key={flavor.id} className="border p-2 rounded">
               {flavor.name} - {flavor.branches.length} sucursales
             </li>

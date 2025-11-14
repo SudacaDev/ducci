@@ -88,8 +88,8 @@ export const useHeroAnimation = (
             duration: 1.2,
             ease: "power4.inOut",
             scrollTrigger: {
-              trigger: refBodyCopy.current,
-              start: "top 85%",
+              trigger: refTitle?.current,
+              start: "top 65%",
               toggleActions: "play none none reverse",
             },
           },
@@ -110,8 +110,8 @@ export const useHeroAnimation = (
             duration: 1.4,
             ease: "power4.inOut",
             scrollTrigger: {
-              trigger: refButtonCTA.current,
-              start: "top 90%",
+              trigger: refTitle?.current,
+              start: "top 60%",
               toggleActions: "play none none reverse",
             },
           },

@@ -1,11 +1,11 @@
-import { useEffect, useState, useCallback } from 'react';
-import { supabase } from '@/lib/supabase';
-import type { Product } from '@/types/product.type';
+import { useEffect, useState, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
+import type { Product } from "@/types/product.type";
 
 interface UseProductsParams {
   categorySlug?: string | null;
   branchId?: number | null;
-  sortOrder?: 'asc' | 'desc' | 'none';
+  sortOrder?: "asc" | "desc" | "none";
   limit?: number;
 }
 
@@ -19,7 +19,7 @@ interface UseProductsReturn {
 export const useProductsDB = ({
   categorySlug = null,
   branchId = null,
-  sortOrder = 'none',
+  sortOrder = "none",
   limit,
 }: UseProductsParams = {}): UseProductsReturn => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +31,7 @@ export const useProductsDB = ({
       setLoading(true);
       setError(null);
 
-      console.log('🔍 Fetching products with filters:', {
+      console.log("🔍 Fetching products with filters:", {
         categorySlug,
         branchId,
         sortOrder,
@@ -41,8 +41,8 @@ export const useProductsDB = ({
       // BASE QUERY
       // ============================================
       let query = supabase
-  .from('products')
-  .select(`
+        .from("products")
+        .select(`
     id,
     name,
     price,
@@ -71,14 +71,14 @@ export const useProductsDB = ({
       )
     )
   `)
-  .eq('is_active', true)
-  .eq('product_branches.is_available', true);
+        .eq("is_active", true)
+        .eq("product_branches.is_available", true);
 
       // ============================================
       // FILTRO POR CATEGORÍA
       // ============================================
-      if (categorySlug && categorySlug !== 'todos') {
-        query = query.eq('categories.slug', categorySlug);
+      if (categorySlug && categorySlug !== "todos") {
+        query = query.eq("categories.slug", categorySlug);
       }
 
       // ============================================
@@ -86,19 +86,19 @@ export const useProductsDB = ({
       // ============================================
       if (branchId !== null) {
         query = query
-          .eq('product_branches.branch_id', branchId)
-          .eq('product_branches.is_available', true);
+          .eq("product_branches.branch_id", branchId)
+          .eq("product_branches.is_available", true);
       }
 
       // ============================================
       // ORDENAMIENTO
       // ============================================
-      if (sortOrder === 'asc') {
-        query = query.order('price', { ascending: true });
-      } else if (sortOrder === 'desc') {
-        query = query.order('price', { ascending: false });
+      if (sortOrder === "asc") {
+        query = query.order("price", { ascending: true });
+      } else if (sortOrder === "desc") {
+        query = query.order("price", { ascending: false });
       } else {
-        query = query.order('name', { ascending: true });
+        query = query.order("name", { ascending: true });
       }
 
       // ============================================
@@ -120,54 +120,60 @@ export const useProductsDB = ({
       // ============================================
       // TRANSFORMAR DATOS
       // ============================================
- 
-// ============================================
-// TRANSFORMAR DATOS
-// ============================================
-const transformedProducts: Product[] = (productsData || []).map((product: any) => {
-  // Agrupar sucursales (puede haber duplicados por el join)
-  const branchMap = new Map<number, { id: number; name: string; address: string }>();
-  
-  product.product_branches.forEach((pb: any) => {
-    if (!branchMap.has(pb.branches.id)) {
-      branchMap.set(pb.branches.id, {
-        id: pb.branches.id,
-        name: pb.branches.name,
-        address: pb.branches.address,
-      });
-    }
-  });
 
-  const uniqueBranches = Array.from(branchMap.values());
+      // ============================================
+      // TRANSFORMAR DATOS
+      // ============================================
+      const transformedProducts: Product[] = (productsData || []).map(
+        (product: any) => {
+          // Agrupar sucursales (puede haber duplicados por el join)
+          const branchMap = new Map<
+            number,
+            { id: number; name: string; address: string }
+          >();
 
-  return {
-    id: product.id,
-    name: product.name,
-    price: product.price,
-    category: product.categories?.slug || 'otros',
-    description: product.description,
-    image: product.image,
-    type: product.type as Product['type'],
-    branches: uniqueBranches,
-    config: {
-      maxFlavors: product.max_flavors,
-      weight: product.weight,
-      maxQuantity: product.max_quantity,
-      boxQuantity: product.box_quantity,
-      isAvailable: true,
-    },
-  };
-});
+          product.product_branches.forEach((pb: any) => {
+            if (!branchMap.has(pb.branches.id)) {
+              branchMap.set(pb.branches.id, {
+                id: pb.branches.id,
+                name: pb.branches.name,
+                address: pb.branches.address,
+              });
+            }
+          });
 
-setProducts(transformedProducts);
+          const uniqueBranches = Array.from(branchMap.values());
 
-setProducts(transformedProducts);
+          return {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            category: product.categories?.slug || "otros",
+            description: product.description,
+            image: product.image,
+            type: product.type as Product["type"],
+            branches: uniqueBranches,
+            config: {
+              maxFlavors: product.max_flavors,
+              weight: product.weight,
+              maxQuantity: product.max_quantity,
+              boxQuantity: product.box_quantity,
+              isAvailable: true,
+            },
+          };
+        },
+      );
+
+      setProducts(transformedProducts);
+
+      setProducts(transformedProducts);
 
       setProducts(transformedProducts);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Error al cargar productos';
+      const errorMessage =
+        err instanceof Error ? err.message : "Error al cargar productos";
       setError(errorMessage);
-      console.error('❌ Error fetching products:', err);
+      console.error("❌ Error fetching products:", err);
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,8 @@
 .branches-map-container {
   display: grid;
   grid-template-columns: 450px 1fr;
-  height: 100vh;
+  height: 100dvh;
+  background-color: white;
 }
 .branches-sidebar {
   background-color: var(--white);

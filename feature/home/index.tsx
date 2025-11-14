@@ -6,7 +6,7 @@ import AboutHomeSection from "./components/about";
 import ProductsHomeSection from "./components/products";
 import BranchesHomeSection from "./components/branches";
 import NewsletterHomeSection from "./components/newsletter";
-import { CarouselProducts } from "./components/carousel-products";
+import { CarouselProducts } from "../branches/components/carousel-products";
 
 import "./style/home.css";
 import Lenis from "lenis";
@@ -33,10 +33,10 @@ const HomePageContent = () => {
     };
   }, []);
   return (
-    <div id="smooth-wrapper">
+    <div id="smooth-wrapper" className="overflow-hidden">
       <div className="smooth-content">
         <HeroBanner />
-        <CarouselProducts />
+
         <ProductsHomeSection />
         <AboutHomeSection />
         <BranchesHomeSection />

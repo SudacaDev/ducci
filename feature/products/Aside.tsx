@@ -1,6 +1,5 @@
 "use client";
 
-
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/constants/prod";
@@ -8,11 +7,7 @@ import { useProducts } from "@/components/products/ProductContext";
 import CategoryFilter from "@/components/products/CategoryFilter";
 
 const Aside = () => {
-  const {
-    
-    openFilter,
-    openFilterToggle,
-  } = useProducts();
+  const { openFilter, openFilterToggle } = useProducts();
 
   return (
     <aside className={` product-aside  ${openFilter ? "active" : ""}`}>
@@ -34,7 +29,6 @@ const Aside = () => {
           <h3 className="font-semibold text-lg">Categorías</h3>
         </div>
         <CategoryFilter />
-         
       </div>
     </aside>
   );

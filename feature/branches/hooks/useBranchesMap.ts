@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
-import { BRANCHES, THEME } from "@/constants/branches";
-import type { Branch } from "@/types/branch.type";
+import { THEME } from "@/constants/branches";
+import { useBranches } from "@/hooks/useBranches";
+import type { Branch } from "@/lib/supabase/types";
 
 interface BranchWithDistance extends Branch {
   distance?: number;
@@ -15,7 +16,6 @@ const useBranchesMap = () => {
   const [hoveredBranch, setHoveredBranch] = useState<number | null>(null);
   const [selectedBranch, setSelectedBranch] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredBranches, setFilteredBranches] = useState<Branch[]>(BRANCHES);
   const [nearbyBranches, setNearbyBranches] = useState<BranchWithDistance[]>(
     [],
   );
@@ -24,6 +24,17 @@ const useBranchesMap = () => {
     lng: number;
   } | null>(null);
   const [locationCircle, setLocationCircle] = useState<any>(null);
+
+  // ============================================
+  // FETCH BRANCHES DESDE SUPABASE
+  // ============================================
+  const { branches: BRANCHES, loading: loadingBranches } = useBranches();
+
+  const [filteredBranches, setFilteredBranches] = useState<Branch[]>([]);
+
+  useEffect(() => {
+    setFilteredBranches(BRANCHES);
+  }, [BRANCHES]);
 
   const calculateDistance = (
     lat1: number,
@@ -45,28 +56,60 @@ const useBranchesMap = () => {
   };
 
   useEffect(() => {
-    if (typeof window === "undefined" || !mapRef.current) return;
+    if (
+      typeof window === "undefined" ||
+      !mapRef.current ||
+      BRANCHES.length === 0
+    )
+      return;
 
-    import("leaflet").then((L) => {
-      const map = L.map(mapRef.current!, {
-        zoomControl: true,
-        scrollWheelZoom: true,
-      }).setView([-32.9468, -60.6393], 13);
+    let map: any = null;
+    let mounted = true;
 
-      const tileUrl =
-        THEME.mapTheme === "dark"
-          ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const initMap = async () => {
+      const L = await import("leaflet");
 
-      L.tileLayer(tileUrl, {
-        attribution: "© OpenStreetMap contributors",
-        maxZoom: 19,
-      }).addTo(map);
+      if (!mounted || !mapRef.current) return;
 
-      const newMarkers = BRANCHES.map((branch) => {
-        const normalIcon = L.divIcon({
-          className: "",
-          html: `
+      try {
+        const container = mapRef.current;
+
+        // Limpiar instancia previa si existe
+        if (container.classList.contains("leaflet-container")) {
+          (container as any)._leaflet_id = null;
+        }
+
+        // ============================================
+        // CALCULAR CENTRO Y BOUNDS DE TODAS LAS SUCURSALES
+        // ============================================
+        const bounds = L.latLngBounds(
+          BRANCHES.map((branch) => [branch.lat, branch.lng]),
+        );
+
+        map = L.map(container, {
+          zoomControl: true,
+          scrollWheelZoom: true,
+        });
+
+        map.fitBounds(bounds, {
+          padding: [50, 50],
+          maxZoom: 14,
+        });
+
+        const tileUrl =
+          THEME.mapTheme === "dark"
+            ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+        L.tileLayer(tileUrl, {
+          attribution: "© OpenStreetMap contributors",
+          maxZoom: 19,
+        }).addTo(map);
+
+        const newMarkers = BRANCHES.map((branch) => {
+          const normalIcon = L.divIcon({
+            className: "",
+            html: `
             <div style="
               background: ${THEME.markerNormal};
               width: 45px;
@@ -86,14 +129,14 @@ const useBranchesMap = () => {
               />
             </div>
           `,
-          iconSize: [45, 45],
-          iconAnchor: [22.5, 22.5],
-          popupAnchor: [0, -20],
-        });
+            iconSize: [45, 45],
+            iconAnchor: [22.5, 22.5],
+            popupAnchor: [0, -20],
+          });
 
-        const highlightIcon = L.divIcon({
-          className: "",
-          html: `
+          const highlightIcon = L.divIcon({
+            className: "",
+            html: `
             <div style="
               background: ${THEME.markerHover};
               width: 55px;
@@ -109,18 +152,20 @@ const useBranchesMap = () => {
               <img 
                 src="/images/logo-ducci.svg" 
                 alt="Ducci" 
-                style="width: 30px; height: 30px; filter: brightness(0);"
+                style="width: 30px; height: 30px; "
               />
             </div>
           `,
-          iconSize: [55, 55],
-          iconAnchor: [27.5, 27.5],
-          popupAnchor: [0, -25],
-        });
+            iconSize: [55, 55],
+            iconAnchor: [27.5, 27.5],
+            popupAnchor: [0, -25],
+          });
 
-        const marker = L.marker([branch.lat, branch.lng], { icon: normalIcon })
-          .addTo(map)
-          .bindPopup(`
+          const marker = L.marker([branch.lat, branch.lng], {
+            icon: normalIcon,
+          })
+            .addTo(map)
+            .bindPopup(`
             <div style="min-width: 200px; color: ${THEME.text};">
               <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: ${THEME.primary};">
                 🍦 ${branch.name}
@@ -143,22 +188,41 @@ const useBranchesMap = () => {
             </div>
           `);
 
-        return { branch, marker, normalIcon, highlightIcon };
-      });
+          return { branch, marker, normalIcon, highlightIcon };
+        });
 
-      setMarkers(newMarkers);
-      setMapInstance(map);
+        if (mounted) {
+          setMarkers(newMarkers);
+          setMapInstance(map);
+        }
 
-      const style = document.createElement("style");
-      style.textContent = `
+        const style = document.createElement("style");
+        style.textContent = `
         @keyframes pulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.08); }
         }
       `;
-      document.head.appendChild(style);
-    });
-  }, []);
+        document.head.appendChild(style);
+      } catch (error) {
+        console.error("Error initializing map:", error);
+      }
+    };
+
+    initMap();
+
+    // Cleanup
+    return () => {
+      mounted = false;
+      if (map) {
+        try {
+          map.remove();
+        } catch (error) {
+          console.error("Error removing map:", error);
+        }
+      }
+    };
+  }, [BRANCHES]);
 
   useEffect(() => {
     if (!mapInstance || markers.length === 0) return;
@@ -172,9 +236,9 @@ const useBranchesMap = () => {
         marker.setZIndexOffset(1000);
         marker.openPopup();
 
-        if (isSelected) {
-          mapInstance.flyTo([branch.lat, branch.lng], 15, { duration: 0.5 });
-        }
+        // if (isSelected) { // Eliminado el movimiento del mapa en el useEffect
+        //   mapInstance.flyTo([branch.lat, branch.lng], 15, { duration: 0.5 });
+        // }
       } else {
         marker.setIcon(normalIcon);
         marker.setZIndexOffset(0);
@@ -201,7 +265,7 @@ const useBranchesMap = () => {
       );
       setFilteredBranches(filtered);
     }
-  }, [searchQuery]);
+  }, [searchQuery, BRANCHES]);
 
   const handleUseMyLocation = () => {
     if (!mapInstance) return;
@@ -332,6 +396,7 @@ const useBranchesMap = () => {
     handleGetDirections,
     nearbyBranches,
     userLocation,
+    loadingBranches,
   };
 };
 

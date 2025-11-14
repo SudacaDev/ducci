@@ -9,7 +9,6 @@ interface Activable {
   is_active: boolean;
 }
 
- 
 export interface Category extends Base, Activable {
   slug: string;
   description: string;
@@ -18,7 +17,6 @@ export interface Category extends Base, Activable {
   display_order: number;
 }
 
- 
 interface Categorizable {
   description: string;
   image: string | null;
@@ -28,12 +26,19 @@ interface Categorizable {
 export interface Branch extends Base, Activable {
   address: string;
   phone: string | null;
+
+  lat: number;
+  lng: number;
+  city: string;
+  hours: string;
+  opening_time: string | null;
+  closing_time: string | null;
 }
 
 export interface ProductDB extends Base, Activable, Categorizable {
   price: number;
-  type: 'flavor-selection' | 'quantity-selection' | 'single-item' | 'box';
-  
+  type: "flavor-selection" | "quantity-selection" | "single-item" | "box";
+
   max_flavors: number | null;
   weight: number | null;
   max_quantity: number | null;

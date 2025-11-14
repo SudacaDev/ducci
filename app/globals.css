@@ -154,6 +154,9 @@ main {
   background-color: var(--background);
   gap: 32px;
   background-image: url(/images/bg-banner.jpg);
+  @media screen and (max-width: 768px) {
+    padding-block: 3em;
+  }
 }
 
 .sub-banner_breadcrumb {

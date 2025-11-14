@@ -1,16 +1,16 @@
-import { ReactNode, RefObject } from "react";
+import React, { ReactNode, Ref } from "react";
 
 interface FooterProps {
   children?: ReactNode;
-  ref?: RefObject<HTMLHeadingElement | null>;
 }
 
-const Footer = ({ children, ref }: FooterProps) => {
-  return (
-    <div className="content-block__footer" ref={ref}>
-      {" "}
-      {children}{" "}
-    </div>
-  );
-};
+const Footer = React.forwardRef<HTMLHeadingElement, FooterProps>(
+  ({ children }, ref: Ref<HTMLHeadingElement>) => {
+    return (
+      <div className="content-block__footer" ref={ref}>
+        {children}
+      </div>
+    );
+  },
+);
 export default Footer;

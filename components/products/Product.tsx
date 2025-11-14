@@ -8,26 +8,32 @@ import { ProductsContext } from "./ProductContext";
 import { parseOrdersFromURL, ordersToURLString } from "./utils/orderParsers";
 import { getSizeFromProduct } from "./utils/orderHelpers";
 import type { Product as ProductType } from "@/types/product.type";
-import type { Order, FlavorOrder, QuantityOrder, SingleItemOrder, BoxOrder } from "@/types/order.type";
+import type {
+  Order,
+  FlavorOrder,
+  QuantityOrder,
+  SingleItemOrder,
+  BoxOrder,
+} from "@/types/order.type";
 
 interface ProductProps {
   children: ReactNode;
 }
 
- 
 const ProductProvider = ({ children }: ProductProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
+
   const selectedCategory = searchParams.get("category") || "todos";
   const viewMode = (searchParams.get("view") as "grid" | "list") || "grid";
-  const sortOrder = (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
+  const sortOrder =
+    (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
   const openFilter = searchParams.get("filter") === "open";
   const branchIdParam = searchParams.get("branch-id");
   const ordersParam = searchParams.get("orders");
 
   const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(
-    branchIdParam ? parseInt(branchIdParam) : null
+    branchIdParam ? parseInt(branchIdParam) : null,
   );
 
   const {
@@ -58,7 +64,7 @@ const ProductProvider = ({ children }: ProductProps) => {
   const allFlavors = flavorsFromDB;
 
   const [confirmedOrders, setConfirmedOrdersState] = useState<Order[]>(
-    parseOrdersFromURL(ordersParam)
+    parseOrdersFromURL(ordersParam),
   );
 
   const [currentDraft, setCurrentDraft] = useState<Order | null>(null);
@@ -96,14 +102,19 @@ const ProductProvider = ({ children }: ProductProps) => {
 
   const setSelectedCategory = (category: string) => updateURL({ category });
   const setViewMode = (mode: "grid" | "list") => updateURL({ view: mode });
-  const setSortOrder = (order: "asc" | "desc" | "none") => updateURL({ sort: order });
-  const openFilterToggle = () => updateURL({ filter: openFilter ? "closed" : "open" });
+  const setSortOrder = (order: "asc" | "desc" | "none") =>
+    updateURL({ sort: order });
+  const openFilterToggle = () =>
+    updateURL({ filter: openFilter ? "closed" : "open" });
 
   const setBranchId = (branchId: number | null) => {
     setSelectedBranchIdState(branchId);
     setConfirmedOrdersState([]);
     setCurrentDraft(null);
-    updateURL({ "branch-id": branchId ? branchId.toString() : null, orders: null });
+    updateURL({
+      "branch-id": branchId ? branchId.toString() : null,
+      orders: null,
+    });
   };
 
   const clearCart = () => {
@@ -149,14 +160,16 @@ const ProductProvider = ({ children }: ProductProps) => {
 
     setCurrentDraft({
       ...currentDraft,
-      selectedFlavors: currentDraft.selectedFlavors.filter((f) => f !== flavorSlug),
+      selectedFlavors: currentDraft.selectedFlavors.filter(
+        (f) => f !== flavorSlug,
+      ),
     });
   };
 
   const addMultipleFlavorOrders = (
     product: ProductType,
     selectedFlavors: string[],
-    quantity: number
+    quantity: number,
   ) => {
     if (product.type !== "flavor-selection") return;
 
@@ -257,9 +270,16 @@ const ProductProvider = ({ children }: ProductProps) => {
   const confirmCurrentOrder = () => {
     if (!currentDraft) return;
 
-    if (currentDraft.type === "flavor-selection" && currentDraft.selectedFlavors.length === 0)
+    if (
+      currentDraft.type === "flavor-selection" &&
+      currentDraft.selectedFlavors.length === 0
+    )
       return;
-    if (currentDraft.type === "quantity-selection" && currentDraft.quantity <= 0) return;
+    if (
+      currentDraft.type === "quantity-selection" &&
+      currentDraft.quantity <= 0
+    )
+      return;
 
     const updatedOrders = [...confirmedOrders, currentDraft];
     setConfirmedOrdersState(updatedOrders);
@@ -274,15 +294,17 @@ const ProductProvider = ({ children }: ProductProps) => {
   const cancelCurrentOrder = () => setCurrentDraft(null);
 
   const removeConfirmedOrder = (orderId: string) => {
-    const updatedOrders = confirmedOrders.filter((order) => order.id !== orderId);
+    const updatedOrders = confirmedOrders.filter(
+      (order) => order.id !== orderId,
+    );
     setConfirmedOrdersState(updatedOrders);
 
     updateURL({
       "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: updatedOrders.length > 0 ? ordersToURLString(updatedOrders) : null,
+      orders:
+        updatedOrders.length > 0 ? ordersToURLString(updatedOrders) : null,
     });
   };
-
 
   const value = {
     products: filteredProducts,
@@ -324,7 +346,6 @@ const ProductProvider = ({ children }: ProductProps) => {
     </ProductsContext.Provider>
   );
 };
-
 
 const Product = ({ children }: ProductProps) => {
   return (

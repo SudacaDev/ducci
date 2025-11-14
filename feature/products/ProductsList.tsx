@@ -13,7 +13,10 @@ import ModalFlavorProduct from "./components/ModalFlavorProduct";
 import SingleItems from "./components/SingleItems";
 
 import { useProducts } from "@/components/products/ProductContext";
-import { ProductListSkeleton, FlavorListSkeleton } from "@/components/products/skeletons/ProductSkeleton";
+import {
+  ProductListSkeleton,
+  FlavorListSkeleton,
+} from "@/components/products/skeletons/ProductSkeleton";
 // @Types
 import type { Product } from "@/types/product.type";
 
@@ -39,7 +42,9 @@ const ProductsList = () => {
   // ============================================
   // ESTADOS LOCALES
   // ============================================
-  const [tempQuantities, setTempQuantities] = useState<Record<number, number>>({});
+  const [tempQuantities, setTempQuantities] = useState<Record<number, number>>(
+    {},
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -73,14 +78,17 @@ const ProductsList = () => {
     setSelectedProduct(null);
   };
 
-  const handleConfirmFromModal = (selectedFlavors: string[], quantity: number) => {
+  const handleConfirmFromModal = (
+    selectedFlavors: string[],
+    quantity: number,
+  ) => {
     if (!selectedProduct) return;
 
     addMultipleFlavorOrders(selectedProduct, selectedFlavors, quantity);
 
     toast.success(
       `${quantity} ${selectedProduct.name} agregado${quantity > 1 ? "s" : ""} al carrito`,
-      { duration: 2000 }
+      { duration: 2000 },
     );
   };
 
@@ -131,7 +139,7 @@ const ProductsList = () => {
       if (currentDraft.selectedFlavors.length >= currentDraft.maxFlavors) {
         toast.error(
           `Máximo ${currentDraft.maxFlavors} sabores para este tamaño`,
-          { duration: 2000 }
+          { duration: 2000 },
         );
         return;
       }
@@ -139,7 +147,7 @@ const ProductsList = () => {
       addFlavorToDraft(flavorSlug);
       toast.success(
         `Sabor agregado (${currentDraft.selectedFlavors.length + 1} de hasta ${currentDraft.maxFlavors})`,
-        { duration: 1500 }
+        { duration: 1500 },
       );
     }
   };
@@ -201,7 +209,7 @@ const ProductsList = () => {
 
     toast.success(
       `${quantity} ${item.name} agregado${quantity > 1 ? "s" : ""} al carrito`,
-      { duration: 2000 }
+      { duration: 2000 },
     );
 
     setTempQuantities({ ...tempQuantities, [item.id]: 1 });
@@ -234,11 +242,11 @@ const ProductsList = () => {
   // FILTRAR PRODUCTOS POR TIPO
   // ============================================
   const flavorProducts = filteredProducts.filter(
-    (p) => p.type === "flavor-selection" && p.price > 0
+    (p) => p.type === "flavor-selection" && p.price > 0,
   );
 
   const quantityProducts = filteredProducts.filter(
-    (p) => p.type === "quantity-selection"
+    (p) => p.type === "quantity-selection",
   );
 
   const singleItems = filteredProducts.filter((p) => p.type === "single-item");
@@ -300,8 +308,9 @@ const ProductsList = () => {
       {/* ============================================
           SECCIÓN 2: SABORES (VIEJO FLUJO)
           ============================================ */}
-      {currentDraft && currentDraft.type === "flavor-selection" && (
-        loading ? (
+      {currentDraft &&
+        currentDraft.type === "flavor-selection" &&
+        (loading ? (
           <div className="mb-8 mx-4">
             <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
             <FlavorListSkeleton count={12} />
@@ -316,10 +325,11 @@ const ProductsList = () => {
           />
         ) : (
           <div className="text-center py-8">
-            <p className="text-gray-600">No hay sabores disponibles en esta sucursal</p>
+            <p className="text-gray-600">
+              No hay sabores disponibles en esta sucursal
+            </p>
           </div>
-        )
-      )}
+        ))}
 
       {/* ============================================
           SECCIÓN 3: PRODUCTOS CON CANTIDAD
@@ -379,7 +389,9 @@ const ProductsList = () => {
           ============================================ */}
       {error && !loading && (
         <div className="text-center py-12">
-          <p className="text-red-600 font-semibold mb-2">Error al cargar productos</p>
+          <p className="text-red-600 font-semibold mb-2">
+            Error al cargar productos
+          </p>
           <p className="text-gray-600 text-sm">{error}</p>
         </div>
       )}
@@ -387,17 +399,20 @@ const ProductsList = () => {
       {/* ============================================
           EMPTY STATE
           ============================================ */}
-      {!loading && !error && filteredProducts.length === 0 && selectedBranchId !== null && (
-        <div className="text-center py-12">
-          <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600 text-lg font-semibold">
-            No hay productos disponibles
-          </p>
-          <p className="text-gray-500 text-sm mt-2">
-            Prueba seleccionando otra categoría o sucursal
-          </p>
-        </div>
-      )}
+      {!loading &&
+        !error &&
+        filteredProducts.length === 0 &&
+        selectedBranchId !== null && (
+          <div className="text-center py-12">
+            <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600 text-lg font-semibold">
+              No hay productos disponibles
+            </p>
+            <p className="text-gray-500 text-sm mt-2">
+              Prueba seleccionando otra categoría o sucursal
+            </p>
+          </div>
+        )}
     </>
   );
 };

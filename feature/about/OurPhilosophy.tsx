@@ -1,3 +1,5 @@
+// OurPhilosophy.tsx
+
 "use client";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -7,6 +9,8 @@ import useGoToPage from "@/libs/goToPage";
 import useIntersectionObserver from "@/hooks/intersection-observer";
 import CTAButton from "@/components/cta-button";
 import Block from "@/components/content-block";
+import { useHeroAnimation } from "../home/components/hero/hooks/useHeroAnimation";
+import { useRef } from "react";
 
 const observerOptions = {
   root: null,
@@ -15,6 +19,24 @@ const observerOptions = {
 };
 
 const OurPhilosophy = () => {
+  // 1. REFS PARA LA PRIMERA SECCIÓN (Misión)
+  const refTitle = useRef<HTMLDivElement>(null);
+  const refBodyCopy = useRef<HTMLDivElement>(null);
+  const refButtonCTA = useRef<HTMLDivElement>(null);
+
+  // 2. REFS PARA LA SEGUNDA SECCIÓN (NUEVA DECLARACIÓN)
+  const refTitle2 = useRef<HTMLDivElement>(null); // ← VUELVE ESTA DECLARACIÓN
+  const refBodyCopy2 = useRef<HTMLDivElement>(null); // ← VUELVE ESTA DECLARACIÓN
+  const refButtonCTA2 = useRef<HTMLDivElement>(null); // ← VUELVE ESTA DECLARACIÓN
+
+  // LLAMADA 1: Para la sección 'Misión'
+  // El segundo argumento (refEyebrow) se pasa como 'undefined' para no desfasar los demás.
+  useHeroAnimation(refTitle, undefined, refBodyCopy, refButtonCTA); // ← CAMBIO
+
+  // LLAMADA 2: Para la sección 'Nuestra Filosofía'
+  // El segundo argumento (refEyebrow) se pasa como 'undefined'.
+  useHeroAnimation(refTitle2, undefined, refBodyCopy2, refButtonCTA2); // ← CAMBIO
+
   const goToPage = useGoToPage();
   const { ref: refHistoria, isIntersecting: isHistoriaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
@@ -39,8 +61,8 @@ const OurPhilosophy = () => {
         </div>
         <div className="journey_content grid-content_right ">
           <Block>
-            <Block.Title>Misión</Block.Title>
-            <Block.Body>
+            <Block.Title ref={refTitle}>Misión</Block.Title>
+            <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
                 <p>
                   Crear espacios accesibles, cálidos y bien pensados donde todas
@@ -57,12 +79,12 @@ const OurPhilosophy = () => {
                 </p>
               </div>
             </Block.Body>
-            <Block.Footer>
+            <Block.Footer ref={refButtonCTA}>
               <CTAButton
                 className="button__cta--secondary"
                 onClick={() => goToPage(String(MENU.PRODUCTS))}
               >
-                Conoce nuestros sabores{" "}
+                Conoce nuestros sabores
                 <span>
                   <ArrowRight size={16} />
                 </span>
@@ -75,9 +97,8 @@ const OurPhilosophy = () => {
       <div ref={refFilosofia} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <Block>
-            <Block.Title>Nuestra Filosofía</Block.Title>
-
-            <Block.Body>
+            <Block.Title ref={refTitle2}>Nuestra Filosofía</Block.Title>
+            <Block.Body ref={refBodyCopy2}>
               <div className="flex flex-col about-section__text">
                 <p>
                   Creemos que un helado excepcional comienza con ingredientes
@@ -96,7 +117,7 @@ const OurPhilosophy = () => {
                 </p>
               </div>
             </Block.Body>
-            <Block.Footer>
+            <Block.Footer ref={refButtonCTA2}>
               <CTAButton
                 className="button__cta--secondary"
                 onClick={() => goToPage(String(MENU.PRODUCTS))}
