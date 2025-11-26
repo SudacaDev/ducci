@@ -60,32 +60,22 @@
   --e-global-text-color: hsl(var(--e-global-text-color-hsl));
   --e-global-text-dark: hsl(var(--e-global-text-dark-hsl));
 
-  --secondary-lighter: hsl(
-    var(--secondary-h),
-    var(--secondary-s),
-    calc(var(--secondary-l) + 19%)
-  );
-  --secondary-lightest: hsl(
-    var(--secondary-h),
-    var(--secondary-s),
-    calc(var(--secondary-l) + 44%)
-  );
-  --secondary-darker-alt: hsl(
-    var(--secondary-h),
-    calc(var(--secondary-s) + 3%),
-    calc(var(--secondary-l) - 31%)
-  );
+  --secondary-lighter: hsl(var(--secondary-h),
+      var(--secondary-s),
+      calc(var(--secondary-l) + 19%));
+  --secondary-lightest: hsl(var(--secondary-h),
+      var(--secondary-s),
+      calc(var(--secondary-l) + 44%));
+  --secondary-darker-alt: hsl(var(--secondary-h),
+      calc(var(--secondary-s) + 3%),
+      calc(var(--secondary-l) - 31%));
 
-  --secondary-hover: hsl(
-    var(--secondary-h),
-    var(--secondary-s),
-    calc(var(--secondary-l) - 25%)
-  );
-  --secondary-hover-darkest: hsl(
-    var(--secondary-h),
-    var(--secondary-s),
-    calc(var(--secondary-l) - 28%)
-  );
+  --secondary-hover: hsl(var(--secondary-h),
+      var(--secondary-s),
+      calc(var(--secondary-l) - 25%));
+  --secondary-hover-darkest: hsl(var(--secondary-h),
+      var(--secondary-s),
+      calc(var(--secondary-l) - 28%));
 
   /* Fuentes */
   --font-poppins: "Poppins", sans-serif;
@@ -142,6 +132,7 @@ body {
 
 main {
   position: relative;
+  z-index: 2;
 }
 
 .sub-banner {
@@ -154,6 +145,7 @@ main {
   background-color: var(--background);
   gap: 32px;
   background-image: url(/images/bg-banner.jpg);
+
   @media screen and (max-width: 768px) {
     padding-block: 3em;
   }
@@ -186,6 +178,7 @@ main {
 }
 
 @media screen and (max-width: 980px) {
+
   .banner-cta,
   .about-home,
   .product-home {
@@ -206,17 +199,21 @@ main {
 .grid-image_left {
   grid-column: 1 / 7;
 }
+
 .grid-content_left {
   grid-column: 1 / 7;
 }
+
 .grid-content_right {
   grid-column: 7 / 13;
 }
+
 .grid-image_right {
   grid-column: 7 / 13;
 }
 
 @media screen and (max-width: 980px) {
+
   .grid-image_left,
   .grid-image_right,
   .grid-content_left,
@@ -235,6 +232,7 @@ main {
 }
 
 @media screen and (max-width: 980px) {
+
   .banner-cta,
   .about-home,
   .product-home,
@@ -304,6 +302,7 @@ main {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
+
 .button__cta:hover {
   box-shadow: 0px 3px 22px 3px hsla(var(--secondary-color-dark), 0.27);
 }
@@ -314,11 +313,9 @@ main {
 }
 
 .button__cta:hover {
-  background-color: hsl(
-    var(--primary-h),
-    var(--primary-s),
-    calc(var(--primary-l) - 15%)
-  );
+  background-color: hsl(var(--primary-h),
+      var(--primary-s),
+      calc(var(--primary-l) - 15%));
 }
 
 .button__cta span:before {
@@ -348,11 +345,9 @@ main {
 
 .button__cta--secondary:hover span:before,
 .button__cta:hover span:before {
-  background-color: hsl(
-    var(--primary-h),
-    var(--primary-s),
-    calc(var(--primary-l) - 20%)
-  );
+  background-color: hsl(var(--primary-h),
+      var(--primary-s),
+      calc(var(--primary-l) - 20%));
 }
 
 .button__cta--secondary {
@@ -396,9 +391,11 @@ main {
   padding: 0.5em 1em 0.5em 1.5em;
   height: auto;
 }
+
 .button__cta--secondary {
   color: var(--primary-color-light);
 }
+
 .aos-animate {
   opacity: 0;
   transform: translateY(40px);
@@ -416,8 +413,8 @@ main {
   background-color: var(--secondary-color);
   color: var(--primary-color);
 }
-.cancel-btn {
-}
+
+.cancel-btn {}
 
 .confirm-btn,
 .cancel-btn {
