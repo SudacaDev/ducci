@@ -2,13 +2,50 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 */3 * *'  # Cada 3 días a medianoche UTC
+  workflow_dispatch:  # Permite ejecutarlo manualmente para probar
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase
+      - name: Ping Supabase with INSERT
         run: |
-          curl -s "${{ secrets.SUPABASE_URL }}/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}"
+          response=$(curl -s -w "\n%{http_code}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/active_project" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=minimal" \
+            -d '{"num": 1}')
+          
+          http_code=$(echo "$response" | tail -n1)
+          
+          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
+            echo "✅ Supabase ping successful (HTTP $http_code)"
+          else
+            echo "❌ Supabase ping failed (HTTP $http_code)"
+            echo "$response"
+            exit 1
+          fi
+
+      - name: Cleanup old records (keep last 10)
+        run: |
+          # Obtener IDs a eliminar (todos excepto los últimos 10)
+          ids_to_delete=$(curl -s \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/active_project?select=id&order=id.desc&offset=10" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          
+          # Si hay registros para eliminar
+          if [ "$ids_to_delete" != "[]" ]; then
+            echo "🧹 Cleaning up old records..."
+            curl -s \
+              "${{ secrets.SUPABASE_URL }}/rest/v1/active_project?id=lt.$(echo $ids_to_delete | jq -r '.[0].id // empty')" \
+              -X DELETE \
+              -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+            echo "✅ Cleanup complete"
+          else
+            echo "ℹ️ No cleanup needed"
+          fi
