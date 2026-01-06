@@ -1,12 +1,18 @@
+// components/header/Nav.tsx
 "use client";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { X, ShoppingCart } from "lucide-react";
 import { NAV } from "@/constants/nav";
 import { useHeader } from "./Header";
 import { Button } from "../ui/button";
+import { useCart } from "@/components/cart";
 
 const Nav = () => {
   const { show, isActive, onCloseMenu } = useHeader();
+  const { cart, isHydrated } = useCart();
+
+  // Calcular total de items
+  const totalItems = cart.length;
 
   return (
     <nav
@@ -54,6 +60,18 @@ const Nav = () => {
           );
         })}
       </ul>
+      
+      {/* Cart Summary */}
+      <div className="cart-summary flex items-center gap-2 px-4 py-2">
+        <ShoppingCart size={20} />
+        <span>
+          {isHydrated ? (
+            <>({totalItems})</>
+          ) : (
+            <>(0)</>
+          )}
+        </span>
+      </div>
     </nav>
   );
 };

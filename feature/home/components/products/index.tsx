@@ -87,7 +87,7 @@ const ProductsHomeSection = () => {
         <div className="items-center justify-center flex">
           <SectionHeader align="center" className="text-center">
             <h2 className="section-header__title" ref={refTitle}>
-              Explorá <span>nuestros sabores</span>
+              <span>SONREÍ, ES DUCCI</span>
             </h2>
             <p className="section-header__subtitle" ref={refBodyCopy}>
               Probá nuestros helados, disfrutá de una experiencia distinta!

@@ -46,7 +46,7 @@
   z-index: 8;
   border-radius: 32px;
   width: 860px;
-  padding: 4em;
+  padding: 4em 4em 0 0;
   background-color: white;
 }
 

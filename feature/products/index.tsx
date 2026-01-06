@@ -12,7 +12,7 @@ import "./styles/products.css";
 const ProductsPageContent = () => {
   return (
     <div id="product-wrapper" className="h-full  ">
-      <InnerLayout bannerTitle="Nuestros Productos">
+      <InnerLayout bannerTitle="Disfrutá Ducci">
         <Product>
           <div className="flex w-full flex-col relatve">
             <OrderSelector />

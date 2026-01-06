@@ -6,7 +6,7 @@ import useGoToPage from "@/libs/goToPage";
 import { MENU } from "@/types/nav.type";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+//import Link from "next/link";
 import { useRef } from "react";
 import { useHeroAnimation } from "../home/components/hero/hooks/useHeroAnimation";
 
@@ -27,9 +27,8 @@ const JourneyCon = () => {
   const { ref: refHistoria, isIntersecting: isFilosofiaVisible } =
     useIntersectionObserver<HTMLDivElement>(observerOptions);
 
-  const filosofiaClasses = `journey-con grid-image_right aos-animate ${
-    isFilosofiaVisible ? "show" : ""
-  }`;
+  const filosofiaClasses = `journey-con grid-image_right aos-animate ${isFilosofiaVisible ? "show" : ""
+    }`;
 
   const goToPage = useGoToPage();
 
@@ -38,7 +37,7 @@ const JourneyCon = () => {
       <div className="journey-con">
         <div className="journey-image grid-image_left relative ">
           <Image
-            src="/images/guilt-image.jpg"
+            src="/images/el-camino.jpeg"
             fill
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -47,22 +46,23 @@ const JourneyCon = () => {
         </div>
         <div className="journey_content grid-content_right">
           <Block>
-            <Block.Title ref={refTitle}>Nuestra Historia</Block.Title>
+            <Block.Title ref={refTitle}>El camino que elegimos</Block.Title>
             <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
                 <p>
-                  Ducci Gelatería nació en 2015 en el corazón de Rosario, con la
-                  pasión de crear helados artesanales que rescatan el auténtico
-                  sabor del gelato italiano. Nuestra familia, con raíces
-                  italo-argentinas, trajo consigo recetas tradicionales que
-                  perfeccionamos con ingredientes locales de primera calidad.
+                  Nuestra propuesta combina tradición, técnica y creatividad para
+                  ofrecer sabores que transmiten calidad en cada cucharada.
                 </p>
                 <p>
-                  Desde nuestros inicios, nos comprometimos a elaborar cada
-                  sabor con dedicación y amor, sin aditivos artificiales ni
-                  conservantes. Hoy, somos el punto de encuentro favorito de
-                  familias y amigos que buscan un momento dulce y auténtico.
+                  Hemos consolidado un estilo propio: procesos cuidados, elaboración
+                  diaria y una selección rigurosa de ingredientes. Este compromiso nos
+                  permite garantizar un producto noble, estable y de alta calidad.
                 </p>
+                <p> En Ducci Gelateria entendemos el helado como una experiencia. Por eso
+                  trabajamos en mejorar permanentemente nuestras formulaciones,
+                  incorporar nuevas combinaciones y mantener un servicio cercano y
+                  atento. Cada pote, cada bocha y cada presentación reflejan nuestra
+                  identidad: calidad y dedicación.</p>
               </div>
             </Block.Body>
             <Block.Footer ref={refButtonCTA}>
@@ -70,7 +70,7 @@ const JourneyCon = () => {
                 className="button__cta--secondary"
                 onClick={() => goToPage(String(MENU.PRODUCTS))}
               >
-                Conoce nuestros sabores
+                Pedí Ducci
                 <span>
                   <ArrowRight size={16} />
                 </span>
@@ -83,18 +83,25 @@ const JourneyCon = () => {
       <div ref={refHistoria} className={filosofiaClasses}>
         <div className="journey_content grid-content_left">
           <Block>
-            <Block.Title ref={refTitle}>Visión y Propósito</Block.Title>
+            <Block.Title ref={refTitle}>Momentos Ducci</Block.Title>
             <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
                 <p>
-                  Queremos ser la excusa perfecta para pasear. Para salir con
-                  tus hijos, con amigas, con tus padres.
+                  Momentos Ducci es nuestra manera de celebrar esos instantes que se
+                  vuelven especiales cuando el helado acompaña. Pequeños rituales cotidianos,
+                  encuentros inesperados o celebraciones que merecen un
+                  sabor a la altura: cada uno de ellos encuentra en Ducci un aliado para
+                  convertirse en un recuerdo.
                 </p>
                 <p>
-                  Queremos que cada visita a Ducci sea un recreo en medio del
-                  pueblo: un momento que corte la rutina, habilite una charla, o
-                  simplemente genere un recuerdo.
+                  Creemos que el helado no es solo un producto, sino una experiencia que
+                  conecta. Por eso elaboramos cada sabor con dedicación, para que esté
+                  presente donde realmente importa: en una sobremesa larga, en un
+                  brindis improvisado, en una tarde en familia o en ese descanso que necesitabas.
                 </p>
+                <p>En Momentos Ducci invitamos a detenernos, disfrutar y compartir.
+                  Porque cuando la calidad se nota y el sabor emociona, cada instante
+                  puede transformarse en un momento que vale la pena guardar.</p>
               </div>
             </Block.Body>
             <Block.Footer ref={refButtonCTA}>
@@ -102,7 +109,7 @@ const JourneyCon = () => {
                 className="button__cta--secondary"
                 onClick={() => goToPage(String(MENU.PRODUCTS))}
               >
-                Conoce nuestros sabores
+                Pedí Ducci
                 <span>
                   <ArrowRight size={16} />
                 </span>
@@ -112,7 +119,7 @@ const JourneyCon = () => {
         </div>
         <div className="journey-image grid-image_right relative ">
           <Image
-            src="/images/guilt-image.jpg"
+            src="/images/momentos.jpg"
             fill
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 50vw"

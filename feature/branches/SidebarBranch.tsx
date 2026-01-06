@@ -47,7 +47,7 @@ const SidebarBranch = ({
   return (
     <div className="branches-sidebar">
       <div className="sidebar-header">
-        <h2>Encontrá un Ducci cerca</h2>
+        <h2>Encontrá tu Ducci</h2>
 
         <div className="search-box">
           <span className="search-icon">🔍</span>
@@ -110,8 +110,8 @@ const SidebarBranch = ({
                   <div
                     key={branch.id}
                     className={`branch-card branch-card--nearby ${selectedBranch === branch.id ? "active" : ""}`}
-                    onMouseEnter={() => setHoveredBranch(branch.id)} // ← CAMBIO
-                    onMouseLeave={() => setHoveredBranch(null)} // ← CAMBIO
+                    onMouseEnter={() => setHoveredBranch(branch.id)}  
+                    onMouseLeave={() => setHoveredBranch(null)}  
                     onClick={() => setSelectedBranch(branch.id)}
                   >
                     <div className="branch-card__distance">

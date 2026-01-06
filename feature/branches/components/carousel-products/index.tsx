@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import "../../styles/home_carousel.css";
-import Block from "@/components/content-block";
+ 
 
 const carouselItems = Array(12).fill(
   <div className="home_carousel--item">imagen local</div>,
@@ -38,7 +38,7 @@ const CarouselProducts = () => {
       <div className="home_carousel--info">
         <div className="home_carousel--info-inner">
           <h2>Visitá nuestras sucursales</h2>
-          <p> Acompañanos en nuestra aventura </p>
+          <p>Viví tu momento Ducci</p>
         </div>
       </div>
       <div className="home_carousel--wrapper">

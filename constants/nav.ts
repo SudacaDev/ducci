@@ -3,14 +3,14 @@ import { MENU } from "@/types/nav.type";
 export const NAV = [
   {
     id: "mskkjsouisbyusyy11992",
-    label: "¿quienes somos?",
+    label: "La magia Ducci",
     slug: "nosotros",
     url: MENU.ABOUT,
     alwaysActive: false,
   },
   {
     id: "idoidisjsmooij930920",
-    label: "productos",
+    label: "Disfrutá Ducci",
     slug: "productos",
     url: MENU.PRODUCTS,
     alwaysActive: false,

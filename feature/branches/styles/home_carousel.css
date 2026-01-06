@@ -108,6 +108,8 @@
   justify-content: center;
   height: 100%;
   gap: var(--gap);
+  color: var(--secondary-color);
+      font-family: var(--font-poppins), sans-serif;
   @media screen and (max-width: 820px) {
     align-items: center;
   }

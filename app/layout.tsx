@@ -1,9 +1,8 @@
 "use client";
 import { Poppins, DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import Lenis from "lenis";
 import "./globals.css";
-import { useEffect } from "react";
+import { CartProvider } from "@/components/cart";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -27,7 +26,9 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${dmSans.variable} antialiased grid grid-rows-[auto_1fr_auto] min-h-screen`}
       >
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
         <Toaster
           position="top-center"
           reverseOrder={false}
@@ -41,7 +42,6 @@ export default function RootLayout({
               borderRadius: "8px",
               fontSize: "14px",
             },
-
             success: {
               duration: 3000,
               iconTheme: {
@@ -49,7 +49,6 @@ export default function RootLayout({
                 secondary: "#fff",
               },
             },
-
             error: {
               duration: 4000,
               iconTheme: {

@@ -30,7 +30,7 @@ const AboutUsContentPage = () => {
     };
   }, []);
   return (
-    <InnerLayout id="about" bannerTitle="Quienes Somos">
+    <InnerLayout id="about" bannerTitle="La magia Ducci">
       <CenterContainer center>
         <JourneyCon />
       </CenterContainer>

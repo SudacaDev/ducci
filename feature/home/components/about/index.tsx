@@ -62,7 +62,7 @@ const AboutHomeSection = () => {
               <div className="about-home__wrappe--image-wrapper overflow-hidden">
                 <div className="about-home__wrappe--image-wrapper__content">
                   <Image
-                    src="/images/guilt-image.jpg"
+                    src="/images/la-magia-de-ducci.png"
                     fill
                     style={{ objectFit: "cover" }}
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -77,22 +77,19 @@ const AboutHomeSection = () => {
                     <Block>
                       <Block.Content>
                         <Block.Subtitle ref={refEyebrow}>
-                          {" "}
-                          ¿Quiénes Somos?{" "}
+                          La Magia de Ducci
                         </Block.Subtitle>
                         <Block.Title ref={refTitle}>
-                          Nuestros valores, <span>nuestra cultura</span>
+                          <span>El momento que elgimos</span>
                         </Block.Title>
                       </Block.Content>
                       <Block.Body ref={refBodyCopy}>
                         <div className="about-home__wrappe--info__content__body">
                           <p>
-                            En Ducci creemos en lo simple, en lo cuidado y en lo
-                            compartido.
+                            Combinamos tradición, técnica y creatividad para ofrecer sabores de calidad en cada cucharada.
                           </p>
                           <p>
-                            Desde quien atiende, hasta quien limpia. Todos
-                            hacemos cultura.
+                            Elaboración diaria, procesos cuidados y selección rigurosa de ingredientes garantizan un producto noble y de alta calidad.
                           </p>
                         </div>
                       </Block.Body>

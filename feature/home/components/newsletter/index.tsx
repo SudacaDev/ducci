@@ -38,7 +38,7 @@ const NewsletterHomeSection = () => {
         <div className="newsletter-home-content__form">
           <div className="newsletter-home-content__image--content">
             <Image
-              src="/images/special-image.png"
+              src="/images/MILSHAKE.png"
               style={{ objectFit: "cover" }}
               width={600}
               height={600}
@@ -47,9 +47,9 @@ const NewsletterHomeSection = () => {
           </div>
           <Block>
             <Block.Content>
-              <Block.Subtitle>Newsletter</Block.Subtitle>
+              <Block.Subtitle>Redes sociales</Block.Subtitle>
               <Block.Title>
-                <span>Beneficios especiales </span> te esperan
+                <span>¡Seguinos, ofertas</span> te esperan!
               </Block.Title>
             </Block.Content>
             <Block.Body>

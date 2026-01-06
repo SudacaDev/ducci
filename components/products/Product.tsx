@@ -1,3 +1,4 @@
+// components/products/ProductProvider.tsx
 "use client";
 
 import { ReactNode, useState, useEffect, Suspense } from "react";
@@ -5,7 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useProductsDB } from "@/hooks/useProducts";
 import { useFlavorsDB } from "@/hooks/useFlavors";
 import { ProductsContext } from "./ProductContext";
-import { parseOrdersFromURL, ordersToURLString } from "./utils/orderParsers";
+import { useCart } from "@/components/cart";
 import { getSizeFromProduct } from "./utils/orderHelpers";
 import type { Product as ProductType } from "@/types/product.type";
 import type {
@@ -20,21 +21,25 @@ interface ProductProps {
   children: ReactNode;
 }
 
-const ProductProvider = ({ children }: ProductProps) => {
+export const ProductProvider = ({ children }: ProductProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  // 👇 Usar el cart global desde CartContext
+  const {
+    cart,
+    selectedBranchId,
+    addToCart,
+    removeFromCart,
+    setBranchId,
+    clearCart,
+  } = useCart();
 
   const selectedCategory = searchParams.get("category") || "todos";
   const viewMode = (searchParams.get("view") as "grid" | "list") || "grid";
   const sortOrder =
     (searchParams.get("sort") as "asc" | "desc" | "none") || "none";
   const openFilter = searchParams.get("filter") === "open";
-  const branchIdParam = searchParams.get("branch-id");
-  const ordersParam = searchParams.get("orders");
-
-  const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(
-    branchIdParam ? parseInt(branchIdParam) : null,
-  );
 
   const {
     products: productsFromDB,
@@ -63,19 +68,8 @@ const ProductProvider = ({ children }: ProductProps) => {
   const filteredProducts = productsFromDB;
   const allFlavors = flavorsFromDB;
 
-  const [confirmedOrders, setConfirmedOrdersState] = useState<Order[]>(
-    parseOrdersFromURL(ordersParam),
-  );
-
+  // ProductProvider solo maneja el draft (orden en progreso)
   const [currentDraft, setCurrentDraft] = useState<Order | null>(null);
-
-  useEffect(() => {
-    const newBranchId = branchIdParam ? parseInt(branchIdParam) : null;
-    const newOrders = parseOrdersFromURL(ordersParam);
-
-    setSelectedBranchIdState(newBranchId);
-    setConfirmedOrdersState(newOrders);
-  }, [branchIdParam, ordersParam]);
 
   const updateURL = (params: Record<string, string | null>) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -106,23 +100,6 @@ const ProductProvider = ({ children }: ProductProps) => {
     updateURL({ sort: order });
   const openFilterToggle = () =>
     updateURL({ filter: openFilter ? "closed" : "open" });
-
-  const setBranchId = (branchId: number | null) => {
-    setSelectedBranchIdState(branchId);
-    setConfirmedOrdersState([]);
-    setCurrentDraft(null);
-    updateURL({
-      "branch-id": branchId ? branchId.toString() : null,
-      orders: null,
-    });
-  };
-
-  const clearCart = () => {
-    setSelectedBranchIdState(null);
-    setConfirmedOrdersState([]);
-    setCurrentDraft(null);
-    updateURL({ "branch-id": null, orders: null });
-  };
 
   const startFlavorOrder = (product: ProductType) => {
     if (product.type !== "flavor-selection") return;
@@ -173,8 +150,6 @@ const ProductProvider = ({ children }: ProductProps) => {
   ) => {
     if (product.type !== "flavor-selection") return;
 
-    const newOrders: FlavorOrder[] = [];
-
     for (let i = 0; i < quantity; i++) {
       const newOrder: FlavorOrder = {
         id: `order-${Date.now()}-${i}-${Math.random().toString(36).substr(2, 9)}`,
@@ -186,16 +161,9 @@ const ProductProvider = ({ children }: ProductProps) => {
         price: product.price,
         selectedFlavors: selectedFlavors,
       };
-      newOrders.push(newOrder);
+      
+      addToCart(newOrder); // 👈 Usa el método global del CartContext
     }
-
-    const updatedOrders = [...confirmedOrders, ...newOrders];
-    setConfirmedOrdersState(updatedOrders);
-
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: ordersToURLString(updatedOrders),
-    });
   };
 
   const startQuantityOrder = (product: ProductType, quantity: number) => {
@@ -211,13 +179,7 @@ const ProductProvider = ({ children }: ProductProps) => {
       quantity,
     };
 
-    const updatedOrders = [...confirmedOrders, newOrder];
-    setConfirmedOrdersState(updatedOrders);
-
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: ordersToURLString(updatedOrders),
-    });
+    addToCart(newOrder); // 👈 Usa el método global del CartContext
   };
 
   const updateQuantityOrder = (quantity: number) => {
@@ -236,13 +198,7 @@ const ProductProvider = ({ children }: ProductProps) => {
       price: product.price,
     };
 
-    const updatedOrders = [...confirmedOrders, newOrder];
-    setConfirmedOrdersState(updatedOrders);
-
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: ordersToURLString(updatedOrders),
-    });
+    addToCart(newOrder); // 👈 Usa el método global del CartContext
   };
 
   const addBoxOrder = (product: ProductType) => {
@@ -258,13 +214,7 @@ const ProductProvider = ({ children }: ProductProps) => {
       boxQuantity: product.config.boxQuantity,
     };
 
-    const updatedOrders = [...confirmedOrders, newOrder];
-    setConfirmedOrdersState(updatedOrders);
-
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: ordersToURLString(updatedOrders),
-    });
+    addToCart(newOrder); // 👈 Usa el método global del CartContext
   };
 
   const confirmCurrentOrder = () => {
@@ -281,30 +231,11 @@ const ProductProvider = ({ children }: ProductProps) => {
     )
       return;
 
-    const updatedOrders = [...confirmedOrders, currentDraft];
-    setConfirmedOrdersState(updatedOrders);
+    addToCart(currentDraft); // 👈 Usa el método global del CartContext
     setCurrentDraft(null);
-
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders: ordersToURLString(updatedOrders),
-    });
   };
 
   const cancelCurrentOrder = () => setCurrentDraft(null);
-
-  const removeConfirmedOrder = (orderId: string) => {
-    const updatedOrders = confirmedOrders.filter(
-      (order) => order.id !== orderId,
-    );
-    setConfirmedOrdersState(updatedOrders);
-
-    updateURL({
-      "branch-id": selectedBranchId ? selectedBranchId.toString() : null,
-      orders:
-        updatedOrders.length > 0 ? ordersToURLString(updatedOrders) : null,
-    });
-  };
 
   const value = {
     products: filteredProducts,
@@ -313,8 +244,8 @@ const ProductProvider = ({ children }: ProductProps) => {
     selectedCategory,
     viewMode,
     sortOrder,
-    selectedBranchId,
-    confirmedOrders,
+    selectedBranchId, // 👈 Del CartContext
+    confirmedOrders: cart, // 👈 Del CartContext (renombrado para mantener compatibilidad)
     currentDraft,
     loading,
     error,
@@ -333,9 +264,9 @@ const ProductProvider = ({ children }: ProductProps) => {
     addBoxOrder,
     confirmCurrentOrder,
     cancelCurrentOrder,
-    removeConfirmedOrder,
-    setBranchId,
-    clearCart,
+    removeConfirmedOrder: removeFromCart, // 👈 Alias al método del CartContext
+    setBranchId, // 👈 Del CartContext
+    clearCart, // 👈 Del CartContext
   };
 
   return (

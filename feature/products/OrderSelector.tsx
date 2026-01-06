@@ -30,7 +30,7 @@ const OrderSelector = () => {
   return (
     <div className="bg-white place-order rounded-lg p-6 mb-6">
       <h3 className="text-3xl font-semibold mb-4 text-gray-800">
-        Selecciona tu sucursal
+       Disfrutá Ducci en casa
       </h3>
 
       {loading ? (
@@ -42,9 +42,9 @@ const OrderSelector = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+          <label htmlFor="branch-selector" className="text-sm font-semibold text-gray-700 flex items-center gap-2">
             <MapPin className="w-4 h-4 text-orange-500" />
-            Elige dónde quieres retirar tu pedido
+            Elegí donde querés hace tu pedido
           </label>
           <div className="order-selector">
             <Select

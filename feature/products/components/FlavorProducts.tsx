@@ -26,7 +26,7 @@ const FlavorProducts = ({
         Helados por peso
       </h3>
       <p className="text-sm text-gray-600 mb-4">
-        Selecciona el tamaño y luego elige tus sabores favoritos
+       Elegí tamaño y luego sabores
       </p>
 
       <div

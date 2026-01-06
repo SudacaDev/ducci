@@ -10,6 +10,7 @@ header
 }
 .header nav {
   gap: 40px;
+  display: flex;
 }
 .header .logo {
   width: 100px;
