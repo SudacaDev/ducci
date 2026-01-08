@@ -210,8 +210,11 @@ export const ModalFlavorProduct = ({
             {/* Imagen */}
             <div className="flex justify-center">
               <div className="modal-img ">
+
+                
                 <Image
-                  src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
+                  src={product.image || "https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"}
+                 
                   alt={product.name}
                   fill
                   className="object-contain"

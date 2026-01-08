@@ -41,7 +41,7 @@ const FlavorProducts = ({
             <button
               type="button"
               key={item.id}
-              onClick={() => handleOpenModal(item)} // ← CAMBIAR ESTA LÍNEA
+              onClick={() => handleOpenModal(item)} 
               disabled={!selectedBranchId}
               className={`product-list_item flex rounded-lg transition-all relative ${
                 isActive
@@ -66,12 +66,12 @@ const FlavorProducts = ({
               <div className="product-list_image inset-shadow-sm rounded-md">
                 <figure>
                   <Image
-                    src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
-                    alt={item.name}
-                    width={240}
-                    height={240}
-                    loading="lazy"
-                  />
+  src={item.image || '/placeholder-helado.jpg'}  
+  alt={item.name}
+  width={240}
+  height={240}
+  loading="lazy"
+/>
                 </figure>
               </div>
 

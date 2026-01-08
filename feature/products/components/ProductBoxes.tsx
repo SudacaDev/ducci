@@ -48,7 +48,7 @@ export const ProductBoxes = ({
             <div className="product-list_image inset-shadow-sm rounded-md">
               <figure>
                 <Image
-                  src="https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
+                    src={item.image || "/images/not-found.png"}
                   alt={item.name}
                   width={240}
                   height={240}
