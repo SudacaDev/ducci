@@ -1,4 +1,4 @@
-// components/cart/CartContext.tsx
+ 
 "use client";
 
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
@@ -91,7 +91,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     updateCartInURL(updatedCart, branchId);
   };
 
-  // Crear el value ANTES del return
+ 
   const contextValue: CartContextType = { 
     cart, 
     selectedBranchId,

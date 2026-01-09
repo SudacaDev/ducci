@@ -34,11 +34,13 @@ const AboutUsContentPage = () => {
       <CenterContainer center>
         <JourneyCon />
       </CenterContainer>
+      {/*
       <CenterContainer className="bg-[var(--primary-color)]">
         <div className="container mx-auto">
           <OurPhilosophy />
         </div>
       </CenterContainer>
+      */}
     </InnerLayout>
   );
 };

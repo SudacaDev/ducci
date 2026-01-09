@@ -26,7 +26,7 @@ const FlavorProducts = ({
         Helados por peso
       </h3>
       <p className="text-sm text-gray-600 mb-4">
-       Elegí tamaño y luego sabores
+        Elegí tamaño y luego sabores
       </p>
 
       <div
@@ -41,15 +41,14 @@ const FlavorProducts = ({
             <button
               type="button"
               key={item.id}
-              onClick={() => handleOpenModal(item)} 
+              onClick={() => handleOpenModal(item)}
               disabled={!selectedBranchId}
-              className={`product-list_item flex rounded-lg transition-all relative ${
-                isActive
+              className={`product-list_item flex rounded-lg transition-all relative ${isActive
                   ? "ring-4 ring-blue-500 shadow-lg bg-blue-50"
                   : !selectedBranchId
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:shadow-md hover:scale-102 cursor-pointer"
-              }`}
+                }`}
             >
               {!selectedBranchId && (
                 <div className="absolute top-2 right-2 z-20 bg-gray-400 rounded-full p-1">
@@ -66,12 +65,12 @@ const FlavorProducts = ({
               <div className="product-list_image inset-shadow-sm rounded-md">
                 <figure>
                   <Image
-  src={item.image || '/placeholder-helado.jpg'}  
-  alt={item.name}
-  width={240}
-  height={240}
-  loading="lazy"
-/>
+                    src={item.image || '/placeholder-helado.jpg'}
+                    alt={item.name}
+                    width={240}
+                    height={240}
+                    loading="lazy"
+                  />
                 </figure>
               </div>
 
