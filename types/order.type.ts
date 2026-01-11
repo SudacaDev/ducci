@@ -37,7 +37,8 @@ export type SingleItemOrder = BaseOrder & {
 
 export type BoxOrder = BaseOrder & {
   type: "box";
-  boxQuantity: number;
+  boxQuantity: number; // Cantidad de items DENTRO de la caja (ej: x6)
+  quantity: number; // Cantidad de CAJAS que se están comprando
 };
 
 export type Order = FlavorOrder | QuantityOrder | SingleItemOrder | BoxOrder;

@@ -1,4 +1,4 @@
-// components/products/ProductProvider.tsx
+
 "use client";
 
 import { ReactNode, useState, useEffect, Suspense } from "react";
@@ -175,7 +175,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
       type: "quantity-selection",
       productId: product.id,
       productName: product.name,
-      price: product.price,
+      price: product.price * quantity, // Precio total = precio unitario * cantidad
       quantity,
     };
 
@@ -201,17 +201,19 @@ export const ProductProvider = ({ children }: ProductProps) => {
     addToCart(newOrder); // 👈 Usa el método global del CartContext
   };
 
-  const addBoxOrder = (product: ProductType) => {
+  const addBoxOrder = (product: ProductType, quantity: number = 1) => {
     if (product.type !== "box") return;
     if (!product.config?.boxQuantity) return;
+    if (quantity <= 0) return;
 
     const newOrder: BoxOrder = {
       id: `order-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type: "box",
       productId: product.id,
       productName: product.name,
-      price: product.price,
+      price: product.price * quantity, // Precio total = precio unitario * cantidad
       boxQuantity: product.config.boxQuantity,
+      quantity, // Cantidad de cajas
     };
 
     addToCart(newOrder); // 👈 Usa el método global del CartContext

@@ -46,7 +46,7 @@ export interface ProductsContextType {
 
   // Other orders
   addSingleItemOrder: (product: ProductType) => void;
-  addBoxOrder: (product: ProductType) => void;
+  addBoxOrder: (product: ProductType, quantity: number) => void;
 
   // Order management
   confirmCurrentOrder: () => void;

@@ -234,8 +234,18 @@ const ProductsList = () => {
       return;
     }
 
-    addBoxOrder(item);
-    toast.success(`${item.name} agregado al carrito`, { duration: 2000 });
+    const quantity = tempQuantities[item.id] || 1;
+
+    // Agregar la caja con la cantidad especificada
+    addBoxOrder(item, quantity);
+
+    toast.success(
+      `${quantity} ${item.name} agregado${quantity > 1 ? "s" : ""} al carrito`,
+      { duration: 2000 },
+    );
+
+    // Resetear la cantidad a 1 después de agregar
+    setTempQuantities({ ...tempQuantities, [item.id]: 1 });
   };
 
   // ============================================
@@ -364,6 +374,8 @@ const ProductsList = () => {
           handleAddBox={handleAddBox}
           selectedBranchId={selectedBranchId}
           viewMode="grid"
+          tempQuantities={tempQuantities}
+          handleQuantityChange={handleQuantityChange}
         />
       ) : null}
 

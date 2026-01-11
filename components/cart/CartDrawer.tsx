@@ -1,4 +1,3 @@
- 
 "use client";
 
 import { ShoppingCart, X, Trash2 } from "lucide-react";
@@ -55,9 +54,12 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
       
       case "box":
         return (
-          <p className="text-sm text-gray-600">
-            {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"}
-          </p>
+          <div className="text-sm text-gray-600">
+            <p>{order.quantity} {order.quantity === 1 ? "caja" : "cajas"}</p>
+            <p className="text-xs text-gray-500">
+              {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"} por caja
+            </p>
+          </div>
         );
       
       case "single-item":
@@ -104,7 +106,7 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
             </DrawerDescription>
           </DrawerHeader>
 
-          {/* Cart Items */}
+     
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {!isHydrated ? (
               <div className="flex items-center justify-center h-32">
@@ -123,7 +125,7 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
                 {cart.map((order) => (
                   <div
                     key={order.id}
-                    className="flex gap-3 p-4 border rounded-lg bg-white hover:shadow-md transition-shadow"
+                    className="flex gap-3 p-4 border border-gray-300 rounded-lg bg-white"
                   >
                     <div className="flex-1">
                       <h3 className="font-medium text-gray-900">
@@ -137,7 +139,7 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
                     
                     <button
                       onClick={() => removeFromCart(order.id)}
-                      className="text-red-600 hover:text-red-700 p-2 h-fit"
+                      className="text-black hover:text-red-700 p-2 h-fit hover:cursor-pointer"
                     >
                       <X className="h-5 w-5" />
                     </button>
