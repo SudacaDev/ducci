@@ -100,10 +100,10 @@ header
     align-items: center;}
  
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1024px) {
   #open-menu,
   #close-menu {
-    display: block;
+    display: flex;
   }
   .header{
     z-index: 99;

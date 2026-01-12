@@ -37,9 +37,12 @@
     background-image: url(/images/bg-secondary.jpg);
     right: 0;
     bottom: 0;
-    background-color: var(--primary-color-light);
+    background-color: var(--secondary-color);
     width: 56%;
     z-index: 0;
+    @media screen and (max-width: 1100px) {
+      background-image: none;
+    }
   }
 }
 
@@ -137,7 +140,7 @@
 .banner-image {
   position: absolute;
   right: 0;
-  bottom: 0;
+ bottom: 80px;
 }
 
 .banner-image__content {
