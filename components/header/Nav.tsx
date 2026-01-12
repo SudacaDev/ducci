@@ -1,14 +1,18 @@
 "use client";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { ShoppingCart, X } from "lucide-react";
 import { NAV } from "@/constants/nav";
 import { useHeader } from "./Header";
 import { Button } from "../ui/button";
-import CartDrawer from "../cart/CartDrawer";
+ 
+import { useCartDrawer } from "@/contexts/CartDrawerContext";
+import { useCart } from "../cart";
  
 
 const Nav = () => {
   const { show, isActive, onCloseMenu } = useHeader();
+  const { openDrawer } = useCartDrawer();
+   const { cart, isHydrated } = useCart();
 
   return (
     <nav
@@ -58,8 +62,10 @@ const Nav = () => {
       </ul>
       
   
-      <div className="cart-wrapper px-4 py-2">
-        <CartDrawer />
+      <div className="cart-wrapper px-4 py-2 hover:cursor-pointer cart-header">
+       <button onClick={openDrawer} className="hover:cursor-pointer">
+        <ShoppingCart />{ cart.length > 0 && isHydrated && <span className="cart-count">{cart.length}</span> } 
+      </button>
       </div>
     </nav>
   );

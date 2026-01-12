@@ -16,11 +16,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 980px) {
-  .journey-image {
-    height: 400px;
-  }
-}
+ 
 
 .journey-image img {
   width: 100%;
@@ -123,18 +119,20 @@
   }
 }
 
+
 @media screen and (max-width: 768px) {
   .journey-con {
     padding-inline: 0em;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     padding-block: 0em;
     gap: 2em;
     place-items: center;
     margin-bottom: 2em;
   }
   .journey-image {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 500px;
+    max-height: 600px;
   }
   .about-section__text {
     font-size: 14px;
@@ -142,4 +140,14 @@
   .about-section__title {
     font-size: 32px;
   }
+}
+
+
+
+@media screen and (max-width: 980px) {
+  .journey-image {
+    height: 600px;
+  }
+
+
 }

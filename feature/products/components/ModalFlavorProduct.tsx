@@ -35,14 +35,11 @@ export const ModalFlavorProduct = ({
 
     if (isOpen) {
       const scrollY = window.scrollY;
-      console.log("📍 Current scroll position:", scrollY);
-
-      // INTENTAR DETENER LENIS
       const lenis = (window as any).lenis;
-      console.log("🎯 Lenis instance:", lenis);
+     
       if (lenis) {
         lenis.stop();
-        console.log("⏸️ Lenis STOPPED");
+ 
       } else {
         console.log("⚠️ Lenis NOT FOUND - usando fallback");
       }
@@ -56,17 +53,17 @@ export const ModalFlavorProduct = ({
       document.body.style.left = "0";
       document.body.style.right = "0";
       document.body.style.paddingRight = `${scrollBarWidth}px`;
-      console.log("🔒 Body scroll LOCKED");
+  
     } else {
-      // REACTIVAR LENIS
+ 
       const lenis = (window as any).lenis;
-      console.log("🎯 Lenis instance on close:", lenis);
+      
       if (lenis) {
         lenis.start();
-        console.log("▶️ Lenis RESTARTED");
+   
       }
 
-      // Restaurar scroll del body
+  
       const scrollY = parseInt(document.body.style.top || "0") * -1;
       document.body.style.overflow = "";
       document.body.style.position = "";
@@ -75,18 +72,17 @@ export const ModalFlavorProduct = ({
       document.body.style.right = "";
       document.body.style.paddingRight = "";
 
-      // Volver a la posición original
+ 
       window.scrollTo(0, scrollY);
-      console.log("🔓 Body scroll UNLOCKED");
+ 
     }
-
-    // Cleanup al desmontar
+ 
     return () => {
       console.log("🧹 Cleanup running");
       const lenis = (window as any).lenis;
       if (lenis) {
         lenis.start();
-        console.log("▶️ Lenis RESTARTED (cleanup)");
+ 
       }
       document.body.style.overflow = "";
       document.body.style.position = "";

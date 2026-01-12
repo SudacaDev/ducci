@@ -1,5 +1,4 @@
-
-"use client";
+ "use client";
 
 import { ReactNode, useState, useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -25,7 +24,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // 👇 Usar el cart global desde CartContext
+ 
   const {
     cart,
     selectedBranchId,
@@ -67,8 +66,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
 
   const filteredProducts = productsFromDB;
   const allFlavors = flavorsFromDB;
-
-  // ProductProvider solo maneja el draft (orden en progreso)
+ 
   const [currentDraft, setCurrentDraft] = useState<Order | null>(null);
 
   const updateURL = (params: Record<string, string | null>) => {
@@ -116,6 +114,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
       maxFlavors: product.config.maxFlavors,
       price: product.price,
       selectedFlavors: [],
+      quantity: 1,  
     };
 
     setCurrentDraft(newDraft);
@@ -149,21 +148,21 @@ export const ProductProvider = ({ children }: ProductProps) => {
     quantity: number,
   ) => {
     if (product.type !== "flavor-selection") return;
+    if (quantity <= 0) return;
 
-    for (let i = 0; i < quantity; i++) {
-      const newOrder: FlavorOrder = {
-        id: `order-${Date.now()}-${i}-${Math.random().toString(36).substr(2, 9)}`,
-        type: "flavor-selection",
-        productId: product.id,
-        productName: product.name,
-        size: getSizeFromProduct(product),
-        maxFlavors: product.config?.maxFlavors || 1,
-        price: product.price,
-        selectedFlavors: selectedFlavors,
-      };
-      
-      addToCart(newOrder); // 👈 Usa el método global del CartContext
-    }
+    const newOrder: FlavorOrder = {
+      id: `order-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      type: "flavor-selection",
+      productId: product.id,
+      productName: product.name,
+      size: getSizeFromProduct(product),
+      maxFlavors: product.config?.maxFlavors || 1,
+      price: product.price, 
+      selectedFlavors: selectedFlavors,
+      quantity,  
+    };
+    
+    addToCart(newOrder); 
   };
 
   const startQuantityOrder = (product: ProductType, quantity: number) => {
@@ -175,11 +174,11 @@ export const ProductProvider = ({ children }: ProductProps) => {
       type: "quantity-selection",
       productId: product.id,
       productName: product.name,
-      price: product.price * quantity, // Precio total = precio unitario * cantidad
+      price: product.price,  
       quantity,
     };
 
-    addToCart(newOrder); // 👈 Usa el método global del CartContext
+    addToCart(newOrder);  
   };
 
   const updateQuantityOrder = (quantity: number) => {
@@ -187,18 +186,20 @@ export const ProductProvider = ({ children }: ProductProps) => {
     setCurrentDraft({ ...currentDraft, quantity });
   };
 
-  const addSingleItemOrder = (product: ProductType) => {
+  const addSingleItemOrder = (product: ProductType, quantity: number = 1) => {
     if (product.type !== "single-item") return;
+    if (quantity <= 0) return;
 
     const newOrder: SingleItemOrder = {
       id: `order-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type: "single-item",
       productId: product.id,
       productName: product.name,
-      price: product.price,
+      price: product.price,  
+      quantity, 
     };
 
-    addToCart(newOrder); // 👈 Usa el método global del CartContext
+    addToCart(newOrder);  
   };
 
   const addBoxOrder = (product: ProductType, quantity: number = 1) => {
@@ -211,12 +212,12 @@ export const ProductProvider = ({ children }: ProductProps) => {
       type: "box",
       productId: product.id,
       productName: product.name,
-      price: product.price * quantity, // Precio total = precio unitario * cantidad
+      price: product.price, 
       boxQuantity: product.config.boxQuantity,
-      quantity, // Cantidad de cajas
+      quantity,  
     };
 
-    addToCart(newOrder); // 👈 Usa el método global del CartContext
+    addToCart(newOrder); 
   };
 
   const confirmCurrentOrder = () => {
@@ -233,7 +234,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
     )
       return;
 
-    addToCart(currentDraft); // 👈 Usa el método global del CartContext
+    addToCart(currentDraft); 
     setCurrentDraft(null);
   };
 
@@ -246,8 +247,8 @@ export const ProductProvider = ({ children }: ProductProps) => {
     selectedCategory,
     viewMode,
     sortOrder,
-    selectedBranchId, // 👈 Del CartContext
-    confirmedOrders: cart, // 👈 Del CartContext (renombrado para mantener compatibilidad)
+    selectedBranchId, 
+    confirmedOrders: cart, 
     currentDraft,
     loading,
     error,
@@ -266,9 +267,9 @@ export const ProductProvider = ({ children }: ProductProps) => {
     addBoxOrder,
     confirmCurrentOrder,
     cancelCurrentOrder,
-    removeConfirmedOrder: removeFromCart, // 👈 Alias al método del CartContext
-    setBranchId, // 👈 Del CartContext
-    clearCart, // 👈 Del CartContext
+    removeConfirmedOrder: removeFromCart,  
+    setBranchId, 
+    clearCart, 
   };
 
   return (

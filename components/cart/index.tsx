@@ -1,8 +1,6 @@
- 
 "use client";
 
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
-import { parseOrdersFromURL, ordersToURLString } from "@/components/products/utils/orderParsers";
 import type { Order } from "@/types/order.type";
 
 interface CartContextType {
@@ -21,77 +19,87 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
+const CART_STORAGE_KEY = "ducci-cart";
+const BRANCH_STORAGE_KEY = "ducci-selected-branch";
+
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Order[]>([]);
   const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Hydration segura - solo en el cliente
+  // Cargar desde localStorage al iniciar
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const params = new URLSearchParams(window.location.search);
-    const ordersParam = params.get('orders');
-    const branchParam = params.get('branch-id');
+    try {
+      // Cargar carrito
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+      if (savedCart) {
+        const parsedCart = JSON.parse(savedCart);
+        setCart(parsedCart);
+      }
 
-    if (ordersParam) {
-      setCart(parseOrdersFromURL(ordersParam));
-    }
-    if (branchParam) {
-      setSelectedBranchIdState(parseInt(branchParam));
+      // Cargar sucursal seleccionada
+      const savedBranch = localStorage.getItem(BRANCH_STORAGE_KEY);
+      if (savedBranch) {
+        setSelectedBranchIdState(parseInt(savedBranch));
+      }
+    } catch (error) {
+      console.error("Error loading cart from localStorage:", error);
     }
 
     setIsHydrated(true);
   }, []);
 
-  const updateCartInURL = (orders: Order[], branchId: number | null) => {
-    if (typeof window === 'undefined') return;
-    
-    const params = new URLSearchParams(window.location.search);
-    
-    if (branchId) {
-      params.set('branch-id', branchId.toString());
-    } else {
-      params.delete('branch-id');
+  // Guardar carrito en localStorage cuando cambia
+  useEffect(() => {
+    if (!isHydrated) return; // No guardar durante la hidratación inicial
+
+    try {
+      if (cart.length > 0) {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      } else {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      }
+    } catch (error) {
+      console.error("Error saving cart to localStorage:", error);
     }
-    
-    if (orders.length > 0) {
-      params.set('orders', ordersToURLString(orders));
-    } else {
-      params.delete('orders');
+  }, [cart, isHydrated]);
+
+  // Guardar sucursal en localStorage cuando cambia
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    try {
+      if (selectedBranchId !== null) {
+        localStorage.setItem(BRANCH_STORAGE_KEY, selectedBranchId.toString());
+      } else {
+        localStorage.removeItem(BRANCH_STORAGE_KEY);
+      }
+    } catch (error) {
+      console.error("Error saving branch to localStorage:", error);
     }
-    
-    const search = params.toString();
-    const query = search ? `?${search}` : "";
-    window.history.replaceState({}, "", `${window.location.pathname}${query}`);
-  };
+  }, [selectedBranchId, isHydrated]);
 
   const addToCart = (order: Order) => {
-    const updatedCart = [...cart, order];
-    setCart(updatedCart);
-    updateCartInURL(updatedCart, selectedBranchId);
+    setCart(prevCart => [...prevCart, order]);
   };
 
   const removeFromCart = (orderId: string) => {
-    const updatedCart = cart.filter(order => order.id !== orderId);
-    setCart(updatedCart);
-    updateCartInURL(updatedCart, selectedBranchId);
+    setCart(prevCart => prevCart.filter(order => order.id !== orderId));
   };
 
   const clearCart = () => {
     setCart([]);
     setSelectedBranchIdState(null);
-    updateCartInURL([], null);
   };
 
   const setBranchId = (branchId: number | null) => {
     setSelectedBranchIdState(branchId);
-    const updatedCart: Order[] = [];
-    setCart(updatedCart);
-    updateCartInURL(updatedCart, branchId);
+    // Limpiar carrito al cambiar de sucursal
+    setCart([]);
   };
 
- 
   const contextValue: CartContextType = { 
     cart, 
     selectedBranchId,

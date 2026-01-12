@@ -140,7 +140,7 @@ products
   background-color: var(--white);
   padding: 10px 10px 25px;
   box-shadow: 0 2px 73px 2px rgba(0, 0, 0, 0.05);
-  gap: 24px;
+  gap: 8px;
   border: 3px solid transparent;
   transition: all 250ms ease-in-out;
   cursor: pointer;
@@ -250,6 +250,10 @@ products
 .product-list_item {
   position: relative;
   transition: all 300ms ease-in-out;
+  @media screen and (max-width: 980px) {
+    
+    flex-direction: column;
+  }
 }
 
 .product-list_item:focus {
@@ -305,12 +309,12 @@ products
 
 /* REMOVIDO: Efecto ::after que causaba problemas con clicks */
 
-/* Cart Widget Flotante */
+
 .cart-widget {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: white;
+  background-color: var(--secondary-color);
   border-radius: 50px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   z-index: 1000;
@@ -427,12 +431,11 @@ products
   gap: 8px;
 }
 
-/* Responsivo para móviles */
+
 @media screen and (max-width: 768px) {
   .cart-widget {
-    bottom: 70px;
+    bottom: 10px;
     right: 10px;
-    left: 10px;
     width: auto;
     max-width: none;
   }

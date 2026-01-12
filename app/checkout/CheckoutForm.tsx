@@ -221,7 +221,7 @@ export default function CheckoutForm({
         <Button
           type="submit"
           disabled={loading}
-          className="w-full h-12 text-base"
+          className="w-full h-12 text-base bg-[#25D366]"
         >
           {loading ? "Procesando..." : "Enviar pedido por WhatsApp"}
         </Button>

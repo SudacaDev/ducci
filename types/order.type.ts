@@ -1,6 +1,4 @@
-// ============================================
-// BASE TYPES
-// ============================================
+ 
 export type IceCreamSize =
   | "1/4"
   | "1/2"
@@ -16,14 +14,13 @@ type BaseOrder = {
   price: number;
 };
 
-// ============================================
-// ORDER TYPES
-// ============================================
+ 
 export type FlavorOrder = BaseOrder & {
   type: "flavor-selection";
   size: IceCreamSize;
   maxFlavors: number;
   selectedFlavors: string[];
+  quantity: number;  
 };
 
 export type QuantityOrder = BaseOrder & {
@@ -33,31 +30,27 @@ export type QuantityOrder = BaseOrder & {
 
 export type SingleItemOrder = BaseOrder & {
   type: "single-item";
+  quantity: number;
 };
 
 export type BoxOrder = BaseOrder & {
   type: "box";
-  boxQuantity: number; // Cantidad de items DENTRO de la caja (ej: x6)
-  quantity: number; // Cantidad de CAJAS que se están comprando
+  boxQuantity: number;  
+  quantity: number; 
 };
 
 export type Order = FlavorOrder | QuantityOrder | SingleItemOrder | BoxOrder;
 
-// ============================================
-// UTILITY TYPES
-// ============================================
-// Solo órdenes con sabores
+ 
 export type OrderWithFlavors = Extract<Order, { selectedFlavors: string[] }>;
 
-// Órdenes sin cantidad
+ 
 export type OrderWithoutQuantity = Exclude<Order, QuantityOrder>;
 
-// Info mínima de orden para el carrito
+ 
 export type OrderSummary = Pick<Order, "id" | "productName" | "price">;
 
-// ============================================
-// SIZE CONFIGURATION
-// ============================================
+ 
 type SizeConfig = {
   maxFlavors: number;
   label: string;

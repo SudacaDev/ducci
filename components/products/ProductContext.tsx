@@ -45,7 +45,7 @@ export interface ProductsContextType {
   updateQuantityOrder: (quantity: number) => void;
 
   // Other orders
-  addSingleItemOrder: (product: ProductType) => void;
+  addSingleItemOrder: (product: ProductType, quantity: number) => void;
   addBoxOrder: (product: ProductType, quantity: number) => void;
 
   // Order management

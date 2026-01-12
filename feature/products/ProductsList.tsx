@@ -39,18 +39,13 @@ const ProductsList = () => {
     addMultipleFlavorOrders,
   } = useProducts();
 
-  // ============================================
-  // ESTADOS LOCALES
-  // ============================================
+  
   const [tempQuantities, setTempQuantities] = useState<Record<number, number>>(
     {},
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-
-  // ============================================
-  // HELPERS
-  // ============================================
+ 
   const productNameToSlug = (name: string) => {
     return name
       .toLowerCase()
@@ -60,9 +55,7 @@ const ProductsList = () => {
       .replace(/[^a-z0-9-]/g, "");
   };
 
-  // ============================================
-  // MODAL HANDLERS
-  // ============================================
+ 
   const handleOpenModal = (product: Product) => {
     if (!selectedBranchId) {
       toast.error("Primero selecciona una sucursal", { duration: 2000 });
@@ -91,10 +84,7 @@ const ProductsList = () => {
       { duration: 2000 },
     );
   };
-
-  // ============================================
-  // FLAVOR HANDLERS (VIEJO FLUJO)
-  // ============================================
+ 
   const handleFlavorProductClick = (item: Product) => {
     if (!selectedBranchId) {
       toast.error("Primero selecciona una sucursal", { duration: 2000 });
@@ -178,10 +168,7 @@ const ProductsList = () => {
     cancelCurrentOrder();
     toast("Pedido cancelado", { duration: 1500 });
   };
-
-  // ============================================
-  // QUANTITY HANDLERS
-  // ============================================
+ 
   const handleQuantityChange = (productId: number, change: number) => {
     const current = tempQuantities[productId] || 1;
     const newQuantity = Math.max(1, current + change);
@@ -215,17 +202,25 @@ const ProductsList = () => {
     setTempQuantities({ ...tempQuantities, [item.id]: 1 });
   };
 
-  // ============================================
-  // SINGLE ITEM & BOX HANDLERS
-  // ============================================
+ 
   const handleAddSingleItem = (item: Product) => {
     if (!selectedBranchId) {
       toast.error("Primero selecciona una sucursal", { duration: 2000 });
       return;
     }
 
-    addSingleItemOrder(item);
-    toast.success(`${item.name} agregado al carrito`, { duration: 2000 });
+    const quantity = tempQuantities[item.id] || 1;
+
+ 
+    addSingleItemOrder(item, quantity);
+
+    toast.success(
+      `${quantity} ${item.name} agregado${quantity > 1 ? "s" : ""} al carrito`,
+      { duration: 2000 },
+    );
+
+     
+    setTempQuantities({ ...tempQuantities, [item.id]: 1 });
   };
 
   const handleAddBox = (item: Product) => {
@@ -236,7 +231,7 @@ const ProductsList = () => {
 
     const quantity = tempQuantities[item.id] || 1;
 
-    // Agregar la caja con la cantidad especificada
+    
     addBoxOrder(item, quantity);
 
     toast.success(
@@ -248,9 +243,7 @@ const ProductsList = () => {
     setTempQuantities({ ...tempQuantities, [item.id]: 1 });
   };
 
-  // ============================================
-  // FILTRAR PRODUCTOS POR TIPO
-  // ============================================
+ 
   const flavorProducts = filteredProducts.filter(
     (p) => p.type === "flavor-selection" && p.price > 0,
   );
@@ -265,16 +258,12 @@ const ProductsList = () => {
 
   const availableFlavors = allFlavors;
 
-  // ============================================
-  // RENDER
-  // ============================================
+ 
   return (
     <>
       <ViewToggle />
 
-      {/* ============================================
-          MODAL DE SABORES
-          ============================================ */}
+     
       <ModalFlavorProduct
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -284,9 +273,7 @@ const ProductsList = () => {
         onConfirm={handleConfirmFromModal}
       />
 
-      {/* ============================================
-          PANEL DE ARMADO (VIEJO FLUJO)
-          ============================================ */}
+    
       {currentDraft && currentDraft.type === "flavor-selection" && (
         <CurrentDraft
           currentDraft={currentDraft}
@@ -297,9 +284,7 @@ const ProductsList = () => {
         />
       )}
 
-      {/* ============================================
-          SECCIÓN 1: PRODUCTOS CON SABORES
-          ============================================ */}
+  
       {loading ? (
         <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
@@ -314,10 +299,7 @@ const ProductsList = () => {
           viewMode="grid"
         />
       ) : null}
-
-      {/* ============================================
-          SECCIÓN 2: SABORES (VIEJO FLUJO)
-          ============================================ */}
+ 
       {currentDraft &&
         currentDraft.type === "flavor-selection" &&
         (loading ? (
@@ -340,10 +322,7 @@ const ProductsList = () => {
             </p>
           </div>
         ))}
-
-      {/* ============================================
-          SECCIÓN 3: PRODUCTOS CON CANTIDAD
-          ============================================ */}
+ 
       {loading ? (
         <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
@@ -359,10 +338,7 @@ const ProductsList = () => {
           viewMode="grid"
         />
       ) : null}
-
-      {/* ============================================
-          SECCIÓN 4: CAJAS
-          ============================================ */}
+ 
       {loading ? (
         <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
@@ -379,9 +355,7 @@ const ProductsList = () => {
         />
       ) : null}
 
-      {/* ============================================
-          SECCIÓN 5: PRODUCTOS ÚNICOS
-          ============================================ */}
+     
       {loading ? (
         <div className="mb-8 mx-4">
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
@@ -393,6 +367,8 @@ const ProductsList = () => {
           viewMode="grid"
           handleAddSingleItem={handleAddSingleItem}
           selectedBranchId={selectedBranchId}
+          tempQuantities={tempQuantities}
+          handleQuantityChange={handleQuantityChange}
         />
       ) : null}
 
@@ -408,9 +384,7 @@ const ProductsList = () => {
         </div>
       )}
 
-      {/* ============================================
-          EMPTY STATE
-          ============================================ */}
+      
       {!loading &&
         !error &&
         filteredProducts.length === 0 &&

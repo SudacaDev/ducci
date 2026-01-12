@@ -13,6 +13,20 @@ export default function OrderSummary({
   branchName,
   totalPrice,
 }: OrderSummaryProps) {
+  // Helper para calcular subtotal de cada orden
+  const getOrderSubtotal = (order: Order): number => {
+    if (order.type === "quantity-selection") {
+      return order.price * order.quantity;
+    } else if (order.type === "box") {
+      return order.price * order.quantity;
+    } else if (order.type === "single-item") {
+      return order.price * order.quantity;
+    } else if (order.type === "flavor-selection") {
+      return order.price * order.quantity;
+    }
+    return 0;
+  };
+
   const renderOrderDetails = (order: Order) => {
     switch (order.type) {
       case "flavor-selection":
@@ -20,30 +34,64 @@ export default function OrderSummary({
           <div className="text-sm space-y-1 mt-1">
             <p className="text-gray-600">
               {SIZE_CONFIG[order.size].label}
+              {order.quantity > 1 && (
+                <span className="font-semibold ml-2">
+                  × {order.quantity}
+                </span>
+              )}
             </p>
             <div className="text-xs text-gray-500">
               <span className="font-medium">Sabores:</span>{" "}
               {order.selectedFlavors.join(", ")}
             </div>
+            {order.quantity > 1 && (
+              <p className="text-xs text-gray-500">
+                ${order.price.toLocaleString("es-AR")} c/u
+              </p>
+            )}
           </div>
         );
 
       case "quantity-selection":
         return (
-          <p className="text-sm text-gray-600 mt-1">
-            Cantidad: {order.quantity}
-          </p>
+          <div className="text-sm space-y-1 mt-1">
+            <p className="text-gray-600">
+              Cantidad: {order.quantity}
+            </p>
+            <p className="text-xs text-gray-500">
+              ${order.price.toLocaleString("es-AR")} c/u
+            </p>
+          </div>
         );
 
       case "box":
         return (
-          <p className="text-sm text-gray-600 mt-1">
-            {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"}
-          </p>
+          <div className="text-sm space-y-1 mt-1">
+            <p className="text-gray-600">
+              {order.quantity} {order.quantity === 1 ? "caja" : "cajas"} de{" "}
+              {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"}
+            </p>
+            {order.quantity > 1 && (
+              <p className="text-xs text-gray-500">
+                ${order.price.toLocaleString("es-AR")} c/u
+              </p>
+            )}
+          </div>
         );
 
       case "single-item":
-        return <p className="text-sm text-gray-600 mt-1">1 unidad</p>;
+        return (
+          <div className="text-sm space-y-1 mt-1">
+            <p className="text-gray-600">
+              Cantidad: {order.quantity}
+            </p>
+            {order.quantity > 1 && (
+              <p className="text-xs text-gray-500">
+                ${order.price.toLocaleString("es-AR")} c/u
+              </p>
+            )}
+          </div>
+        );
     }
   };
 
@@ -76,7 +124,7 @@ export default function OrderSummary({
                 {renderOrderDetails(order)}
               </div>
               <p className="font-semibold text-gray-900 ml-4">
-                ${order.price.toLocaleString("es-AR")}
+                ${getOrderSubtotal(order).toLocaleString("es-AR")}
               </p>
             </div>
           </div>

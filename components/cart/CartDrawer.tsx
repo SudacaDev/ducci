@@ -9,22 +9,47 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/components/cart";
+import { useCartDrawer } from "@/contexts/CartDrawerContext";
 import { Order, SIZE_CONFIG } from "@/types/order.type";
 import Link from "next/link";
+import { useHeader } from "../header/Header";
 
-interface CartDrawerProps {
-  trigger?: React.ReactNode;
-}
-
-export default function CartDrawer({ trigger }: CartDrawerProps) {
+export default function CartDrawer() {
   const { cart, removeFromCart, clearCart, isHydrated } = useCart();
+  const { isOpen, closeDrawer } = useCartDrawer();
+ 
+  
 
   const totalItems = cart.length;
-  const totalPrice = cart.reduce((sum, order) => sum + order.price, 0);
+  const totalPrice = cart.reduce((sum, order) => {
+    if (order.type === "quantity-selection") {
+      return sum + (order.price * order.quantity);
+    } else if (order.type === "box") {
+      return sum + (order.price * order.quantity);
+    } else if (order.type === "single-item") {
+      return sum + (order.price * order.quantity);
+    } else if (order.type === "flavor-selection") {
+      return sum + (order.price * order.quantity);
+    }
+    return sum;
+  }, 0);
+
+  // Helper para calcular el subtotal de cada orden
+  const getOrderSubtotal = (order: Order): number => {
+    if (order.type === "quantity-selection") {
+      return order.price * order.quantity;
+    } else if (order.type === "box") {
+      return order.price * order.quantity;
+    } else if (order.type === "single-item") {
+      return order.price * order.quantity;
+    } else if (order.type === "flavor-selection") {
+      return order.price * order.quantity;
+    }
+    return 0;
+  };
 
   const renderOrderDetails = (order: Order) => {
     switch (order.type) {
@@ -34,6 +59,11 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
             <p className="text-gray-600">
               {SIZE_CONFIG[order.size].label} - {order.maxFlavors} sabores
             </p>
+            {order.quantity > 1 && (
+              <p className="text-gray-600 font-semibold">
+                Cantidad: {order.quantity}
+              </p>
+            )}
             <div className="text-xs text-gray-500">
               {order.selectedFlavors.map((flavor, idx) => (
                 <span key={idx}>
@@ -54,37 +84,26 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
       
       case "box":
         return (
-          <div className="text-sm text-gray-600">
-            <p>{order.quantity} {order.quantity === 1 ? "caja" : "cajas"}</p>
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>{order.quantity} {order.quantity === 1 ? "caja" : "cajas"} de {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"}</p>
             <p className="text-xs text-gray-500">
-              {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"} por caja
+              ${order.price.toLocaleString("es-AR")} c/u
             </p>
           </div>
         );
       
       case "single-item":
         return (
-          <p className="text-sm text-gray-600">1 unidad</p>
+          <p className="text-sm text-gray-600">
+            Cantidad: {order.quantity}
+          </p>
         );
     }
   };
 
   return (
-    <Drawer direction="right">
-      <DrawerTrigger asChild>
-        {trigger || (
-          <button className="relative flex items-center gap-2">
-            <ShoppingCart size={20} />
-            {isHydrated && totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {totalItems}
-              </span>
-            )}
-          </button>
-        )}
-      </DrawerTrigger>
-      
-      <DrawerContent className="h-full w-full bg-white sm:max-w-lg fixed right-0 top-0 z-[99999999] bottom-0 pt-[32px]">
+    <Drawer direction="right" open={isOpen} onOpenChange={closeDrawer}>
+      <DrawerContent className="h-full w-full bg-white sm:max-w-md md:max-w-lg border-none fixed right-0 top-0 z-[99999999] bottom-0 pt-[32px]">
         <div className="mx-auto w-full h-full flex flex-col">
           <DrawerHeader>
             <div className="flex items-center justify-between">
@@ -133,7 +152,7 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
                       </h3>
                       {renderOrderDetails(order)}
                       <p className="font-semibold text-gray-900 mt-2">
-                        ${order.price.toLocaleString("es-AR")}
+                        ${getOrderSubtotal(order).toLocaleString("es-AR")}
                       </p>
                     </div>
                     
@@ -158,7 +177,7 @@ export default function CartDrawer({ trigger }: CartDrawerProps) {
               </div>
               
               <Link href="/checkout" className="block w-full">
-                <Button className="w-full h-12 text-base">
+                <Button className="w-full h-12 text-base" onClick={closeDrawer} >
                   Finalizar Pedido
                 </Button>
               </Link>

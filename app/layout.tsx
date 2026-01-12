@@ -3,6 +3,10 @@ import { Poppins, DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { CartProvider } from "@/components/cart";
+import { CartDrawerProvider } from "@/contexts/CartDrawerContext";
+import CartDrawer from "@/components/cart/CartDrawer";
+import CartWidget from "@/feature/products/CartWidget";
+
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -27,8 +31,13 @@ export default function RootLayout({
         className={`${poppins.variable} ${dmSans.variable} antialiased grid grid-rows-[auto_1fr_auto] min-h-screen`}
       >
         <CartProvider>
-          {children}
+          <CartDrawerProvider>
+            {children}
+            <CartDrawer />
+            <CartWidget />
+          </CartDrawerProvider>
         </CartProvider>
+
         <Toaster
           position="top-center"
           reverseOrder={false}
