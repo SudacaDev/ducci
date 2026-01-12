@@ -6,14 +6,14 @@ import useGoToPage from "@/libs/goToPage";
 import { MENU } from "@/types/nav.type";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-//import Link from "next/link";
+ 
 import { useRef } from "react";
 import { useHeroAnimation } from "../home/components/hero/hooks/useHeroAnimation";
 
 const observerOptions = {
   root: null,
   rootMargin: "0px",
-  threshold: 0.1,
+  threshold: 0.2,
 };
 
 const JourneyCon = () => {

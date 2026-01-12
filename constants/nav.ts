@@ -17,7 +17,7 @@ export const NAV = [
   },
   {
     id: "jsks99uuahs00d00djjdo",
-    label: "sucursales",
+    label: "Sucursales",
     slug: "sucursales",
     url: MENU.BRANCHES,
     alwaysActive: false,
@@ -25,10 +25,10 @@ export const NAV = [
 
   {
     id: "jsks99uuahs00d00ddsjdo",
-    label: "contacto",
+    label: "Contacto",
     slug: "contacto",
     url: MENU.CONTACT,
-    alwaysActive: true,
+    alwaysActive: false,
   },
 ];
 

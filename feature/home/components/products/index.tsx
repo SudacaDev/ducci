@@ -11,31 +11,42 @@ gsap.registerPlugin(ScrollTrigger);
 import "../../style/products.css";
 import ProductCard from "./ProductCatd";
 import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
+ 
 
 export const PRODUCTS = [
   {
     id: 1,
     name: "Dulce de Leche",
-    image: "/images/guilt-image.jpg",
-    category: "Clásicos",
+    image: "/images/la-magia-ducci.png",
+    slug: "nosotros",
+    title: "La Magia Ducci"
   },
   {
     id: 2,
     name: "Chocolate Amargo",
-    image: "/images/guilt-image.jpg",
-    category: "Clásicos",
+    image: "/images/disfruta-ducci.jpg",
+    slug: "productos",
+    title: "Disfrutá Ducci"
   },
   {
     id: 3,
     name: "Frutilla",
-    image: "/images/guilt-image.jpg",
-    category: "Frutales",
+    image: "/images/sucursales.jpg",
+    slug: "sucursales",
+    title: "Sucursales"
   },
-  {
+ {
     id: 4,
-    name: "Pistacho",
-    image: "/images/guilt-image.jpg",
-    category: "Premium",
+    images: [  
+      "/images/momentos-1.jpg",
+      "/images/momentos-2.jpg",
+      "/images/momentos-3.jpg",
+      "/images/momentos-4.jpg",
+      "/images/momentos-5.jpg",
+    ],
+    slug: "",
+    title: "Momentos Ducci",
+    hasCarousel: true  
   },
 ];
 
@@ -99,6 +110,7 @@ const ProductsHomeSection = () => {
           {PRODUCTS.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
+         
         </div>
       </CenterContainer>
     </section>

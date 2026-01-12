@@ -39,7 +39,7 @@ const HomePageContent = () => {
 
         <ProductsHomeSection />
         <AboutHomeSection />
-        <BranchesHomeSection />
+        {/** <BranchesHomeSection /> */}
         <NewsletterHomeSection />
       </div>
     </div>

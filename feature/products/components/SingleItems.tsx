@@ -64,7 +64,7 @@ const SingleItems = ({
                 </figure>
               </div>
 
-              <div className="flex flex-col gap-2 text-left w-full justify-center">
+              <div className="flex flex-col gap-2 text-left w-full justify-center pr-[24px]">
                 <div className="product-list_name">
                   <h3>{item.name}</h3>
                 </div>

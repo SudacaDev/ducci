@@ -44,7 +44,7 @@ const HeroBanner = () => {
 
               <div ref={refButtonCTA} className="hero__cta">
                 <Link className="button__cta" href={MENU.PRODUCTS}>
-                  Conocé nuestros sabores
+                 Pedí Ducci
                   <span>
                     <ArrowRight size={20} />
                   </span>

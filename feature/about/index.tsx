@@ -4,7 +4,7 @@ import Lenis from "lenis";
 import CenterContainer from "@/components/container/center";
 import InnerLayout from "@/components/inner-layout";
 import JourneyCon from "./JourneyCon";
-import OurPhilosophy from "./OurPhilosophy";
+//import OurPhilosophy from "./OurPhilosophy";
 
 import "./style/about.css";
 
@@ -30,6 +30,7 @@ const AboutUsContentPage = () => {
     };
   }, []);
   return (
+    <>
     <InnerLayout id="about" bannerTitle="La magia Ducci">
       <CenterContainer center>
         <JourneyCon />
@@ -42,6 +43,12 @@ const AboutUsContentPage = () => {
       </CenterContainer>
       */}
     </InnerLayout>
+    <div className='bottom-section'>
+      <div className='botton-section_content'>
+       
+      </div>
+    </div>
+    </>
   );
 };
 export default AboutUsContentPage;
