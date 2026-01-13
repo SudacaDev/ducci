@@ -118,3 +118,16 @@
 .contact__box p {
   font-size: 0.875em;
 }
+
+
+.contact-support{
+  --direction: row;
+  width: 100%;
+  max-width: 100% !important;
+  flex-direction: var(--direction);
+  .contact-support__box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

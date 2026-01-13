@@ -37,7 +37,7 @@ footer {
 }
 
 .footer_address-wrapper {
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5em;
 }
 
@@ -146,9 +146,13 @@ footer .footer-copy {
   max-width: 200px;
 }
 
-.footer_social-content,
+
 .footer_address-content {
   height: 70px;
+}
+
+.footer_social-content{
+  height: 120px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -165,7 +169,7 @@ footer .footer-copy {
     height: 90px;
     display: flex;
     align-items: start;
-    justify-content: center;
+    justify-content: start;
   }
 }
 

@@ -8,7 +8,7 @@ const Address = () => {
         </div>
         <div className="footer_address-content">
           <p className="font-semibold">Dirección</p>
-          <p className="label">Rosario - Santa Fe</p>
+          <p className="label">Santa Fe - Argentina</p>
         </div>
       </div>
       <div className="footer_address-wrapper flex">

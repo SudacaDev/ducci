@@ -4,8 +4,10 @@ const FooterDefault = () => {
   return (
     <Footer>
       <Footer.Logo />
-      <Footer.Nav />
+      
+        <Footer.Nav />
       <Footer.Address />
+   
       <Footer.Social />
     </Footer>
   );

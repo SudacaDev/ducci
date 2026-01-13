@@ -35,6 +35,21 @@ const ContactPageContent = () => {
         <div id="contactWrapper" className="py-8">
           <Block className="text-center">
             <Block.Title>
+             <span>Comunicate con nuestras sucursales</span> 
+            </Block.Title>
+            <Block.Body className='flex contact-support '>
+              <div className="contact-support__box">
+                <p> title</p>
+                <p> direction</p>
+              </div>
+              <div className="contact-support__box">2</div>
+              <div className="contact-support__box">3</div>
+              
+            </Block.Body>
+          </Block>
+
+          <Block className="text-center">
+            <Block.Title>
              <span>Ponete en contacto con nosotros</span> 
             </Block.Title>
             <Block.Body>
@@ -45,7 +60,8 @@ const ContactPageContent = () => {
 
           <div className="contact_form">
             <div className="contact_form-info">
-              <div className="contact__box">
+              {/** 
+               * <div className="contact__box">
                 <div className="contact__icon">
                   <MapPinIcon size={32} color="currentColor" />
                 </div>
@@ -54,6 +70,8 @@ const ContactPageContent = () => {
                   <p>Vélez Sarsfield 1163 Rosario, Santa Fe</p>
                 </div>
               </div>
+
+               */}
               <div className="contact__box">
                 <div className="contact__icon">
                   <PhoneIcon size={32} />
