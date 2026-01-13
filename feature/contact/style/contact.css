@@ -137,6 +137,7 @@
   width: 100%;
   max-width: 100% !important;
   gap: 24px;
+
   .contact-support__box {
     width: 100%;
     display: flex;
@@ -163,5 +164,13 @@
 
   .contact-support__box-address {
     color: var(--secondary-color);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .contact-support {
+    --direction: column;
+
+    flex-direction: var(--direction);
   }
 }
