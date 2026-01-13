@@ -1,6 +1,6 @@
 "use client";
 
-import { Order, SIZE_CONFIG } from "@/types/order.type";
+import { type Order, SIZE_CONFIG } from "@/types/order.type";
 
 interface OrderSummaryProps {
   cart: Order[];
@@ -13,7 +13,7 @@ export default function OrderSummary({
   branchName,
   totalPrice,
 }: OrderSummaryProps) {
-  // Helper para calcular subtotal de cada orden
+  
   const getOrderSubtotal = (order: Order): number => {
     if (order.type === "quantity-selection") {
       return order.price * order.quantity;
@@ -101,7 +101,7 @@ export default function OrderSummary({
         Resumen del pedido
       </h2>
 
-      {/* Sucursal */}
+ 
       <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <p className="text-sm text-blue-600 font-medium mb-1">
           Retirás por:
@@ -109,7 +109,7 @@ export default function OrderSummary({
         <p className="text-lg font-semibold text-gray-900">{branchName}</p>
       </div>
 
-      {/* Items */}
+ 
       <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
         {cart.map((order) => (
           <div
@@ -131,7 +131,7 @@ export default function OrderSummary({
         ))}
       </div>
 
-      {/* Total */}
+ 
       <div className="pt-4 border-t-2 border-gray-300">
         <div className="flex justify-between items-center">
           <span className="text-xl font-bold text-gray-900">Total:</span>
@@ -140,8 +140,8 @@ export default function OrderSummary({
           </span>
         </div>
       </div>
-
-      {/* Info adicional */}
+ 
+ 
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
         <p className="text-sm text-gray-600">
           📱 Al confirmar, se abrirá WhatsApp para coordinar el retiro con la

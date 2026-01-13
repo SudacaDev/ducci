@@ -1,7 +1,8 @@
-// app/checkout/CheckoutForm.tsx
+ 
 "use client";
 
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/lib/supabase";
 import { useCart } from "@/components/cart";
-import { Order } from "@/types/order.type";
+import type { Order } from "@/types/order.type";
 import toast from "react-hot-toast";
 
 interface CheckoutFormProps {
@@ -51,7 +52,7 @@ export default function CheckoutForm({
     setLoading(true);
 
     try {
-      // 1. Crear el pedido en la tabla orders
+   
       const { data: order, error: orderError } = await supabase
         .from("orders")
         .insert({
@@ -68,7 +69,7 @@ export default function CheckoutForm({
 
       if (orderError) throw orderError;
 
-      // 2. Crear los items del pedido en order_items
+      
       const orderItems = cart.map((item) => ({
         order_id: order.id,
         product_id: item.productId,
@@ -85,7 +86,7 @@ export default function CheckoutForm({
 
       if (itemsError) throw itemsError;
 
-      // 3. Obtener teléfono de la sucursal
+ 
       const { data: branch, error: branchError } = await supabase
         .from("branches")
         .select("whatsapp_number, phone")
@@ -97,34 +98,35 @@ export default function CheckoutForm({
         throw new Error("No se pudo obtener los datos de la sucursal");
       }
 
-      // Usar whatsapp_number, si no existe usar phone, si no existe usar por defecto
+      
       const whatsappNumber = branch?.whatsapp_number || branch?.phone || "5491159594708";
       
       if (!whatsappNumber) {
         throw new Error("La sucursal no tiene número de WhatsApp configurado");
       }
 
-      // 4. Generar mensaje de WhatsApp
+  
+      const orderReference = order.order_number || `#${order.id}`;
       const message = generateWhatsAppMessage(
         formData.name,
-        order.id,
+        orderReference,
         cart,
         totalPrice,
         branchName,
         formData.notes
       );
 
-      // 5. Abrir WhatsApp en nueva ventana
+     
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
         message
       )}`;
       
       toast.success("¡Pedido creado exitosamente!");
       
-      // Abrir WhatsApp en nueva ventana
+      
       window.open(whatsappURL, "_blank");
       
-      // 6. Esperar 2 segundos antes de limpiar carrito (para asegurar que se abrió WhatsApp)
+ 
       setTimeout(() => {
         clearCart();
         router.push("/");
@@ -238,7 +240,7 @@ export default function CheckoutForm({
  
 function generateWhatsAppMessage(
   customerName: string,
-  orderId: number,
+  orderReference: string,
   cart: Order[],
   total: number,
   branchName: string,
@@ -246,7 +248,7 @@ function generateWhatsAppMessage(
 ): string {
   let message = `*NUEVO PEDIDO - DUCCI GELATERIA*\n\n`;
   message += `*Cliente:* ${customerName}\n`;
-  message += `*Referencia:* #${orderId}\n`;
+  message += `*Referencia:* ${orderReference}\n`;
   message += `*Sucursal:* ${branchName}\n\n`;
   message += `*DETALLE DEL PEDIDO:*\n`;
   message += `------------------------\n`;

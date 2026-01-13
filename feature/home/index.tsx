@@ -12,6 +12,9 @@ import "./style/home.css";
 import Lenis from "lenis";
 
 const HomePageContent = () => {
+
+
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
