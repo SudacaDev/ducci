@@ -11,9 +11,9 @@ import {
   CheckCircle,
   XCircle,
   Loader2,
-  MapPinIcon,
   PhoneIcon,
   MailIcon,
+  MapPin, 
 } from "lucide-react";
 
 import "./style/contact.css";
@@ -32,29 +32,58 @@ const ContactPageContent = () => {
   return (
     <InnerLayout id="contact" bannerTitle="Contacto">
       <CenterContainer center>
-        <div id="contactWrapper" className="py-8">
+        <div id="contactWrapper" className="py-8 flex">
           <Block className="text-center">
             <Block.Title>
-             <span>Comunicate con nuestras sucursales</span> 
+              <span>Comunicate con nuestras sucursales</span>
             </Block.Title>
             <Block.Body className='flex contact-support '>
-              <div className="contact-support__box">
-                <p> title</p>
-                <p> direction</p>
+              <div className="contact-support__box flex flex-col items-start gap-2">
+                <p className="contact-support__box-title"> Ducci Gelateria CdG</p>
+                <div className="flex flex-col items-start gap-2">
+                  <div className="flex items-center gap-2 contact-support__box-phone">
+                   <PhoneIcon size={14} />  <p> 3471 385043</p>
+                  </div>
+                  <div className="flex items-center gap-3  contact-support__box-address">
+                    <MapPin size={14} color="red" /> Ocampo 1002 Ducci
+                  </div>
+                </div>
               </div>
-              <div className="contact-support__box">2</div>
-              <div className="contact-support__box">3</div>
-              
+
+              <div className="contact-support__box flex flex-col items-start gap-2">
+                <p className="contact-support__box-title">Ducci Gelateria Las Rosas</p>
+                <div className="flex flex-col items-start gap-2">
+                  <div className="flex items-center gap-2 contact-support__box-phone">
+                    <PhoneIcon size={14} /> <p> 3471 319743</p>
+                  </div>
+                  <div className="flex items-center gap-3  contact-support__box-address">
+                    <MapPin size={14} color="red" /> Lavalle 202
+                  </div>
+                </div>
+              </div>
+
+              <div className="contact-support__box flex flex-col items-start gap-2">
+               <p className="contact-support__box-title"> Ducci Gelateria Totoras</p>
+                <div className="flex flex-col items-start gap-2">
+                  <div className="flex items-center gap-2 contact-support__box-phone">
+                    <PhoneIcon size={14} /> <p> 3476 545573</p>
+                  </div>
+                  <div className="flex items-center gap-3  contact-support__box-address">
+                    <MapPin size={14} color="red" /> Av. San Martín 1302
+                  </div>
+                </div>
+              </div>
+
             </Block.Body>
           </Block>
 
           <Block className="text-center">
             <Block.Title>
-             <span>Ponete en contacto con nosotros</span> 
+              <span>Ponete en contacto con nosotros</span>
             </Block.Title>
             <Block.Body>
               <p>Contanos tus inquietudes, nuestro equipo se pondrá en contacto con vos</p>
-              
+
             </Block.Body>
           </Block>
 
