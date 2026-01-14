@@ -11,9 +11,11 @@ interface SingleItemsProps {
   handleAddSingleItem: (item: Product) => void;
   tempQuantities: Record<number, number>;
   handleQuantityChange: (productId: number, change: number) => void;
+  title: string;
 }
 
 const SingleItems = ({
+  title,
   viewMode,
   singleItems,
   selectedBranchId,
@@ -25,9 +27,14 @@ const SingleItems = ({
   
   return (
     <div className="mb-8 product-container ">
-      <h3 className="text-2xl font-bold mb-4 text-gray-800">
-        Tortas y especiales
+      <div className="flex flex-col gap-1">
+        <h3 className="text-2xl font-bold text-gray-800">{title}
+     
       </h3>
+       <p className="text-sm text-gray-600 mb-4">
+       Seleccioná la cantidad que desees
+      </p>
+      </div>
 
       <div
         className={`grid gap-4 ${

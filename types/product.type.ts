@@ -4,6 +4,8 @@ export type ProductType =
   | "single-item"
   | "box";
 
+type Slug =  "postres" | "potes"
+
 export interface Product {
   id: number;
   name: string;
@@ -16,9 +18,11 @@ export interface Product {
     | "especiales"
     | "individuales"
     | "cajas"
-    | "postres";
+    | "postres"
+    | "potes";
   description: string;
   image?: string;
+  slug: Slug
 
   // CAMBIO: De branch (objeto) a branches (array)
   branches: {

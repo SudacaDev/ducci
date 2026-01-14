@@ -252,7 +252,15 @@ const ProductsList = () => {
     (p) => p.type === "quantity-selection",
   );
 
-  const singleItems = filteredProducts.filter((p) => p.type === "single-item");
+  //const singleItems = filteredProducts.filter((p) => p.type === "single-item");
+
+  const potes = filteredProducts.filter(
+  (p) => p.type === "single-item" && p.category === "potes"
+);
+
+const postres = filteredProducts.filter(
+  (p) => p.type === "single-item" && p.category === "postres"
+);
 
   const boxes = filteredProducts.filter((p) => p.type === "box");
 
@@ -361,9 +369,28 @@ const ProductsList = () => {
           <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
           <ProductListSkeleton count={5} />
         </div>
-      ) : singleItems.length > 0 ? (
+      ) : postres.length > 0 ? (
         <SingleItems
-          singleItems={singleItems}
+          singleItems={postres}
+          title="Postres y tortas"
+          viewMode="grid"
+          handleAddSingleItem={handleAddSingleItem}
+          selectedBranchId={selectedBranchId}
+          tempQuantities={tempQuantities}
+          handleQuantityChange={handleQuantityChange}
+        />
+      ) : null}
+
+
+      {loading ? (
+        <div className="mb-8 mx-4">
+          <div className="h-8 bg-gray-200 rounded w-64 mb-4 animate-pulse"></div>
+          <ProductListSkeleton count={5} />
+        </div>
+      ) : potes.length > 0 ? (
+        <SingleItems
+          singleItems={potes}
+          title="Potes"
           viewMode="grid"
           handleAddSingleItem={handleAddSingleItem}
           selectedBranchId={selectedBranchId}
