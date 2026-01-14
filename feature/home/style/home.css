@@ -106,6 +106,9 @@
   gap: 56px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px){
+    gap: 16px
+  }
 }
 
 .banner_content .hero__eyebrow {
@@ -235,6 +238,11 @@ ease-in-out infinite alternate move; */
     padding-bottom: 3em;
     justify-content: center;
     align-items: center;
+    @media screen and (max-width: 768px){
+      
+      padding-top: 1em;
+    padding-bottom: 1em;
+    }
   }
 
   .banner_content .hero__description {
