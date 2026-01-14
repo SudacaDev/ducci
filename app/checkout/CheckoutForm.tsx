@@ -124,7 +124,13 @@ export default function CheckoutForm({
       toast.success("¡Pedido creado exitosamente!");
       
       
-      window.open(whatsappURL, "_blank");
+    const link = document.createElement('a');
+link.href = whatsappURL;
+link.target = '_blank';
+link.rel = 'noopener noreferrer';
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
       
  
       setTimeout(() => {
