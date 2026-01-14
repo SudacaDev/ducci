@@ -24,7 +24,7 @@ export const ProductBoxes = ({
   const { formatPrice } = useCurrency();
   
   return (
-    <div className="mb-8 md:mx-2 sm:mx-2">
+    <div className="mb-8 product-container ">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">Cajas</h3>
       <p className="text-sm text-gray-600 mb-4">
         Packs especiales con descuento

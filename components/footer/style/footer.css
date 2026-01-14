@@ -152,7 +152,7 @@ footer .footer-copy {
 }
 
 .footer_social-content{
-  height: 120px;
+  /*height: 120px;*/
 }
 
 @media screen and (max-width: 1200px) {
@@ -166,7 +166,7 @@ footer .footer-copy {
 
   .footer_social-content,
   .footer_address-content {
-    height: 90px;
+   
     display: flex;
     align-items: start;
     justify-content: start;

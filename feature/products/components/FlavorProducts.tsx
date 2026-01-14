@@ -1,7 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { useCurrency } from "@/hooks/useCurrency";
 import { Order } from "@/types/order.type";
 import { Product } from "@/types/product.type";
-import { CheckCircle2, Lock } from "lucide-react";
+import { CheckCircle2, Lock, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 
 interface FlavorProductsProps {
@@ -21,7 +22,7 @@ const FlavorProducts = ({
 }: FlavorProductsProps) => {
   const { formatPrice } = useCurrency();
   return (
-    <div className="mb-8 md:mx-2 sm:mx-2">
+    <div   className="mb-8 product-container ">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">
         Helados por peso
       </h3>
@@ -38,11 +39,11 @@ const FlavorProducts = ({
             currentDraft.productId === item.id;
 
           return (
-            <button
-              type="button"
+            <div
+              
               key={item.id}
-              onClick={() => handleOpenModal(item)}
-              disabled={!selectedBranchId}
+          
+             
               className={`product-list_item flex rounded-lg transition-all relative ${isActive
                   ? "ring-4 ring-blue-500 shadow-lg bg-blue-50"
                   : !selectedBranchId
@@ -86,8 +87,15 @@ const FlavorProducts = ({
                     {formatPrice(item.price)}
                   </p>
                 </div>
+              <Button
+              type="button"
+              key={item.id}
+              onClick={() => handleOpenModal(item)}
+              disabled={!selectedBranchId}
+               className="flex-1 bg-[var(--secondary-color)] hover:bg-[var(--secondary-color)]/90 text-white gap-2"
+            > <ShoppingCart className="w-4 h-4" /> Agregar </Button>
               </div>
-            </button>
+            </div>
           );
         })}
       </div>
