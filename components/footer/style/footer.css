@@ -39,6 +39,9 @@ footer {
 .footer_address-wrapper {
   align-items: flex-start;
   gap: 1.5em;
+  @media screen and (max-width: 768px) {
+   display: none;
+  }
 }
 
 .footer_address-wrapper .label,
@@ -186,6 +189,7 @@ footer .footer-copy {
 @media screen and (max-width: 768px) {
   .footer_wrapper {
     padding-inline: 10px;
+    padding-block: 8px;
     grid-template-columns: repeat(1, 1fr);
   }
 
