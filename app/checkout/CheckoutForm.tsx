@@ -1,8 +1,7 @@
- 
+// app/checkout/CheckoutForm.tsx
 "use client";
 
 import { useState } from "react";
-
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -52,7 +51,7 @@ export default function CheckoutForm({
     setLoading(true);
 
     try {
-   
+      // 1. Crear el pedido en la tabla orders
       const { data: order, error: orderError } = await supabase
         .from("orders")
         .insert({
@@ -69,7 +68,7 @@ export default function CheckoutForm({
 
       if (orderError) throw orderError;
 
-      
+      // 2. Crear los items del pedido en order_items
       const orderItems = cart.map((item) => ({
         order_id: order.id,
         product_id: item.productId,
@@ -86,7 +85,7 @@ export default function CheckoutForm({
 
       if (itemsError) throw itemsError;
 
- 
+      // 3. Obtener teléfono de la sucursal
       const { data: branch, error: branchError } = await supabase
         .from("branches")
         .select("whatsapp_number, phone")
@@ -98,14 +97,14 @@ export default function CheckoutForm({
         throw new Error("No se pudo obtener los datos de la sucursal");
       }
 
-      
+      // Usar whatsapp_number, si no existe usar phone, si no existe usar por defecto
       const whatsappNumber = branch?.whatsapp_number || branch?.phone || "5491159594708";
       
       if (!whatsappNumber) {
         throw new Error("La sucursal no tiene número de WhatsApp configurado");
       }
 
-  
+      // 4. Generar mensaje de WhatsApp con order_number
       const orderReference = order.order_number || `#${order.id}`;
       const message = generateWhatsAppMessage(
         formData.name,
@@ -116,27 +115,19 @@ export default function CheckoutForm({
         formData.notes
       );
 
-     
+      // 5. Navegar directamente a WhatsApp (no se bloquea en mobile)
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
         message
       )}`;
       
-      toast.success("¡Pedido creado exitosamente!");
+      toast.success("¡Pedido creado! Abriendo WhatsApp...");
       
+      // Limpiar carrito antes de navegar
+      clearCart();
       
-    const link = document.createElement('a');
-link.href = whatsappURL;
-link.target = '_blank';
-link.rel = 'noopener noreferrer';
-document.body.appendChild(link);
-link.click();
-document.body.removeChild(link);
+      // Navegar a WhatsApp (no se bloquea nunca)
+      window.location.href = whatsappURL;
       
- 
-      setTimeout(() => {
-        clearCart();
-        router.push("/");
-      }, 2000);
     } catch (error) {
       console.error("Error al crear pedido:", error);
       toast.error("Error al procesar el pedido. Por favor intentá de nuevo.");

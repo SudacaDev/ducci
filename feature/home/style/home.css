@@ -28,6 +28,10 @@
     background-color: var(--secondary-color);
     width: 45%;
     z-index: 0;
+    
+    @media screen and (max-width: 1100px) {
+      display: none; /* Ocultar también el ::after */
+    }
   }
 
   &::before {
@@ -40,12 +44,12 @@
     background-color: var(--secondary-color);
     width: 56%;
     z-index: 0;
+    
     @media screen and (max-width: 1100px) {
-      background-image: none;
+      display: none;
     }
   }
 }
-
 .hero-banner::after {
   content: "";
   z-index: 10;
@@ -200,6 +204,7 @@ ease-in-out infinite alternate move; */
 @media screen and (max-width: 1100px) {
   .hero-banner {
     height: 100dvh;
+    background-color: var(--secondary-color);
   }
 
   .banner-image__content::after {
