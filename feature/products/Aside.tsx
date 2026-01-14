@@ -2,7 +2,6 @@
 
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CATEGORIES } from "@/constants/prod";
 import { useProducts } from "@/components/products/ProductContext";
 import CategoryFilter from "@/components/products/CategoryFilter";
 
