@@ -120,10 +120,6 @@ export const useProductsDB = ({
       // ============================================
       // TRANSFORMAR DATOS
       // ============================================
-
-      // ============================================
-      // TRANSFORMAR DATOS
-      // ============================================
       const transformedProducts: Product[] = (productsData || []).map(
         (product: any) => {
           // Agrupar sucursales (puede haber duplicados por el join)
@@ -149,6 +145,7 @@ export const useProductsDB = ({
             name: product.name,
             price: product.price,
             category: product.categories?.slug || "otros",
+            slug: product.categories?.slug || "otros",
             description: product.description,
             image: product.image,
             type: product.type as Product["type"],
@@ -163,10 +160,6 @@ export const useProductsDB = ({
           };
         },
       );
-
-      setProducts(transformedProducts);
-
-      setProducts(transformedProducts);
 
       setProducts(transformedProducts);
     } catch (err) {
