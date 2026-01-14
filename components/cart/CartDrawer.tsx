@@ -168,7 +168,7 @@ export default function CartDrawer() {
             )}
           </div>
 
-          {/* Footer con total y botón checkout */}
+       
           {totalItems > 0 && (
             <DrawerFooter>
               <div className="flex items-center justify-between text-lg font-semibold mb-4">
@@ -177,13 +177,13 @@ export default function CartDrawer() {
               </div>
               
               <Link href="/checkout" className="block w-full">
-                <Button className="w-full h-12 text-base" onClick={closeDrawer} >
+                <Button className="w-full h-12 text-base bg-[var(--secondary-color)] text-white hover:cursor-pointer hover:bg-[var(--secondary-color-dark)]" onClick={closeDrawer} >
                   Finalizar Pedido
                 </Button>
               </Link>
               
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full hover:bg-gray-200 hover:cursor-pointer">
                   Seguir comprando
                 </Button>
               </DrawerClose>

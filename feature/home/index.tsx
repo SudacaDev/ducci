@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import HeroBanner from "./components/hero";
 import AboutHomeSection from "./components/about";
 import ProductsHomeSection from "./components/products";
-import BranchesHomeSection from "./components/branches";
 import NewsletterHomeSection from "./components/newsletter";
-import { CarouselProducts } from "../branches/components/carousel-products";
+//import BranchesHomeSection from "./components/branches";
+//import { CarouselProducts } from "../branches/components/carousel-products";
 
 import "./style/home.css";
 import Lenis from "lenis";

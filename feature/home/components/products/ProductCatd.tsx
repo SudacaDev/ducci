@@ -94,7 +94,7 @@ const ProductCard = ({
     );
   }
 
-  // Card estática normal
+ 
   return (
     <Link
       href={product.slug}
@@ -111,6 +111,7 @@ const ProductCard = ({
             sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             alt={product.title}
             priority={index < 2}
+            objectFit="cover"
           />
         </figure>
       </div>

@@ -129,6 +129,9 @@
   font-size: 1.375em;
   line-height: 1.275em;
   padding-right: 11.875em;
+  @media screen and (max-width: 768px) {
+   font-size: 1em;
+  }
 }
 
 .banner_content .hero__description,
@@ -145,6 +148,8 @@
   position: absolute;
   right: 0;
  bottom: 80px;
+ display: grid;
+    grid-column-start: 8;
 }
 
 .banner-image__content {
@@ -241,10 +246,26 @@ ease-in-out infinite alternate move; */
   .banner-image {
     position: relative;
     width: 100%;
-    display: flex;
+    display: grid;
     justify-content: center;
     margin-top: 2em;
+    grid-column-start: 1;
+    grid-column-end: 13;
+   
+    
   }
+
+  .banner-carousel__slide.min-w-full {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+   .banner-carousel__slide   img{
+      justify-items: center;
+      justify-content: center;
+      display: flex;
+    }
 
   .banner-image__content::after {
     width: 500px;

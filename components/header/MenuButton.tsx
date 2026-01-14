@@ -60,7 +60,7 @@ const MenuButton = () => {
             </DrawerClose>
 
           </div>
-          <div>
+          <div className="w-full">
             <ul className="drawer-menu flex flex-col px-8"> 
             {NAV.map((item) => {
               const isCurrentPage = isActive(item.url);
@@ -82,7 +82,10 @@ const MenuButton = () => {
                     href={item.url}
                     aria-current={isCurrentPage ? "page" : undefined}
                     className={getClasses()}
-                    onClick={onCloseMenu}
+                    onClick={() => {
+    setIsOpen(false); 
+    onCloseMenu(); 
+  }}
                   >
                     {item.label}
                   </Link>
@@ -98,11 +101,7 @@ const MenuButton = () => {
           </div>
         </nav>
 
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button variant="outline">Cerrar</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        
       </DrawerContent>
     </Drawer>
   );

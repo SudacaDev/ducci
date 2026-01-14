@@ -328,6 +328,7 @@ products
 /* REMOVIDO: Efecto ::after que causaba problemas con clicks */
 
 
+
 .cart-widget {
   position: fixed;
   bottom: 20px;

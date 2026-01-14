@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 import { MENU } from "@/types/nav.type";
 import { useHeroAnimation } from "./hooks/useHeroAnimation";
+import BannerCarousel from "./BannerCarousel";
 
 const HeroBanner = () => {
   const refTitle = useRef<HTMLDivElement>(null);
@@ -52,19 +53,15 @@ const HeroBanner = () => {
               </div>
             </div>
 
-            <div className="xl:flex-5 md:w-full"></div>
-          </div>
-
-          <section className="banner-image relative">
+            <section className="banner-image relative">
             <div className="banner-image__content">
-              <Image
-                src="/images/banner-image.png"
-                height={783}
-                width={669}
-                alt="home"
-              />
+              <BannerCarousel />
+              
             </div>
           </section>
+          </div>
+
+          
         </div>
       </section>
     </div>

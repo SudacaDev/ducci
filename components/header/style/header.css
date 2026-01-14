@@ -72,6 +72,12 @@ header
   color: var(--primary-foreground);
 }
 
+.cart-wrapper{
+  justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
 .cart-header button{
   display: flex;
   position: relative;
@@ -94,10 +100,21 @@ header
 .drawer-menu{  
   gap: 8px; 
   width: 100%;
-
+line-height: 4;
     display: flex;
-    padding-left: 0.5em;
-    align-items: center;}
+    padding: 0.5em;
+    align-items: center;
+    li{
+      width: 100%;
+      
+      a{
+          width: 100%;
+          display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+    }
+  }
  
 
 @media screen and (max-width: 1024px) {
