@@ -131,6 +131,7 @@ export const useFlavorsDB = ({
             name: flavor.name,
             price: 0,
             category: flavor.categories?.slug || "otros",
+            slug: flavor.categories?.slug || "otros",
             description: flavor.description,
             image: flavor.image,
             type: "flavor-selection" as const,
@@ -139,9 +140,6 @@ export const useFlavorsDB = ({
           };
         },
       );
-
-      setFlavors(transformedFlavors);
-      setFlavors(transformedFlavors);
 
       setFlavors(transformedFlavors);
     } catch (err) {
