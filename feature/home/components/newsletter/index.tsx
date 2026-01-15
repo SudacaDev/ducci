@@ -2,10 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { ArrowRight, Loader2, CheckCircle, XCircle } from "lucide-react";
 
-import CTAButton from "@/components/cta-button";
-import { Input } from "@/components/ui/input";
 import Block from "@/components/content-block";
 
 
@@ -14,14 +11,16 @@ import "../../style/newsletter.css";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useNewsletter } from "@/hooks/useNewsletter";
+import FacebookIcon from "@/components/icons/facebook";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
+import Link from "next/link";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NewsletterHomeSection = () => {
   const refContentNewsletter = useRef(null);
-  const { form, onSubmit, isLoading, isSuccess, isError, errorMessage } = useNewsletter();
-  const { register, formState: { errors } } = form;
+
 
   useEffect(() => {
     if (!refContentNewsletter.current) return;
@@ -45,69 +44,27 @@ const NewsletterHomeSection = () => {
               alt="Helados artesanales Ducci"
             />
           </div>
-          <Block>
-            <Block.Content>
-              <Block.Subtitle>Redes sociales</Block.Subtitle>
-              <Block.Title>
-                <span>¡Seguinos, ofertas</span> te esperan!
-              </Block.Title>
-            </Block.Content>
-            <Block.Body>
-              <p className="section-header__subtitle">
-                Promociones especiales, lanzamientos de sabores únicos y
-                descuentos exclusivos para suscriptores
-              </p>
-              <form onSubmit={onSubmit} className="newsletter-home-content__form--content">
-                <div>
-                  <Input
-                    type="email"
-                    placeholder="Ingresá tu email para suscribirte"
-                    {...register("email")}
-                    disabled={isLoading}
-                  />
-                  {errors.email && (
-                    <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
-                  )}
-                </div>
-
-                {isSuccess && (
-                  <div className="flex items-center gap-2 text-green-600">
-                    <CheckCircle size={16} />
-                    <span>¡Gracias por suscribirte!</span>
-                  </div>
-                )}
-
-                {isError && (
-                  <div className="flex items-center gap-2 text-red-600">
-                    <XCircle size={16} />
-                    <span>{errorMessage}</span>
-                  </div>
-                )}
-
-                <div className="flex">
-                  <CTAButton
-                    className="button__cta flex"
-
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 size={20} className="animate-spin" />
-                        Suscribiendo...
-                      </>
-                    ) : (
-                      <>
-                        Suscribite al newsletter
-                        <span>
-                          <ArrowRight size={20} />
-                        </span>
-                      </>
-                    )}
-                  </CTAButton>
-                </div>
-              </form>
-            </Block.Body>
-          </Block>
+          <div className="newsletter-wrapper">
+            <Block>
+              <Block.Content className="flex items-center justify-center">
+                <Block.Subtitle>Redes sociales</Block.Subtitle>
+                <Block.Title>
+                  <span>¡Seguinos, ofertas</span> te esperan!
+                </Block.Title>
+              </Block.Content>
+              <Block.Content className="newsletter-social">
+               <div className=" newsletter-social__icons">
+                <Link href='https://www.instagram.com/ducci.gelateria/' target="_blank">
+                 <FaFacebookF size={24} />
+                </Link>
+               </div>
+               <div className=" newsletter-social__icons">
+                 <Link href='https://www.instagram.com/ducci.gelateria/' target="_blank">
+                 <FaInstagram size={24} /></Link>
+               </div>
+              </Block.Content>
+            </Block>
+          </div>
         </div>
       </div>
     </section>
