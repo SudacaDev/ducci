@@ -113,9 +113,12 @@
 @media screen and (max-width: 1280px) {}
 
 @media screen and (max-width: 980px) {
+  .newsletter-home-content{
+    padding: 0
+  }
   .newsletter-home-content__form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 16px;
   }
 
@@ -123,6 +126,7 @@
     margin-left: 0;
     max-width: 680px;
     margin-block: 24px;
+    height: auto;
   }
 
   .newsletter-home-content__image--content img {
@@ -135,6 +139,6 @@
   .newsletter-home-content {
     max-width: 340px;
     margin-inline: auto;
-    padding: 2em;
+
   }
 }
