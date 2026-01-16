@@ -27,7 +27,14 @@ const MenuButton = () => {
 
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right" >
+      <div className="flex gap-2">
+        <div className="cart-wrapper mobile px-4 py-2 hover:cursor-pointer cart-header">
+            <button onClick={openDrawer} className="hover:cursor-pointer">
+              <ShoppingCart />{cart.length > 0 && isHydrated && <span className="cart-count">{cart.length}</span>}
+            </button>
+          </div>
       <DrawerTrigger asChild>
+        
         <Button
           id="open-menu"
           type="button"
@@ -40,6 +47,7 @@ const MenuButton = () => {
           <Menu />
         </Button>
       </DrawerTrigger>
+      </div>
 
       <DrawerContent className="h-full w-full bg-white sm:max-w-md md:max-w-lg border-none fixed right-0 top-0 z-[99999999] bottom-0 pt-[32px] flex flex-col">
         <VisuallyHidden>
@@ -98,11 +106,7 @@ const MenuButton = () => {
               })}
             </ul>
           </div>
-          <div className="cart-wrapper px-4 py-2 hover:cursor-pointer cart-header">
-            <button onClick={openDrawer} className="hover:cursor-pointer">
-              <ShoppingCart />{cart.length > 0 && isHydrated && <span className="cart-count">{cart.length}</span>}
-            </button>
-          </div>
+        
         </nav>
 
 

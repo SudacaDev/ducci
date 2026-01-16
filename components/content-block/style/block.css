@@ -49,7 +49,7 @@
 @media screen and (max-width: 680px) {
   .content-block__title {
     font-weight: 600;
-    font-size: clamp(1.2em, 3em, 32px);
+    font-size: clamp(1.2em, 2em, 32px);
     line-height: 32px;
   }
 }

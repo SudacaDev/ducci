@@ -76,6 +76,15 @@ header
   justify-content: center;
     align-items: center;
     display: flex;
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+}
+.cart-wrapper.mobile{
+  display: none;
+    @media screen and (max-width: 1024px) {
+      display: flex;
+    }
 }
 
 .cart-header button{
