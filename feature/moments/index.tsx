@@ -51,6 +51,7 @@ export const DucciMomentsContent = () => {
           {!loading && momentos.length > 0 && (
             <MomentList 
               momentos={momentos}
+               
             />
              
           )}
