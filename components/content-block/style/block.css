@@ -14,6 +14,7 @@
   font-weight: 600;
   font-size: clamp(1.2em, 3em, 48px);
   line-height: 48px;
+  color: var(--secondary-color-dark);
 }
 .content-block__title span {
   color: var(--secondary-color);

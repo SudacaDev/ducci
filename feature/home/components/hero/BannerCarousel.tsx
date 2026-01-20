@@ -24,7 +24,7 @@ export default function BannerCarousel() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Array extendido: [último, 1, 2, 3, primero]
+
   const extendedImages = [
     BANNER_IMAGES[BANNER_IMAGES.length - 1],
     ...BANNER_IMAGES,
@@ -49,35 +49,35 @@ export default function BannerCarousel() {
     setCurrentIndex(index + 1);
   };
 
-  // Auto-play
+ 
   useEffect(() => {
-    const interval = setInterval(goToNext, 5000);
+    const interval = setInterval(goToNext, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  // Manejar el loop infinito
+ 
   useEffect(() => {
     if (!isTransitioning) return;
 
     const timeout = setTimeout(() => {
-      // Si llegamos al clone del primero (última posición)
+    
       if (currentIndex === extendedImages.length - 1) {
         setIsTransitioning(false);
-        setCurrentIndex(1); // Saltar al primero real
+        setCurrentIndex(1);  
       }
-      // Si llegamos al clone del último (primera posición)
+     
       else if (currentIndex === 0) {
         setIsTransitioning(false);
-        setCurrentIndex(BANNER_IMAGES.length); // Saltar al último real
+        setCurrentIndex(BANNER_IMAGES.length);  
       } else {
         setIsTransitioning(false);
       }
-    }, 500); // Duración de la transición
+    }, 500); 
 
     return () => clearTimeout(timeout);
   }, [currentIndex, isTransitioning, extendedImages.length]);
 
-  // Calcular índice real para los dots
+   
   const getRealIndex = () => {
     if (currentIndex === 0) return BANNER_IMAGES.length - 1;
     if (currentIndex === extendedImages.length - 1) return 0;

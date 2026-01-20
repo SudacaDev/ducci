@@ -75,7 +75,7 @@ const ContactPageContent = () => {
                 </div>
                 <div className="contact__box--info">
                   <h3>escribinos</h3>
-                  <p>contacto@ducci.com</p>
+                  <p>contacto@ducci.com.ar</p>
                 </div>
               </div>
             </div>

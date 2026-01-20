@@ -31,7 +31,7 @@ const AboutUsContentPage = () => {
   }, []);
   return (
     <>
-    <InnerLayout id="about" bannerTitle="La magia Ducci">
+    <InnerLayout id="about" bannerTitle="La Magia Ducci">
       <CenterContainer center>
         <JourneyCon />
       </CenterContainer>

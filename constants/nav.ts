@@ -3,7 +3,7 @@ import { MENU } from "@/types/nav.type";
 export const NAV = [
   {
     id: "mskkjsouisbyusyy11992",
-    label: "La magia Ducci",
+    label: "La Magia Ducci",
     slug: "nosotros",
     url: MENU.ABOUT,
     alwaysActive: false,
