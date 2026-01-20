@@ -1,0 +1,41 @@
+#momentos{
+    background-color: white;
+    .moment-list h3{
+        font-family: var(--font-poppins)
+    }
+    .moment-list span{
+        font-family: var(--font-poppins);
+        color: white
+    }
+
+    .bg-ducci{
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        &:hover{
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+    }
+    .border-ducci{
+        border: 1px solid var(--secondary-color);
+        color: var(--secondary-color);
+         &:hover{
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+    }
+
+    .moment-modal{
+        z-index: 99999;
+    }
+    
+}
+
+.selectedMomento-branch-name, 
+    .selectedMomento-descripcion, 
+    .selectedMomento-title{
+         font-family: var(--font-poppins);
+         
+    }

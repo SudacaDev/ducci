@@ -168,6 +168,7 @@ main {
 
 .sub-banner_breadcrumb p {
   color: var(--e-global-text-dark);
+  font-size: .8em;
 }
 
 .banner-cta,

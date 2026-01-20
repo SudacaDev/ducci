@@ -44,7 +44,7 @@ export const PRODUCTS = [
       "/images/momentos-4.jpg",
       "/images/momentos-5.jpg",
     ],
-    slug: "",
+    slug: "momentos-ducci",
     title: "Momentos Ducci",
     hasCarousel: true  
   },
