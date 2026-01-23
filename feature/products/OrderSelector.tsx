@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useProducts } from "@/components/products/ProductContext";
 import { useBranches } from "@/hooks/useBranches";
 import {
@@ -13,8 +15,22 @@ import { MapPin } from "lucide-react";
 import { BranchSelectorSkeleton } from "@/components/products/skeletons/ProductSkeleton";
 
 const OrderSelector = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { selectedBranchId, setBranchId, confirmedOrders } = useProducts();
   const { branches, loading, error } = useBranches();
+
+  // Leer sucursal desde URL y pre-seleccionar
+ useEffect(() => {
+  const sucursalSlug = searchParams.get("sucursal");
+  
+  if (sucursalSlug && branches.length > 0) {
+    const branch = branches.find((b) => b.slug === sucursalSlug);
+    if (branch && branch.id !== selectedBranchId) {
+      setBranchId(branch.id);
+    }
+  }
+}, [searchParams, branches]);
 
   const handleBranchChange = (value: string) => {
     if (confirmedOrders.length > 0) {
@@ -24,7 +40,19 @@ const OrderSelector = () => {
         return;
       }
     }
-    setBranchId(value === "all" ? null : Number.parseInt(value));
+    
+    if (value === "all") {
+      setBranchId(null);
+      router.push("/productos");
+    } else {
+      const branchId = Number.parseInt(value);
+      const branch = branches.find((b) => b.id === branchId);
+      setBranchId(branchId);
+      
+      if (branch?.slug) {
+        router.push(`/productos?sucursal=${branch.slug}`);
+      }
+    }
   };
 
   return (
