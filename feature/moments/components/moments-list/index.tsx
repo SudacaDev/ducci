@@ -76,7 +76,7 @@ export const MomentList = ({ momentos }: MomentsProps) => {
                             {selectedMomento.evento}
                         </span>
                     )}
-                    <h3 className="text-white font-serif text-2xl">
+                    <h3 className="text-white font-serif text-2xl selectedMomento-title">
                         {selectedMomento.titulo}
                     </h3>
                     {selectedMomento.descripcion && (
@@ -84,7 +84,7 @@ export const MomentList = ({ momentos }: MomentsProps) => {
                             {selectedMomento.descripcion}
                         </p>
                     )}
-                    <div className="flex items-center justify-center gap-3 mt-3 text-sm text-white/50">
+                    <div className="flex items-center justify-center gap-3 mt-3 text-sm text-white/50 selectedMomento-branch-name">
                         {selectedMomento.branch && (
                             <span>{selectedMomento.branch.name}</span>
                         )}
@@ -108,7 +108,7 @@ export const MomentList = ({ momentos }: MomentsProps) => {
 
     return (
         <>
-            {/* Grid de momentos */}
+         
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]">
                 {momentos.map((momento, index) => (
                     <MomentCard

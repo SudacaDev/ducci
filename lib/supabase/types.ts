@@ -33,6 +33,7 @@ export interface Branch extends Base, Activable {
   hours: string;
   opening_time: string | null;
   closing_time: string | null;
+  slug: string;
 }
 
 export interface ProductDB extends Base, Activable, Categorizable {

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { THEME } from "@/constants/branches";
 import { useBranches } from "@/hooks/useBranches";
@@ -9,27 +10,32 @@ interface BranchWithDistance extends Branch {
   distance?: number;
 }
 
+const generateSlug = (name: string): string => {
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+};
+
 const useBranchesMap = () => {
+  const router = useRouter();
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<any>(null);
   const [markers, setMarkers] = useState<any[]>([]);
   const [hoveredBranch, setHoveredBranch] = useState<number | null>(null);
   const [selectedBranch, setSelectedBranch] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [nearbyBranches, setNearbyBranches] = useState<BranchWithDistance[]>(
-    [],
-  );
+  const [nearbyBranches, setNearbyBranches] = useState<BranchWithDistance[]>([]);
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
   } | null>(null);
   const [locationCircle, setLocationCircle] = useState<any>(null);
 
-  // ============================================
-  // FETCH BRANCHES DESDE SUPABASE
-  // ============================================
   const { branches: BRANCHES, loading: loadingBranches } = useBranches();
-
   const [filteredBranches, setFilteredBranches] = useState<Branch[]>([]);
 
   useEffect(() => {
@@ -40,7 +46,7 @@ const useBranchesMap = () => {
     lat1: number,
     lon1: number,
     lat2: number,
-    lon2: number,
+    lon2: number
   ): number => {
     const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -74,16 +80,12 @@ const useBranchesMap = () => {
       try {
         const container = mapRef.current;
 
-        // Limpiar instancia previa si existe
         if (container.classList.contains("leaflet-container")) {
           (container as any)._leaflet_id = null;
         }
 
-        // ============================================
-        // CALCULAR CENTRO Y BOUNDS DE TODAS LAS SUCURSALES
-        // ============================================
         const bounds = L.latLngBounds(
-          BRANCHES.map((branch) => [branch.lat, branch.lng]),
+          BRANCHES.map((branch) => [branch.lat, branch.lng])
         );
 
         map = L.map(container, {
@@ -107,28 +109,32 @@ const useBranchesMap = () => {
         }).addTo(map);
 
         const newMarkers = BRANCHES.map((branch) => {
+          const slug = branch.slug;
+
           const normalIcon = L.divIcon({
             className: "",
             html: `
-            <div style="
-              background: ${THEME.markerNormal};
-              width: 45px;
-              height: 45px;
-              border-radius: 50%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border: 3px solid ${THEME.markerNormalBorder};
-              box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-              transition: all 0.3s;
-            ">
-              <img 
-                src="/images/logo-ducci.svg" 
-                alt="Ducci" 
-                style="width: 24px; height: 24px; filter: brightness(0) invert(1);"
-              />
-            </div>
-          `,
+              <div 
+                onclick="window.location.href='/sucursales/${slug}'"
+                style="
+                  background: ${THEME.markerNormal};
+                  width: 45px;
+                  height: 45px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: 3px solid ${THEME.markerNormalBorder};
+                  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                  cursor: pointer;
+                ">
+                <img 
+                  src="/images/logo-ducci.svg" 
+                  alt="Ducci" 
+                  style="width: 24px; height: 24px; filter: brightness(0) invert(1); pointer-events: none;"
+                />
+              </div>
+            `,
             iconSize: [45, 45],
             iconAnchor: [22.5, 22.5],
             popupAnchor: [0, -20],
@@ -137,25 +143,28 @@ const useBranchesMap = () => {
           const highlightIcon = L.divIcon({
             className: "",
             html: `
-            <div style="
-              background: ${THEME.markerHover};
-              width: 55px;
-              height: 55px;
-              border-radius: 50%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border: 4px solid ${THEME.markerHoverBorder};
-              box-shadow: 0 6px 20px rgba(186, 101, 22, 0.5);
-              animation: pulse 1.5s infinite;
-            ">
-              <img 
-                src="/images/logo-ducci.svg" 
-                alt="Ducci" 
-                style="width: 30px; height: 30px; "
-              />
-            </div>
-          `,
+              <div 
+                onclick="window.location.href='/sucursales/${slug}'"
+                style="
+                  background: ${THEME.markerHover};
+                  width: 55px;
+                  height: 55px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: 4px solid ${THEME.markerHoverBorder};
+                  box-shadow: 0 6px 20px rgba(186, 101, 22, 0.5);
+                  animation: pulse 1.5s infinite;
+                  cursor: pointer;
+                ">
+                <img 
+                  src="/images/logo-ducci.svg" 
+                  alt="Ducci" 
+                  style="width: 30px; height: 30px; pointer-events: none;"
+                />
+              </div>
+            `,
             iconSize: [55, 55],
             iconAnchor: [27.5, 27.5],
             popupAnchor: [0, -25],
@@ -163,9 +172,10 @@ const useBranchesMap = () => {
 
           const marker = L.marker([branch.lat, branch.lng], {
             icon: normalIcon,
-          })
-            .addTo(map)
-            .bindPopup(`
+          }).addTo(map);
+
+          marker.bindPopup(
+            `
             <div style="min-width: 200px; color: ${THEME.text};">
               <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: ${THEME.primary};">
                 🍦 ${branch.name}
@@ -178,15 +188,21 @@ const useBranchesMap = () => {
               </p>
               ${
                 branch.phone
-                  ? `
-                  <p style="margin: 0.5rem 0; color: ${THEME.primary};">
-                    📞 ${branch.phone}
-                  </p>
-                `
+                  ? `<p style="margin: 0.5rem 0; color: ${THEME.primary};">
+                      📞 ${branch.phone}
+                    </p>`
                   : ""
               }
             </div>
-          `);
+          `,
+            {
+              closeOnClick: false,
+              autoClose: false,
+            }
+          );
+
+          marker.on("mouseover", () => marker.openPopup());
+          marker.on("mouseout", () => marker.closePopup());
 
           return { branch, marker, normalIcon, highlightIcon };
         });
@@ -198,11 +214,11 @@ const useBranchesMap = () => {
 
         const style = document.createElement("style");
         style.textContent = `
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.08); }
-        }
-      `;
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+          }
+        `;
         document.head.appendChild(style);
       } catch (error) {
         console.error("Error initializing map:", error);
@@ -211,7 +227,6 @@ const useBranchesMap = () => {
 
     initMap();
 
-    // Cleanup
     return () => {
       mounted = false;
       if (map) {
@@ -235,10 +250,6 @@ const useBranchesMap = () => {
         marker.setIcon(highlightIcon);
         marker.setZIndexOffset(1000);
         marker.openPopup();
-
-        // if (isSelected) { // Eliminado el movimiento del mapa en el useEffect
-        //   mapInstance.flyTo([branch.lat, branch.lng], 15, { duration: 0.5 });
-        // }
       } else {
         marker.setIcon(normalIcon);
         marker.setZIndexOffset(0);
@@ -261,7 +272,7 @@ const useBranchesMap = () => {
         (branch) =>
           removeAccents(branch.name.toLowerCase()).includes(query) ||
           removeAccents(branch.address.toLowerCase()).includes(query) ||
-          removeAccents(branch.city.toLowerCase()).includes(query),
+          removeAccents(branch.city.toLowerCase()).includes(query)
       );
       setFilteredBranches(filtered);
     }
@@ -283,7 +294,7 @@ const useBranchesMap = () => {
               latitude,
               longitude,
               branch.lat,
-              branch.lng,
+              branch.lng
             ),
           }))
             .filter((branch) => branch.distance! <= 5)
@@ -332,7 +343,7 @@ const useBranchesMap = () => {
 
             nearby.forEach((nearbyBranch) => {
               const markerData = markers.find(
-                (m) => m.branch.id === nearbyBranch.id,
+                (m) => m.branch.id === nearbyBranch.id
               );
               if (markerData) {
                 markerData.marker.setIcon(markerData.highlightIcon);
@@ -351,7 +362,7 @@ const useBranchesMap = () => {
                       color: "#fff",
                       minWidth: "300px",
                     },
-                  },
+                  }
                 );
               }, 800);
             } else {
@@ -366,10 +377,10 @@ const useBranchesMap = () => {
         },
         (error) => {
           toast.error(
-            "No se pudo obtener tu ubicación. Asegurate de dar permisos.",
+            "No se pudo obtener tu ubicación. Asegurate de dar permisos."
           );
           console.error(error);
-        },
+        }
       );
     } else {
       toast.error("Tu navegador no soporta geolocalización");
@@ -379,7 +390,7 @@ const useBranchesMap = () => {
   const handleGetDirections = (lat: number, lng: number) => {
     window.open(
       `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
-      "_blank",
+      "_blank"
     );
   };
 

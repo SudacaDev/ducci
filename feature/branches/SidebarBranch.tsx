@@ -13,7 +13,7 @@ interface SidebarBranchProps {
   hoveredBranch: number | null;
   nearbyBranches: BranchWithDistance[];
   userLocation: { lat: number; lng: number } | null;
-  loadingBranches?: boolean; // ← NUEVO
+  loadingBranches?: boolean;  
   setSearchQuery: (value: SetStateAction<string>) => void;
   setHoveredBranch: (id: number | null) => void;
   setSelectedBranch: (id: number | null) => void;
@@ -78,7 +78,7 @@ const SidebarBranch = ({
       </div>
 
       <div className="branches-list">
-        {/* Loading State */}
+       
         {loadingBranches ? (
           <div style={{ padding: "3rem 2rem", textAlign: "center" }}>
             <div
@@ -102,7 +102,7 @@ const SidebarBranch = ({
           </div>
         ) : (
           <>
-            {/* Nearby Branches */}
+             
             {userLocation && nearbyBranches.length > 0 && (
               <div className="nearby-section">
                 <h3 className="nearby-title">🍦 Ducci cerca tuyo</h3>
