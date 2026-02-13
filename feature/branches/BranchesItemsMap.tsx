@@ -17,6 +17,10 @@ export const BranchesItemsMap = () => {
     return (
         <div className="bg-white">
             <CenterContainer center >
+                <div className="branch-title--info-inner !jutify-center !items-center">
+                    <h2>Visitá nuestras sucursales</h2>
+                    <p>Viví tu momento Ducci</p>
+                </div>
                 <div className="branch-grid" >
 
                     {filteredBranches.map((branch) => (
@@ -45,7 +49,7 @@ export const BranchesItemsMap = () => {
                                 </div>
                             </div>
                             
-                                <Button variant={'outline'} onClick={()=> goToPage(`/productos?sucursal=${branch.slug}`)} className="hover:cursor-pointer">
+                                <Button variant={'outline'} onClick={()=> goToPage(`/productos?sucursal=${branch.slug}`)} className="hover:cursor-pointer branch-grid_button  ">
                                     Pedi Ducci 
                                 </Button>
                              

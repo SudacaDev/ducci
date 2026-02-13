@@ -1,6 +1,8 @@
 import CenterContainer from "@/components/container/center";
 import { createClient } from "@/lib/supabase/server";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -19,9 +21,6 @@ export default async function BranchSinglePage({ params }: Props) {
     if (error || !branch) {
         notFound();
     }
-
-
-
 
     return (
         <div id="product-wrapper" className="h-full bg-white  ">
@@ -50,8 +49,6 @@ export default async function BranchSinglePage({ params }: Props) {
                                 </div>
                             )}
 
-
-
                             <div className="flex gap-4">
 
                                 <a href={`https://www.google.com/maps/dir/?api=1&destination=${branch.lat},${branch.lng}`}
@@ -72,8 +69,12 @@ export default async function BranchSinglePage({ params }: Props) {
                         </div>
 
 
-                        <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
-                            <span className="text-gray-500">Mapa de la sucursal</span>
+                        <div
+                            className="flex items-center justify-center w-full h-[600px] bg-cover bg-bottom bg-no-repeat"
+                            style={{ backgroundImage: `url('/images/locales/suc-local-${branch.id}.jpg')` }}
+                            aria-label={`Sucursal ${branch.name}`}
+                        >
+
                         </div>
                     </div>
                 </div>
