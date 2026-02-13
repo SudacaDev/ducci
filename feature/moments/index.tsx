@@ -15,7 +15,7 @@ export const DucciMomentsContent = () => {
   const { momentos, loading, error, categoria, changeCategoria } = useMomentos()
 
   return (
-    <InnerLayout id="momentos" bannerTitle="Momentos Ducci">
+    <InnerLayout id="momentos" bannerTitle="Promociones">
       <CenterContainer center>
         <section className="">
           <div className="flex justify-center gap-3 mb-10 flex-wrap">

@@ -46,23 +46,13 @@ const JourneyCon = () => {
         </div>
         <div className="journey_content grid-content_right">
           <Block>
-            <Block.Title ref={refTitle}>El camino que elegimos</Block.Title>
+            <Block.Title ref={refTitle}>No solo servimos helado,<br /> Creamos momentos.</Block.Title>
             <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
-                <p>
-                  Nuestra propuesta combina tradición, técnica y creatividad para
-                  ofrecer sabores que transmiten calidad en cada cucharada.
-                </p>
-                <p>
-                  Hemos consolidado un estilo propio: procesos cuidados, elaboración
-                  diaria y una selección rigurosa de ingredientes. Este compromiso nos
-                  permite garantizar un producto noble, estable y de alta calidad.
-                </p>
-                <p> En Ducci Gelateria entendemos el helado como una experiencia. Por eso
-                  trabajamos en mejorar permanentemente nuestras formulaciones,
-                  incorporar nuevas combinaciones y mantener un servicio cercano y
-                  atento. Cada pote, cada bocha y cada presentación reflejan nuestra
-                  identidad: calidad y dedicación.</p>
+                <p> Nuestra propuesta combina tradición, técnica y creatividad para ofrecer sabores de calidad en cada cucharada.
+Trabajamos con procesos cuidados, elaboración diaria y una selección rigurosa de ingredientes. Eso nos permite mantener un estilo propio y garantizar un producto estable, noble y siempre fresco.
+</p>
+                <p> En Ducci entendemos el helado como una experiencia. Por eso buscamos mejorar constantemente, crear nuevas combinaciones y ofrecer un servicio cercano. Cada pote, cada bocha y cada presentación reflejan lo que nos define: calidad, dedicación y amor por lo que hacemos.</p>
               </div>
             </Block.Body>
             <Block.Footer ref={refButtonCTA}>
@@ -86,22 +76,11 @@ const JourneyCon = () => {
             <Block.Title ref={refTitle}>Momentos Ducci</Block.Title>
             <Block.Body ref={refBodyCopy}>
               <div className="flex flex-col about-section__text">
-                <p>
-                  Momentos Ducci es nuestra manera de celebrar esos instantes que se
-                  vuelven especiales cuando el helado acompaña. Pequeños rituales cotidianos,
-                  encuentros inesperados o celebraciones que merecen un
-                  sabor a la altura: cada uno de ellos encuentra en Ducci un aliado para
-                  convertirse en un recuerdo.
-                </p>
-                <p>
-                  Creemos que el helado no es solo un producto, sino una experiencia que
-                  conecta. Por eso elaboramos cada sabor con dedicación, para que esté
-                  presente donde realmente importa: en una sobremesa larga, en un
-                  brindis improvisado, en una tarde en familia o en ese descanso que necesitabas.
-                </p>
-                <p>En Momentos Ducci invitamos a detenernos, disfrutar y compartir.
-                  Porque cuando la calidad se nota y el sabor emociona, cada instante
-                  puede transformarse en un momento que vale la pena guardar.</p>
+                <p> Momentos Ducci es nuestra forma de celebrar esos instantes que se vuelven especiales cuando el helado acompaña.
+Copas únicas, sabores distintivos y combinaciones pensadas para compartir, sorprender y disfrutar.</p>
+                <p> Porque en Ducci el helado no es solo un producto: es parte de encuentros, pausas y momentos para darse un gusto.
+Creamos propuestas para que cada ocasión tenga su sabor inolvidable.</p>
+                
               </div>
             </Block.Body>
             <Block.Footer ref={refButtonCTA}>

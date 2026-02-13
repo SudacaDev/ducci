@@ -49,7 +49,7 @@ const NewsletterHomeSection = () => {
               <Block.Content className="flex items-center justify-center">
                 <Block.Subtitle>Redes sociales</Block.Subtitle>
                 <Block.Title>
-                  <span>¡Seguinos, ofertas</span> te esperan!
+                  <span>¡Seguinos!</span> Seamos amiduccis.
                 </Block.Title>
               </Block.Content>
               <Block.Content className="newsletter-social">

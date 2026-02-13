@@ -65,8 +65,8 @@ const ContactPageContent = () => {
                   <PhoneIcon size={32} />
                 </div>
                 <div className="contact__box--info">
-                  <h3>telefono</h3>
-                  <p>+54 341 5222700</p>
+                  <h3>franquicia central </h3>
+                  <p>+54 9 341 584 1995</p>
                 </div>
               </div>
               <div className="contact__box">

@@ -77,19 +77,20 @@ const AboutHomeSection = () => {
                     <Block>
                       <Block.Content>
                         <Block.Subtitle ref={refEyebrow}>
-                          La Magia de Ducci
+                          La Magia Ducci
                         </Block.Subtitle>
                         <Block.Title ref={refTitle}>
-                          <span>El momento que elgimos</span>
+                          <span>El camino que elegimos </span>
                         </Block.Title>
                       </Block.Content>
                       <Block.Body ref={refBodyCopy}>
                         <div className="about-home__wrappe--info__content__body">
+                          <p>No solo servimos helado. Creamos momentos.</p>
                           <p>
-                            Combinamos tradición, técnica y creatividad para ofrecer sabores de calidad en cada cucharada.
+                            Ducci nace para ser la salida familiar en pueblos grandes y ciudades chicas donde no hay tantas opciones para disfrutar con niños o preadolescentes.
                           </p>
                           <p>
-                            Elaboración diaria, procesos cuidados y selección rigurosa de ingredientes garantizan un producto noble y de alta calidad.
+                            Somos un lugar de encuentro, alegría y juego.
                           </p>
                         </div>
                       </Block.Body>

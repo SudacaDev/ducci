@@ -26,7 +26,7 @@ export const PRODUCTS = [
     name: "Chocolate Amargo",
     image: "/images/disfruta-ducci.jpg",
     slug: "productos",
-    title: "Disfrutá Ducci"
+    title: "Pedí Ducci"
   },
   {
     id: 3,
@@ -44,8 +44,8 @@ export const PRODUCTS = [
       "/images/momentos-4.jpg",
       "/images/momentos-5.jpg",
     ],
-    slug: "momentos-ducci",
-    title: "Momentos Ducci",
+    slug: "promociones",
+    title: "Promociones",
     hasCarousel: true  
   },
 ];
@@ -98,7 +98,7 @@ const ProductsHomeSection = () => {
         <div className="items-center justify-center flex">
           <SectionHeader align="center" className="text-center">
             <h2 className="section-header__title" ref={refTitle}>
-              <span>SONREÍ, ES DUCCI</span>
+              <span>Disfruta en Ducci </span>
             </h2>
             <p className="section-header__subtitle" ref={refBodyCopy}>
               Probá nuestros helados, disfrutá de una experiencia distinta!

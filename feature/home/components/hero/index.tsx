@@ -29,17 +29,16 @@ const HeroBanner = () => {
                     className="hero__eyebrow flex items-center gap-2"
                     ref={refEyebrow}
                   >
-                    Es mucho más que una heladería.
+                   {/**  Es mucho más que una heladería. */}
                   </p>
                   <h1 className="hero__title" ref={refTitle}>
-                    Ducci <span className="hero__title--accent">Gelatería</span>
+                    Sonreí, <br /> <span className="hero__title--accent">Es Ducci</span>
                   </h1>
                 </div>
 
                 <p className="hero__description copy" ref={refBodyCopy}>
-                  Es el punto de encuentro. <br />
-                  En Ducci cada sabor tiene su historia y cada visita se
-                  transforma en un recreo.
+                  Cada sabor,  <br />
+                  Un momento para disfrutar.
                 </p>
               </div>
 
