@@ -23,6 +23,8 @@ const DucciBranchesMap = () => {
     loadingBranches,
   } = useBranchesMap();
 
+ 
+
   return (
     <div className="branches-map-container">
       <SidebarBranch

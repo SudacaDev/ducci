@@ -1,0 +1,24 @@
+.branch-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    @media screen and (min-width: 980px){
+         grid-template-columns: repeat(3, 1fr);
+    }
+    grid-gap: 24px;
+}
+.branch-grid_item{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.branch-grid_item--name{
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: .5px;
+}
+.branch-grid_item--address, .branch-grid_item--time, .branch-grid_item--phone{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+     color: var(--e-global-text-color);
+}

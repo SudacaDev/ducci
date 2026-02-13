@@ -1,6 +1,6 @@
 import type { SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
-import type { Branch } from "@/lib/supabase/types"; // ← CAMBIAR IMPORT
+import type { Branch } from "@/lib/supabase/types";
 
 interface BranchWithDistance extends Branch {
   distance?: number;
@@ -29,11 +29,11 @@ const SidebarBranch = ({
   filteredBranches,
   selectedBranch,
   setSelectedBranch,
-  hoveredBranch,
+ 
   setHoveredBranch,
   nearbyBranches = [],
   userLocation = null,
-  loadingBranches = false, // ← NUEVO
+  loadingBranches = false,  
 }: SidebarBranchProps) => {
   const sortedBranches = userLocation
     ? [
@@ -165,12 +165,8 @@ const SidebarBranch = ({
                       <br />
                       {branch.city}
                     </p>
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="flex-1 items-center justify-center">
-                        {branch.hours && (
-                          <p className="branch-card__hours">• {branch.hours}</p>
-                        )}
-                      </div>
+                    <div className="flex items-center justify-center gap-2 max-w-[200px]">
+                      
                       <div className="flex-1 items-center justify-center">
                         <Button
                           className="branch-card__cta "
