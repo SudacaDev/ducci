@@ -17,7 +17,7 @@ export const PRODUCTS = [
   {
     id: 1,
     name: "Dulce de Leche",
-    image: "/images/la-magia-ducci.png",
+    image: "/images/la-magia-ducci.jpg",
     slug: "nosotros",
     title: "La Magia Ducci"
   },
