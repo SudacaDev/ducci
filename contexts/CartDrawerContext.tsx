@@ -10,7 +10,7 @@ interface CartDrawerContextType {
 }
 
 const CartDrawerContext = createContext<CartDrawerContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const CartDrawerProvider = ({ children }: { children: ReactNode }) => {

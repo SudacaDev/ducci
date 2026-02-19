@@ -22,13 +22,11 @@ const FlavorProducts = ({
 }: FlavorProductsProps) => {
   const { formatPrice } = useCurrency();
   return (
-    <div   className="mb-8 product-container ">
+    <div className="mb-8 product-container ">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">
         Helados por peso
       </h3>
-      <p className="text-sm text-gray-600 mb-4">
-        Elegí tamaño y luego sabores
-      </p>
+      <p className="text-sm text-gray-600 mb-4">Elegí tamaño y luego sabores</p>
 
       <div
         className={`grid gap-4 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3" : "grid-cols-1"}`}
@@ -40,16 +38,14 @@ const FlavorProducts = ({
 
           return (
             <div
-              
               key={item.id}
-          
-             
-              className={`product-list_item flex rounded-lg transition-all relative ${isActive
+              className={`product-list_item flex rounded-lg transition-all relative ${
+                isActive
                   ? "ring-4 ring-blue-500 shadow-lg bg-blue-50"
                   : !selectedBranchId
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:shadow-md hover:scale-102 cursor-pointer"
-                }`}
+              }`}
             >
               {!selectedBranchId && (
                 <div className="absolute top-2 right-2 z-20 bg-gray-400 rounded-full p-1">
@@ -66,7 +62,7 @@ const FlavorProducts = ({
               <div className="product-list_image inset-shadow-sm rounded-md">
                 <figure>
                   <Image
-                    src={item.image || '/placeholder-helado.jpg'}
+                    src={item.image || "/placeholder-helado.jpg"}
                     alt={item.name}
                     width={240}
                     height={240}
@@ -87,13 +83,16 @@ const FlavorProducts = ({
                     {formatPrice(item.price)}
                   </p>
                 </div>
-              <Button
-              type="button"
-              key={item.id}
-              onClick={() => handleOpenModal(item)}
-              disabled={!selectedBranchId}
-               className="flex-1 bg-[var(--secondary-color)] hover:bg-[var(--secondary-color)]/90 text-white gap-2"
-            > <ShoppingCart className="w-4 h-4" /> Agregar </Button>
+                <Button
+                  type="button"
+                  key={item.id}
+                  onClick={() => handleOpenModal(item)}
+                  disabled={!selectedBranchId}
+                  className="flex-1 bg-[var(--secondary-color)] hover:bg-[var(--secondary-color)]/90 text-white gap-2"
+                >
+                  {" "}
+                  <ShoppingCart className="w-4 h-4" /> Agregar{" "}
+                </Button>
               </div>
             </div>
           );

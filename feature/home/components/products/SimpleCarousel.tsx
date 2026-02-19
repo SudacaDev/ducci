@@ -9,10 +9,10 @@ interface SimpleCarouselProps {
   autoplayDelay?: number;
 }
 
-export default function SimpleCarousel({ 
-  images, 
+export default function SimpleCarousel({
+  images,
   alt,
-  autoplayDelay = 5000 
+  autoplayDelay = 5000,
 }: SimpleCarouselProps) {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -45,17 +45,16 @@ export default function SimpleCarousel({
   };
 
   return (
-    <div 
+    <div
       className="relative w-full h-full"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-
       {images.map((img, idx) => (
         <div
           key={idx}
           className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            idx === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            idx === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
           <Image
@@ -76,9 +75,7 @@ export default function SimpleCarousel({
               goToSlide(idx);
             }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              idx === current 
-                ? 'bg-white w-6' 
-                : 'bg-white/50 hover:bg-white/80'
+              idx === current ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
             }`}
             aria-label={`Ir a imagen ${idx + 1}`}
           />

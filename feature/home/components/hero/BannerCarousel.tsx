@@ -24,7 +24,6 @@ export default function BannerCarousel() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
-
   const extendedImages = [
     BANNER_IMAGES[BANNER_IMAGES.length - 1],
     ...BANNER_IMAGES,
@@ -49,35 +48,29 @@ export default function BannerCarousel() {
     setCurrentIndex(index + 1);
   };
 
- 
   useEffect(() => {
     const interval = setInterval(goToNext, 3000);
     return () => clearInterval(interval);
   }, []);
 
- 
   useEffect(() => {
     if (!isTransitioning) return;
 
     const timeout = setTimeout(() => {
-    
       if (currentIndex === extendedImages.length - 1) {
         setIsTransitioning(false);
-        setCurrentIndex(1);  
-      }
-     
-      else if (currentIndex === 0) {
+        setCurrentIndex(1);
+      } else if (currentIndex === 0) {
         setIsTransitioning(false);
-        setCurrentIndex(BANNER_IMAGES.length);  
+        setCurrentIndex(BANNER_IMAGES.length);
       } else {
         setIsTransitioning(false);
       }
-    }, 500); 
+    }, 500);
 
     return () => clearTimeout(timeout);
   }, [currentIndex, isTransitioning, extendedImages.length]);
 
-   
   const getRealIndex = () => {
     if (currentIndex === 0) return BANNER_IMAGES.length - 1;
     if (currentIndex === extendedImages.length - 1) return 0;
@@ -92,11 +85,16 @@ export default function BannerCarousel() {
           className="banner-carousel__track flex"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
-            transition: isTransitioning ? "transform 500ms ease-in-out" : "none",
+            transition: isTransitioning
+              ? "transform 500ms ease-in-out"
+              : "none",
           }}
         >
           {extendedImages.map((image, index) => (
-            <div key={`slide-${index}`} className="banner-carousel__slide min-w-full flex-shrink-0">
+            <div
+              key={`slide-${index}`}
+              className="banner-carousel__slide min-w-full flex-shrink-0"
+            >
               <Image
                 src={image.src}
                 height={783}

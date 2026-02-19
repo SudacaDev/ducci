@@ -28,7 +28,7 @@
     background-color: var(--secondary-color);
     width: 45%;
     z-index: 0;
-    
+
     @media screen and (max-width: 1100px) {
       display: none; /* Ocultar también el ::after */
     }
@@ -44,7 +44,7 @@
     background-color: var(--secondary-color);
     width: 56%;
     z-index: 0;
-    
+
     @media screen and (max-width: 1100px) {
       display: none;
     }
@@ -106,8 +106,8 @@
   gap: 56px;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 768px){
-    gap: 16px
+  @media screen and (max-width: 768px) {
+    gap: 16px;
   }
 }
 
@@ -133,7 +133,7 @@
   line-height: 1.275em;
   padding-right: 11.875em;
   @media screen and (max-width: 768px) {
-   font-size: 1em;
+    font-size: 1em;
   }
 }
 
@@ -150,12 +150,12 @@
 .banner-image {
   position: absolute;
   right: 0;
- bottom: 80px;
- display: grid;
-    grid-column-start: 8;
-    @media screen and (max-width: 1280px) {
-          grid-column-start: 7;
-    }
+  bottom: 80px;
+  display: grid;
+  grid-column-start: 8;
+  @media screen and (max-width: 1280px) {
+    grid-column-start: 7;
+  }
 }
 
 .banner-image__content {
@@ -241,10 +241,9 @@ ease-in-out infinite alternate move; */
     padding-bottom: 3em;
     justify-content: center;
     align-items: center;
-    @media screen and (max-width: 768px){
-      
+    @media screen and (max-width: 768px) {
       padding-top: 1em;
-    padding-bottom: 1em;
+      padding-bottom: 1em;
     }
   }
 
@@ -262,21 +261,19 @@ ease-in-out infinite alternate move; */
     margin-top: 2em;
     grid-column-start: 1;
     grid-column-end: 13;
-   
-    
   }
 
   .banner-carousel__slide.min-w-full {
     justify-content: center;
     align-items: center;
     display: flex;
-}
+  }
 
-   .banner-carousel__slide   img{
-      justify-items: center;
-      justify-content: center;
-      display: flex;
-    }
+  .banner-carousel__slide img {
+    justify-items: center;
+    justify-content: center;
+    display: flex;
+  }
 
   .banner-image__content::after {
     width: 500px;

@@ -20,19 +20,17 @@ import { useHeader } from "../header/Header";
 export default function CartDrawer() {
   const { cart, removeFromCart, clearCart, isHydrated } = useCart();
   const { isOpen, closeDrawer } = useCartDrawer();
- 
-  
 
   const totalItems = cart.length;
   const totalPrice = cart.reduce((sum, order) => {
     if (order.type === "quantity-selection") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     } else if (order.type === "box") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     } else if (order.type === "single-item") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     } else if (order.type === "flavor-selection") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     }
     return sum;
   }, 0);
@@ -74,29 +72,29 @@ export default function CartDrawer() {
             </div>
           </div>
         );
-      
+
       case "quantity-selection":
         return (
-          <p className="text-sm text-gray-600">
-            Cantidad: {order.quantity}
-          </p>
+          <p className="text-sm text-gray-600">Cantidad: {order.quantity}</p>
         );
-      
+
       case "box":
         return (
           <div className="text-sm text-gray-600 space-y-1">
-            <p>{order.quantity} {order.quantity === 1 ? "caja" : "cajas"} de {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"}</p>
+            <p>
+              {order.quantity} {order.quantity === 1 ? "caja" : "cajas"} de{" "}
+              {order.boxQuantity}{" "}
+              {order.boxQuantity === 1 ? "unidad" : "unidades"}
+            </p>
             <p className="text-xs text-gray-500">
               ${order.price.toLocaleString("es-AR")} c/u
             </p>
           </div>
         );
-      
+
       case "single-item":
         return (
-          <p className="text-sm text-gray-600">
-            Cantidad: {order.quantity}
-          </p>
+          <p className="text-sm text-gray-600">Cantidad: {order.quantity}</p>
         );
     }
   };
@@ -125,7 +123,6 @@ export default function CartDrawer() {
             </DrawerDescription>
           </DrawerHeader>
 
-     
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {!isHydrated ? (
               <div className="flex items-center justify-center h-32">
@@ -155,7 +152,7 @@ export default function CartDrawer() {
                         ${getOrderSubtotal(order).toLocaleString("es-AR")}
                       </p>
                     </div>
-                    
+
                     <button
                       onClick={() => removeFromCart(order.id)}
                       className="text-black hover:text-red-700 p-2 h-fit hover:cursor-pointer"
@@ -168,22 +165,27 @@ export default function CartDrawer() {
             )}
           </div>
 
-       
           {totalItems > 0 && (
             <DrawerFooter>
               <div className="flex items-center justify-between text-lg font-semibold mb-4">
                 <span>Total:</span>
                 <span>${totalPrice.toLocaleString("es-AR")}</span>
               </div>
-              
+
               <Link href="/checkout" className="block w-full">
-                <Button className="w-full h-12 text-base bg-[var(--secondary-color)] text-white hover:cursor-pointer hover:bg-[var(--secondary-color-dark)]" onClick={closeDrawer} >
+                <Button
+                  className="w-full h-12 text-base bg-[var(--secondary-color)] text-white hover:cursor-pointer hover:bg-[var(--secondary-color-dark)]"
+                  onClick={closeDrawer}
+                >
                   Finalizar Pedido
                 </Button>
               </Link>
-              
+
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full hover:bg-gray-200 hover:cursor-pointer">
+                <Button
+                  variant="outline"
+                  className="w-full hover:bg-gray-200 hover:cursor-pointer"
+                >
                   Seguir comprando
                 </Button>
               </DrawerClose>

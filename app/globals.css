@@ -60,22 +60,32 @@
   --e-global-text-color: hsl(var(--e-global-text-color-hsl));
   --e-global-text-dark: hsl(var(--e-global-text-dark-hsl));
 
-  --secondary-lighter: hsl(var(--secondary-h),
-      var(--secondary-s),
-      calc(var(--secondary-l) + 19%));
-  --secondary-lightest: hsl(var(--secondary-h),
-      var(--secondary-s),
-      calc(var(--secondary-l) + 44%));
-  --secondary-darker-alt: hsl(var(--secondary-h),
-      calc(var(--secondary-s) + 3%),
-      calc(var(--secondary-l) - 31%));
+  --secondary-lighter: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) + 19%)
+  );
+  --secondary-lightest: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) + 44%)
+  );
+  --secondary-darker-alt: hsl(
+    var(--secondary-h),
+    calc(var(--secondary-s) + 3%),
+    calc(var(--secondary-l) - 31%)
+  );
 
-  --secondary-hover: hsl(var(--secondary-h),
-      var(--secondary-s),
-      calc(var(--secondary-l) - 25%));
-  --secondary-hover-darkest: hsl(var(--secondary-h),
-      var(--secondary-s),
-      calc(var(--secondary-l) - 28%));
+  --secondary-hover: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) - 25%)
+  );
+  --secondary-hover-darkest: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    calc(var(--secondary-l) - 28%)
+  );
 
   /* Fuentes */
   --font-poppins: "Poppins", sans-serif;
@@ -168,7 +178,7 @@ main {
 
 .sub-banner_breadcrumb p {
   color: var(--e-global-text-dark);
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .banner-cta,
@@ -179,7 +189,6 @@ main {
 }
 
 @media screen and (max-width: 980px) {
-
   .banner-cta,
   .about-home,
   .product-home {
@@ -214,7 +223,6 @@ main {
 }
 
 @media screen and (max-width: 980px) {
-
   .grid-image_left,
   .grid-image_right,
   .grid-content_left,
@@ -233,7 +241,6 @@ main {
 }
 
 @media screen and (max-width: 980px) {
-
   .banner-cta,
   .about-home,
   .product-home,
@@ -314,9 +321,11 @@ main {
 }
 
 .button__cta:hover {
-  background-color: hsl(var(--primary-h),
-      var(--primary-s),
-      calc(var(--primary-l) - 15%));
+  background-color: hsl(
+    var(--primary-h),
+    var(--primary-s),
+    calc(var(--primary-l) - 15%)
+  );
 }
 
 .button__cta span:before {
@@ -346,9 +355,11 @@ main {
 
 .button__cta--secondary:hover span:before,
 .button__cta:hover span:before {
-  background-color: hsl(var(--primary-h),
-      var(--primary-s),
-      calc(var(--primary-l) - 20%));
+  background-color: hsl(
+    var(--primary-h),
+    var(--primary-s),
+    calc(var(--primary-l) - 20%)
+  );
 }
 
 .button__cta--secondary {
@@ -415,7 +426,8 @@ main {
   color: var(--primary-color);
 }
 
-.cancel-btn {}
+.cancel-btn {
+}
 
 .confirm-btn,
 .cancel-btn {

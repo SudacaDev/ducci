@@ -1,4 +1,3 @@
- 
 export type IceCreamSize =
   | "1/4"
   | "1/2"
@@ -14,13 +13,12 @@ type BaseOrder = {
   price: number;
 };
 
- 
 export type FlavorOrder = BaseOrder & {
   type: "flavor-selection";
   size: IceCreamSize;
   maxFlavors: number;
   selectedFlavors: string[];
-  quantity: number;  
+  quantity: number;
 };
 
 export type QuantityOrder = BaseOrder & {
@@ -35,22 +33,18 @@ export type SingleItemOrder = BaseOrder & {
 
 export type BoxOrder = BaseOrder & {
   type: "box";
-  boxQuantity: number;  
-  quantity: number; 
+  boxQuantity: number;
+  quantity: number;
 };
 
 export type Order = FlavorOrder | QuantityOrder | SingleItemOrder | BoxOrder;
 
- 
 export type OrderWithFlavors = Extract<Order, { selectedFlavors: string[] }>;
 
- 
 export type OrderWithoutQuantity = Exclude<Order, QuantityOrder>;
 
- 
 export type OrderSummary = Pick<Order, "id" | "productName" | "price">;
 
- 
 type SizeConfig = {
   maxFlavors: number;
   label: string;

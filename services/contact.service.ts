@@ -2,7 +2,7 @@ import { ContactFormData, ContactFormResponse } from "@/types/contact.type";
 import { supabase } from "@/lib/supabase";
 
 export const sendContactMessage = async (
-  data: ContactFormData
+  data: ContactFormData,
 ): Promise<ContactFormResponse> => {
   try {
     const { error } = await supabase.from("contact_messages").insert({
@@ -27,7 +27,7 @@ export const sendContactMessage = async (
     throw new Error(
       error instanceof Error
         ? error.message
-        : "Error desconocido al enviar el mensaje"
+        : "Error desconocido al enviar el mensaje",
     );
   }
 };

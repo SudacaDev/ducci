@@ -31,23 +31,21 @@ const AboutUsContentPage = () => {
   }, []);
   return (
     <>
-    <InnerLayout id="about" bannerTitle="La Magia Ducci">
-      <CenterContainer center>
-        <JourneyCon />
-      </CenterContainer>
-      {/*
+      <InnerLayout id="about" bannerTitle="La Magia Ducci">
+        <CenterContainer center>
+          <JourneyCon />
+        </CenterContainer>
+        {/*
       <CenterContainer className="bg-[var(--primary-color)]">
         <div className="container mx-auto">
           <OurPhilosophy />
         </div>
       </CenterContainer>
       */}
-    </InnerLayout>
-    <div className='bottom-section'>
-      <div className='botton-section_content'>
-       
+      </InnerLayout>
+      <div className="bottom-section">
+        <div className="botton-section_content"></div>
       </div>
-    </div>
     </>
   );
 };

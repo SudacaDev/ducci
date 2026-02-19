@@ -131,7 +131,6 @@
   font-size: 0.875em;
 }
 
-
 .contact-support {
   --direction: row;
   width: 100%;
@@ -175,8 +174,8 @@
   }
 }
 
-@media screen and (max-width: 768px){
-  .content-block__body{
+@media screen and (max-width: 768px) {
+  .content-block__body {
     text-align: left;
   }
 }

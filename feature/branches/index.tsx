@@ -12,7 +12,7 @@ const BranchesContentPage = () => {
     <InnerLayout id="branches" bannerTitle="Sucursales">
       <BranchesItemsMap />
       <DucciBranchesMap />
-      
+
       <ProductsHomeSection />
     </InnerLayout>
   );

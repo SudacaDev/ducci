@@ -6,7 +6,6 @@ import { PRODUCTS } from ".";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
- 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,7 +33,6 @@ const ProductCard = ({
     const speedFactor = 1.2 + index * 0.2;
 
     let ctx = gsap.context(() => {
-      
       if (imageRef.current && !product.hasCarousel) {
         gsap.to(imageRef.current, {
           y: -50 * speedFactor,
@@ -78,7 +76,7 @@ const ProductCard = ({
         style={{ opacity: 0 }}
       >
         <div className="product-home-list__grid__item_image">
-          <SimpleCarousel 
+          <SimpleCarousel
             images={product.images}
             alt={product.title}
             autoplayDelay={5000}
@@ -94,7 +92,6 @@ const ProductCard = ({
     );
   }
 
- 
   return (
     <Link
       href={product.slug}

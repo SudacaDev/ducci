@@ -27,18 +27,18 @@ export default function CheckoutForm({
 }: CheckoutFormProps) {
   const router = useRouter();
   const { clearCart } = useCart();
-  
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     notes: "",
   });
-  
+
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -98,8 +98,9 @@ export default function CheckoutForm({
       }
 
       // Usar whatsapp_number, si no existe usar phone, si no existe usar por defecto
-      const whatsappNumber = branch?.whatsapp_number || branch?.phone || "5491159594708";
-      
+      const whatsappNumber =
+        branch?.whatsapp_number || branch?.phone || "5491159594708";
+
       if (!whatsappNumber) {
         throw new Error("La sucursal no tiene número de WhatsApp configurado");
       }
@@ -112,22 +113,21 @@ export default function CheckoutForm({
         cart,
         totalPrice,
         branchName,
-        formData.notes
+        formData.notes,
       );
 
       // 5. Navegar directamente a WhatsApp (no se bloquea en mobile)
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-        message
+        message,
       )}`;
-      
+
       toast.success("¡Pedido creado! Abriendo WhatsApp...");
-      
+
       // Limpiar carrito antes de navegar
       clearCart();
-      
+
       // Navegar a WhatsApp (no se bloquea nunca)
       window.location.href = whatsappURL;
-      
     } catch (error) {
       console.error("Error al crear pedido:", error);
       toast.error("Error al procesar el pedido. Por favor intentá de nuevo.");
@@ -143,7 +143,6 @@ export default function CheckoutForm({
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        
         <div>
           <Label htmlFor="name">
             Nombre completo <span className="text-red-500">*</span>
@@ -160,7 +159,6 @@ export default function CheckoutForm({
           />
         </div>
 
-        
         <div>
           <Label htmlFor="phone">
             Teléfono <span className="text-red-500">*</span>
@@ -177,7 +175,6 @@ export default function CheckoutForm({
           />
         </div>
 
-       
         <div>
           <Label htmlFor="email">Email (opcional)</Label>
           <Input
@@ -194,7 +191,6 @@ export default function CheckoutForm({
           </p>
         </div>
 
-        
         <div>
           <Label>Sucursal seleccionada</Label>
           <div className="mt-1 p-3 bg-gray-50 rounded-lg border border-gray-200">
@@ -202,7 +198,6 @@ export default function CheckoutForm({
           </div>
         </div>
 
-        
         <div>
           <Label htmlFor="notes">Notas del pedido (opcional)</Label>
           <Textarea
@@ -216,7 +211,6 @@ export default function CheckoutForm({
           />
         </div>
 
-        
         <Button
           type="submit"
           disabled={loading}
@@ -234,14 +228,13 @@ export default function CheckoutForm({
   );
 }
 
- 
 function generateWhatsAppMessage(
   customerName: string,
   orderReference: string,
   cart: Order[],
   total: number,
   branchName: string,
-  notes?: string
+  notes?: string,
 ): string {
   let message = `*NUEVO PEDIDO - DUCCI GELATERIA*\n\n`;
   message += `*Cliente:* ${customerName}\n`;
@@ -252,7 +245,7 @@ function generateWhatsAppMessage(
 
   cart.forEach((item, index) => {
     message += `\n${index + 1}. *${item.productName}*\n`;
-    
+
     if (item.type === "flavor-selection") {
       message += `   - Tamaño: ${item.size}\n`;
       message += `   - Sabores: ${item.selectedFlavors.join(", ")}\n`;
@@ -261,7 +254,7 @@ function generateWhatsAppMessage(
     } else if (item.type === "box") {
       message += `   - Cantidad: ${item.boxQuantity}\n`;
     }
-    
+
     message += `   - Precio: $${item.price.toLocaleString("es-AR")}\n`;
   });
 

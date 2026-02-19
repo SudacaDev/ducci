@@ -11,7 +11,6 @@ gsap.registerPlugin(ScrollTrigger);
 import "../../style/products.css";
 import ProductCard from "./ProductCatd";
 import { useHeroAnimation } from "../hero/hooks/useHeroAnimation";
- 
 
 export const PRODUCTS = [
   {
@@ -19,25 +18,25 @@ export const PRODUCTS = [
     name: "Dulce de Leche",
     image: "/images/la-magia-ducci.jpg",
     slug: "nosotros",
-    title: "La Magia Ducci"
+    title: "La Magia Ducci",
   },
   {
     id: 2,
     name: "Chocolate Amargo",
     image: "/images/disfruta-ducci.jpg",
     slug: "productos",
-    title: "Pedí Ducci"
+    title: "Pedí Ducci",
   },
   {
     id: 3,
     name: "Frutilla",
     image: "/images/sucursales.jpg",
     slug: "sucursales",
-    title: "Sucursales"
+    title: "Sucursales",
   },
- {
+  {
     id: 4,
-    images: [  
+    images: [
       "/images/momentos-1.jpg",
       "/images/momentos-2.jpg",
       "/images/momentos-3.jpg",
@@ -46,7 +45,7 @@ export const PRODUCTS = [
     ],
     slug: "promociones",
     title: "Promociones",
-    hasCarousel: true  
+    hasCarousel: true,
   },
 ];
 
@@ -110,7 +109,6 @@ const ProductsHomeSection = () => {
           {PRODUCTS.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
-         
         </div>
       </CenterContainer>
     </section>

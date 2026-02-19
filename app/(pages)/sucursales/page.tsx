@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Sucursales | ${APP_CONFIG.APP_NAME}`,
-  description: "Encontrá nuestra heladería artesanal Ducci más cerca. Sucursales en Cañada de Gómez, Las Rosas y Totoras. Horarios, direcciones y delivery disponible.",
+  description:
+    "Encontrá nuestra heladería artesanal Ducci más cerca. Sucursales en Cañada de Gómez, Las Rosas y Totoras. Horarios, direcciones y delivery disponible.",
   keywords: [
     "sucursales ducci",
     "heladería cañada de gómez",
@@ -16,11 +17,12 @@ export const metadata: Metadata = {
     "helados artesanales santa fe",
     "heladería artesanal santa fe",
     "direcciones ducci",
-    "horarios ducci"
+    "horarios ducci",
   ],
   openGraph: {
     title: `Sucursales | ${APP_CONFIG.APP_NAME}`,
-    description: "Visitanos en Cañada de Gómez, Las Rosas o Totoras. Pedí delivery a domicilio.",
+    description:
+      "Visitanos en Cañada de Gómez, Las Rosas o Totoras. Pedí delivery a domicilio.",
     images: ["/images/Logo-Ducci-OP.jpg"],
     type: "website",
     locale: "es_AR",

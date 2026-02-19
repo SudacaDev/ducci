@@ -28,7 +28,9 @@ const useBranchesMap = () => {
   const [hoveredBranch, setHoveredBranch] = useState<number | null>(null);
   const [selectedBranch, setSelectedBranch] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [nearbyBranches, setNearbyBranches] = useState<BranchWithDistance[]>([]);
+  const [nearbyBranches, setNearbyBranches] = useState<BranchWithDistance[]>(
+    [],
+  );
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
@@ -46,7 +48,7 @@ const useBranchesMap = () => {
     lat1: number,
     lon1: number,
     lat2: number,
-    lon2: number
+    lon2: number,
   ): number => {
     const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -85,7 +87,7 @@ const useBranchesMap = () => {
         }
 
         const bounds = L.latLngBounds(
-          BRANCHES.map((branch) => [branch.lat, branch.lng])
+          BRANCHES.map((branch) => [branch.lat, branch.lng]),
         );
 
         map = L.map(container, {
@@ -198,7 +200,7 @@ const useBranchesMap = () => {
             {
               closeOnClick: false,
               autoClose: false,
-            }
+            },
           );
 
           marker.on("mouseover", () => marker.openPopup());
@@ -272,7 +274,7 @@ const useBranchesMap = () => {
         (branch) =>
           removeAccents(branch.name.toLowerCase()).includes(query) ||
           removeAccents(branch.address.toLowerCase()).includes(query) ||
-          removeAccents(branch.city.toLowerCase()).includes(query)
+          removeAccents(branch.city.toLowerCase()).includes(query),
       );
       setFilteredBranches(filtered);
     }
@@ -294,7 +296,7 @@ const useBranchesMap = () => {
               latitude,
               longitude,
               branch.lat,
-              branch.lng
+              branch.lng,
             ),
           }))
             .filter((branch) => branch.distance! <= 5)
@@ -343,7 +345,7 @@ const useBranchesMap = () => {
 
             nearby.forEach((nearbyBranch) => {
               const markerData = markers.find(
-                (m) => m.branch.id === nearbyBranch.id
+                (m) => m.branch.id === nearbyBranch.id,
               );
               if (markerData) {
                 markerData.marker.setIcon(markerData.highlightIcon);
@@ -362,7 +364,7 @@ const useBranchesMap = () => {
                       color: "#fff",
                       minWidth: "300px",
                     },
-                  }
+                  },
                 );
               }, 800);
             } else {
@@ -377,10 +379,10 @@ const useBranchesMap = () => {
         },
         (error) => {
           toast.error(
-            "No se pudo obtener tu ubicación. Asegurate de dar permisos."
+            "No se pudo obtener tu ubicación. Asegurate de dar permisos.",
           );
           console.error(error);
-        }
+        },
       );
     } else {
       toast.error("Tu navegador no soporta geolocalización");
@@ -390,7 +392,7 @@ const useBranchesMap = () => {
   const handleGetDirections = (lat: number, lng: number) => {
     window.open(
       `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
-      "_blank"
+      "_blank",
     );
   };
 

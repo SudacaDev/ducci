@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { ReactNode, useState, useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -24,7 +24,6 @@ export const ProductProvider = ({ children }: ProductProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
- 
   const {
     cart,
     selectedBranchId,
@@ -66,7 +65,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
 
   const filteredProducts = productsFromDB;
   const allFlavors = flavorsFromDB;
- 
+
   const [currentDraft, setCurrentDraft] = useState<Order | null>(null);
 
   const updateURL = (params: Record<string, string | null>) => {
@@ -114,7 +113,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
       maxFlavors: product.config.maxFlavors,
       price: product.price,
       selectedFlavors: [],
-      quantity: 1,  
+      quantity: 1,
     };
 
     setCurrentDraft(newDraft);
@@ -157,12 +156,12 @@ export const ProductProvider = ({ children }: ProductProps) => {
       productName: product.name,
       size: getSizeFromProduct(product),
       maxFlavors: product.config?.maxFlavors || 1,
-      price: product.price, 
+      price: product.price,
       selectedFlavors: selectedFlavors,
-      quantity,  
+      quantity,
     };
-    
-    addToCart(newOrder); 
+
+    addToCart(newOrder);
   };
 
   const startQuantityOrder = (product: ProductType, quantity: number) => {
@@ -174,11 +173,11 @@ export const ProductProvider = ({ children }: ProductProps) => {
       type: "quantity-selection",
       productId: product.id,
       productName: product.name,
-      price: product.price,  
+      price: product.price,
       quantity,
     };
 
-    addToCart(newOrder);  
+    addToCart(newOrder);
   };
 
   const updateQuantityOrder = (quantity: number) => {
@@ -195,11 +194,11 @@ export const ProductProvider = ({ children }: ProductProps) => {
       type: "single-item",
       productId: product.id,
       productName: product.name,
-      price: product.price,  
-      quantity, 
+      price: product.price,
+      quantity,
     };
 
-    addToCart(newOrder);  
+    addToCart(newOrder);
   };
 
   const addBoxOrder = (product: ProductType, quantity: number = 1) => {
@@ -212,12 +211,12 @@ export const ProductProvider = ({ children }: ProductProps) => {
       type: "box",
       productId: product.id,
       productName: product.name,
-      price: product.price, 
+      price: product.price,
       boxQuantity: product.config.boxQuantity,
-      quantity,  
+      quantity,
     };
 
-    addToCart(newOrder); 
+    addToCart(newOrder);
   };
 
   const confirmCurrentOrder = () => {
@@ -234,7 +233,7 @@ export const ProductProvider = ({ children }: ProductProps) => {
     )
       return;
 
-    addToCart(currentDraft); 
+    addToCart(currentDraft);
     setCurrentDraft(null);
   };
 
@@ -247,8 +246,8 @@ export const ProductProvider = ({ children }: ProductProps) => {
     selectedCategory,
     viewMode,
     sortOrder,
-    selectedBranchId, 
-    confirmedOrders: cart, 
+    selectedBranchId,
+    confirmedOrders: cart,
     currentDraft,
     loading,
     error,
@@ -267,9 +266,9 @@ export const ProductProvider = ({ children }: ProductProps) => {
     addBoxOrder,
     confirmCurrentOrder,
     cancelCurrentOrder,
-    removeConfirmedOrder: removeFromCart,  
-    setBranchId, 
-    clearCart, 
+    removeConfirmedOrder: removeFromCart,
+    setBranchId,
+    clearCart,
   };
 
   return (

@@ -31,12 +31,6 @@ export const useProductsDB = ({
       setLoading(true);
       setError(null);
 
-      console.log("🔍 Fetching products with filters:", {
-        categorySlug,
-        branchId,
-        sortOrder,
-      });
-
       // ============================================
       // BASE QUERY
       // ============================================
@@ -114,8 +108,6 @@ export const useProductsDB = ({
       const { data: productsData, error: productsError } = await query;
 
       if (productsError) throw productsError;
-
-      console.log(`✅ Fetched ${productsData?.length || 0} products`);
 
       // ============================================
       // TRANSFORMAR DATOS

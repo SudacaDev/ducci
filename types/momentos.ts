@@ -1,4 +1,4 @@
-export type MomentoCategoria = 'todos' | 'eventos' | 'en_familia' | 'amigos';
+export type MomentoCategoria = "todos" | "eventos" | "en_familia" | "amigos";
 
 export interface Momento {
   id: string;
@@ -15,7 +15,7 @@ export interface Momento {
   orden: number;
   created_at: string;
   updated_at: string;
- 
+
   branch?: {
     id: string;
     name: string;
@@ -40,10 +40,9 @@ export interface MomentoUpdate extends Partial<MomentoInsert> {
   id: string;
 }
 
- 
 export const CATEGORIA_LABELS: Record<MomentoCategoria, string> = {
-  todos: 'Todos',
-  eventos: 'Eventos',
-  en_familia: 'En familia',
-  amigos: 'Amigos',
+  todos: "Todos",
+  eventos: "Eventos",
+  en_familia: "En familia",
+  amigos: "Amigos",
 };

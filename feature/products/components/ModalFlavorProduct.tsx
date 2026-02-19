@@ -31,15 +31,12 @@ export const ModalFlavorProduct = ({
   // BLOQUEAR SCROLL DEL BODY
   // ============================================
   useEffect(() => {
-    console.log("🔵 Modal isOpen changed:", isOpen);
-
     if (isOpen) {
       const scrollY = window.scrollY;
       const lenis = (window as any).lenis;
-     
+
       if (lenis) {
         lenis.stop();
- 
       } else {
         console.log("⚠️ Lenis NOT FOUND - usando fallback");
       }
@@ -53,17 +50,13 @@ export const ModalFlavorProduct = ({
       document.body.style.left = "0";
       document.body.style.right = "0";
       document.body.style.paddingRight = `${scrollBarWidth}px`;
-  
     } else {
- 
       const lenis = (window as any).lenis;
-      
+
       if (lenis) {
         lenis.start();
-   
       }
 
-  
       const scrollY = parseInt(document.body.style.top || "0") * -1;
       document.body.style.overflow = "";
       document.body.style.position = "";
@@ -72,17 +65,14 @@ export const ModalFlavorProduct = ({
       document.body.style.right = "";
       document.body.style.paddingRight = "";
 
- 
       window.scrollTo(0, scrollY);
- 
     }
- 
+
     return () => {
       console.log("🧹 Cleanup running");
       const lenis = (window as any).lenis;
       if (lenis) {
         lenis.start();
- 
       }
       document.body.style.overflow = "";
       document.body.style.position = "";
@@ -206,11 +196,11 @@ export const ModalFlavorProduct = ({
             {/* Imagen */}
             <div className="flex justify-center">
               <div className="modal-img ">
-
-                
                 <Image
-                  src={product.image || "https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"}
-                 
+                  src={
+                    product.image ||
+                    "https://html.designingmedia.com/icedelight/assets/images/classic-image2.png"
+                  }
                   alt={product.name}
                   fill
                   className="object-contain"

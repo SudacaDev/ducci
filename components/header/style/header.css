@@ -19,7 +19,6 @@ header
   width: 100px;
 }
 .header nav .item {
-
   font-weight: 700;
   transition: color 150ms ease;
 }
@@ -74,26 +73,26 @@ header
   color: var(--primary-foreground);
 }
 
-.cart-wrapper{
+.cart-wrapper {
   justify-content: center;
-    align-items: center;
-    display: flex;
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
+  align-items: center;
+  display: flex;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 }
-.cart-wrapper.mobile{
+.cart-wrapper.mobile {
   display: none;
-    @media screen and (max-width: 1024px) {
-      display: flex;
-    }
+  @media screen and (max-width: 1024px) {
+    display: flex;
+  }
 }
 
-.cart-header button{
+.cart-header button {
   display: flex;
   position: relative;
 }
-.cart-count{
+.cart-count {
   position: absolute;
   right: -15px;
   width: 20px;
@@ -107,33 +106,31 @@ header
   align-items: center;
 }
 
-
-.drawer-menu{  
-  gap: 8px; 
+.drawer-menu {
+  gap: 8px;
   width: 100%;
-line-height: 4;
-    display: flex;
-    padding: 0.5em;
-    align-items: center;
-    li{
+  line-height: 4;
+  display: flex;
+  padding: 0.5em;
+  align-items: center;
+  li {
+    width: 100%;
+
+    a {
       width: 100%;
-      
-      a{
-          width: 100%;
-          display: flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      }
     }
   }
- 
+}
 
 @media screen and (max-width: 1024px) {
   #open-menu,
   #close-menu {
     display: flex;
   }
-  .header{
+  .header {
     z-index: 99;
   }
   .header nav {
@@ -149,7 +146,7 @@ line-height: 4;
   .header nav.show {
     right: 0;
     display: flex;
-        flex-direction: column;
+    flex-direction: column;
   }
 
   .header nav ul {

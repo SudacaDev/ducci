@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart";
- 
+
 import { supabase } from "@/lib/supabase";
 import CheckoutForm from "./CheckoutForm";
 import OrderSummary from "./OrderSummary";
@@ -17,13 +17,13 @@ export default function CheckoutPage() {
     // Obtener nombre de la sucursal
     const fetchBranch = async () => {
       if (!selectedBranchId) return;
-      
+
       const { data } = await supabase
         .from("branches")
         .select("name")
         .eq("id", selectedBranchId)
         .single();
-      
+
       if (data) setBranchName(data.name);
     };
 
@@ -66,16 +66,15 @@ export default function CheckoutPage() {
   // Type guard: en este punto sabemos que selectedBranchId no es null
   if (!selectedBranchId) return null;
 
-  
   const totalPrice = cart.reduce((sum, order) => {
     if (order.type === "quantity-selection") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     } else if (order.type === "box") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     } else if (order.type === "single-item") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     } else if (order.type === "flavor-selection") {
-      return sum + (order.price * order.quantity);
+      return sum + order.price * order.quantity;
     }
     return sum;
   }, 0);

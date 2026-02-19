@@ -29,11 +29,6 @@ export const useFlavorsDB = ({
       setLoading(true);
       setError(null);
 
-      console.log("🔍 Fetching flavors with filters:", {
-        categorySlug,
-        branchId,
-      });
-
       // ============================================
       // BASE QUERY
       // ============================================
@@ -99,8 +94,6 @@ export const useFlavorsDB = ({
       const { data: flavorsData, error: flavorsError } = await query;
 
       if (flavorsError) throw flavorsError;
-
-      console.log(`✅ Fetched ${flavorsData?.length || 0} flavors`);
 
       // ============================================
       // TRANSFORMAR DATOS

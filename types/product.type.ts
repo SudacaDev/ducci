@@ -4,7 +4,7 @@ export type ProductType =
   | "single-item"
   | "box";
 
-type Slug =  "postres" | "potes"
+type Slug = "postres" | "potes";
 
 export interface Product {
   id: number;
@@ -22,7 +22,7 @@ export interface Product {
     | "potes";
   description: string;
   image?: string;
-  slug: Slug
+  slug: Slug;
 
   // CAMBIO: De branch (objeto) a branches (array)
   branches: {

@@ -3,6 +3,7 @@ import { Lock, Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCurrency } from "@/hooks/useCurrency";
+import { useCategories } from "@/hooks/useCategories";
 
 interface ProductsQuantityProps {
   viewMode: string;
@@ -21,11 +22,16 @@ export const ProductsQuantity = ({
   handleAddQuantityProduct,
 }: ProductsQuantityProps) => {
   const { formatPrice } = useCurrency();
+  const { categories } = useCategories();
+
+  const individualCategory = categories?.find(
+    (cat) => cat.slug === "individuales",
+  );
 
   return (
-    <div  className="mb-8 product-container">
+    <div className="mb-8 product-container">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">
-        Productos individuales
+        Productos {individualCategory ? individualCategory.name : "Productos"}
       </h3>
       <p className="text-sm text-gray-600 mb-4">
         Selecciona la cantidad que desees
@@ -53,7 +59,7 @@ export const ProductsQuantity = ({
               <div className="product-list_image inset-shadow-sm rounded-md">
                 <figure>
                   <Image
-                     src={item.image || "/images/not-found.png"}
+                    src={item.image || "/images/not-found.png"}
                     alt={item.name}
                     width={240}
                     height={240}

@@ -29,22 +29,23 @@ const HeroBanner = () => {
                     className="hero__eyebrow flex items-center gap-2"
                     ref={refEyebrow}
                   >
-                   {/**  Es mucho más que una heladería. */}
+                    {/**  Es mucho más que una heladería. */}
                   </p>
                   <h1 className="hero__title" ref={refTitle}>
-                    Sonreí, <br /> <span className="hero__title--accent">Es Ducci</span>
+                    Sonreí, <br />{" "}
+                    <span className="hero__title--accent">Es Ducci</span>
                   </h1>
                 </div>
 
                 <p className="hero__description copy" ref={refBodyCopy}>
-                  Cada sabor,  <br />
+                  Cada sabor, <br />
                   Un momento para disfrutar.
                 </p>
               </div>
 
               <div ref={refButtonCTA} className="hero__cta">
                 <Link className="button__cta" href={MENU.PRODUCTS}>
-                 Pedí Ducci
+                  Pedí Ducci
                   <span>
                     <ArrowRight size={20} />
                   </span>
@@ -53,14 +54,11 @@ const HeroBanner = () => {
             </div>
 
             <section className="banner-image relative">
-            <div className="banner-image__content">
-              <BannerCarousel />
-              
-            </div>
-          </section>
+              <div className="banner-image__content">
+                <BannerCarousel />
+              </div>
+            </section>
           </div>
-
-          
         </div>
       </section>
     </div>

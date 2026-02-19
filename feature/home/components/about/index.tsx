@@ -87,11 +87,11 @@ const AboutHomeSection = () => {
                         <div className="about-home__wrappe--info__content__body">
                           <p>No solo servimos helado. Creamos momentos.</p>
                           <p>
-                            Ducci nace para ser la salida familiar en pueblos grandes y ciudades chicas donde no hay tantas opciones para disfrutar con niños o preadolescentes.
+                            Ducci nace para ser la salida familiar en pueblos
+                            grandes y ciudades chicas donde no hay tantas
+                            opciones para disfrutar con niños o preadolescentes.
                           </p>
-                          <p>
-                            Somos un lugar de encuentro, alegría y juego.
-                          </p>
+                          <p>Somos un lugar de encuentro, alegría y juego.</p>
                         </div>
                       </Block.Body>
                       <Block.Footer ref={refButtonCTA}>

@@ -13,7 +13,6 @@ export default function OrderSummary({
   branchName,
   totalPrice,
 }: OrderSummaryProps) {
-  
   const getOrderSubtotal = (order: Order): number => {
     if (order.type === "quantity-selection") {
       return order.price * order.quantity;
@@ -35,9 +34,7 @@ export default function OrderSummary({
             <p className="text-gray-600">
               {SIZE_CONFIG[order.size].label}
               {order.quantity > 1 && (
-                <span className="font-semibold ml-2">
-                  × {order.quantity}
-                </span>
+                <span className="font-semibold ml-2">× {order.quantity}</span>
               )}
             </p>
             <div className="text-xs text-gray-500">
@@ -55,9 +52,7 @@ export default function OrderSummary({
       case "quantity-selection":
         return (
           <div className="text-sm space-y-1 mt-1">
-            <p className="text-gray-600">
-              Cantidad: {order.quantity}
-            </p>
+            <p className="text-gray-600">Cantidad: {order.quantity}</p>
             <p className="text-xs text-gray-500">
               ${order.price.toLocaleString("es-AR")} c/u
             </p>
@@ -69,7 +64,8 @@ export default function OrderSummary({
           <div className="text-sm space-y-1 mt-1">
             <p className="text-gray-600">
               {order.quantity} {order.quantity === 1 ? "caja" : "cajas"} de{" "}
-              {order.boxQuantity} {order.boxQuantity === 1 ? "unidad" : "unidades"}
+              {order.boxQuantity}{" "}
+              {order.boxQuantity === 1 ? "unidad" : "unidades"}
             </p>
             {order.quantity > 1 && (
               <p className="text-xs text-gray-500">
@@ -82,9 +78,7 @@ export default function OrderSummary({
       case "single-item":
         return (
           <div className="text-sm space-y-1 mt-1">
-            <p className="text-gray-600">
-              Cantidad: {order.quantity}
-            </p>
+            <p className="text-gray-600">Cantidad: {order.quantity}</p>
             {order.quantity > 1 && (
               <p className="text-xs text-gray-500">
                 ${order.price.toLocaleString("es-AR")} c/u
@@ -101,15 +95,11 @@ export default function OrderSummary({
         Resumen del pedido
       </h2>
 
- 
       <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-        <p className="text-sm text-blue-600 font-medium mb-1">
-          Retirás por:
-        </p>
+        <p className="text-sm text-blue-600 font-medium mb-1">Retirás por:</p>
         <p className="text-lg font-semibold text-gray-900">{branchName}</p>
       </div>
 
- 
       <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
         {cart.map((order) => (
           <div
@@ -131,7 +121,6 @@ export default function OrderSummary({
         ))}
       </div>
 
- 
       <div className="pt-4 border-t-2 border-gray-300">
         <div className="flex justify-between items-center">
           <span className="text-xl font-bold text-gray-900">Total:</span>
@@ -140,8 +129,7 @@ export default function OrderSummary({
           </span>
         </div>
       </div>
- 
- 
+
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
         <p className="text-sm text-gray-600">
           📱 Al confirmar, se abrirá WhatsApp para coordinar el retiro con la

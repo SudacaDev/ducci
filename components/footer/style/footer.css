@@ -40,7 +40,7 @@ footer {
   align-items: flex-start;
   gap: 1.5em;
   @media screen and (max-width: 768px) {
-   display: none;
+    display: none;
   }
 }
 
@@ -81,14 +81,12 @@ footer {
   text-transform: capitalize;
   width: 100%;
   cursor: pointer;
-
 }
 
 .footer_links-ul li {
   position: relative;
   display: flex;
   align-items: center;
-
 }
 
 .footer_links-ul li i {
@@ -149,12 +147,11 @@ footer .footer-copy {
   max-width: 200px;
 }
 
-
 .footer_address-content {
   height: 70px;
 }
 
-.footer_social-content{
+.footer_social-content {
   /*height: 120px;*/
 }
 
@@ -169,7 +166,6 @@ footer .footer-copy {
 
   .footer_social-content,
   .footer_address-content {
-   
     display: flex;
     align-items: start;
     justify-content: start;

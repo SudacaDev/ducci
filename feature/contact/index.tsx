@@ -13,7 +13,7 @@ import {
   Loader2,
   PhoneIcon,
   MailIcon,
-  MapPin, 
+  MapPin,
 } from "lucide-react";
 
 import "./style/contact.css";
@@ -41,8 +41,10 @@ const ContactPageContent = () => {
               <span>Ponete en contacto con nosotros</span>
             </Block.Title>
             <Block.Body>
-              <p>Contanos tus inquietudes, nuestro equipo se pondrá en contacto con vos</p>
-
+              <p>
+                Contanos tus inquietudes, nuestro equipo se pondrá en contacto
+                con vos
+              </p>
             </Block.Body>
           </Block>
 

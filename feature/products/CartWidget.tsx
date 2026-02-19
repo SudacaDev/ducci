@@ -19,10 +19,10 @@ const CartWidget = () => {
       return sum + order.price * order.quantity;
     } else if (order.type === "single-item") {
       return sum + order.price * order.quantity;
-    } else if (order.type === "flavor-selection") {  
+    } else if (order.type === "flavor-selection") {
       return sum + order.price * order.quantity;
     } else {
-      return sum  
+      return sum;
     }
   }, 0);
 

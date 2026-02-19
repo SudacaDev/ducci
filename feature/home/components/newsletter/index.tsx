@@ -5,8 +5,6 @@ import Image from "next/image";
 
 import Block from "@/components/content-block";
 
-
-
 import "../../style/newsletter.css";
 
 import gsap from "gsap";
@@ -15,12 +13,10 @@ import FacebookIcon from "@/components/icons/facebook";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import Link from "next/link";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const NewsletterHomeSection = () => {
   const refContentNewsletter = useRef(null);
-
 
   useEffect(() => {
     if (!refContentNewsletter.current) return;
@@ -53,15 +49,22 @@ const NewsletterHomeSection = () => {
                 </Block.Title>
               </Block.Content>
               <Block.Content className="newsletter-social">
-               <div className=" newsletter-social__icons">
-                <Link href='https://www.instagram.com/ducci.gelateria/' target="_blank">
-                 <FaFacebookF size={24} />
-                </Link>
-               </div>
-               <div className=" newsletter-social__icons">
-                 <Link href='https://www.instagram.com/ducci.gelateria/' target="_blank">
-                 <FaInstagram size={24} /></Link>
-               </div>
+                <div className=" newsletter-social__icons">
+                  <Link
+                    href="https://www.instagram.com/ducci.gelateria/"
+                    target="_blank"
+                  >
+                    <FaFacebookF size={24} />
+                  </Link>
+                </div>
+                <div className=" newsletter-social__icons">
+                  <Link
+                    href="https://www.instagram.com/ducci.gelateria/"
+                    target="_blank"
+                  >
+                    <FaInstagram size={24} />
+                  </Link>
+                </div>
               </Block.Content>
             </Block>
           </div>

@@ -21,16 +21,16 @@ const OrderSelector = () => {
   const { branches, loading, error } = useBranches();
 
   // Leer sucursal desde URL y pre-seleccionar
- useEffect(() => {
-  const sucursalSlug = searchParams.get("sucursal");
-  
-  if (sucursalSlug && branches.length > 0) {
-    const branch = branches.find((b) => b.slug === sucursalSlug);
-    if (branch && branch.id !== selectedBranchId) {
-      setBranchId(branch.id);
+  useEffect(() => {
+    const sucursalSlug = searchParams.get("sucursal");
+
+    if (sucursalSlug && branches.length > 0) {
+      const branch = branches.find((b) => b.slug === sucursalSlug);
+      if (branch && branch.id !== selectedBranchId) {
+        setBranchId(branch.id);
+      }
     }
-  }
-}, [searchParams, branches]);
+  }, [searchParams, branches]);
 
   const handleBranchChange = (value: string) => {
     if (confirmedOrders.length > 0) {
@@ -40,7 +40,7 @@ const OrderSelector = () => {
         return;
       }
     }
-    
+
     if (value === "all") {
       setBranchId(null);
       router.push("/productos");
@@ -48,7 +48,7 @@ const OrderSelector = () => {
       const branchId = Number.parseInt(value);
       const branch = branches.find((b) => b.id === branchId);
       setBranchId(branchId);
-      
+
       if (branch?.slug) {
         router.push(`/productos?sucursal=${branch.slug}`);
       }
@@ -58,7 +58,7 @@ const OrderSelector = () => {
   return (
     <div className="bg-white place-order rounded-lg p-6 mb-6">
       <h3 className="text-3xl font-semibold mb-4 text-gray-800">
-       Disfrutá Ducci en casa
+        Disfrutá Ducci en casa
       </h3>
 
       {loading ? (
@@ -70,7 +70,10 @@ const OrderSelector = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-2">
-          <label htmlFor="branch-selector" className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+          <label
+            htmlFor="branch-selector"
+            className="text-sm font-semibold text-gray-700 flex items-center gap-2"
+          >
             <MapPin className="w-4 h-4 text-orange-500" />
             Elegí donde querés hace tu pedido
           </label>

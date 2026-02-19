@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { useCurrency } from "@/hooks/useCurrency";
-import { Product } from "@/types/product.type";
-import { Lock, Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import { Lock, Minus, Plus, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Product } from "@/types/product.type";
+import { useCurrency } from "@/hooks/useCurrency";
+import { useCategories } from "@/hooks/useCategories";
 
 interface ProductBoxesProps {
   boxes: Product[];
@@ -22,12 +23,20 @@ export const ProductBoxes = ({
   handleQuantityChange,
 }: ProductBoxesProps) => {
   const { formatPrice } = useCurrency();
-  
+
+  const { categories } = useCategories();
+
+  const multipackCategory = categories?.find(
+    (cat) => cat.slug === "multipacks",
+  );
+
   return (
     <div className="mb-8 product-container ">
-      <h3 className="text-2xl font-bold mb-4 text-gray-800">Multipacks</h3>
+      <h3 className="text-2xl font-bold mb-4 text-gray-800">
+        {multipackCategory ? multipackCategory.name : "Productos"}
+      </h3>
       <p className="text-sm text-gray-600 mb-4">
-       Seleccioná la cantidad que desees
+        Seleccioná la cantidad que desees
       </p>
 
       <div

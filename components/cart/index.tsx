@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, ReactNode, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
 import type { Order } from "@/types/order.type";
 
 interface CartContextType {
@@ -24,12 +30,14 @@ const BRANCH_STORAGE_KEY = "ducci-selected-branch";
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Order[]>([]);
-  const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(null);
+  const [selectedBranchId, setSelectedBranchIdState] = useState<number | null>(
+    null,
+  );
   const [isHydrated, setIsHydrated] = useState(false);
 
   // Cargar desde localStorage al iniciar
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     try {
       // Cargar carrito
@@ -82,11 +90,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }, [selectedBranchId, isHydrated]);
 
   const addToCart = (order: Order) => {
-    setCart(prevCart => [...prevCart, order]);
+    setCart((prevCart) => [...prevCart, order]);
   };
 
   const removeFromCart = (orderId: string) => {
-    setCart(prevCart => prevCart.filter(order => order.id !== orderId));
+    setCart((prevCart) => prevCart.filter((order) => order.id !== orderId));
   };
 
   const clearCart = () => {
@@ -100,20 +108,18 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart([]);
   };
 
-  const contextValue: CartContextType = { 
-    cart, 
+  const contextValue: CartContextType = {
+    cart,
     selectedBranchId,
     isHydrated,
-    addToCart, 
-    removeFromCart, 
+    addToCart,
+    removeFromCart,
     clearCart,
     setBranchId,
   };
 
   return (
-    <CartContext.Provider value={contextValue}>
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
 };
 

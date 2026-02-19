@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import React, { ReactNode, Ref } from "react";
- 
 
 interface BodyProps {
   children?: ReactNode;

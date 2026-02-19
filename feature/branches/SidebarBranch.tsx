@@ -13,7 +13,7 @@ interface SidebarBranchProps {
   hoveredBranch: number | null;
   nearbyBranches: BranchWithDistance[];
   userLocation: { lat: number; lng: number } | null;
-  loadingBranches?: boolean;  
+  loadingBranches?: boolean;
   setSearchQuery: (value: SetStateAction<string>) => void;
   setHoveredBranch: (id: number | null) => void;
   setSelectedBranch: (id: number | null) => void;
@@ -29,11 +29,11 @@ const SidebarBranch = ({
   filteredBranches,
   selectedBranch,
   setSelectedBranch,
- 
+
   setHoveredBranch,
   nearbyBranches = [],
   userLocation = null,
-  loadingBranches = false,  
+  loadingBranches = false,
 }: SidebarBranchProps) => {
   const sortedBranches = userLocation
     ? [
@@ -78,7 +78,6 @@ const SidebarBranch = ({
       </div>
 
       <div className="branches-list">
-       
         {loadingBranches ? (
           <div style={{ padding: "3rem 2rem", textAlign: "center" }}>
             <div
@@ -102,7 +101,6 @@ const SidebarBranch = ({
           </div>
         ) : (
           <>
-             
             {userLocation && nearbyBranches.length > 0 && (
               <div className="nearby-section">
                 <h3 className="nearby-title">🍦 Ducci cerca tuyo</h3>
@@ -110,8 +108,8 @@ const SidebarBranch = ({
                   <div
                     key={branch.id}
                     className={`branch-card branch-card--nearby ${selectedBranch === branch.id ? "active" : ""}`}
-                    onMouseEnter={() => setHoveredBranch(branch.id)}  
-                    onMouseLeave={() => setHoveredBranch(null)}  
+                    onMouseEnter={() => setHoveredBranch(branch.id)}
+                    onMouseLeave={() => setHoveredBranch(null)}
                     onClick={() => setSelectedBranch(branch.id)}
                   >
                     <div className="branch-card__distance">
@@ -166,7 +164,6 @@ const SidebarBranch = ({
                       {branch.city}
                     </p>
                     <div className="flex items-center justify-center gap-2 max-w-[200px]">
-                      
                       <div className="flex-1 items-center justify-center">
                         <Button
                           className="branch-card__cta "

@@ -1,6 +1,5 @@
-
 import { Poppins, DM_Sans } from "next/font/google";
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "@/components/cart";
@@ -8,23 +7,20 @@ import { CartDrawerProvider } from "@/contexts/CartDrawerContext";
 import CartDrawer from "@/components/cart/CartDrawer";
 import CartWidget from "@/feature/products/CartWidget";
 
-
-
 export const metadata: Metadata = {
-    title: 'Ducci Gelateria',
-    description: 'Es mucho más que una heladeria',
-    icons: {
-        icon: [
-            { url: '/favicon.ico' },
-            { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-            { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-        ],
-        apple: [
-            { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-        ],
-    },
-}
-
+  title: "Ducci Gelateria",
+  description: "Es mucho más que una heladeria",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+};
 
 const poppins = Poppins({
   variable: "--font-poppins",

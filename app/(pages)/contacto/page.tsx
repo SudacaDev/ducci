@@ -1,10 +1,11 @@
- import ContactPageContent from "@/feature/contact";
+import ContactPageContent from "@/feature/contact";
 import APP_CONFIG from "@/config/general";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Contacto | Comunicate con Nosotros | ${APP_CONFIG.APP_NAME}`,
-  description: "¿Tenés dudas sobre nuestros helados artesanales, pedidos o delivery? Contactanos por WhatsApp, mail o visitanos en nuestras sucursales. Estamos para ayudarte.",
+  description:
+    "¿Tenés dudas sobre nuestros helados artesanales, pedidos o delivery? Contactanos por WhatsApp, mail o visitanos en nuestras sucursales. Estamos para ayudarte.",
   keywords: [
     "contacto ducci",
     "whatsapp ducci",
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
     "consultas helados",
     "soporte ducci",
     "ayuda pedidos",
-    "información delivery"
+    "información delivery",
   ],
   openGraph: {
     title: `Contacto | ${APP_CONFIG.APP_NAME}`,
-    description: "Estamos para ayudarte. Contactanos por WhatsApp, mail o visitanos en nuestras sucursales.",
+    description:
+      "Estamos para ayudarte. Contactanos por WhatsApp, mail o visitanos en nuestras sucursales.",
     images: ["/images/contact-og.jpg"],
     type: "website",
     locale: "es_AR",

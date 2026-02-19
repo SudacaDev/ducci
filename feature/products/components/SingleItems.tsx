@@ -24,16 +24,14 @@ const SingleItems = ({
   handleQuantityChange,
 }: SingleItemsProps) => {
   const { formatPrice } = useCurrency();
-  
+
   return (
     <div className="mb-8 product-container ">
       <div className="flex flex-col gap-1">
-        <h3 className="text-2xl font-bold text-gray-800">{title}
-     
-      </h3>
-       <p className="text-sm text-gray-600 mb-4">
-       Seleccioná la cantidad que desees
-      </p>
+        <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Seleccioná la cantidad que desees
+        </p>
       </div>
 
       <div
@@ -84,7 +82,6 @@ const SingleItems = ({
                   </p>
                 </div>
 
-                
                 <div className="flex items-center gap-3 mt-3">
                   <Button
                     type="button"

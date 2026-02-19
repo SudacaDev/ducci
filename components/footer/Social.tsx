@@ -7,14 +7,14 @@ const Social = () => {
         <p className="font-semibold">Teléfono</p>
         <div className="flex flex-col gap-2">
           <a href="tel:+543471385043" className="label">
-          <p> Ducci Gelateria CdG 3471 385043 </p> 
-        </a>
-        <a href="tel:+543471319743" className="label">
-          <p>Ducci Gelateria Las Rosas 3471 319743 </p> 
-        </a>
-        <a href="tel:+543476545573" className="label">
-          <p>Ducci Gelateria Totoras 3476 545573 </p> 
-        </a>
+            <p> Ducci Gelateria CdG 3471 385043 </p>
+          </a>
+          <a href="tel:+543471319743" className="label">
+            <p>Ducci Gelateria Las Rosas 3471 319743 </p>
+          </a>
+          <a href="tel:+543476545573" className="label">
+            <p>Ducci Gelateria Totoras 3476 545573 </p>
+          </a>
         </div>
       </div>
       <div className="footer_social-content">

@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `La Magia Ducci | Nuestra Historia | ${APP_CONFIG.APP_NAME}`,
-  description: "Conocé la historia de Ducci Gelateria. Momentos Ducci es nuestra manera de celebrar la tradición artesanal argentina, la familia y el sabor auténtico que nos define.",
+  description:
+    "Conocé la historia de Ducci Gelateria. Momentos Ducci es nuestra manera de celebrar la tradición artesanal argentina, la familia y el sabor auténtico que nos define.",
   keywords: [
     "ducci historia",
     "sobre ducci",
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
     "la magia ducci",
     "historia heladería",
     "valores ducci",
-    "familia ducci"
+    "familia ducci",
   ],
   openGraph: {
     title: `La Magia Ducci | ${APP_CONFIG.APP_NAME}`,
-    description: "Momentos Ducci es nuestra manera de celebrar la tradición, la familia y el sabor auténtico.",
+    description:
+      "Momentos Ducci es nuestra manera de celebrar la tradición, la familia y el sabor auténtico.",
     images: ["/images/Logo-Ducci-OP.jpg"],
     type: "website",
     locale: "es_AR",
