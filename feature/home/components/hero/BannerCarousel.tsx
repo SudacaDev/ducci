@@ -97,10 +97,10 @@ export default function BannerCarousel() {
             >
               <Image
                 src={image.src}
-                height={783}
-                width={669}
+                height={665.96}
+                width={569}
                 alt={image.alt}
-                className="w-full h-auto"
+                className="w-full max-w-[569px] h-auto"
                 priority={index === 1}
               />
             </div>
