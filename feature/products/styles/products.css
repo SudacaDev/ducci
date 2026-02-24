@@ -99,7 +99,7 @@ products
 
   /* Aside como modal en mobile */
   .product-aside {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: -100%;
     height: 100vh;

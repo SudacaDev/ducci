@@ -3,7 +3,11 @@
 import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "./ProductContext";
 
-const CategoryFilter = () => {
+export interface CategoryFilterProps {
+  onFilterClick?: () => void;
+}
+
+const CategoryFilter = ({ onFilterClick }: CategoryFilterProps) => {
   const { categories, loading } = useCategories();
   const { selectedCategory, setSelectedCategory } = useProducts();
 
@@ -25,6 +29,10 @@ const CategoryFilter = () => {
 
   const handleCategoryClick = (slug: string, name: string) => {
     setSelectedCategory(slug);
+    // Cerrar el aside en mobile después de seleccionar
+    if (onFilterClick) {
+      onFilterClick();
+    }
   };
 
   return (
