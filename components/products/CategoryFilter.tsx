@@ -5,7 +5,7 @@ import { useProducts } from "./ProductContext";
 
 const CategoryFilter = () => {
   const { categories, loading } = useCategories();
-  const { selectedCategory, setSelectedCategory, openFilterToggle } = useProducts();
+  const { selectedCategory, setSelectedCategory } = useProducts();
 
   if (loading) {
     return (
@@ -25,13 +25,6 @@ const CategoryFilter = () => {
 
   const handleCategoryClick = (slug: string, name: string) => {
     setSelectedCategory(slug);
-    
-    // Cerrar el aside solo en mobile después de seleccionar
-    if (window.innerWidth < 768) {
-      setTimeout(() => {
-        openFilterToggle();
-      }, 150);
-    }
   };
 
   return (

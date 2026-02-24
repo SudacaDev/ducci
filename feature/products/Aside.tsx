@@ -1,12 +1,20 @@
 "use client";
 
+import { useEffect } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/components/products/ProductContext";
 import CategoryFilter from "@/components/products/CategoryFilter";
 
 const Aside = () => {
-  const { openFilter, openFilterToggle } = useProducts();
+  const { openFilter, openFilterToggle, selectedCategory } = useProducts();
+
+  // Cerrar el aside en mobile cuando cambia la categoría
+  useEffect(() => {
+    if (openFilter && window.innerWidth < 768) {
+      openFilterToggle();
+    }
+  }, [selectedCategory]);
 
   return (
     <aside className={` product-aside  ${openFilter ? "active" : ""}`}>
