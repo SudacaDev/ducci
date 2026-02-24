@@ -8,10 +8,6 @@ import CategoryFilter from "@/components/products/CategoryFilter";
 const Aside = () => {
   const { openFilter, openFilterToggle } = useProducts();
 
-  const handleFilterClick = () => {
-    openFilterToggle();
-  };
-
   return (
     <aside className={` product-aside  ${openFilter ? "active" : ""}`}>
       <div className="flex justify-between items-center mb-4 md:hidden">
@@ -31,7 +27,7 @@ const Aside = () => {
         <div className="aside_filter-title">
           <h3 className="font-semibold text-lg">Categorías</h3>
         </div>
-        <CategoryFilter onFilterClick={handleFilterClick} />
+        <CategoryFilter />
       </div>
     </aside>
   );
