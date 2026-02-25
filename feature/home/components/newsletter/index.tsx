@@ -9,7 +9,7 @@ import "../../style/newsletter.css";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import FacebookIcon from "@/components/icons/facebook";
+
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import Link from "next/link";
 
@@ -51,7 +51,7 @@ const NewsletterHomeSection = () => {
               <Block.Content className="newsletter-social">
                 <div className=" newsletter-social__icons">
                   <Link
-                    href="https://www.instagram.com/ducci.gelateria/"
+                    href="https://www.facebook.com/people/DUCCI-Gelateria/61552406397718/"
                     target="_blank"
                   >
                     <FaFacebookF size={24} />

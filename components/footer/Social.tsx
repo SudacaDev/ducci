@@ -32,7 +32,7 @@ const Social = () => {
             </span>
           </a>
           <a
-            href="https://www.instagram.com/ducci.gelateria/"
+            href="https://www.facebook.com/people/DUCCI-Gelateria/61552406397718/"
             title="Ir a facebook Ducci Gelateria"
             aria-label="Ir a Facebook Ducci Gelateria"
             rel="noopener"
