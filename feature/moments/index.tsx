@@ -11,9 +11,9 @@ import { MomentList } from "./components/moments-list";
 
 const CATEGORIAS: MomentoCategoria[] = [
   "todos",
-  "eventos",
-  "en_familia",
-  "amigos",
+  "combos",
+  "lunes_a_jueves",
+  "viernes_a_domingo",
 ];
 
 export const DucciMomentsContent = () => {
@@ -27,6 +27,7 @@ export const DucciMomentsContent = () => {
           <div className="flex justify-center gap-3 mb-10 flex-wrap">
             {CATEGORIAS.map((cat) => (
               <button
+              type="button"
                 key={cat}
                 onClick={() => changeCategoria(cat)}
                 className={`px-5 py-2 rounded-full text-sm transition-all ${
