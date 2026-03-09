@@ -37,15 +37,11 @@ export const PRODUCTS = [
   {
     id: 4,
     images: [
-      "/images/momentos-1.jpg",
-      "/images/momentos-2.jpg",
-      "/images/momentos-3.jpg",
-      "/images/momentos-4.jpg",
-      "/images/momentos-5.jpg",
+      "/images/promociones.jpg",
     ],
     slug: "promociones",
     title: "Promociones",
-    hasCarousel: true,
+    hasCarousel: false,
   },
 ];
 

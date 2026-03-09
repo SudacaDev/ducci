@@ -87,11 +87,9 @@ const AboutHomeSection = () => {
                         <div className="about-home__wrappe--info__content__body">
                           <p>No solo servimos helado. Creamos momentos.</p>
                           <p>
-                            Ducci nace para ser la salida familiar en pueblos
-                            grandes y ciudades chicas donde no hay tantas
-                            opciones para disfrutar con niños o preadolescentes.
+                            Nuestra propuesta combina tradición, técnica y creatividad para ofrecer sabores de calidad en cada cucharada. Trabajamos con procesos cuidados, elaboración diaria y una selección rigurosa de ingredientes. Eso nos permite mantener un estilo propio y garantizar un producto noble y fresco.
                           </p>
-                          <p>Somos un lugar de encuentro, alegría y juego.</p>
+                          <p>En Ducci entendemos el helado como una experiencia. Cada pote, cada bocha y cada presentación reflejan lo que nos define: calidad, dedicación y amor por lo que hacemos.</p>
                         </div>
                       </Block.Body>
                       <Block.Footer ref={refButtonCTA}>
