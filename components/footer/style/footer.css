@@ -34,14 +34,13 @@ footer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding-block: 56px;
+  gap: 2rem;
+  width: 100%;
 }
 
 .footer_address-wrapper {
   align-items: flex-start;
   gap: 1.5em;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
 }
 
 .footer_address-wrapper .label,
@@ -68,10 +67,6 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
-.footer_links-ul li {
-  margin-bottom: 1em;
-}
-
 .footer_link {
   width: 100%;
   margin-bottom: 1rem;
@@ -89,18 +84,6 @@ footer {
   align-items: center;
 }
 
-.footer_links-ul li i {
-  width: 0.5em;
-  height: 0.5em;
-  background-color: var(--secondary-foreground);
-  border-radius: 50%;
-  margin-right: 1em;
-}
-
-.footer_links-ul li i {
-  pointer-events: none;
-}
-
 .footer_address,
 .footer_social {
   display: grid;
@@ -114,24 +97,25 @@ footer {
   gap: 0.5em;
 }
 
-.footer_social-content a svg {
-  border-radius: 100%;
-  color: var(--primary-color);
-  position: relative;
-}
-
-.footer_social-content a span {
-  position: relative;
-  display: flex;
+.social-icon-wrapper {
   background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  transition: all 0.3s ease;
 }
 
-.footer_social-content a span {
-  border-radius: 100%;
-  padding: 0.8em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.social-icon-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.footer_social-content a svg {
+  color: inherit;
+  position: relative;
 }
 
 footer .footer-copy {
@@ -157,7 +141,8 @@ footer .footer-copy {
 
 @media screen and (max-width: 1200px) {
   .footer_wrapper {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: auto auto;
+    gap: 3rem;
   }
 
   .footer_address-wrapper {
@@ -174,7 +159,8 @@ footer .footer-copy {
 
 @media screen and (max-width: 980px) {
   .footer_wrapper {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
   .footer_social {
@@ -186,7 +172,8 @@ footer .footer-copy {
   .footer_wrapper {
     padding-inline: 10px;
     padding-block: 8px;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .footer_links {
