@@ -11,7 +11,7 @@ const FooterDefault = () => {
         <Footer.Nav />
       </div>
 
-      <div className="flex w-full flex-col gap-10 md:gap-14 justify-center md:justify-start">
+      <div className="flex w-full flex-col items-center md:items-start gap-8 md:gap-14 justify-center md:justify-start">
         <Footer.Address />
         <Footer.Social />
       </div>
